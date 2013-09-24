@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="cjPLB4" name="OwlNest" projectType="guiapp" version="1.0.0"
+              bundleIdentifier="com.RebelTech.OwlNest" includeBinaryInAppConfig="1"
+              jucerVersion="3.1.0" companyName="Rebel Tech">
+  <MAINGROUP id="nyhdga" name="OwlNest">
+    <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
+      <FILE id="fOoNsr" name="OpenWareMidiControl.h" compile="0" resource="0"
+            file="Source/OpenWareMidiControl.h"/>
+      <FILE id="nHRZpa" name="Settings.h" compile="0" resource="0" file="Source/Settings.h"/>
+      <FILE id="si1Oew" name="Settings.cpp" compile="1" resource="0" file="Source/Settings.cpp"/>
+      <FILE id="p7DYsR" name="OwlNestGui.cpp" compile="1" resource="0" file="Source/OwlNestGui.cpp"/>
+      <FILE id="PjPrzx" name="OwlNestGui.h" compile="0" resource="0" file="Source/OwlNestGui.h"/>
+      <FILE id="mpRW8n" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" juceFolder="../../JUCE-master/modules">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="1" optimisation="1" targetName="OwlNest"/>
+        <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="0" optimisation="2" targetName="OwlNest"/>
+      </CONFIGURATIONS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>
