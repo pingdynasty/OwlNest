@@ -74,6 +74,7 @@ private:
     ScopedPointer<Slider> leftGainSlider;
     ScopedPointer<Label> leftGainLabel;
     ScopedPointer<TextButton> saveButton;
+    ScopedPointer<TextButton> dfuButton;
 
 
     //==============================================================================

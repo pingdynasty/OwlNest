@@ -72,6 +72,10 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     saveButton->setButtonText ("save to owl");
     saveButton->addListener (this);
 
+    addAndMakeVisible (dfuButton = new TextButton ("new button"));
+    dfuButton->setButtonText ("Firmware Update");
+    dfuButton->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -99,6 +103,7 @@ OwlNestGui::~OwlNestGui()
     leftGainSlider = nullptr;
     leftGainLabel = nullptr;
     saveButton = nullptr;
+    dfuButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -126,6 +131,7 @@ void OwlNestGui::resized()
     leftGainSlider->setBounds (128, 416, 150, 24);
     leftGainLabel->setBounds (24, 416, 103, 24);
     saveButton->setBounds (224, 336, 150, 24);
+    dfuButton->setBounds (128, 456, 150, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -184,6 +190,12 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         theSettings.SaveToOwl();
         //[/UserButtonCode_saveButton]
     }
+    else if (buttonThatWasClicked == dfuButton)
+    {
+        //[UserButtonCode_dfuButton] -- add your button handler code here..
+        theSettings.setCc(DEVICE_FIRMWARE_UPDATE, 127);
+        //[/UserButtonCode_dfuButton]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -198,7 +210,6 @@ void OwlNestGui::sliderValueChanged (Slider* sliderThatWasMoved)
 
     if (sliderThatWasMoved == leftGainSlider)
     {
-        cc=LEFT_INPUT_GAIN;
         //[UserSliderCode_leftGainSlider] -- add your slider handling code here..
         val=leftGainSlider->getValue();
         //[/UserSliderCode_leftGainSlider]
@@ -218,11 +229,11 @@ void OwlNestGui::valueChanged(juce::Value &value){
 
 void OwlNestGui::settingsChanged() {
     int v;
-    
+
     // Sampling rate
     v = theSettings.getCc(SAMPLING_RATE)>>5;
     samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
-    
+
     // Left Input Gain
     leftGainSlider->setValue(theSettings.getCc(LEFT_INPUT_GAIN),dontSendNotification);
 }
@@ -267,6 +278,9 @@ BEGIN_JUCER_METADATA
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="f37a6fa0e6074e35" memberName="saveButton"
               virtualName="" explicitFocusOrder="0" pos="224 336 150 24" buttonText="save to owl"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="new button" id="49395e88504ed9a4" memberName="dfuButton"
+              virtualName="" explicitFocusOrder="0" pos="128 456 150 24" buttonText="Firmware Update"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
