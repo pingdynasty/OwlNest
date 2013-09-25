@@ -38,17 +38,12 @@ OwlNestSettings::~OwlNestSettings(){
 void OwlNestSettings::setCc(int cc,int value)
 {
     // check value range
-    int v=value;
-    if (v<0) {
-        v=0;
-    }
-    else if (v>=NB_CHANNELS) {
-        v=NB_CHANNELS-1;
-    }
+  value = std::min(NB_CHANNELS-1, std::max(0, value));
     // set midiArray and update Owl
     if (cc>0 && cc<NB_CHANNELS){
-        midiArray[cc]=v;
-        theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,cc,v));
+      midiArray[cc] = value;
+      if(theDm.getDefaultMidiOutput() != NULL)
+        theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,cc,value));
     }
 }
 
@@ -63,9 +58,11 @@ int OwlNestSettings::getCc(int cc)
 }
 
 void OwlNestSettings::SaveToOwl(){
+  if(theDm.getDefaultMidiOutput() != NULL)
     theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,SAVE_SETTINGS,127));
 }
 
 void OwlNestSettings::LoadFromOwl(){
+  if(theDm.getDefaultMidiOutput() != NULL)
     theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,REQUEST_SETTINGS,127)); // Will provoke incoming midi messages
 }
