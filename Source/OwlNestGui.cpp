@@ -211,13 +211,13 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == bypassButton)
     {
         //[UserButtonCode_bypassButton] -- add your button handler code here..
-      theSettings.setCc(BYPASS, bypassButton->getToggleState() ? 0xff : 0);	
+      theSettings.setCc(BYPASS, bypassButton->getToggleState() ? 127 : 0);	
         //[/UserButtonCode_bypassButton]
     }
     else if (buttonThatWasClicked == swapLRButton)
     {
         //[UserButtonCode_swapLRButton] -- add your button handler code here..
-      theSettings.setCc(LEFT_RIGHT_SWAP, swapLRButton->getToggleState() ? 0xff : 0);	
+      theSettings.setCc(LEFT_RIGHT_SWAP, swapLRButton->getToggleState() ? 127 : 0);	
         //[/UserButtonCode_swapLRButton]
     }
 
@@ -259,12 +259,12 @@ void OwlNestGui::settingsChanged() {
     v = theSettings.getCc(SAMPLING_RATE)>>5;
     samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
 
-    if(theSettings.getCc(BYPASS) == 0xff)
+    if(theSettings.getCc(BYPASS) == 127)
       bypassButton->setToggleState(true, dontSendNotification);
     else
       bypassButton->setToggleState(false, dontSendNotification);
 
-    if(theSettings.getCc(LEFT_RIGHT_SWAP) == 0xff)
+    if(theSettings.getCc(LEFT_RIGHT_SWAP) == 127)
       swapLRButton->setToggleState(true, dontSendNotification);
     else
       swapLRButton->setToggleState(false, dontSendNotification);
