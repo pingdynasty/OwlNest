@@ -212,6 +212,7 @@ void OwlNestGui::sliderValueChanged (Slider* sliderThatWasMoved)
     {
         //[UserSliderCode_leftGainSlider] -- add your slider handling code here..
         val=leftGainSlider->getValue();
+	cc = LEFT_INPUT_GAIN;
         //[/UserSliderCode_leftGainSlider]
     }
 
@@ -235,7 +236,7 @@ void OwlNestGui::settingsChanged() {
     samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
 
     // Left Input Gain
-    leftGainSlider->setValue(theSettings.getCc(LEFT_INPUT_GAIN),dontSendNotification);
+    leftGainSlider->setValue(theSettings.getCc(LEFT_INPUT_GAIN), dontSendNotification);
 }
 //[/MiscUserCode]
 
