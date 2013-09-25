@@ -13,51 +13,37 @@
 
 /*
  MIDI Control Change Mappings
- 
- cc     value		function
- 
- 32     0-127		left channel input gain, -34.5dB to +12dB (92 = 0dB)
- 33     0-127		right channel input gain
- 34     0-127		left channel output gain, -73dB to +6dB (121 = 0dB)
- 35     0-127		right channel output gain
- 36     127=mute	left channel mute
- 37     127=mute	right channel mute
- 38 	0-127		Codec Bypass mode
- 60     0-127		sampling rate
-        0-31 = 8kHz
-        32-63 = 32kHz
-        64-95 = 48kHz
-        96-127 = 96kHz
- 61     0-127		bit width
-        0-41 = 16bit
-        42-83 = 24bit
-        84-127 = 32bit
- 62     0-127		buffer size
- 63     0-127		Swap left/right channels
-        0-63 normal mode
-        64-127 swapped mode
- 67     127=request	load settings from device
- 68     127=save	save settings to device
- 69     127=DFU	enter Device Firmware Upgrade mode
- */
+*/
 
 enum OpenWareMidiControl {
-  LEFT_INPUT_GAIN =        32,
+  LEFT_INPUT_GAIN =        32, /* left channel input gain, -34.5dB to +12dB (92 = 0dB) */
   RIGHT_INPUT_GAIN =       33,
-  LEFT_OUTPUT_GAIN =       34,
+  LEFT_OUTPUT_GAIN =       34, /* left channel output gain, -73dB to +6dB (121 = 0dB) */
   RIGHT_OUTPUT_GAIN =      35,
-  LEFT_CHANNEL_MUTE =      36,
-  RIGHT_CHANNEL_MUTE =     37,
-  BYPASS =                 38,
+  LEFT_INPUT_MUTE =        36, /* mute left input (127=muted) */
+  RIGHT_INPUT_MUTE =       37,
+  LEFT_OUTPUT_MUTE =       38, /* mute left output (127=muted) */
+  RIGHT_OUTPUT_MUTE =      39,
+  BYPASS =                 40, /* codec bypass mode (127=bypass) */
 
-  SAMPLING_RATE =          60,
-  SAMPLING_BITS =          61,
-  SAMPLING_SIZE =          62,
-  LEFT_RIGHT_SWAP =        63,
+  SAMPLING_RATE =          60, /* sampling rate
+				  0-31 = 8kHz
+				  32-63 = 32kHz
+				  64-95 = 48kHz
+				  96-127 = 96kHz
+			       */
+  SAMPLING_BITS =          61, /* sampling bits
+				  0-41 = 16bit
+				  42-83 = 24bit
+				  84-127 = 32bit
+			       */
+  SAMPLING_SIZE =          62, /* block size in samples */
 
-  REQUEST_SETTINGS =       67,
-  SAVE_SETTINGS =          68,
-  DEVICE_FIRMWARE_UPDATE = 69
+  LEFT_RIGHT_SWAP =        63, /* swap left/right channels */
+
+  REQUEST_SETTINGS =       67, /* load settings from device */
+  SAVE_SETTINGS =          68, /* save settings to device */
+  DEVICE_FIRMWARE_UPDATE = 69  /* enter Device Firmware Upgrade mode */
 };
 
 #define MIDI_ID 0x7D ;
