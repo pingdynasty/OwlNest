@@ -42,17 +42,22 @@
  */
 
 enum OpenWareMidiControl {
-    LEFT_INPUT_GAIN =   32,
-    RIGHT_INPUT_GAIN =  33,
-    LEFT_OUTPUT_GAIN =  34,
-    RIGHT_OUTPUT_GAIN = 35,
-    LEFT_MUTE = 36,
-    RIGHT_MUTE = 37,
-    SAMPLING_RATE = 60,
-    
-    REQUEST_SETTINGS = 67,
-    SAVE_SETTINGS = 68,
-    DEVICE_FIRMWARE_UPDATE = 69
+  LEFT_INPUT_GAIN =        32,
+  RIGHT_INPUT_GAIN =       33,
+  LEFT_OUTPUT_GAIN =       34,
+  RIGHT_OUTPUT_GAIN =      35,
+  LEFT_CHANNEL_MUTE =      36,
+  RIGHT_CHANNEL_MUTE =     37,
+  BYPASS =                 38,
+
+  SAMPLING_RATE =          60,
+  SAMPLING_BITS =          61,
+  SAMPLING_SIZE =          62,
+  LEFT_RIGHT_SWAP =        63,
+
+  REQUEST_SETTINGS =       67,
+  SAVE_SETTINGS =          68,
+  DEVICE_FIRMWARE_UPDATE = 69
 };
 
 #define MIDI_ID 0x7D ;

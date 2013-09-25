@@ -76,6 +76,14 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     dfuButton->setButtonText ("Firmware Update");
     dfuButton->addListener (this);
 
+    addAndMakeVisible (bypassButton = new ToggleButton ("new toggle button"));
+    bypassButton->setButtonText ("Bypass");
+    bypassButton->addListener (this);
+
+    addAndMakeVisible (swapLRButton = new ToggleButton ("new toggle button"));
+    swapLRButton->setButtonText ("Swap Left/Right");
+    swapLRButton->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -104,6 +112,8 @@ OwlNestGui::~OwlNestGui()
     leftGainLabel = nullptr;
     saveButton = nullptr;
     dfuButton = nullptr;
+    bypassButton = nullptr;
+    swapLRButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -132,6 +142,8 @@ void OwlNestGui::resized()
     leftGainLabel->setBounds (24, 416, 103, 24);
     saveButton->setBounds (224, 336, 150, 24);
     dfuButton->setBounds (128, 456, 150, 24);
+    bypassButton->setBounds (24, 240, 150, 24);
+    swapLRButton->setBounds (24, 280, 150, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -196,6 +208,18 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         theSettings.setCc(DEVICE_FIRMWARE_UPDATE, 127);
         //[/UserButtonCode_dfuButton]
     }
+    else if (buttonThatWasClicked == bypassButton)
+    {
+        //[UserButtonCode_bypassButton] -- add your button handler code here..
+      theSettings.setCc(BYPASS, bypassButton->getToggleState() ? 0xff : 0);	
+        //[/UserButtonCode_bypassButton]
+    }
+    else if (buttonThatWasClicked == swapLRButton)
+    {
+        //[UserButtonCode_swapLRButton] -- add your button handler code here..
+      theSettings.setCc(LEFT_RIGHT_SWAP, swapLRButton->getToggleState() ? 0xff : 0);	
+        //[/UserButtonCode_swapLRButton]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -234,6 +258,16 @@ void OwlNestGui::settingsChanged() {
     // Sampling rate
     v = theSettings.getCc(SAMPLING_RATE)>>5;
     samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
+
+    if(theSettings.getCc(BYPASS) == 0xff)
+      bypassButton->setToggleState(true, dontSendNotification);
+    else
+      bypassButton->setToggleState(false, dontSendNotification);
+
+    if(theSettings.getCc(LEFT_RIGHT_SWAP) == 0xff)
+      swapLRButton->setToggleState(true, dontSendNotification);
+    else
+      swapLRButton->setToggleState(false, dontSendNotification);
 
     // Left Input Gain
     leftGainSlider->setValue(theSettings.getCc(LEFT_INPUT_GAIN), dontSendNotification);
@@ -283,6 +317,12 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="new button" id="49395e88504ed9a4" memberName="dfuButton"
               virtualName="" explicitFocusOrder="0" pos="128 456 150 24" buttonText="Firmware Update"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
+                virtualName="" explicitFocusOrder="0" pos="24 240 150 24" buttonText="Bypass"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TOGGLEBUTTON name="new toggle button" id="5e0a14ed17680a7" memberName="swapLRButton"
+                virtualName="" explicitFocusOrder="0" pos="24 280 150 24" buttonText="Swap Left/Right"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

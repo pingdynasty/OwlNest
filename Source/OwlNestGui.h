@@ -75,6 +75,8 @@ private:
     ScopedPointer<Label> leftGainLabel;
     ScopedPointer<TextButton> saveButton;
     ScopedPointer<TextButton> dfuButton;
+    ScopedPointer<ToggleButton> bypassButton;
+    ScopedPointer<ToggleButton> swapLRButton;
 
 
     //==============================================================================
