@@ -77,6 +77,18 @@ private:
     ScopedPointer<TextButton> dfuButton;
     ScopedPointer<ToggleButton> bypassButton;
     ScopedPointer<ToggleButton> swapLRButton;
+    ScopedPointer<Label> rightGainLabel;
+    ScopedPointer<Slider> rightGainSlider;
+    ScopedPointer<Slider> leftOutGainSlider;
+    ScopedPointer<Label> leftOutGainLabel;
+    ScopedPointer<Label> rightOutGainLabel;
+    ScopedPointer<Slider> rightOutGainSlider;
+    ScopedPointer<ToggleButton> leftInputMuteButton;
+    ScopedPointer<ToggleButton> rightInputMuteButton;
+    ScopedPointer<ToggleButton> leftOutputMuteButton;
+    ScopedPointer<ToggleButton> rightOutputMuteButton;
+    ScopedPointer<ComboBox> samplingBitsComboBox;
+    ScopedPointer<Label> samplingBitsLabel;
 
 
     //==============================================================================
