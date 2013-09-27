@@ -211,18 +211,18 @@ int dfuse_special_command(struct dfu_if *dif, unsigned int address,
 	if (ret < 0) {
 		errx(EX_IOERR, "Error during special command \"%s\" download",
 			dfuse_command_name[command]);
-		exit(1);
+		return 1;
 	}
 	ret = dfu_get_status(dif->dev_handle, dif->interface, &dst);
 	if (ret < 0) {
 		errx(EX_IOERR, "Error during special command \"%s\" get_status",
 			dfuse_command_name[command]);
-		exit(1);
+		return 1;
 	}
 	if (dst.bState != DFU_STATE_dfuDNBUSY) {
 		errx(EX_IOERR, "Wrong state after command \"%s\" download",
 			dfuse_command_name[command]);
-		exit(1);
+		return 1;
 	}
 	/* wait while command is executed */
 	if (verbose)
@@ -239,28 +239,28 @@ int dfuse_special_command(struct dfu_if *dif, unsigned int address,
 		printf("state(%u) = %s, status(%u) = %s\n", dst.bState,
 		       dfu_state_to_string(dst.bState), dst.bStatus,
 		       dfu_status_to_string(dst.bStatus));
-		exit(1);
+		return 1;
 	}
 	if (dst.bStatus != DFU_STATUS_OK) {
 		errx(EX_IOERR, "%s not correctly executed",
 			dfuse_command_name[command]);
-		exit(1);
+		return 1;
 	}
 	milli_sleep(dst.bwPollTimeout);
 
 	ret = dfu_abort(dif->dev_handle, dif->interface);
 	if (ret < 0) {
 		errx(EX_IOERR, "Error sending dfu abort request");
-		exit(1);
+		return 1;
 	}
 	ret = dfu_get_status(dif->dev_handle, dif->interface, &dst);
 	if (ret < 0) {
 		errx(EX_IOERR, "Error during abort get_status");
-		exit(1);
+		return 1;
 	}
 	if (dst.bState != DFU_STATE_dfuIDLE) {
 		errx(EX_IOERR, "Failed to enter idle state on abort");
-		exit(1);
+		return 1;
 	}
 	milli_sleep(dst.bwPollTimeout);
 	return ret;
@@ -625,7 +625,7 @@ int dfuse_do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file,
 		}
 		dfuse_special_command(dif, 0, READ_UNPROTECT);
 		printf("Device disconnects, erases flash and resets now\n");
-		exit(0);
+		return 0;
 	}
 	if (dfuse_mass_erase) {
 		if (!dfuse_force) {
