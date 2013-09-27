@@ -60,7 +60,7 @@ int FirmwareLoader::updateFirmware(File& firmware){
   match_iface_alt_index = 0; // -a n
   dfuse_options = "0x8000000:leave"; // -s ccc
   mode = MODE_DOWNLOAD;
-  final_reset = 1;
+  final_reset = 0;
 
   memset(&file, 0, sizeof(file));
   file.name = firmware.getFullPathName().toUTF8();
@@ -92,6 +92,12 @@ int FirmwareLoader::updateFirmware(File& firmware){
   if (mode == MODE_LIST) {
     list_dfu_interfaces();
     return 0;
+  }
+
+  for(int i=0; i<20 && dfu_root == NULL; ++i) {
+    printf("probing for DFU device...\n");
+    milli_sleep(500);
+    probe_devices(ctx);
   }
 
   if (dfu_root == NULL) {
