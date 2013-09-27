@@ -18,6 +18,7 @@
 */
 
 //[Headers] You can add your own extra header files here...
+#include "FirmwareLoader.h"
 //[/Headers]
 
 #include "OwlNestGui.h"
@@ -325,7 +326,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == dfuButton)
     {
         //[UserButtonCode_dfuButton] -- add your button handler code here..
-        theSettings.setCc(DEVICE_FIRMWARE_UPDATE, 127);
+      updateFirmware();
         //[/UserButtonCode_dfuButton]
     }
     else if (buttonThatWasClicked == bypassButton)
@@ -454,6 +455,20 @@ void OwlNestGui::settingsChanged() {
         rightOutputMuteButton->setToggleState(true, dontSendNotification);
     else
         rightOutputMuteButton->setToggleState(false, dontSendNotification);
+}
+
+void OwlNestGui::updateFirmware(){
+  FileChooser chooser("Select Firmware", 
+		      File::getSpecialLocation (File::currentApplicationFile),
+// 		      File::getSpecialLocation (File::userHomeDirectory/),
+		      "*.bin");
+  if(chooser.browseForFileToOpen()){
+    // put device into DFU mode
+    theSettings.setCc(DEVICE_FIRMWARE_UPDATE, 127);
+    File file = chooser.getResult();
+    FirmwareLoader loader;
+    loader.updateFirmware(file);
+  }
 }
 //[/MiscUserCode]
 

@@ -50,6 +50,7 @@ public:
     //[UserMethods]     -- You can add your own custom methods in this section.
     void settingsChanged();
     void valueChanged(juce::Value &value);
+    void updateFirmware();
     //[/UserMethods]
 
     void paint (Graphics& g);
