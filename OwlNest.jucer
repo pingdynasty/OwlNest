@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="cjPLB4" name="OwlNest" projectType="guiapp" version="1.0.0"
-              bundleIdentifier="com.RebelTech.OwlNest" includeBinaryInAppConfig="1"
-              jucerVersion="3.1.0" companyName="Rebel Tech">
+              bundleIdentifier="com.pingdynasty.OwlNest" includeBinaryInAppConfig="1"
+              jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
+      <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
+        <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">
+          <FILE id="vGsKMz" name="dfu.c" compile="1" resource="0" file="Libraries/dfu-util/dfu.c"/>
+          <FILE id="PzpQa1" name="dfu.h" compile="0" resource="0" file="Libraries/dfu-util/dfu.h"/>
+          <FILE id="BSzQC2" name="dfu_file.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_file.c"/>
+          <FILE id="oLOxkR" name="dfu_file.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_file.h"/>
+          <FILE id="PUHKJS" name="dfu_load.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_load.c"/>
+          <FILE id="My0es0" name="dfu_load.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_load.h"/>
+          <FILE id="JTwNEB" name="dfu_util.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_util.c"/>
+          <FILE id="ISAwQL" name="dfu_util.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_util.h"/>
+          <FILE id="cqHU5l" name="dfuse.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse.c"/>
+          <FILE id="vP1u6O" name="dfuse.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse.h"/>
+          <FILE id="Zj5KmQ" name="dfuse_mem.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse_mem.c"/>
+          <FILE id="gEU9As" name="dfuse_mem.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse_mem.h"/>
+          <FILE id="YWEpxW" name="portable.h" compile="0" resource="0" file="Libraries/dfu-util/portable.h"/>
+          <FILE id="PqFOUS" name="quirks.c" compile="1" resource="0" file="Libraries/dfu-util/quirks.c"/>
+          <FILE id="Pw0A3z" name="quirks.h" compile="0" resource="0" file="Libraries/dfu-util/quirks.h"/>
+          <FILE id="TZ2f7t" name="usb_dfu.h" compile="0" resource="0" file="Libraries/dfu-util/usb_dfu.h"/>
+        </GROUP>
+      </GROUP>
+      <FILE id="Jf6p1r" name="FirmwareLoader.cpp" compile="1" resource="0"
+            file="Source/FirmwareLoader.cpp"/>
+      <FILE id="BPvtu3" name="FirmwareLoader.h" compile="0" resource="0"
+            file="Source/FirmwareLoader.h"/>
       <FILE id="fOoNsr" name="OpenWareMidiControl.h" compile="0" resource="0"
             file="Source/OpenWareMidiControl.h"/>
       <FILE id="nHRZpa" name="Settings.h" compile="0" resource="0" file="Source/Settings.h"/>
@@ -29,10 +53,12 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" juceFolder="../../JUCE-master/modules">
+    <XCODE_MAC targetFolder="Builds/MacOSX" juceFolder="modules" extraLinkerFlags="-L/opt/local/lib "
+               extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
+               externalLibraries="usb-1.0 " extraDefs="HAVE_NANOSLEEP=1">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                       isDebug="1" optimisation="1" targetName="OwlNest"/>
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="/opt/local/include/libusb-1.0"/>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest"/>
       </CONFIGURATIONS>
