@@ -53,14 +53,15 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" juceFolder="modules" extraLinkerFlags="-L/opt/local/lib "
-               extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
+    <XCODE_MAC targetFolder="Builds/MacOSX" juceFolder="/Users/Gouigoui/JUCE-master/modules"
+               extraLinkerFlags="" extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
                externalLibraries="usb-1.0 " extraDefs="HAVE_NANOSLEEP=1">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="/opt/local/include/libusb-1.0"/>
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="/opt/local/include/libusb-1.0"
+                       libraryPath="/opt/local/lib "/>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                       isDebug="0" optimisation="2" targetName="OwlNest"/>
+                       isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "/>
       </CONFIGURATIONS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" juceFolder="modules" extraDefs="HAVE_NANOSLEEP=1"

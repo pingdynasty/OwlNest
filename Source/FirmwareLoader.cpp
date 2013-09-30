@@ -162,7 +162,7 @@ int FirmwareLoader::updateFirmware(File& firmware){
     }
 
     if (!(dfu_root->quirks & QUIRK_POLLTIMEOUT))
-      milli_sleep(status.bwPollTimeout);
+      milli_sleep((long) status.bwPollTimeout);
 
     switch (status.bState) {
     case DFU_STATE_appIDLE:
@@ -269,7 +269,7 @@ int FirmwareLoader::updateFirmware(File& firmware){
   printf("state = %s, status = %d\n",
 	 dfu_state_to_string(status.bState), status.bStatus);
   if (!(dfu_root->quirks & QUIRK_POLLTIMEOUT))
-    milli_sleep(status.bwPollTimeout);
+    milli_sleep((long) status.bwPollTimeout);
 
   switch (status.bState) {
   case DFU_STATE_appIDLE:
@@ -309,7 +309,7 @@ int FirmwareLoader::updateFirmware(File& firmware){
     if (DFU_STATUS_OK != status.bStatus)
       errx(EX_SOFTWARE, "Status is not OK: %d", status.bStatus);
     if (!(dfu_root->quirks & QUIRK_POLLTIMEOUT))
-      milli_sleep(status.bwPollTimeout);
+      milli_sleep((long) status.bwPollTimeout);
   }
 
   printf("DFU mode device DFU version %04x\n",
