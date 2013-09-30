@@ -437,7 +437,7 @@ void OwlNestGui::settingsChanged() {
     rightGainSlider->setValue(theSettings.getCc(RIGHT_INPUT_GAIN),dontSendNotification);
     leftOutGainSlider->setValue(theSettings.getCc(LEFT_OUTPUT_GAIN), dontSendNotification);
     rightOutGainSlider->setValue(theSettings.getCc(RIGHT_OUTPUT_GAIN), dontSendNotification);
-    
+
     // Mute
     if(theSettings.getCc(LEFT_INPUT_MUTE) == 127)
         leftInputMuteButton->setToggleState(true, dontSendNotification);
@@ -458,7 +458,7 @@ void OwlNestGui::settingsChanged() {
 }
 
 void OwlNestGui::updateFirmware(){
-  FileChooser chooser("Select Firmware", 
+  FileChooser chooser("Select Firmware",
 		      File::getSpecialLocation (File::currentApplicationFile),
 // 		      File::getSpecialLocation (File::userHomeDirectory/),
 		      "*.bin");
