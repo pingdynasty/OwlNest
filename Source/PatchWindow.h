@@ -16,20 +16,9 @@
 
 class PatchWindow : public DocumentWindow
 {
-public:
-    PatchWindow(StompBoxAudioProcessor& stompbox) : DocumentWindow("Owl Patch",Colours::lightgrey,DocumentWindow::allButtons)
+public: PatchWindow(StompBoxAudioProcessor& stompbox);
 
-    {
-    setContentOwned (stompbox.createEditor(), true);
-    
-    centreWithSize (getWidth(), getHeight());
-    setVisible (true);
-    }
-
-    void closeButtonPressed()
-    {
-        JUCEApplication::getInstance()->systemRequestedQuit();
-    }
+    void closeButtonPressed();
     
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PatchWindow)

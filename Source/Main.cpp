@@ -11,6 +11,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "OwlNestGui.h"
 #include "PluginProcessor.h"
+#include "PatchWindow.h"
 
 //==============================================================================
 class OwlNestApplication  : public JUCEApplication
@@ -46,6 +47,7 @@ public:
         
         // start GUI
         mainWindow = new MainWindow(settings, dm, updateGui);
+        patchWindow = new PatchWindow(stompbox);
     }
 
     void shutdown()
@@ -107,6 +109,9 @@ public:
 
 private:
     ScopedPointer<MainWindow> mainWindow;
+    ScopedPointer<PatchWindow> patchWindow;
+    
+    
 };
 
 //==============================================================================
