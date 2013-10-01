@@ -10,7 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "OwlNestGui.h"
-
+#include "PluginProcessor.h"
 
 //==============================================================================
 class OwlNestApplication  : public JUCEApplication
@@ -27,6 +27,9 @@ public:
     ScopedPointer<OwlNestGui> mainAppWindow;
     AudioDeviceManager dm;
     OwlNestSettings settings;
+    AudioProcessorPlayer  player;
+    StompBoxAudioProcessor stompbox;
+    
     Value updateGui; // flag used to update Gui when Owl settings are loaded
     
     
@@ -37,6 +40,9 @@ public:
         
         // Initialize audio/midi device
         dm.initialise(2, 2, nullptr, true);
+        
+        player.setProcessor(&stompbox);
+        dm.addAudioCallback(&player);
         
         // start GUI
         mainWindow = new MainWindow(settings, dm, updateGui);
