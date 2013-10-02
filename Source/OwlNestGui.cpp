@@ -161,6 +161,34 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     samplingBitsLabel->setColour (TextEditor::textColourId, Colours::black);
     samplingBitsLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (ledButton = new TextButton ("new button"));
+    ledButton->setButtonText ("LED");
+    ledButton->addListener (this);
+
+    addAndMakeVisible (activePatchComboBox = new ComboBox ("new combo box"));
+    activePatchComboBox->setEditableText (false);
+    activePatchComboBox->setJustificationType (Justification::centredLeft);
+    activePatchComboBox->setTextWhenNothingSelected (String::empty);
+    activePatchComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
+    activePatchComboBox->addItem ("StereoGain", 1);
+    activePatchComboBox->addItem ("StereoMixer", 2);
+    activePatchComboBox->addItem ("ParametricEQ", 3);
+    activePatchComboBox->addItem ("Phaser", 4);
+    activePatchComboBox->addItem ("ResonantFilter", 5);
+    activePatchComboBox->addItem ("StateVariableFilter", 6);
+    activePatchComboBox->addItem ("LeakyIntegrator", 7);
+    activePatchComboBox->addItem ("DroneBox", 8);
+    activePatchComboBox->addItem ("SimpleDelay", 9);
+    activePatchComboBox->addListener (this);
+
+    addAndMakeVisible (activePatchLabel = new Label ("new label",
+                                                     "Active Patch"));
+    activePatchLabel->setFont (Font (15.00f, Font::plain));
+    activePatchLabel->setJustificationType (Justification::centredLeft);
+    activePatchLabel->setEditable (false, false, false);
+    activePatchLabel->setColour (TextEditor::textColourId, Colours::black);
+    activePatchLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -203,6 +231,9 @@ OwlNestGui::~OwlNestGui()
     rightOutputMuteButton = nullptr;
     samplingBitsComboBox = nullptr;
     samplingBitsLabel = nullptr;
+    ledButton = nullptr;
+    activePatchComboBox = nullptr;
+    activePatchLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -245,6 +276,9 @@ void OwlNestGui::resized()
     rightOutputMuteButton->setBounds (288, 563, 100, 24);
     samplingBitsComboBox->setBounds (129, 400, 150, 24);
     samplingBitsLabel->setBounds (24, 400, 103, 24);
+    ledButton->setBounds (224, 288, 150, 24);
+    activePatchComboBox->setBounds (129, 616, 150, 24);
+    activePatchLabel->setBounds (24, 616, 103, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -299,6 +333,13 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
                 break;
         }
         //[/UserComboBoxCode_samplingBitsComboBox]
+    }
+    else if (comboBoxThatHasChanged == activePatchComboBox)
+    {
+        //[UserComboBoxCode_activePatchComboBox] -- add your combo box handling code here..
+      cc = ACTIVE_PATCH;
+      val = activePatchComboBox->getSelectedId()-1;
+        //[/UserComboBoxCode_activePatchComboBox]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -365,6 +406,23 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         theSettings.setCc(RIGHT_OUTPUT_MUTE, rightOutputMuteButton->getToggleState() ? 127 : 0);
         //[/UserButtonCode_rightOutputMuteButton]
     }
+    else if (buttonThatWasClicked == ledButton)
+    {
+        //[UserButtonCode_ledButton] -- add your button handler code here..
+      int val = theSettings.getCc(LED);
+      val = (val+42)%128;
+      Colour colour;
+      if(val < 42){
+	colour = Colour::fromRGB(0xbb, 0xbb, 0xff);
+      }else if(val > 83){
+	colour = Colour::fromRGB(0xff, 0, 0); // red
+      }else{
+	colour = Colour::fromRGB(0, 0xff, 0); // green
+      }
+      ledButton->setColour(TextButton::buttonColourId, colour);
+      theSettings.setCc(LED, val);
+        //[/UserButtonCode_ledButton]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -413,6 +471,22 @@ void OwlNestGui::valueChanged(juce::Value &value){
 
 void OwlNestGui::settingsChanged() {
     int v;
+
+    // LED button
+    v = theSettings.getCc(LED);
+    Colour colour;
+    if(v < 42){
+      colour = Colour::fromRGB(0xbb, 0xbb, 0xff);
+    }else if(v > 83){
+      colour = Colour::fromRGB(0xff, 0, 0); // red
+    }else{
+      colour = Colour::fromRGB(0, 0xff, 0); // green
+    }
+    ledButton->setColour(TextButton::buttonColourId, colour);
+
+    // Active patch
+    v = theSettings.getCc(ACTIVE_PATCH);
+    activePatchComboBox->setSelectedId(v+1, dontSendNotification);
 
     // Sampling rate and bits
     v = theSettings.getCc(SAMPLING_RATE)>>5;
@@ -567,6 +641,18 @@ BEGIN_JUCER_METADATA
   <LABEL name="new label" id="f3258eff2173a09d" memberName="samplingBitsLabel"
          virtualName="" explicitFocusOrder="0" pos="24 400 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sampling Bits" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
+  <TEXTBUTTON name="new button" id="936c69781f0cac49" memberName="ledButton"
+              virtualName="" explicitFocusOrder="0" pos="224 288 150 24" buttonText="LED"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <COMBOBOX name="new combo box" id="2ffc2c8f2164d257" memberName="activePatchComboBox"
+            virtualName="" explicitFocusOrder="0" pos="129 616 150 24" editable="0"
+            layout="33" items="StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="f3938ff8c995b8ad" memberName="activePatchLabel"
+         virtualName="" explicitFocusOrder="0" pos="24 616 103 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Active Patch" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
