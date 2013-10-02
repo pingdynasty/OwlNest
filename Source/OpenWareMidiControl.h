@@ -1,21 +1,31 @@
-/*
-  ==============================================================================
-
-    OpenWareMidiControl.h
-    Created: 23 Sep 2013 12:56:24pm
-    Author:  Guillaume Le Nost
-
-  ==============================================================================
-*/
-
 #ifndef OPENWAREMIDICONTROL_H_INCLUDED
 #define OPENWAREMIDICONTROL_H_INCLUDED
+
+#define MIDI_SYSEX_MANUFACTURER        0x7d     /* Educational or development use only */
+#define MIDI_SYSEX_DEVICE              0x02     /* OWL Open Ware Laboratory */
+#define MIDI_SYSEX_PROTOCOL_VERSION    0x02     /* Rev 02. */
+#define MIDI_MAX_MESSAGE_SIZE          0x0f
+
+enum OpenWareMidiSysexCommand {
+  MIDI_SYSEX_DFU_COMMAND = 0xff
+};
 
 /*
  MIDI Control Change Mappings
 */
-
 enum OpenWareMidiControl {
+  PATCH_PARAMETER_A      = 20, /*  */
+  PATCH_PARAMETER_B      = 21, /*  */
+  PATCH_PARAMETER_C      = 22, /*  */
+  PATCH_PARAMETER_D      = 23, /*  */
+  PATCH_PARAMETER_E      = 24, /*  */
+
+  LED                    = 30, /* set/get LED value: 
+				  0-41 = off
+				  42-83 = green
+				  84-127 = red */
+  ACTIVE_PATCH           = 31, /* currently active patch, 0-number of available patches */
+
   LEFT_INPUT_GAIN =        32, /* left channel input gain, -34.5dB to +12dB (92 = 0dB) */
   RIGHT_INPUT_GAIN =       33,
   LEFT_OUTPUT_GAIN =       34, /* left channel output gain, -73dB to +6dB (121 = 0dB) */
@@ -45,10 +55,5 @@ enum OpenWareMidiControl {
   SAVE_SETTINGS =          68, /* save settings to device */
   DEVICE_FIRMWARE_UPDATE = 69  /* enter Device Firmware Upgrade mode */
 };
-
-#define MIDI_ID 0x7D ;
-#define USB_ID  04835740 ;
-
-
 
 #endif  // OPENWAREMIDICONTROL_H_INCLUDED
