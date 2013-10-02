@@ -397,7 +397,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == leftOutputMuteButton)
     {
         //[UserButtonCode_leftOutputMuteButton] -- add your button handler code here..
-        theSettings.setCc(LEFT_INPUT_MUTE, leftOutputMuteButton->getToggleState() ? 127 : 0);
+        theSettings.setCc(LEFT_OUTPUT_MUTE, leftOutputMuteButton->getToggleState() ? 127 : 0);
         //[/UserButtonCode_leftOutputMuteButton]
     }
     else if (buttonThatWasClicked == rightOutputMuteButton)
