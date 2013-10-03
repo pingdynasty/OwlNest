@@ -32,6 +32,7 @@
 // #include "Patches/FreeVerbPatch.hpp"
 // #include "Patches/EnvelopeFilterPatch.hpp"
 // #include "Patches/OctaveDownPatch.hpp"
+#include "Patches/HighPassFilterPatch.hpp"
 
 #include "Patches/Contest/BiasPatch.hpp"
 #include "Patches/Contest/BiasedDelayPatch.hpp" 
@@ -59,6 +60,7 @@ PatchRegistry::PatchRegistry(){
   REGISTER_PATCH(LeakyIntegratorPatch, "Leaky Integrator");
   REGISTER_PATCH(LpfDelayPatch<32768>, "Low Pass Filtered Delay");
   REGISTER_PATCH(LpfDelayPhaserPatch<32768>, "Low Pass Filtered Delay with Phaser");
+  REGISTER_PATCH(HighPassFilterPatch, "a High Pass Filter");
 //   REGISTER_PATCH(WaveshaperPatch, "Waveshaper");
 //   REGISTER_PATCH(FreeVerbPatch, "FreeVerb");
 //   REGISTER_PATCH(EnvelopeFilterPatch, "Envelope Filter");

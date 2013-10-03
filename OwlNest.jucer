@@ -5,6 +5,85 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
+      <FILE id="mgH8Dv" name="SeriesDeviceCallBacks.cpp" compile="1" resource="0"
+            file="Source/SeriesDeviceCallBacks.cpp"/>
+      <FILE id="b7QvIe" name="SeriesDeviceCallBacks.h" compile="0" resource="0"
+            file="Source/SeriesDeviceCallBacks.h"/>
+      <FILE id="ALqvD7" name="PatchWindow.cpp" compile="1" resource="0" file="Source/PatchWindow.cpp"/>
+      <FILE id="XY1XBy" name="PatchWindow.h" compile="0" resource="0" file="Source/PatchWindow.h"/>
+      <FILE id="E8t39G" name="StompGui.cpp" compile="1" resource="0" file="Source/StompGui.cpp"/>
+      <FILE id="Ox8vEb" name="StompGui.h" compile="0" resource="0" file="Source/StompGui.h"/>
+      <FILE id="L1e6fx" name="SampleBuffer.cpp" compile="1" resource="0"
+            file="Source/SampleBuffer.cpp"/>
+      <FILE id="FTCZJ3" name="SampleBuffer.h" compile="0" resource="0" file="Source/SampleBuffer.h"/>
+      <FILE id="EDoQ6M" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="dwNJHN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <GROUP id="{E1A6C4FA-12E5-2AE2-4C2B-F6152320ABD4}" name="Patches">
+        <FILE id="FGIdnd" name="HighPassFilterPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/HighPassFilterPatch.hpp"/>
+        <FILE id="w96kRR" name="CircularBuffer.hpp" compile="0" resource="0"
+              file="Source/Patches/CircularBuffer.hpp"/>
+        <GROUP id="{FE7A1CE3-26D8-258F-66AE-1A1B5A9A9765}" name="Contest">
+          <FILE id="u1cEDw" name="BiasedDelayPatch.hpp" compile="0" resource="0"
+                file="Source/Patches/Contest/BiasedDelayPatch.hpp"/>
+          <FILE id="RyayGy" name="BiasPatch.hpp" compile="0" resource="0" file="Source/Patches/Contest/BiasPatch.hpp"/>
+          <FILE id="FMq34q" name="BitH8rPatch.hpp" compile="0" resource="0" file="Source/Patches/Contest/BitH8rPatch.hpp"/>
+          <FILE id="B22KXc" name="blo_bleep.hpp" compile="0" resource="0" file="Source/Patches/Contest/blo_bleep.hpp"/>
+          <FILE id="bDAyD5" name="ConnyPatch.hpp" compile="0" resource="0" file="Source/Patches/Contest/ConnyPatch.hpp"/>
+          <FILE id="QQChXN" name="DroneBox.hpp" compile="0" resource="0" file="Source/Patches/Contest/DroneBox.hpp"/>
+          <FILE id="KhsZP9" name="DualTremoloPatch.hpp" compile="0" resource="0"
+                file="Source/Patches/Contest/DualTremoloPatch.hpp"/>
+          <FILE id="PABJBq" name="JumpDelay.hpp" compile="0" resource="0" file="Source/Patches/Contest/JumpDelay.hpp"/>
+          <FILE id="CeqZYY" name="SampleJitterPatch.hpp" compile="0" resource="0"
+                file="Source/Patches/Contest/SampleJitterPatch.hpp"/>
+          <FILE id="jJDuTW" name="SirenPatch.hpp" compile="0" resource="0" file="Source/Patches/Contest/SirenPatch.hpp"/>
+        </GROUP>
+        <FILE id="TT90wX" name="EnvelopeFilterPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/EnvelopeFilterPatch.hpp"/>
+        <FILE id="AO0FSX" name="FlangerPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/FlangerPatch.hpp"/>
+        <FILE id="tHIiaI" name="FreeVerbPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/FreeVerbPatch.hpp"/>
+        <FILE id="bPWNuz" name="GainPatch.hpp" compile="0" resource="0" file="Source/Patches/GainPatch.hpp"/>
+        <FILE id="bS6u3j" name="LeakyIntegratorPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/LeakyIntegratorPatch.hpp"/>
+        <FILE id="cozHFs" name="LpfDelayPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/LpfDelayPatch.hpp"/>
+        <FILE id="wl70gQ" name="LpfDelayPhaserPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/LpfDelayPhaserPatch.hpp"/>
+        <FILE id="cPQj5Q" name="OctaveDownPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/OctaveDownPatch.hpp"/>
+        <FILE id="p0UGrQ" name="OverdrivePatch.hpp" compile="0" resource="0"
+              file="Source/Patches/OverdrivePatch.hpp"/>
+        <FILE id="yVeIYm" name="ParametricEqPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/ParametricEqPatch.hpp"/>
+        <FILE id="tb0K6i" name="PhaserPatch.hpp" compile="0" resource="0" file="Source/Patches/PhaserPatch.hpp"/>
+        <FILE id="pIm8pF" name="ResonantFilterPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/ResonantFilterPatch.hpp"/>
+        <FILE id="I6Jt28" name="SampleBasedPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/SampleBasedPatch.hpp"/>
+        <FILE id="jBVSxa" name="SimpleDelayPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/SimpleDelayPatch.hpp"/>
+        <FILE id="Kn8egp" name="StateVariableFilterPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/StateVariableFilterPatch.hpp"/>
+        <FILE id="lJZ5qI" name="TemplatePatch.hpp" compile="0" resource="0"
+              file="Source/Patches/TemplatePatch.hpp"/>
+        <FILE id="UIMW7i" name="WaveshaperPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/WaveshaperPatch.hpp"/>
+      </GROUP>
+      <FILE id="vFjzMG" name="PatchRegistry.cpp" compile="1" resource="0"
+            file="Source/PatchRegistry.cpp"/>
+      <FILE id="wz382r" name="PatchRegistry.h" compile="0" resource="0" file="Source/PatchRegistry.h"/>
+      <FILE id="fBeDu6" name="StompBox.h" compile="0" resource="0" file="Source/StompBox.h"/>
+      <FILE id="ndKe9y" name="PatchProcessor.cpp" compile="1" resource="0"
+            file="Source/PatchProcessor.cpp"/>
+      <FILE id="cxUeTL" name="PatchProcessor.h" compile="0" resource="0"
+            file="Source/PatchProcessor.h"/>
+      <FILE id="sEOYX7" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="sEjXVv" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
       <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
         <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">
           <FILE id="vGsKMz" name="dfu.c" compile="1" resource="0" file="Libraries/dfu-util/dfu.c"/>
@@ -39,22 +118,21 @@
     </GROUP>
   </MAINGROUP>
   <MODULES>
-    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" juceFolder="/Users/Gouigoui/JUCE-master/modules"
-               extraLinkerFlags="" extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="" extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
                externalLibraries="usb-1.0 " extraDefs="HAVE_NANOSLEEP=1">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
@@ -63,16 +141,43 @@
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "/>
       </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
     </XCODE_MAC>
-    <LINUX_MAKE targetFolder="Builds/Linux" juceFolder="modules" extraDefs="HAVE_NANOSLEEP=1"
-                extraCompilerFlags="-I../../Libraries" extraLinkerFlags="-L/opt/local/lib "
-                externalLibraries="usb-1.0 ">
+    <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries"
+                extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 ">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
         <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="2"
                        targetName="OwlNest"/>
       </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
   <JUCEOPTIONS/>

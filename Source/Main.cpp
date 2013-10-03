@@ -12,6 +12,7 @@
 #include "OwlNestGui.h"
 #include "PluginProcessor.h"
 #include "PatchWindow.h"
+#include "SeriesDeviceCallBacks.h"
 
 //==============================================================================
 class OwlNestApplication  : public JUCEApplication
@@ -28,8 +29,7 @@ public:
     ScopedPointer<OwlNestGui> mainAppWindow;
     AudioDeviceManager dm;
     OwlNestSettings settings;
-    AudioProcessorPlayer  player;
-    StompBoxAudioProcessor stompbox;
+    SeriesDeviceCallBacks sdcb;
     
     Value updateGui; // flag used to update Gui when Owl settings are loaded
     
@@ -42,12 +42,13 @@ public:
         // Initialize audio/midi device
         dm.initialise(2, 2, nullptr, true);
         
-        player.setProcessor(&stompbox);
-        dm.addAudioCallback(&player);
+        dm.addAudioCallback(&sdcb);
         
+        sdcb.setInputFile(File("/Users/Dino/Documents/GitHub/OwlNest/Source/test.wav"));
+
         // start GUI
         mainWindow = new MainWindow(settings, dm, updateGui);
-        patchWindow = new PatchWindow(stompbox);
+        patchWindow = new PatchWindow(sdcb.getStompbox());
     }
 
     void shutdown()

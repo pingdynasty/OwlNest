@@ -49,6 +49,14 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
+  $(OBJDIR)/PatchWindow_722c40b9.o \
+  $(OBJDIR)/StompGui_6de188b3.o \
+  $(OBJDIR)/SampleBuffer_5a386a13.o \
+  $(OBJDIR)/PluginEditor_94d4fb09.o \
+  $(OBJDIR)/PatchRegistry_cb5b7186.o \
+  $(OBJDIR)/PatchProcessor_b85b83b3.o \
+  $(OBJDIR)/PluginProcessor_a059e380.o \
   $(OBJDIR)/dfu_ad6672eb.o \
   $(OBJDIR)/dfu_file_6fdc65a.o \
   $(OBJDIR)/dfu_load_118a6344.o \
@@ -90,6 +98,46 @@ clean:
 strip:
 	@echo Stripping OwlNest
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/SeriesDeviceCallBacks_31482262.o: ../../Source/SeriesDeviceCallBacks.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling SeriesDeviceCallBacks.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PatchWindow_722c40b9.o: ../../Source/PatchWindow.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PatchWindow.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/StompGui_6de188b3.o: ../../Source/StompGui.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling StompGui.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/SampleBuffer_5a386a13.o: ../../Source/SampleBuffer.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling SampleBuffer.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PluginEditor_94d4fb09.o: ../../Source/PluginEditor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PluginEditor.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PatchRegistry_cb5b7186.o: ../../Source/PatchRegistry.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PatchRegistry.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PatchProcessor_b85b83b3.o: ../../Source/PatchProcessor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PatchProcessor.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PluginProcessor_a059e380.o: ../../Source/PluginProcessor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PluginProcessor.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/dfu_ad6672eb.o: ../../Libraries/dfu-util/dfu.c
 	-@mkdir -p $(OBJDIR)
