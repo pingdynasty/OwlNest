@@ -90,6 +90,9 @@ private:
     ScopedPointer<ToggleButton> rightOutputMuteButton;
     ScopedPointer<ComboBox> samplingBitsComboBox;
     ScopedPointer<Label> samplingBitsLabel;
+    ScopedPointer<TextButton> ledButton;
+    ScopedPointer<ComboBox> activePatchComboBox;
+    ScopedPointer<Label> activePatchLabel;
 
 
     //==============================================================================
