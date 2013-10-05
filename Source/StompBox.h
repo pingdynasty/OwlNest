@@ -14,6 +14,7 @@ enum PatchParameterId {
 
 class AudioBuffer {
 public:
+  virtual ~AudioBuffer();
   virtual float* getSamples(int channel) = 0;
   virtual int getChannels() = 0;
   virtual int getSize() = 0;
