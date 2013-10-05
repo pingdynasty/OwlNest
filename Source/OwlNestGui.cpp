@@ -170,15 +170,16 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     activePatchComboBox->setJustificationType (Justification::centredLeft);
     activePatchComboBox->setTextWhenNothingSelected (String::empty);
     activePatchComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    activePatchComboBox->addItem ("StereoGain", 1);
-    activePatchComboBox->addItem ("StereoMixer", 2);
-    activePatchComboBox->addItem ("ParametricEQ", 3);
-    activePatchComboBox->addItem ("Phaser", 4);
-    activePatchComboBox->addItem ("ResonantFilter", 5);
-    activePatchComboBox->addItem ("StateVariableFilter", 6);
-    activePatchComboBox->addItem ("LeakyIntegrator", 7);
-    activePatchComboBox->addItem ("DroneBox", 8);
-    activePatchComboBox->addItem ("SimpleDelay", 9);
+    activePatchComboBox->addItem ("Copy", 1);
+    activePatchComboBox->addItem ("StereoGain", 2);
+    activePatchComboBox->addItem ("StereoMixer", 3);
+    activePatchComboBox->addItem ("ParametricEQ", 4);
+    activePatchComboBox->addItem ("Phaser", 5);
+    activePatchComboBox->addItem ("ResonantFilter", 6);
+    activePatchComboBox->addItem ("StateVariableFilter", 7);
+    activePatchComboBox->addItem ("LeakyIntegrator", 8);
+    activePatchComboBox->addItem ("DroneBox", 9);
+    activePatchComboBox->addItem ("SimpleDelay", 10);
     activePatchComboBox->addListener (this);
 
     addAndMakeVisible (activePatchLabel = new Label ("new label",
@@ -648,7 +649,7 @@ BEGIN_JUCER_METADATA
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="2ffc2c8f2164d257" memberName="activePatchComboBox"
             virtualName="" explicitFocusOrder="0" pos="129 616 150 24" editable="0"
-            layout="33" items="StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay"
+            layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="f3938ff8c995b8ad" memberName="activePatchLabel"
          virtualName="" explicitFocusOrder="0" pos="24 616 103 24" edTextCol="ff000000"
