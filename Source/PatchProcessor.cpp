@@ -3,6 +3,8 @@
 #include "PatchProcessor.h"
 #include "PluginProcessor.h"
 
+AudioBuffer::~AudioBuffer(){}
+
 Patch::Patch() : processor(NULL) {
   processor = StompBoxAudioProcessor::getThreadLocalInstance();
 }
