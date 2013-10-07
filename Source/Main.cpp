@@ -29,7 +29,7 @@ public:
     ScopedPointer<OwlNestGui> mainAppWindow;
     AudioDeviceManager dm;
     OwlNestSettings settings;
-    SeriesDeviceCallBacks sdcb;
+   // SeriesDeviceCallBacks sdcb;
     
     Value updateGui; // flag used to update Gui when Owl settings are loaded
     
@@ -42,13 +42,13 @@ public:
         // Initialize audio/midi device
         dm.initialise(2, 2, nullptr, true);
         
-        dm.addAudioCallback(&sdcb);
+       // dm.addAudioCallback(&sdcb);
         
-        sdcb.setInputFile(File("/Users/Dino/Documents/GitHub/OwlNest/Source/test.wav"));
+        //sdcb.setInputFile(File("/Users/Dino/Documents/GitHub/OwlNest/Source/test.wav"));
 
         // start GUI
         mainWindow = new MainWindow(settings, dm, updateGui);
-        patchWindow = new PatchWindow(sdcb.getStompbox());
+       // patchWindow = new PatchWindow(sdcb.getStompbox());
     }
 
     void shutdown()

@@ -22,6 +22,7 @@ private:
     AudioSourcePlayer player;
     ScopedPointer<AudioFormatReaderSource> source;
     StompBoxAudioProcessor stompbox;
+    
 
     float** buffer;
     int channels, samples;
@@ -39,9 +40,9 @@ public:
     StompBoxAudioProcessor& getStompbox();
     
     void setInputFile(File input);
-//    void sourcePlayerCallBack();
+//  void sourcePlayerCallBack();
     
-//    void processorPlayerCallBack();
+// void processorPlayerCallBack();
 };
 
 

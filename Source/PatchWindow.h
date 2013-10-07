@@ -12,12 +12,16 @@
 #define PATCHWINDOW_H_INCLUDED
 
 #include "PluginProcessor.h"
+#include "SeriesDeviceCallBacks.h"
 
 
 class PatchWindow : public DocumentWindow
 {
-public: PatchWindow(StompBoxAudioProcessor& stompbox);
-
+public: PatchWindow();
+    SeriesDeviceCallBacks sdcb;
+   
+    void appearance(bool state);
+    
     void closeButtonPressed();
     
 private:

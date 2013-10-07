@@ -10,16 +10,31 @@
 
 #include "PatchWindow.h"
 
-PatchWindow ::  PatchWindow(StompBoxAudioProcessor& stompbox) : DocumentWindow("Owl Patch",Colours::lightgrey,DocumentWindow::allButtons)
+
+PatchWindow ::  PatchWindow() : DocumentWindow("Owl Patch",Colours::lightgrey,DocumentWindow::allButtons)
 
 {
-    setContentOwned (stompbox.createEditor(), true);
+     StompBoxAudioProcessor& stompbox = sdcb.getStompbox();
+       setContentOwned (stompbox.createEditor(), true);
     
     centreWithSize (getWidth(), getHeight());
-    setVisible (true);
+    setVisible (false);
+}
+
+void PatchWindow :: appearance(bool state)
+{
+    if(state == false|| NULL)
+    {
+    setVisible (false);
+    }
+    if(state == true)
+    {
+        setVisible(true);
+    }
 }
 
 void PatchWindow :: closeButtonPressed()
 {
-    JUCEApplication::getInstance()->systemRequestedQuit();
+   // JUCEApplication::getInstance()->systemRequestedQuit();
+    setVisible (false);
 }

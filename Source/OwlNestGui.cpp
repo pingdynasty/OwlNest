@@ -19,9 +19,12 @@
 
 //[Headers] You can add your own extra header files here...
 #include "FirmwareLoader.h"
+#include "OwlNestGui.h"
+
+
 //[/Headers]
 
-#include "OwlNestGui.h"
+
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
@@ -192,6 +195,10 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     activePatchLabel->setColour (TextEditor::textColourId, Colours::black);
     activePatchLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (simButton = new TextButton ("new button"));
+    simButton->setButtonText ("Simulate");
+    simButton->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -205,6 +212,8 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     settingsChanged();
     updateGui.addListener(this);
     setVisible(true); // set the window visible
+    patchWindow = new PatchWindow();
+    
     //[/Constructor]
 }
 
@@ -237,6 +246,7 @@ OwlNestGui::~OwlNestGui()
     ledButton = nullptr;
     activePatchComboBox = nullptr;
     activePatchLabel = nullptr;
+    simButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -282,6 +292,7 @@ void OwlNestGui::resized()
     ledButton->setBounds (224, 288, 150, 24);
     activePatchComboBox->setBounds (129, 616, 150, 24);
     activePatchLabel->setBounds (24, 616, 103, 24);
+    simButton->setBounds (128, 656, 150, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -425,6 +436,15 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
       ledButton->setColour(TextButton::buttonColourId, colour);
       theSettings.setCc(LED, val);
         //[/UserButtonCode_ledButton]
+    }
+    else if (buttonThatWasClicked == simButton)
+    {
+        
+        //[UserButtonCode_simButton] -- add your button handler code here..
+       // SeriesDeviceCallBacks sdcb;
+        patchWindow->appearance(true);
+        
+        //[/UserButtonCode_simButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -658,6 +678,9 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="Active Patch" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
+  <TEXTBUTTON name="new button" id="3e431d6ab8f0b3" memberName="simButton"
+              virtualName="" explicitFocusOrder="0" pos="128 656 150 24" buttonText="Simulate"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
