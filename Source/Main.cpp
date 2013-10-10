@@ -11,8 +11,9 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "OwlNestGui.h"
 #include "PluginProcessor.h"
-#include "PatchWindow.h"
+#include "PatchComponent.h"
 #include "SeriesDeviceCallBacks.h"
+#include "ApplicationSettingsWindow.h"
 
 //==============================================================================
 class OwlNestApplication  : public JUCEApplication
@@ -29,6 +30,7 @@ public:
     ScopedPointer<OwlNestGui> mainAppWindow;
     AudioDeviceManager dm;
     OwlNestSettings settings;
+   
    // SeriesDeviceCallBacks sdcb;
     
     Value updateGui; // flag used to update Gui when Owl settings are loaded
@@ -48,7 +50,7 @@ public:
 
         // start GUI
         mainWindow = new MainWindow(settings, dm, updateGui);
-       // patchWindow = new PatchWindow(sdcb.getStompbox());
+        
     }
 
     void shutdown()
@@ -83,9 +85,16 @@ public:
                                         Colours::lightgrey,
                                         DocumentWindow::allButtons)
         {
-            setContentOwned (new OwlNestGui(settings, dm, updateGui), true);
-
-            centreWithSize (getWidth(), getHeight());
+            
+            
+//            setContentOwned (new OwlNestGui(settings, dm, updateGui), true);
+            tabs = new TabbedComponent(TabbedButtonBar::TabsAtTop);
+            setContentOwned(tabs, false);
+            tabs->addTab("Main",Colours::lightgrey, new OwlNestGui(settings,dm,updateGui),true,1);
+            tabs->addTab("Patch",Colours::lightgrey, new PatchComponent(), true,2 );
+            tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true,3);
+            
+            centreWithSize (700, 700);
             setVisible (true);
         }
 
@@ -105,12 +114,13 @@ public:
         */
 
     private:
+         ScopedPointer<TabbedComponent> tabs;
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
     };
 
 private:
     ScopedPointer<MainWindow> mainWindow;
-    ScopedPointer<PatchWindow> patchWindow;
+  //  ScopedPointer<PatchComponent> patchTab;
     
     
 };

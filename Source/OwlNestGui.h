@@ -23,7 +23,7 @@
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
 #include "Settings.h"
-#include "PatchWindow.h"
+
 //[/Headers]
 
 
@@ -94,9 +94,7 @@ private:
     ScopedPointer<TextButton> ledButton;
     ScopedPointer<ComboBox> activePatchComboBox;
     ScopedPointer<Label> activePatchLabel;
-    ScopedPointer<TextButton> simButton;
-    ScopedPointer<PatchWindow> patchWindow;
-    
+
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OwlNestGui)
