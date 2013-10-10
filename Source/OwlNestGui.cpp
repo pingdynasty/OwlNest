@@ -200,16 +200,13 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     setSize (400, 700);
     //[/UserPreSize]
 
-    
-
-
+   
     //[Constructor] You can add your own custom stuff here..
-   addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent(theDm,0,0,0,0,true,true,false,true));
-  audioSelector->setBounds(8,8,300,200);
+
     settingsChanged();
     updateGui.addListener(this);
     setVisible(true); // set the window visible
-   
+
 
     //[/Constructor]
 }
@@ -264,30 +261,30 @@ void OwlNestGui::paint (Graphics& g)
 
 void OwlNestGui::resized()
 {
-    samplingRateComboBox->setBounds (129, 368, 150, 24);
-    samplingRateLabel->setBounds (24, 368, 103, 24);
-    loadButton->setBounds (24, 336, 150, 24);
-    leftGainSlider->setBounds (128, 470, 150, 24);
-    leftGainLabel->setBounds (24, 470, 103, 24);
-    saveButton->setBounds (224, 336, 150, 24);
-    dfuButton->setBounds (224, 248, 150, 24);
-    bypassButton->setBounds (24, 240, 150, 24);
-    swapLRButton->setBounds (24, 280, 150, 24);
-    rightGainLabel->setBounds (24, 499, 103, 24);
-    rightGainSlider->setBounds (128, 499, 150, 24);
-    leftOutGainSlider->setBounds (128, 534, 150, 24);
-    leftOutGainLabel->setBounds (24, 534, 103, 24);
-    rightOutGainLabel->setBounds (24, 563, 103, 24);
-    rightOutGainSlider->setBounds (128, 563, 150, 24);
-    leftInputMuteButton->setBounds (288, 470, 100, 24);
-    rightInputMuteButton->setBounds (288, 499, 100, 24);
-    leftOutputMuteButton->setBounds (288, 534, 100, 24);
-    rightOutputMuteButton->setBounds (288, 563, 100, 24);
-    samplingBitsComboBox->setBounds (129, 400, 150, 24);
-    samplingBitsLabel->setBounds (24, 400, 103, 24);
-    ledButton->setBounds (224, 288, 150, 24);
-    activePatchComboBox->setBounds (129, 616, 150, 24);
-    activePatchLabel->setBounds (24, 616, 103, 24);
+    samplingRateComboBox->setBounds (129, 280, 150, 24);
+    samplingRateLabel->setBounds (24, 280, 103, 24);
+    loadButton->setBounds (24, 248, 150, 24);
+    leftGainSlider->setBounds (128, 382, 150, 24);
+    leftGainLabel->setBounds (24, 382, 103, 24);
+    saveButton->setBounds (224, 248, 150, 24);
+    dfuButton->setBounds (224, 160, 150, 24);
+    bypassButton->setBounds (24, 152, 150, 24);
+    swapLRButton->setBounds (24, 192, 150, 24);
+    rightGainLabel->setBounds (24, 411, 103, 24);
+    rightGainSlider->setBounds (128, 411, 150, 24);
+    leftOutGainSlider->setBounds (128, 446, 150, 24);
+    leftOutGainLabel->setBounds (24, 446, 103, 24);
+    rightOutGainLabel->setBounds (24, 475, 103, 24);
+    rightOutGainSlider->setBounds (128, 475, 150, 24);
+    leftInputMuteButton->setBounds (288, 382, 100, 24);
+    rightInputMuteButton->setBounds (288, 411, 100, 24);
+    leftOutputMuteButton->setBounds (288, 446, 100, 24);
+    rightOutputMuteButton->setBounds (288, 475, 100, 24);
+    samplingBitsComboBox->setBounds (129, 312, 150, 24);
+    samplingBitsLabel->setBounds (24, 312, 103, 24);
+    ledButton->setBounds (224, 200, 150, 24);
+    activePatchComboBox->setBounds (129, 528, 150, 24);
+    activePatchLabel->setBounds (24, 528, 103, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -572,95 +569,95 @@ BEGIN_JUCER_METADATA
                  fixedSize="1" initialWidth="400" initialHeight="700">
   <BACKGROUND backgroundColour="ffffffff"/>
   <COMBOBOX name="new combo box" id="7eed9fbfa06bf85b" memberName="samplingRateComboBox"
-            virtualName="" explicitFocusOrder="0" pos="129 368 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="129 280 150 24" editable="0"
             layout="33" items="8 kHz&#10;32 kHz&#10;48 kHz&#10;96 kHz" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="aedcbbc865265e" memberName="samplingRateLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 368 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 280 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sampling Rate" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="712a98a25b0d275e" memberName="loadButton"
-              virtualName="" explicitFocusOrder="0" pos="24 336 150 24" buttonText="load from owl"
+              virtualName="" explicitFocusOrder="0" pos="24 248 150 24" buttonText="load from owl"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="new slider" id="ce099269a95e9cf7" memberName="leftGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="128 470 150 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="128 382 150 24" min="0"
           max="127" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="0" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="2138fad0eb10f8ee" memberName="leftGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 470 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 382 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Input Gain L" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="f37a6fa0e6074e35" memberName="saveButton"
-              virtualName="" explicitFocusOrder="0" pos="224 336 150 24" buttonText="save to owl"
+              virtualName="" explicitFocusOrder="0" pos="224 248 150 24" buttonText="save to owl"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="49395e88504ed9a4" memberName="dfuButton"
-              virtualName="" explicitFocusOrder="0" pos="224 248 150 24" buttonText="Firmware Update"
+              virtualName="" explicitFocusOrder="0" pos="224 160 150 24" buttonText="Firmware Update"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
-                virtualName="" explicitFocusOrder="0" pos="24 240 150 24" buttonText="Bypass"
+                virtualName="" explicitFocusOrder="0" pos="24 152 150 24" buttonText="Bypass"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="5e0a14ed17680a7" memberName="swapLRButton"
-                virtualName="" explicitFocusOrder="0" pos="24 280 150 24" buttonText="Swap Left/Right"
+                virtualName="" explicitFocusOrder="0" pos="24 192 150 24" buttonText="Swap Left/Right"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="a4c7e40cc3b84fa1" memberName="rightGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 499 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 411 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Input Gain R" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="new slider" id="751638225df21da5" memberName="rightGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="128 499 150 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="128 411 150 24" min="0"
           max="127" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="0" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="new slider" id="59927295068e5acd" memberName="leftOutGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="128 534 150 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="128 446 150 24" min="0"
           max="127" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="0" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="d2acb69e045cd837" memberName="leftOutGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 534 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 446 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Output Gain L" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="f61d9f9ae7e5f004" memberName="rightOutGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 563 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 475 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Output Gain R" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="new slider" id="e520e83dc8199cec" memberName="rightOutGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="128 563 150 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="128 475 150 24" min="0"
           max="127" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="0" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <TOGGLEBUTTON name="new toggle button" id="c3d4453ea3e0bad0" memberName="leftInputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="288 470 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="288 382 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="9d0155fca059ad2b" memberName="rightInputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="288 499 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="288 411 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="e8b8a82e4cc96eab" memberName="leftOutputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="288 534 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="288 446 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="47ae93ef5d84135f" memberName="rightOutputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="288 563 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="288 475 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="68afb9201dff30b0" memberName="samplingBitsComboBox"
-            virtualName="" explicitFocusOrder="0" pos="129 400 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="129 312 150 24" editable="0"
             layout="33" items="16 bit&#10;24 bit&#10;32 bit" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="f3258eff2173a09d" memberName="samplingBitsLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 400 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 312 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sampling Bits" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="936c69781f0cac49" memberName="ledButton"
-              virtualName="" explicitFocusOrder="0" pos="224 288 150 24" buttonText="LED"
+              virtualName="" explicitFocusOrder="0" pos="224 200 150 24" buttonText="LED"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="2ffc2c8f2164d257" memberName="activePatchComboBox"
-            virtualName="" explicitFocusOrder="0" pos="129 616 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="129 528 150 24" editable="0"
             layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay&#10;LpfDelay&#10;LpfDelayPhaser"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="f3938ff8c995b8ad" memberName="activePatchLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 616 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 528 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Active Patch" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>

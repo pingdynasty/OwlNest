@@ -5,12 +5,22 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
+      <FILE id="h4PIME" name="Transport Panel.cpp" compile="1" resource="0"
+            file="Source/Transport Panel.cpp"/>
+      <FILE id="CTzaMc" name="Transport Panel.h" compile="0" resource="0"
+            file="Source/Transport Panel.h"/>
+      <FILE id="lvttDF" name="ApplicationSettingsWindow.cpp" compile="1"
+            resource="0" file="Source/ApplicationSettingsWindow.cpp"/>
+      <FILE id="bvN4BV" name="ApplicationSettingsWindow.h" compile="0" resource="0"
+            file="Source/ApplicationSettingsWindow.h"/>
       <FILE id="mgH8Dv" name="SeriesDeviceCallBacks.cpp" compile="1" resource="0"
             file="Source/SeriesDeviceCallBacks.cpp"/>
       <FILE id="b7QvIe" name="SeriesDeviceCallBacks.h" compile="0" resource="0"
             file="Source/SeriesDeviceCallBacks.h"/>
-      <FILE id="ALqvD7" name="PatchWindow.cpp" compile="1" resource="0" file="Source/PatchWindow.cpp"/>
-      <FILE id="XY1XBy" name="PatchWindow.h" compile="0" resource="0" file="Source/PatchWindow.h"/>
+      <FILE id="ALqvD7" name="PatchComponent.cpp" compile="1" resource="0"
+            file="Source/PatchComponent.cpp"/>
+      <FILE id="XY1XBy" name="PatchComponent.h" compile="0" resource="0"
+            file="Source/PatchComponent.h"/>
       <FILE id="E8t39G" name="StompGui.cpp" compile="1" resource="0" file="Source/StompGui.cpp"/>
       <FILE id="Ox8vEb" name="StompGui.h" compile="0" resource="0" file="Source/StompGui.h"/>
       <FILE id="L1e6fx" name="SampleBuffer.cpp" compile="1" resource="0"

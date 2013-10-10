@@ -29,19 +29,21 @@
 //==============================================================================
 ApplicationSettingsWindow::ApplicationSettingsWindow (AudioDeviceManager& deviceManager)
 {
-    addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,2,0,2,true,true,false,false));
+    addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,0,0,0,true,true,false,true));
     audioSelector->setName ("new component");
 
 
     //[UserPreSize]
+
     //[/UserPreSize]
 
     setSize (600, 400);
 
 
     //[Constructor] You can add your own custom stuff here..
-//   addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent(deviceManager,0,0,0,0,true,true,false,true));
-//    audioSelector->setBounds(8,8,300,200);
+addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,2,0,2,true,true,false,false));
+    audioSelector->setName ("new component");
+
     setVisible(true);
     //[/Constructor]
 }
@@ -84,7 +86,7 @@ void ApplicationSettingsWindow::paint (Graphics& g)
 
 void ApplicationSettingsWindow::resized()
 {
-    audioSelector->setBounds (0, 0, 392, 528);
+    audioSelector->setBounds (48, 40, 408, 512);
     internalPath1.clear();
     internalPath1.startNewSubPath (406.0f, 360.0f);
     internalPath1.lineTo (436.0f, 410.0f);
@@ -123,7 +125,7 @@ BEGIN_JUCER_METADATA
                hasStroke="0"/>
   </BACKGROUND>
   <GENERICCOMPONENT name="new component" id="29b98dd09a98b370" memberName="audioSelector"
-                    virtualName="" explicitFocusOrder="0" pos="0 0 392 528" class="AudioDeviceSelectorComponent"
+                    virtualName="" explicitFocusOrder="0" pos="48 40 408 512" class="AudioDeviceSelectorComponent"
                     params="deviceManager,0,0,0,0,true,true,false,true"/>
 </JUCER_COMPONENT>
 

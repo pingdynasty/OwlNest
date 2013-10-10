@@ -13,6 +13,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
+#include "Transport Panel.h"
 
 class SeriesDeviceCallBacks : public AudioIODeviceCallback
 {
@@ -22,7 +23,7 @@ private:
     AudioSourcePlayer player;
     ScopedPointer<AudioFormatReaderSource> source;
     StompBoxAudioProcessor stompbox;
-    
+    Transport
 
     float** buffer;
     int channels, samples;

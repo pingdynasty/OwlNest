@@ -18,12 +18,12 @@ ifeq ($(CONFIG),Debug)
     TARGET_ARCH := -march=native
   endif
 
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 -I../../Libraries
   CXXFLAGS += $(CFLAGS)
   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt -lusb-1.0 -L/opt/local/lib
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   TARGET := OwlNest
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
@@ -38,19 +38,21 @@ ifeq ($(CONFIG),Release)
     TARGET_ARCH := -march=native
   endif
 
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os -I../../Libraries
   CXXFLAGS += $(CFLAGS)
   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt -lusb-1.0 -L/opt/local/lib
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   TARGET := OwlNest
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/Transport\ Panel_e03a680e.o \
+  $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
   $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
-  $(OBJDIR)/PatchWindow_722c40b9.o \
+  $(OBJDIR)/PatchComponent_9fa7269e.o \
   $(OBJDIR)/StompGui_6de188b3.o \
   $(OBJDIR)/SampleBuffer_5a386a13.o \
   $(OBJDIR)/PluginEditor_94d4fb09.o \
@@ -99,14 +101,24 @@ strip:
 	@echo Stripping OwlNest
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
+$(OBJDIR)/Transport\ Panel_e03a680e.o: ../../Source/Transport\ Panel.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Transport Panel.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ApplicationSettingsWindow_2723744.o: ../../Source/ApplicationSettingsWindow.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ApplicationSettingsWindow.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/SeriesDeviceCallBacks_31482262.o: ../../Source/SeriesDeviceCallBacks.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling SeriesDeviceCallBacks.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/PatchWindow_722c40b9.o: ../../Source/PatchWindow.cpp
+$(OBJDIR)/PatchComponent_9fa7269e.o: ../../Source/PatchComponent.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PatchWindow.cpp"
+	@echo "Compiling PatchComponent.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/StompGui_6de188b3.o: ../../Source/StompGui.cpp
