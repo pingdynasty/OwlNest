@@ -218,13 +218,71 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     masterButton->setButtonText ("Master");
     masterButton->addListener (this);
 
-    addAndMakeVisible (status = new Label ("new label",
-                                           String::empty));
-    status->setFont (Font (15.00f, Font::plain));
-    status->setJustificationType (Justification::centredLeft);
-    status->setEditable (false, false, false);
-    status->setColour (TextEditor::textColourId, Colours::black);
-    status->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    addAndMakeVisible (statusLabel = new Label ("new label",
+                                                "Status: Initialising..."));
+    statusLabel->setFont (Font (15.00f, Font::plain));
+    statusLabel->setJustificationType (Justification::centredLeft);
+    statusLabel->setEditable (false, false, false);
+    statusLabel->setColour (TextEditor::textColourId, Colours::black);
+    statusLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (patchSlotAComboBox = new ComboBox ("new combo box"));
+    patchSlotAComboBox->setEditableText (false);
+    patchSlotAComboBox->setJustificationType (Justification::centredLeft);
+    patchSlotAComboBox->setTextWhenNothingSelected (String::empty);
+    patchSlotAComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
+    patchSlotAComboBox->addItem ("Copy", 1);
+    patchSlotAComboBox->addItem ("StereoGain", 2);
+    patchSlotAComboBox->addItem ("StereoMixer", 3);
+    patchSlotAComboBox->addItem ("ParametricEQ", 4);
+    patchSlotAComboBox->addItem ("Phaser", 5);
+    patchSlotAComboBox->addItem ("ResonantFilter", 6);
+    patchSlotAComboBox->addItem ("StateVariableFilter", 7);
+    patchSlotAComboBox->addItem ("LeakyIntegrator", 8);
+    patchSlotAComboBox->addItem ("DroneBox", 9);
+    patchSlotAComboBox->addItem ("SimpleDelay", 10);
+    patchSlotAComboBox->addItem ("LpfDelay", 11);
+    patchSlotAComboBox->addItem ("LpfDelayPhaser", 12);
+    patchSlotAComboBox->addItem ("TestTone", 13);
+    patchSlotAComboBox->addItem ("FixedDelay", 14);
+    patchSlotAComboBox->addListener (this);
+
+    addAndMakeVisible (patchSlotALabel = new Label ("new label",
+                                                    "Slot A"));
+    patchSlotALabel->setFont (Font (15.00f, Font::plain));
+    patchSlotALabel->setJustificationType (Justification::centredLeft);
+    patchSlotALabel->setEditable (false, false, false);
+    patchSlotALabel->setColour (TextEditor::textColourId, Colours::black);
+    patchSlotALabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (patchSlotBComboBox = new ComboBox ("new combo box"));
+    patchSlotBComboBox->setEditableText (false);
+    patchSlotBComboBox->setJustificationType (Justification::centredLeft);
+    patchSlotBComboBox->setTextWhenNothingSelected (String::empty);
+    patchSlotBComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
+    patchSlotBComboBox->addItem ("Copy", 1);
+    patchSlotBComboBox->addItem ("StereoGain", 2);
+    patchSlotBComboBox->addItem ("StereoMixer", 3);
+    patchSlotBComboBox->addItem ("ParametricEQ", 4);
+    patchSlotBComboBox->addItem ("Phaser", 5);
+    patchSlotBComboBox->addItem ("ResonantFilter", 6);
+    patchSlotBComboBox->addItem ("StateVariableFilter", 7);
+    patchSlotBComboBox->addItem ("LeakyIntegrator", 8);
+    patchSlotBComboBox->addItem ("DroneBox", 9);
+    patchSlotBComboBox->addItem ("SimpleDelay", 10);
+    patchSlotBComboBox->addItem ("LpfDelay", 11);
+    patchSlotBComboBox->addItem ("LpfDelayPhaser", 12);
+    patchSlotBComboBox->addItem ("TestTone", 13);
+    patchSlotBComboBox->addItem ("FixedDelay", 14);
+    patchSlotBComboBox->addListener (this);
+
+    addAndMakeVisible (patchSlotBLabel = new Label ("new label",
+                                                    "Slot B"));
+    patchSlotBLabel->setFont (Font (15.00f, Font::plain));
+    patchSlotBLabel->setJustificationType (Justification::centredLeft);
+    patchSlotBLabel->setEditable (false, false, false);
+    patchSlotBLabel->setColour (TextEditor::textColourId, Colours::black);
+    patchSlotBLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
 
     //[UserPreSize]
@@ -239,7 +297,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     settingsChanged();
     updateGui.addListener(this);
     setVisible(true); // set the window visible
-
+    setStatus("ready");
 
     //[/Constructor]
 }
@@ -276,7 +334,11 @@ OwlNestGui::~OwlNestGui()
     protocolComboBox = nullptr;
     protocolLabel = nullptr;
     masterButton = nullptr;
-    status = nullptr;
+    statusLabel = nullptr;
+    patchSlotAComboBox = nullptr;
+    patchSlotALabel = nullptr;
+    patchSlotBComboBox = nullptr;
+    patchSlotBLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -325,7 +387,11 @@ void OwlNestGui::resized()
     protocolComboBox->setBounds (129, 344, 150, 24);
     protocolLabel->setBounds (24, 344, 103, 24);
     masterButton->setBounds (288, 344, 150, 24);
-    status->setBounds (24, 616, 352, 24);
+    statusLabel->setBounds (24, 656, 352, 24);
+    patchSlotAComboBox->setBounds (129, 568, 150, 24);
+    patchSlotALabel->setBounds (24, 568, 103, 24);
+    patchSlotBComboBox->setBounds (129, 608, 150, 24);
+    patchSlotBLabel->setBounds (24, 608, 103, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -394,6 +460,20 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       cc = CODEC_PROTOCOL;
       val = protocolComboBox->getSelectedId() == 1 ? 0 : 127;
         //[/UserComboBoxCode_protocolComboBox]
+    }
+    else if (comboBoxThatHasChanged == patchSlotAComboBox)
+    {
+        //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
+      cc = PATCH_SLOT_A;
+      val = patchSlotAComboBox->getSelectedId()-1;
+        //[/UserComboBoxCode_patchSlotAComboBox]
+    }
+    else if (comboBoxThatHasChanged == patchSlotBComboBox)
+    {
+        //[UserComboBoxCode_patchSlotBComboBox] -- add your combo box handling code here..
+      cc = PATCH_SLOT_B;
+      val = patchSlotBComboBox->getSelectedId()-1;
+        //[/UserComboBoxCode_patchSlotBComboBox]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -529,6 +609,10 @@ void OwlNestGui::valueChanged(juce::Value &value){
     settingsChanged();
 }
 
+void OwlNestGui::setStatus(const juce::String& msg){
+  statusLabel->setText(msg, dontSendNotification);
+}
+
 void OwlNestGui::settingsChanged() {
     int v;
 
@@ -544,9 +628,13 @@ void OwlNestGui::settingsChanged() {
     }
     ledButton->setColour(TextButton::buttonColourId, colour);
 
-    // Active patch
+    // Patches
     v = theSettings.getCc(ACTIVE_PATCH);
     activePatchComboBox->setSelectedId(v+1, dontSendNotification);
+    v = theSettings.getCc(PATCH_SLOT_A);
+    patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
+    v = theSettings.getCc(PATCH_SLOT_B);
+    patchSlotBComboBox->setSelectedId(v+1, dontSendNotification);
 
     // Sampling rate and bits
     v = theSettings.getCc(SAMPLING_RATE)>>5;
@@ -602,6 +690,7 @@ void OwlNestGui::settingsChanged() {
     else
       masterButton->setToggleState(true, dontSendNotification);
 
+    setStatus("Updated settings");
 }
 
 void OwlNestGui::updateFirmware(){
@@ -615,6 +704,7 @@ void OwlNestGui::updateFirmware(){
     File file = chooser.getResult();
     FirmwareLoader loader;
     loader.updateFirmware(file);
+    setStatus("Updated firmware");
   }
 }
 //[/MiscUserCode]
@@ -739,9 +829,27 @@ BEGIN_JUCER_METADATA
   <TOGGLEBUTTON name="new toggle button" id="7ae50b59d73384c8" memberName="masterButton"
                 virtualName="" explicitFocusOrder="0" pos="288 344 150 24" buttonText="Master"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
-  <LABEL name="new label" id="2f07a4c0694077f7" memberName="status" virtualName=""
-         explicitFocusOrder="0" pos="24 616 352 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="" editableSingleClick="0" editableDoubleClick="0"
+  <LABEL name="new label" id="2f07a4c0694077f7" memberName="statusLabel"
+         virtualName="" explicitFocusOrder="0" pos="24 656 352 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Status: Initialising..." editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
+  <COMBOBOX name="new combo box" id="8a0d565fbe220bde" memberName="patchSlotAComboBox"
+            virtualName="" explicitFocusOrder="0" pos="129 568 150 24" editable="0"
+            layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay&#10;LpfDelay&#10;LpfDelayPhaser&#10;TestTone&#10;FixedDelay"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="54afa4d08d09d664" memberName="patchSlotALabel"
+         virtualName="" explicitFocusOrder="0" pos="24 568 103 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Slot A" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <COMBOBOX name="new combo box" id="ead688c04fb4a49e" memberName="patchSlotBComboBox"
+            virtualName="" explicitFocusOrder="0" pos="129 608 150 24" editable="0"
+            layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay&#10;LpfDelay&#10;LpfDelayPhaser&#10;TestTone&#10;FixedDelay"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="a882f7d2f19281a4" memberName="patchSlotBLabel"
+         virtualName="" explicitFocusOrder="0" pos="24 608 103 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Slot B" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>

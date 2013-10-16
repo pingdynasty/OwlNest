@@ -52,6 +52,7 @@ public:
     void settingsChanged();
     void valueChanged(juce::Value &value);
     void updateFirmware();
+    void setStatus(const String& msg);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -97,7 +98,11 @@ private:
     ScopedPointer<ComboBox> protocolComboBox;
     ScopedPointer<Label> protocolLabel;
     ScopedPointer<ToggleButton> masterButton;
-    ScopedPointer<Label> status;
+    ScopedPointer<Label> statusLabel;
+    ScopedPointer<ComboBox> patchSlotAComboBox;
+    ScopedPointer<Label> patchSlotALabel;
+    ScopedPointer<ComboBox> patchSlotBComboBox;
+    ScopedPointer<Label> patchSlotBLabel;
 
 
     //==============================================================================

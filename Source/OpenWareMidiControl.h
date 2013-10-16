@@ -20,6 +20,9 @@ enum OpenWareMidiControl {
   PATCH_PARAMETER_D      = 23, /*  */
   PATCH_PARAMETER_E      = 24, /*  */
 
+  PATCH_SLOT_A           = 28, /* load patch into slot A */
+  PATCH_SLOT_B           = 29, /* load patch into slot B */
+
   LED                    = 30, /* set/get LED value: 
 				  0-41 = off
 				  42-83 = green
