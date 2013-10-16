@@ -36,6 +36,14 @@ enum OpenWareMidiControl {
   RIGHT_OUTPUT_MUTE =      39,
   BYPASS =                 40, /* codec bypass mode (127=bypass) */
 
+  CODEC_MASTER =           41, /* codec mode, slave or master:
+				  0-63 = slave
+				  64-127 = master
+			       */
+  CODEC_PROTOCOL =         42, /* codec protocol: 
+				  0-63 = I2S Philips
+				  64-127 = MSB
+			       */
   SAMPLING_RATE =          60, /* sampling rate
 				  0-31 = 8kHz
 				  32-63 = 32kHz
