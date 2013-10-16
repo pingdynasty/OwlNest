@@ -185,6 +185,8 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     activePatchComboBox->addItem ("SimpleDelay", 10);
     activePatchComboBox->addItem ("LpfDelay", 11);
     activePatchComboBox->addItem ("LpfDelayPhaser", 12);
+    activePatchComboBox->addItem ("TestTone", 13);
+    activePatchComboBox->addItem ("FixedDelay", 14);
     activePatchComboBox->addListener (this);
 
     addAndMakeVisible (activePatchLabel = new Label ("new label",
@@ -195,12 +197,43 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     activePatchLabel->setColour (TextEditor::textColourId, Colours::black);
     activePatchLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (protocolComboBox = new ComboBox ("new combo box"));
+    protocolComboBox->setEditableText (false);
+    protocolComboBox->setJustificationType (Justification::centredLeft);
+    protocolComboBox->setTextWhenNothingSelected (String::empty);
+    protocolComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
+    protocolComboBox->addItem ("Philips", 1);
+    protocolComboBox->addItem ("MSB", 2);
+    protocolComboBox->addListener (this);
+
+    addAndMakeVisible (protocolLabel = new Label ("new label",
+                                                  "Protocol"));
+    protocolLabel->setFont (Font (15.00f, Font::plain));
+    protocolLabel->setJustificationType (Justification::centredLeft);
+    protocolLabel->setEditable (false, false, false);
+    protocolLabel->setColour (TextEditor::textColourId, Colours::black);
+    protocolLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (masterButton = new ToggleButton ("new toggle button"));
+    masterButton->setButtonText ("Master");
+    masterButton->addListener (this);
+
+    addAndMakeVisible (status = new Label ("new label",
+                                           String::empty));
+    status->setFont (Font (15.00f, Font::plain));
+    status->setJustificationType (Justification::centredLeft);
+    status->setEditable (false, false, false);
+    status->setColour (TextEditor::textColourId, Colours::black);
+    status->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
 
     //[UserPreSize]
     setSize (400, 700);
     //[/UserPreSize]
 
-   
+    setSize (400, 700);
+
+
     //[Constructor] You can add your own custom stuff here..
 
     settingsChanged();
@@ -240,6 +273,10 @@ OwlNestGui::~OwlNestGui()
     ledButton = nullptr;
     activePatchComboBox = nullptr;
     activePatchLabel = nullptr;
+    protocolComboBox = nullptr;
+    protocolLabel = nullptr;
+    masterButton = nullptr;
+    status = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -285,6 +322,10 @@ void OwlNestGui::resized()
     ledButton->setBounds (224, 200, 150, 24);
     activePatchComboBox->setBounds (129, 528, 150, 24);
     activePatchLabel->setBounds (24, 528, 103, 24);
+    protocolComboBox->setBounds (129, 344, 150, 24);
+    protocolLabel->setBounds (24, 344, 103, 24);
+    masterButton->setBounds (288, 344, 150, 24);
+    status->setBounds (24, 616, 352, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -346,6 +387,13 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       cc = ACTIVE_PATCH;
       val = activePatchComboBox->getSelectedId()-1;
         //[/UserComboBoxCode_activePatchComboBox]
+    }
+    else if (comboBoxThatHasChanged == protocolComboBox)
+    {
+        //[UserComboBoxCode_protocolComboBox] -- add your combo box handling code here..
+      cc = CODEC_PROTOCOL;
+      val = protocolComboBox->getSelectedId() == 1 ? 0 : 127;
+        //[/UserComboBoxCode_protocolComboBox]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -428,6 +476,12 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
       ledButton->setColour(TextButton::buttonColourId, colour);
       theSettings.setCc(LED, val);
         //[/UserButtonCode_ledButton]
+    }
+    else if (buttonThatWasClicked == masterButton)
+    {
+        //[UserButtonCode_masterButton] -- add your button handler code here..
+      theSettings.setCc(CODEC_MASTER, masterButton->getToggleState() ? 127 : 0);
+        //[/UserButtonCode_masterButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -535,6 +589,19 @@ void OwlNestGui::settingsChanged() {
         rightOutputMuteButton->setToggleState(true, dontSendNotification);
     else
         rightOutputMuteButton->setToggleState(false, dontSendNotification);
+
+    // Protocol
+    if(theSettings.getCc(CODEC_PROTOCOL) < 64)
+      protocolComboBox->setSelectedId(1);
+    else
+      protocolComboBox->setSelectedId(2);
+
+    // Master
+    if(theSettings.getCc(CODEC_MASTER) < 64)
+      masterButton->setToggleState(false, dontSendNotification);
+    else
+      masterButton->setToggleState(true, dontSendNotification);
+
 }
 
 void OwlNestGui::updateFirmware(){
@@ -654,13 +721,29 @@ BEGIN_JUCER_METADATA
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="2ffc2c8f2164d257" memberName="activePatchComboBox"
             virtualName="" explicitFocusOrder="0" pos="129 528 150 24" editable="0"
-            layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay&#10;LpfDelay&#10;LpfDelayPhaser"
+            layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay&#10;LpfDelay&#10;LpfDelayPhaser&#10;TestTone&#10;FixedDelay"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="f3938ff8c995b8ad" memberName="activePatchLabel"
          virtualName="" explicitFocusOrder="0" pos="24 528 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Active Patch" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
+  <COMBOBOX name="new combo box" id="8e9735eeb5b5f6cd" memberName="protocolComboBox"
+            virtualName="" explicitFocusOrder="0" pos="129 344 150 24" editable="0"
+            layout="33" items="Philips&#10;MSB" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="6f96ad882d073112" memberName="protocolLabel"
+         virtualName="" explicitFocusOrder="0" pos="24 344 103 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Protocol" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <TOGGLEBUTTON name="new toggle button" id="7ae50b59d73384c8" memberName="masterButton"
+                virtualName="" explicitFocusOrder="0" pos="288 344 150 24" buttonText="Master"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <LABEL name="new label" id="2f07a4c0694077f7" memberName="status" virtualName=""
+         explicitFocusOrder="0" pos="24 616 352 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
