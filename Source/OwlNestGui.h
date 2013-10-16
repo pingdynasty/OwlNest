@@ -94,6 +94,10 @@ private:
     ScopedPointer<TextButton> ledButton;
     ScopedPointer<ComboBox> activePatchComboBox;
     ScopedPointer<Label> activePatchLabel;
+    ScopedPointer<ComboBox> protocolComboBox;
+    ScopedPointer<Label> protocolLabel;
+    ScopedPointer<ToggleButton> masterButton;
+    ScopedPointer<Label> status;
 
 
     //==============================================================================
