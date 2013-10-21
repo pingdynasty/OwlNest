@@ -19,7 +19,7 @@
 
 class PatchComponent : public Component
 {
-public: PatchComponent();
+public: PatchComponent(AudioDeviceManager& dm);
     SeriesDeviceCallBacks sdcb;
    
     void appearance(bool state);

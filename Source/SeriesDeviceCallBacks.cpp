@@ -29,10 +29,13 @@ StompBoxAudioProcessor& SeriesDeviceCallBacks::getStompbox(){
 
 void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelData, int numInputChannels, float **outputChannelData, int numOutputChannels, int numSamples)
 {
-    player.audioDeviceIOCallback(inputChannelData, numInputChannels,
-                                buffer, channels, samples);
+//     player.audioDeviceIOCallback(inputChannelData, numInputChannels,
+//                                 buffer, channels, samples);
     
-    processor.audioDeviceIOCallback((const float**)buffer, channels, outputChannelData,
+//     processor.audioDeviceIOCallback((const float**)buffer, channels, outputChannelData,
+//                                     numOutputChannels, samples);
+
+    processor.audioDeviceIOCallback(inputChannelData, numInputChannels, outputChannelData,
                                     numOutputChannels, samples);
     
 }

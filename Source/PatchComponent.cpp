@@ -11,13 +11,14 @@
 #include "PatchComponent.h"
 
 
-PatchComponent ::  PatchComponent() : Component("Patch")
+PatchComponent ::  PatchComponent(AudioDeviceManager& dm) : Component("Patch")
 
 {
     StompBoxAudioProcessor& stompbox = sdcb.getStompbox();
      
      addAndMakeVisible( stompbox.createEditor());
-    
+
+     dm.addAudioCallback(&sdcb);
    
    // docWindow = new DocumentWindow("Application Settings", Colours::lightgrey,0);
    // docWindow->setContentNonOwned(applicationSettings, true);

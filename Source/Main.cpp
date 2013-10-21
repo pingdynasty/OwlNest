@@ -91,7 +91,7 @@ public:
             tabs = new TabbedComponent(TabbedButtonBar::TabsAtTop);
             setContentOwned(tabs, false);
             tabs->addTab("Main",Colours::lightgrey, new OwlNestGui(settings,dm,updateGui),true,1);
-            tabs->addTab("Patch",Colours::lightgrey, new PatchComponent(), true,2 );
+            tabs->addTab("Patch",Colours::lightgrey, new PatchComponent(dm), true,2 );
             tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true,3);
             
             centreWithSize (700, 700);
