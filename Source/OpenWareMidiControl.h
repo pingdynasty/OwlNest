@@ -2,12 +2,13 @@
 #define OPENWAREMIDICONTROL_H_INCLUDED
 
 #define MIDI_SYSEX_MANUFACTURER        0x7d     /* Educational or development use only */
-#define MIDI_SYSEX_DEVICE              0x02     /* OWL Open Ware Laboratory */
-#define MIDI_SYSEX_PROTOCOL_VERSION    0x02     /* Rev 02. */
+#define MIDI_SYSEX_DEVICE              0x52     /* OWL Open Ware Laboratory */
+#define MIDI_SYSEX_VERSION             0x03     /* Revision */
 #define MIDI_MAX_MESSAGE_SIZE          0x0f
 
 enum OpenWareMidiSysexCommand {
-  MIDI_SYSEX_DFU_COMMAND = 0xff
+  SYSEX_PRESET_NAME_COMMAND     = 0x01,
+  SYSEX_DFU_COMMAND             = 0x7e
 };
 
 /*
