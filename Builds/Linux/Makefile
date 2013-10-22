@@ -49,7 +49,9 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
-  $(OBJDIR)/Transport\ Panel_e03a680e.o \
+  $(OBJDIR)/PatchMode_d85501ec.o \
+  $(OBJDIR)/DualPatchPanel_2c59bfc1.o \
+  $(OBJDIR)/TransportPanel_18909a64.o \
   $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
   $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
   $(OBJDIR)/PatchComponent_9fa7269e.o \
@@ -101,9 +103,19 @@ strip:
 	@echo Stripping OwlNest
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
-$(OBJDIR)/Transport\ Panel_e03a680e.o: ../../Source/Transport\ Panel.cpp
+$(OBJDIR)/PatchMode_d85501ec.o: ../../Source/PatchMode.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling Transport Panel.cpp"
+	@echo "Compiling PatchMode.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/DualPatchPanel_2c59bfc1.o: ../../Source/DualPatchPanel.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling DualPatchPanel.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/TransportPanel_18909a64.o: ../../Source/TransportPanel.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling TransportPanel.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ApplicationSettingsWindow_2723744.o: ../../Source/ApplicationSettingsWindow.cpp

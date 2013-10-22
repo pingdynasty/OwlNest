@@ -13,17 +13,23 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
-#include "Transport Panel.h"
+
+
 
 class SeriesDeviceCallBacks : public AudioIODeviceCallback
 {
     
 private:
-    AudioProcessorPlayer processor;
+    AudioProcessorPlayer processorA;
+    AudioProcessorPlayer processorB;
     AudioSourcePlayer player;
     ScopedPointer<AudioFormatReaderSource> source;
-    StompBoxAudioProcessor stompbox;
-    Transport
+    StompBoxAudioProcessor stompboxA;
+    StompBoxAudioProcessor stompboxB;
+    bool audioModeState = false;
+    
+    enum  configmodes { SINGLE = 1,DUAL = 2,SERIES = 3,PARALLEL = 4};
+   enum configmodes configuration = SINGLE;
 
     float** buffer;
     int channels, samples;
@@ -38,10 +44,33 @@ public:
     
     virtual void 	audioDeviceStopped ();
 
-    StompBoxAudioProcessor& getStompbox();
-    
+    StompBoxAudioProcessor& getStompboxA();
+    StompBoxAudioProcessor& getStompboxB();
     void setInputFile(File input);
-//  void sourcePlayerCallBack();
+    
+    void play();
+    
+    void stop();
+    
+    void  pause();
+    
+    void fileMode();
+    
+    void stompAChange(std::string patch);
+    void stompBChange(std::string patch);
+    
+    void setConfiguration(int config);
+
+    StringArray getpatchesA();
+    String getCurrentPatchA();
+    
+    StringArray getpatchesB();
+    String getCurrentPatchB();
+    
+    
+    void audioInMode();
+    
+    
     
 // void processorPlayerCallBack();
 };

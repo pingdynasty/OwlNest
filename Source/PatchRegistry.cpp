@@ -44,6 +44,7 @@
 #include "Patches/Contest/SampleJitterPatch.hpp"
 #include "Patches/Contest/SirenPatch.hpp"
 #include "Patches/Contest/blo_bleep.hpp"
+#include "Patches/ThreeOscSynthPatch.hpp"
 
 #define REGISTER_PATCH(T, STR) registerPatch(STR, Register<T>::construct)
 
@@ -76,6 +77,7 @@ PatchRegistry::PatchRegistry(){
   REGISTER_PATCH(SampleJitterPatch, "contest/SampleJitterPatch");
   REGISTER_PATCH(SirenPatch, "contest/SirenPatch");
   REGISTER_PATCH(little_blo_bleep, "Contest/blo_bleep");
+    REGISTER_PATCH(ThreeOscSynthPatch, "Three Oscillator Synth");
 }
 
 StringArray PatchRegistry::getNames(){

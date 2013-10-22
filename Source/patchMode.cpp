@@ -20,7 +20,7 @@
 //[Headers] You can add your own extra header files here...
 //[/Headers]
 
-#include "patchMode.h"
+#include "PatchMode.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...

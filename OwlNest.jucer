@@ -5,10 +5,16 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
-      <FILE id="h4PIME" name="Transport Panel.cpp" compile="1" resource="0"
-            file="Source/Transport Panel.cpp"/>
-      <FILE id="CTzaMc" name="Transport Panel.h" compile="0" resource="0"
-            file="Source/Transport Panel.h"/>
+      <FILE id="P76MAW" name="PatchMode.cpp" compile="1" resource="0" file="Source/PatchMode.cpp"/>
+      <FILE id="m2FwAK" name="PatchMode.h" compile="0" resource="0" file="Source/PatchMode.h"/>
+      <FILE id="QZqLsC" name="DualPatchPanel.cpp" compile="1" resource="0"
+            file="Source/DualPatchPanel.cpp"/>
+      <FILE id="eLm9S6" name="DualPatchPanel.h" compile="0" resource="0"
+            file="Source/DualPatchPanel.h"/>
+      <FILE id="h4PIME" name="TransportPanel.cpp" compile="1" resource="0"
+            file="Source/TransportPanel.cpp"/>
+      <FILE id="CTzaMc" name="TransportPanel.h" compile="0" resource="0"
+            file="Source/TransportPanel.h"/>
       <FILE id="lvttDF" name="ApplicationSettingsWindow.cpp" compile="1"
             resource="0" file="Source/ApplicationSettingsWindow.cpp"/>
       <FILE id="bvN4BV" name="ApplicationSettingsWindow.h" compile="0" resource="0"
@@ -30,6 +36,8 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="dwNJHN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       <GROUP id="{E1A6C4FA-12E5-2AE2-4C2B-F6152320ABD4}" name="Patches">
+        <FILE id="MfzHUQ" name="ThreeOscSynthPatch.hpp" compile="0" resource="0"
+              file="Source/Patches/ThreeOscSynthPatch.hpp"/>
         <FILE id="FGIdnd" name="HighPassFilterPatch.hpp" compile="0" resource="0"
               file="Source/Patches/HighPassFilterPatch.hpp"/>
         <FILE id="w96kRR" name="CircularBuffer.hpp" compile="0" resource="0"

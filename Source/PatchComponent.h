@@ -13,23 +13,29 @@
 
 #include "PluginProcessor.h"
 #include "SeriesDeviceCallBacks.h"
+#include "TransportPanel.h"
+#include "DualPatchPanel.h"
+#include "PatchMode.h"
 
 
 
 
 class PatchComponent : public Component
 {
-public: PatchComponent();
+public: PatchComponent(AudioDeviceManager& dm);
     SeriesDeviceCallBacks sdcb;
    
-    void appearance(bool state);
+   
     
     void closeButtonPressed();
     
 private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PatchComponent)
-
-   ScopedPointer<DocumentWindow> docWindow;
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PatchComponent);
+    ScopedPointer<TransportPanel> transportPanel;
+    ScopedPointer<DualPatchPanel> dualPatchPanel;
+    ScopedPointer<patchModeSwitching> patchButton;
+    ScopedPointer<Component> stompboxAGui;
+    ScopedPointer<Component> stompboxBGui;
 
 };
 

@@ -27,7 +27,7 @@
 //[/MiscUserDefs]
 
 //==============================================================================
-TransportPanel::TransportPanel (AudioDeviceManager& dm, SeriesDeviceCallBacks& sdcb)
+TransportPanel::TransportPanel ( SeriesDeviceCallBacks& sdcb)
     : transportSdcb(sdcb)
 {
     addAndMakeVisible (PlayButton = new ImageButton ("new button"));
@@ -207,7 +207,7 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="TransportPanel" componentName=""
-                 parentClasses="public Component" constructorParams="AudioDeviceManager&amp; dm, SeriesDeviceCallBacks&amp; sdcb"
+                 parentClasses="public Component" constructorParams=" SeriesDeviceCallBacks&amp; sdcb"
                  variableInitialisers="transportSdcb(sdcb)" snapPixels="8" snapActive="1"
                  snapShown="1" overlayOpacity="0.330" fixedSize="1" initialWidth="529"
                  initialHeight="124">
