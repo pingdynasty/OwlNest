@@ -26,12 +26,16 @@ class OwlNestSettings: public MidiInputCallback {
     void SaveToOwl();
     int getCc(int cc);            // get value of a given cc
     void setCc(int cc,int value);  // set a value for a given cc
-    
+    StringArray& getPresetNames(){
+      return presets;
+    }
     private:
     int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
     Value& theUpdateGui;
     AudioDeviceManager& theDm;
+    StringArray presets;
     void handleIncomingMidiMessage(	MidiInput * 	source,
                               const MidiMessage & 	message
                               )	;
+  void handlePresetNameMessage(uint8_t index, const char* name, int size);
 };

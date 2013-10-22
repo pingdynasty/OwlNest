@@ -9,27 +9,39 @@
 */
 
 #include "Settings.h"
+#include "OpenWareMidiControl.h"
 
 OwlNestSettings::OwlNestSettings(AudioDeviceManager& dm, Value& updateGui):
 theDm(dm), theUpdateGui(updateGui)
 {
-    // init midiArray
-    for (int i=0; i<NB_CHANNELS; i++) {
-        midiArray[i]=0;
-    }
-    
-    midiArray[60]=64; // test
-    midiArray[32]=69; // test
-    
-    // Add midi Input Callback
-    theDm.addMidiInputCallback("",this);
+  memset(midiArray, 0, NB_CHANNELS);
+  theDm.addMidiInputCallback("", this);
 }
 
+void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
+  presets.set(index, String(name, size));
+}
 
-void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message)	{
+void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message){
+  bool hasChanged = false;
+  if(message.isController()){
     midiArray[message.getControllerNumber()]=message.getControllerValue();
     int i=theUpdateGui.getValue();
-    theUpdateGui.setValue(1-i); // change the updateGui Value to update GUI
+    hasChanged = true;
+  }else if(message.isSysEx() && message.getSysExDataSize() > 2){
+    const uint8 *data = message.getSysExData();
+    if(data[0] == MIDI_SYSEX_MANUFACTURER &&
+       data[1] == MIDI_SYSEX_DEVICE){
+      switch(data[2]){
+      case SYSEX_PRESET_NAME_COMMAND:
+	handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
+	hasChanged = true;
+	break;
+      }
+    }
+  }
+  if(hasChanged)
+    theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
 }
 
 OwlNestSettings::~OwlNestSettings(){

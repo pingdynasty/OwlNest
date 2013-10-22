@@ -14,8 +14,6 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 
-
-
 class SeriesDeviceCallBacks : public AudioIODeviceCallback
 {
     
