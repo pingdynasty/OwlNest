@@ -6,6 +6,7 @@ PluginPatchProcessor::PluginPatchProcessor(StompBoxAudioProcessor* pl)
 }
 
 PluginPatchProcessor::~PluginPatchProcessor(){
+  plugin = NULL;
 }
 
 void PluginPatchProcessor::setPatch(Patch* p){

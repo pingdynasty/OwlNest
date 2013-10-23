@@ -14,23 +14,13 @@
 #include "PluginProcessor.h"
 #include "SeriesDeviceCallBacks.h"
 
-
-
-
-class PatchComponent : public Component
-{
-public: PatchComponent(AudioDeviceManager& dm);
-    SeriesDeviceCallBacks sdcb;
-   
-    void appearance(bool state);
-    
-    void closeButtonPressed();
-    
+class PatchComponent : public Component {
+public: 
+  PatchComponent(AudioDeviceManager& dm);
 private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PatchComponent)
-
-   ScopedPointer<DocumentWindow> docWindow;
-
+  JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PatchComponent)
+  SeriesDeviceCallBacks sdcb;
+  ScopedPointer<Component> editor;
 };
 
 #endif  // PATCHWINDOW_H_INCLUDED

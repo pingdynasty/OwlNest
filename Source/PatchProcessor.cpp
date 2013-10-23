@@ -6,7 +6,6 @@
 AudioBuffer::~AudioBuffer(){}
 
 Patch::Patch() : processor(NULL) {
-//   processor = StompBoxAudioProcessor::getThreadLocalInstance();
   processor = StompBoxAudioProcessor::getPatchProcessor();
 }
 
