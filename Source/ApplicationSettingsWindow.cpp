@@ -29,7 +29,7 @@
 //==============================================================================
 ApplicationSettingsWindow::ApplicationSettingsWindow (AudioDeviceManager& deviceManager)
 {
-    addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,0,0,0,true,true,false,true));
+    addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,2,0,2,true,true,false,false));
     audioSelector->setName ("new component");
 
 
@@ -41,10 +41,7 @@ ApplicationSettingsWindow::ApplicationSettingsWindow (AudioDeviceManager& device
 
 
     //[Constructor] You can add your own custom stuff here..
-addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,2,0,2,true,true,false,false));
-    audioSelector->setName ("new component");
 
-    setVisible(true);
     //[/Constructor]
 }
 
@@ -66,19 +63,7 @@ void ApplicationSettingsWindow::paint (Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colour (0xffbdbdbd));
-
-    g.setColour (Colour (0xff2aa54f));
-    g.fillRect (44, 100, 100, 100);
-
-    g.setColour (Colour (0xff2aa567));
-    g.fillPath (internalPath1);
-
-    g.setColour (Colour (0xff2aa55e));
-    g.fillRoundedRectangle (516.0f, 124.0f, 100.0f, 100.0f, 10.000f);
-
-    g.setColour (Colour (0xff2aa570));
-    g.fillRoundedRectangle (132.0f, 356.0f, 100.0f, 100.0f, 10.000f);
+    g.fillAll (Colours::white);
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -87,12 +72,6 @@ void ApplicationSettingsWindow::paint (Graphics& g)
 void ApplicationSettingsWindow::resized()
 {
     audioSelector->setBounds (48, 40, 408, 512);
-    internalPath1.clear();
-    internalPath1.startNewSubPath (406.0f, 360.0f);
-    internalPath1.lineTo (436.0f, 410.0f);
-    internalPath1.lineTo (376.0f, 410.0f);
-    internalPath1.closeSubPath();
-
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -116,17 +95,10 @@ BEGIN_JUCER_METADATA
                  componentName="" parentClasses="public Component" constructorParams="AudioDeviceManager&amp; deviceManager"
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330" fixedSize="0" initialWidth="600" initialHeight="400">
-  <BACKGROUND backgroundColour="ffbdbdbd">
-    <RECT pos="44 100 100 100" fill="solid: ff2aa54f" hasStroke="0"/>
-    <PATH pos="0 0 100 100" fill="solid: ff2aa567" hasStroke="0" nonZeroWinding="1">s 406 360 l 436 410 l 376 410 x</PATH>
-    <ROUNDRECT pos="516 124 100 100" cornerSize="10" fill="solid: ff2aa55e"
-               hasStroke="0"/>
-    <ROUNDRECT pos="132 356 100 100" cornerSize="10" fill="solid: ff2aa570"
-               hasStroke="0"/>
-  </BACKGROUND>
+  <BACKGROUND backgroundColour="ffffffff"/>
   <GENERICCOMPONENT name="new component" id="29b98dd09a98b370" memberName="audioSelector"
                     virtualName="" explicitFocusOrder="0" pos="48 40 408 512" class="AudioDeviceSelectorComponent"
-                    params="deviceManager,0,0,0,0,true,true,false,true"/>
+                    params="deviceManager,0,2,0,2,true,true,false,false"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

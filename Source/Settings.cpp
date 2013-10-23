@@ -75,6 +75,8 @@ void OwlNestSettings::SaveToOwl(){
 }
 
 void OwlNestSettings::LoadFromOwl(){
-  if(theDm.getDefaultMidiOutput() != NULL)
+  if(theDm.getDefaultMidiOutput() != NULL){
+    presets.clear();
     theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,REQUEST_SETTINGS,127)); // Will provoke incoming midi messages
+  }
 }

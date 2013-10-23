@@ -6,7 +6,8 @@
 AudioBuffer::~AudioBuffer(){}
 
 Patch::Patch() : processor(NULL) {
-  processor = StompBoxAudioProcessor::getThreadLocalInstance();
+//   processor = StompBoxAudioProcessor::getThreadLocalInstance();
+  processor = StompBoxAudioProcessor::getPatchProcessor();
 }
 
 Patch::~Patch(){
@@ -22,9 +23,14 @@ float Patch::getParameterValue(PatchParameterId pid){
 }
 
 int Patch::getBlockSize(){
-  return  processor->getBlockSize();
+  return processor->getBlockSize();
 }
 
 double Patch::getSampleRate(){
   return processor->getSampleRate();
 }
+
+AudioBuffer* Patch::createMemoryBuffer(int channels, int samples){
+  return processor->createMemoryBuffer(channels, samples);
+}
+
