@@ -5,10 +5,10 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
-      <FILE id="h4PIME" name="Transport Panel.cpp" compile="1" resource="0"
-            file="Source/Transport Panel.cpp"/>
-      <FILE id="CTzaMc" name="Transport Panel.h" compile="0" resource="0"
-            file="Source/Transport Panel.h"/>
+      <FILE id="KU2GlZ" name="PluginPatchProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginPatchProcessor.cpp"/>
+      <FILE id="O14Un3" name="PluginPatchProcessor.h" compile="0" resource="0"
+            file="Source/PluginPatchProcessor.h"/>
       <FILE id="lvttDF" name="ApplicationSettingsWindow.cpp" compile="1"
             resource="0" file="Source/ApplicationSettingsWindow.cpp"/>
       <FILE id="bvN4BV" name="ApplicationSettingsWindow.h" compile="0" resource="0"
@@ -143,7 +143,7 @@
   </MODULES>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="" extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
-               externalLibraries="usb-1.0 " extraDefs="HAVE_NANOSLEEP=1">
+               externalLibraries="usb-1.0 " extraDefs="HAVE_NANOSLEEP=1" juceFolder="../juce">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="1" optimisation="1" targetName="OwlNest" headerPath="/opt/local/include/libusb-1.0"
