@@ -3,8 +3,8 @@
 class MemoryBuffer : public AudioBuffer {
 private:
   float** buffer;
-  int size;
   int channels;
+  int size;
 public:
   MemoryBuffer(int ch, int sz): buffer(NULL), channels(ch), size(sz) {
     buffer = new float* [channels];
