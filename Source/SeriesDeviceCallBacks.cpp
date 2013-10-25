@@ -143,7 +143,7 @@ String SeriesDeviceCallBacks::getCurrentPatchB()
 
 void SeriesDeviceCallBacks::setConfiguration(int config)
 {
-    configuration  = configmodes(config);
+    configuration  = ConfigModes(config);
     
 	
 }

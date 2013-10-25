@@ -16,18 +16,24 @@
 #include "TransportPanel.h"
 #include "DualPatchPanel.h"
 #include "PatchMode.h"
+#include "Enums.h"
 
 
 
 
-class PatchComponent : public Component
+class PatchComponent : public Component,
+                       public Value::Listener
+
+
 {
 public: PatchComponent(AudioDeviceManager& dm);
     SeriesDeviceCallBacks sdcb;
    
    
+    juce::Value patchState;
     
     void closeButtonPressed();
+    void valueChanged(juce::Value &patchChange);
     
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PatchComponent);

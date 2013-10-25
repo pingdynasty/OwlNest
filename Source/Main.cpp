@@ -44,8 +44,7 @@ public:
         // Initialize audio/midi device
         dm.initialise(2, 2, nullptr, true);
         
-     //  dm.addAudioCallback(&sdcb);
-        
+   
         
 
         // start GUI

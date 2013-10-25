@@ -27,8 +27,8 @@
 //[/MiscUserDefs]
 
 //==============================================================================
-DualPatchPanel::DualPatchPanel (SeriesDeviceCallBacks& sdcb)
-    : dualPatchSdcb(sdcb)
+DualPatchPanel::DualPatchPanel (SeriesDeviceCallBacks& sdcb,Value& patchChange)
+    : dualPatchSdcb(sdcb), patchState(patchChange)
 {
     addAndMakeVisible (configMode = new ComboBox ("new combo box"));
     configMode->setEditableText (false);
@@ -51,20 +51,21 @@ DualPatchPanel::DualPatchPanel (SeriesDeviceCallBacks& sdcb)
     patchB->setTextWhenNoChoicesAvailable ("(no choices)");
     patchB->addListener (this);
 
-    addAndMakeVisible (A = new TextButton ("new button"));
-    A->setButtonText ("A");
-    A->addListener (this);
-    A->setColour (TextButton::buttonColourId, Colour (0xffd50000));
-    A->setColour (TextButton::buttonOnColourId, Colour (0xff0cbc00));
+    addAndMakeVisible (buttonA = new TextButton ("new button"));
+    buttonA->setButtonText ("A");
+    buttonA->addListener (this);
+    buttonA->setColour (TextButton::buttonColourId, Colour (0xffd50000));
+    buttonA->setColour (TextButton::buttonOnColourId, Colour (0xff0cbc00));
 
-    addAndMakeVisible (B = new TextButton ("new button"));
-    B->setButtonText ("B");
-    B->addListener (this);
-    B->setColour (TextButton::buttonColourId, Colour (0xffd50000));
-    B->setColour (TextButton::buttonOnColourId, Colour (0xff0cbc00));
+    addAndMakeVisible (buttonB = new TextButton ("new button"));
+    buttonB->setButtonText ("B");
+    buttonB->addListener (this);
+    buttonB->setColour (TextButton::buttonColourId, Colour (0xffd50000));
+    buttonB->setColour (TextButton::buttonOnColourId, Colour (0xff0cbc00));
 
 
     //[UserPreSize]
+   
     //[/UserPreSize]
 
     setSize (252, 185);
@@ -81,7 +82,7 @@ DualPatchPanel::DualPatchPanel (SeriesDeviceCallBacks& sdcb)
     patchB->addItemList( dualPatchSdcb.getpatchesB(), 1);
     patchB->setTextWhenNothingSelected(sdcb.getCurrentPatchB());
     patchB->setText(sdcb.getCurrentPatchB());
-
+    
 
     StringArray modes = *new StringArray();
 
@@ -91,7 +92,7 @@ DualPatchPanel::DualPatchPanel (SeriesDeviceCallBacks& sdcb)
     configMode->addItemList(modes, 1);
     configMode->setTextWhenNothingSelected(modes[0]);
     configMode->setText(modes[0]);
-
+   patchState.addListener(this);
     //[/Constructor]
 }
 
@@ -103,8 +104,8 @@ DualPatchPanel::~DualPatchPanel()
     configMode = nullptr;
     patchA = nullptr;
     patchB = nullptr;
-    A = nullptr;
-    B = nullptr;
+    buttonA = nullptr;
+    buttonB = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -128,8 +129,8 @@ void DualPatchPanel::resized()
     configMode->setBounds (16, 16, 150, 24);
     patchA->setBounds (16, 96, 150, 24);
     patchB->setBounds (16, 144, 150, 24);
-    A->setBounds (176, 96, 24, 24);
-    B->setBounds (176, 144, 24, 24);
+    buttonA->setBounds (176, 96, 24, 24);
+    buttonB->setBounds (176, 144, 24, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -142,12 +143,15 @@ void DualPatchPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     if (comboBoxThatHasChanged == configMode)
     {
         //[UserComboBoxCode_configMode] -- add your combo box handling code here..
+        
         dualPatchSdcb.setConfiguration( configMode->getSelectedId());
+        
         //[/UserComboBoxCode_configMode]
     }
     else if (comboBoxThatHasChanged == patchA)
     {
         //[UserComboBoxCode_patchA] -- add your combo box handling code here..
+        
         String js=patchA->getText(); // JUCE string
         std::string ss (js.toUTF8()); // convert to std::string
         dualPatchSdcb.stompAChange(ss);
@@ -158,9 +162,11 @@ void DualPatchPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == patchB)
     {
         //[UserComboBoxCode_patchB] -- add your combo box handling code here..
+        
         String js=patchB->getText(); // JUCE string
         std::string ss (js.toUTF8()); // convert to std::string
         dualPatchSdcb.stompBChange(ss);
+        
         //[/UserComboBoxCode_patchB]
     }
 
@@ -173,15 +179,15 @@ void DualPatchPanel::buttonClicked (Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
 
-    if (buttonThatWasClicked == A)
+    if (buttonThatWasClicked == buttonA)
     {
-        //[UserButtonCode_A] -- add your button handler code here..
-        //[/UserButtonCode_A]
+        //[UserButtonCode_buttonA] -- add your button handler code here..
+        //[/UserButtonCode_buttonA]
     }
-    else if (buttonThatWasClicked == B)
+    else if (buttonThatWasClicked == buttonB)
     {
-        //[UserButtonCode_B] -- add your button handler code here..
-        //[/UserButtonCode_B]
+        //[UserButtonCode_buttonB] -- add your button handler code here..
+        //[/UserButtonCode_buttonB]
     }
 
     //[UserbuttonClicked_Post]
@@ -191,6 +197,33 @@ void DualPatchPanel::buttonClicked (Button* buttonThatWasClicked)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+
+void DualPatchPanel::valueChanged(juce::Value& patchState)
+{
+    
+    
+    
+    switch((int) patchState.getValue())
+    {
+        case A:
+        {
+            buttonB->setColour(TextButton::buttonColourId, Colours::red);
+            buttonA->setColour(TextButton::buttonColourId,Colours::green);
+            break;
+        }
+
+        case B:
+        {
+            buttonA->setColour(TextButton::buttonColourId,Colours::red);
+            buttonB->setColour(TextButton::buttonColourId, Colours::green);
+            break;
+        }
+
+    }
+    }
+
+
+
 //[/MiscUserCode]
 
 
@@ -204,10 +237,10 @@ void DualPatchPanel::buttonClicked (Button* buttonThatWasClicked)
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="DualPatchPanel" componentName=""
-                 parentClasses="public Component" constructorParams="SeriesDeviceCallBacks&amp; sdcb"
-                 variableInitialisers="dualPatchSdcb(sdcb)" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330" fixedSize="1" initialWidth="252"
-                 initialHeight="185">
+                 parentClasses="public Component, public Value::Listener" constructorParams="SeriesDeviceCallBacks&amp; sdcb,Value&amp; patchChange"
+                 variableInitialisers="dualPatchSdcb(sdcb), patchState(patchChange)"
+                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
+                 fixedSize="1" initialWidth="252" initialHeight="185">
   <BACKGROUND backgroundColour="ffffffff"/>
   <COMBOBOX name="new combo box" id="be5da53c5ac94829" memberName="configMode"
             virtualName="" explicitFocusOrder="0" pos="16 16 150 24" editable="0"
@@ -218,12 +251,12 @@ BEGIN_JUCER_METADATA
   <COMBOBOX name="new combo box" id="8c5f11dabd968937" memberName="patchB"
             virtualName="" explicitFocusOrder="0" pos="16 144 150 24" editable="0"
             layout="33" items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
-  <TEXTBUTTON name="new button" id="45770c82e0f94c9e" memberName="A" virtualName=""
-              explicitFocusOrder="0" pos="176 96 24 24" bgColOff="ffd50000"
+  <TEXTBUTTON name="new button" id="45770c82e0f94c9e" memberName="buttonA"
+              virtualName="" explicitFocusOrder="0" pos="176 96 24 24" bgColOff="ffd50000"
               bgColOn="ff0cbc00" buttonText="A" connectedEdges="0" needsCallback="1"
               radioGroupId="0"/>
-  <TEXTBUTTON name="new button" id="c871a619e7eea525" memberName="B" virtualName=""
-              explicitFocusOrder="0" pos="176 144 24 24" bgColOff="ffd50000"
+  <TEXTBUTTON name="new button" id="c871a619e7eea525" memberName="buttonB"
+              virtualName="" explicitFocusOrder="0" pos="176 144 24 24" bgColOff="ffd50000"
               bgColOn="ff0cbc00" buttonText="B" connectedEdges="0" needsCallback="1"
               radioGroupId="0"/>
 </JUCER_COMPONENT>

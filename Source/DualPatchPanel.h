@@ -23,6 +23,7 @@
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
 #include "SeriesDeviceCallBacks.h"
+#include "Enums.h"
 //[/Headers]
 
 
@@ -36,16 +37,18 @@
                                                                     //[/Comments]
 */
 class DualPatchPanel  : public Component,
+                        public Value::Listener,
                         public ComboBoxListener,
                         public ButtonListener
 {
 public:
     //==============================================================================
-    DualPatchPanel (SeriesDeviceCallBacks& sdcb);
+    DualPatchPanel (SeriesDeviceCallBacks& sdcb,Value& patchChange);
     ~DualPatchPanel();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+    void valueChanged(juce::Value& patchState);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -58,14 +61,16 @@ public:
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     SeriesDeviceCallBacks& dualPatchSdcb;
+    Value& patchState;
+
     //[/UserVariables]
 
     //==============================================================================
     ScopedPointer<ComboBox> configMode;
     ScopedPointer<ComboBox> patchA;
     ScopedPointer<ComboBox> patchB;
-    ScopedPointer<TextButton> A;
-    ScopedPointer<TextButton> B;
+    ScopedPointer<TextButton> buttonA;
+    ScopedPointer<TextButton> buttonB;
 
 
     //==============================================================================

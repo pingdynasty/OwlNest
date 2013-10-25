@@ -27,8 +27,8 @@
 //[/MiscUserDefs]
 
 //==============================================================================
-patchModeSwitching::patchModeSwitching (SeriesDeviceCallBacks& sdcb)
-    : patchSdcb(sdcb)
+patchModeSwitching::patchModeSwitching (SeriesDeviceCallBacks& sdcb, Value& patchChange)
+    : patchSdcb(sdcb), patchChange(patchChange)
 {
     addAndMakeVisible (patchModeButton = new TextButton (String::empty));
     patchModeButton->addListener (this);
@@ -84,7 +84,25 @@ void patchModeSwitching::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_patchModeButton] -- add your button handler code here..
 
-
+        
+        switch ((int) patchChange.getValue()) {
+            case A:
+            {
+                patchChange.setValue(B);
+            
+                break;
+            }
+            case B:
+            {
+                patchChange.setValue(A);
+               
+                break;
+            }
+               
+        }
+        
+        
+       
 
         //[/UserButtonCode_patchModeButton]
     }

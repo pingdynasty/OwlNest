@@ -23,6 +23,7 @@
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
 #include "SeriesDeviceCallBacks.h"
+#include "Enums.h"
 //[/Headers]
 
 
@@ -41,7 +42,7 @@ class patchModeSwitching  : public Component,
 {
 public:
     //==============================================================================
-    patchModeSwitching (SeriesDeviceCallBacks& sdcb);
+    patchModeSwitching (SeriesDeviceCallBacks& sdcb,Value& patchChange);
     ~patchModeSwitching();
 
     //==============================================================================
@@ -51,12 +52,15 @@ public:
     void paint (Graphics& g);
     void resized();
     void buttonClicked (Button* buttonThatWasClicked);
+    
+    
 
 
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     SeriesDeviceCallBacks& patchSdcb;
+    Value& patchChange;
     //[/UserVariables]
 
     //==============================================================================

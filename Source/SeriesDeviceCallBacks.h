@@ -13,6 +13,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
+#include "Enums.h"
 
 class SeriesDeviceCallBacks : public AudioIODeviceCallback
 {
@@ -26,8 +27,8 @@ private:
     StompBoxAudioProcessor stompboxB;
     bool audioModeState = false;
     
-    enum  configmodes { SINGLE = 1,DUAL = 2,SERIES = 3,PARALLEL = 4};
-   enum configmodes configuration = SINGLE;
+    
+   ConfigModes configuration = SINGLE;
 
     float** buffer;
     int channels, samples;
