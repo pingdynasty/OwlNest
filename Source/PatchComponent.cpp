@@ -12,42 +12,57 @@
 
 
 PatchComponent ::  PatchComponent(AudioDeviceManager& dm) : Component("Patch")
-
 {
-    StompBoxAudioProcessor& stompbox = sdcb.getStompbox();
-     
-     addAndMakeVisible( stompbox.createEditor());
-
-     dm.addAudioCallback(&sdcb);
+    StompBoxAudioProcessor& stompboxA = sdcb.getStompboxA();
+    StompBoxAudioProcessor& stompboxB = sdcb.getStompboxB();
+    
+    patchState.setValue(A);
    
-   // docWindow = new DocumentWindow("Application Settings", Colours::lightgrey,0);
-   // docWindow->setContentNonOwned(applicationSettings, true);
-   //docWindow->setVisible(true);
+        
+    dm.addAudioCallback(&sdcb);
+    addAndMakeVisible(dualPatchPanel = new DualPatchPanel(sdcb,patchState));
+    addAndMakeVisible(transportPanel = new TransportPanel(sdcb));
+    
+    stompboxBGui = stompboxB.createEditor();
+    stompboxAGui = stompboxA.createEditor();
+   
+    addAndMakeVisible(stompboxBGui);
+    addAndMakeVisible(stompboxAGui);
     
     
+    addAndMakeVisible(patchButton = new patchModeSwitching(sdcb, patchState));
+    
+   patchState.addListener(this);
    
- //   centreWithSize (getWidth(), getHeight());
-   // setVisible (false);
+ 
 }
 
-void PatchComponent:: appearance(bool state)
+
+void PatchComponent::valueChanged(Value &patchChange)
 {
-    if(state == false|| NULL)
+   /*
+    switch((int) patchChange.getValue())
     {
-  //  setVisible (false);
-    docWindow->setVisible(false);
-    docWindow->toFront(true);
+        case A:
+        {
+            patchState.setValue(A);
+            break;
+        }
+        case B:
+        {
+            patchState.setValue(B);
+            break;
+        }
+            
+            
     }
-    if(state == true)
-    {
-    //    setVisible(true);
-        docWindow->setVisible(true);
-    }
+    */
 }
+
 
 void PatchComponent:: closeButtonPressed()
 {
    // JUCEApplication::getInstance()->systemRequestedQuit();
 //    setVisible (false);
-appearance(false); 
+
 }

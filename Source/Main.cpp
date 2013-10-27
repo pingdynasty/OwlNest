@@ -44,9 +44,8 @@ public:
         // Initialize audio/midi device
         dm.initialise(2, 2, nullptr, true);
         
-       // dm.addAudioCallback(&sdcb);
+   
         
-        //sdcb.setInputFile(File("/Users/Dino/Documents/GitHub/OwlNest/Source/test.wav"));
 
         // start GUI
         mainWindow = new MainWindow(settings, dm, updateGui);
@@ -87,14 +86,14 @@ public:
         {
             
             
-//            setContentOwned (new OwlNestGui(settings, dm, updateGui), true);
+
             tabs = new TabbedComponent(TabbedButtonBar::TabsAtTop);
             setContentOwned(tabs, false);
             tabs->addTab("Main",Colours::lightgrey, new OwlNestGui(settings,dm,updateGui),true,1);
             tabs->addTab("Patch",Colours::lightgrey, new PatchComponent(dm), true,2 );
             tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true,3);
             
-            centreWithSize (700, 700);
+            centreWithSize (779, 700);
             setVisible (true);
         }
 
@@ -120,7 +119,7 @@ public:
 
 private:
     ScopedPointer<MainWindow> mainWindow;
-  //  ScopedPointer<PatchComponent> patchTab;
+  
     
     
 };

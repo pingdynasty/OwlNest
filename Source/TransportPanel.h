@@ -40,7 +40,7 @@ class TransportPanel  : public Component,
 {
 public:
     //==============================================================================
-    TransportPanel (AudioDeviceManager& dm, SeriesDeviceCallBacks& sdcb);
+    TransportPanel ( SeriesDeviceCallBacks& sdcb);
     ~TransportPanel();
 
     //==============================================================================

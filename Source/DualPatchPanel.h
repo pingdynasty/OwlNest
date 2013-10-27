@@ -17,12 +17,13 @@
   ==============================================================================
 */
 
-#ifndef __JUCE_HEADER_C09E1113F370FC98__
-#define __JUCE_HEADER_C09E1113F370FC98__
+#ifndef __JUCE_HEADER_A090AF88698C1264__
+#define __JUCE_HEADER_A090AF88698C1264__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
-#include "PluginProcessor.h"
+#include "SeriesDeviceCallBacks.h"
+#include "Enums.h"
 //[/Headers]
 
 
@@ -30,65 +31,53 @@
 //==============================================================================
 /**
                                                                     //[Comments]
-    An auto-generated component, created by the Jucer.
+    An auto-generated component, created by the Introjucer.
 
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class StompGui  : public Component,
-                  public Timer,
-                  public SliderListener,
-                  public ComboBoxListener,
-                  public ButtonListener
+class DualPatchPanel  : public Component,
+                        public Value::Listener,
+                        public ComboBoxListener,
+                        public ButtonListener
 {
 public:
     //==============================================================================
-    StompGui (StompBoxAudioProcessor* ptr);
-    ~StompGui();
+    DualPatchPanel (SeriesDeviceCallBacks& sdcb,Value& patchChange);
+    ~DualPatchPanel();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    void timerCallback();
-    void updateLabels();
+    void valueChanged(juce::Value& patchState);
     //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
-    void sliderValueChanged (Slider* sliderThatWasMoved);
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     void buttonClicked (Button* buttonThatWasClicked);
 
-    // Binary resources:
-    static const char* owl_illustration_illustrator_svg;
-    static const int owl_illustration_illustrator_svgSize;
-    static const char* owlFaceplate_png;
-    static const int owlFaceplate_pngSize;
 
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    StompBoxAudioProcessor* processor;
+    SeriesDeviceCallBacks& dualPatchSdcb;
+    Value& patchState;
+
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<Slider> slider4;
-    ScopedPointer<Slider> slider3;
-    ScopedPointer<Label> label3;
-    ScopedPointer<Label> label4;
-    ScopedPointer<ComboBox> menu;
-    ScopedPointer<Label> label1;
-    ScopedPointer<Slider> slider1;
-    ScopedPointer<Label> label2;
-    ScopedPointer<Slider> slider2;
-    ScopedPointer<TextButton> switchButton;
-    Image cachedImage_owlFaceplate_png;
+    ScopedPointer<ComboBox> configMode;
+    ScopedPointer<ComboBox> patchA;
+    ScopedPointer<ComboBox> patchB;
+    ScopedPointer<TextButton> buttonA;
+    ScopedPointer<TextButton> buttonB;
 
 
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (StompGui)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DualPatchPanel)
 };
 
 //[EndFile] You can add extra defines here...
 //[/EndFile]
 
-#endif   // __JUCE_HEADER_C09E1113F370FC98__
+#endif   // __JUCE_HEADER_A090AF88698C1264__

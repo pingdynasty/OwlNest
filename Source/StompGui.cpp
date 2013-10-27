@@ -1,20 +1,18 @@
 /*
   ==============================================================================
 
-  This is an automatically generated file created by the Jucer!
-
-  Creation date:  24 Jun 2013 12:03:45pm
+  This is an automatically generated GUI class created by the Introjucer!
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Jucer version: 1.12
+  Created with Introjucer version: 3.1.0
 
   ------------------------------------------------------------------------------
 
-  The Jucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright 2004-6 by Raw Material Software ltd.
+  The Introjucer is part of the JUCE library - "Jules' Utility Class Extensions"
+  Copyright 2004-13 by Raw Material Software Ltd.
 
   ==============================================================================
 */
@@ -25,7 +23,7 @@
 
 //[/Headers]
 
-
+#include "StompGui.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
@@ -33,20 +31,9 @@
 
 //==============================================================================
 StompGui::StompGui (StompBoxAudioProcessor* ptr)
-    : Component (L"StompGui"),
-      slider4 (0),
-      slider3 (0),
-      label3 (0),
-      label4 (0),
-      menu (0),
-      label1 (0),
-      slider1 (0),
-      label2 (0),
-      slider2 (0),
-      switchButton (0),
-      cachedImage_owlFaceplate_png (0)
+    : Component ("StompGui")
 {
-    addAndMakeVisible (slider4 = new Slider (L"new slider"));
+    addAndMakeVisible (slider4 = new Slider ("new slider"));
     slider4->setRange (0, 1, 0);
     slider4->setSliderStyle (Slider::RotaryVerticalDrag);
     slider4->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
@@ -55,7 +42,7 @@ StompGui::StompGui (StompBoxAudioProcessor* ptr)
     slider4->setColour (Slider::rotarySliderFillColourId, Colours::black);
     slider4->addListener (this);
 
-    addAndMakeVisible (slider3 = new Slider (L"new slider"));
+    addAndMakeVisible (slider3 = new Slider ("new slider"));
     slider3->setRange (0, 1, 0);
     slider3->setSliderStyle (Slider::RotaryVerticalDrag);
     slider3->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
@@ -64,38 +51,38 @@ StompGui::StompGui (StompBoxAudioProcessor* ptr)
     slider3->setColour (Slider::rotarySliderFillColourId, Colours::black);
     slider3->addListener (this);
 
-    addAndMakeVisible (label3 = new Label (L"new label",
-                                           L"label text"));
-    label3->setFont (Font (15.0000f, Font::bold));
+    addAndMakeVisible (label3 = new Label ("new label",
+                                           "label text"));
+    label3->setFont (Font (15.00f, Font::bold));
     label3->setJustificationType (Justification::centred);
     label3->setEditable (false, false, false);
     label3->setColour (TextEditor::textColourId, Colours::black);
-    label3->setColour (TextEditor::backgroundColourId, Colour (0x0));
+    label3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (label4 = new Label (L"new label",
-                                           L"label text"));
-    label4->setFont (Font (15.0000f, Font::bold));
+    addAndMakeVisible (label4 = new Label ("new label",
+                                           "label text"));
+    label4->setFont (Font (15.00f, Font::bold));
     label4->setJustificationType (Justification::centred);
     label4->setEditable (false, false, false);
     label4->setColour (TextEditor::textColourId, Colours::black);
-    label4->setColour (TextEditor::backgroundColourId, Colour (0x0));
+    label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (menu = new ComboBox (L"PatchMenu"));
+    addAndMakeVisible (menu = new ComboBox ("PatchMenu"));
     menu->setEditableText (false);
     menu->setJustificationType (Justification::centredLeft);
     menu->setTextWhenNothingSelected (String::empty);
-    menu->setTextWhenNoChoicesAvailable (L"(no choices)");
+    menu->setTextWhenNoChoicesAvailable ("(no choices)");
     menu->addListener (this);
 
-    addAndMakeVisible (label1 = new Label (L"new label",
-                                           L"label text"));
-    label1->setFont (Font (15.0000f, Font::bold));
+    addAndMakeVisible (label1 = new Label ("new label",
+                                           "label text"));
+    label1->setFont (Font (15.00f, Font::bold));
     label1->setJustificationType (Justification::centred);
     label1->setEditable (false, false, false);
     label1->setColour (TextEditor::textColourId, Colours::black);
-    label1->setColour (TextEditor::backgroundColourId, Colour (0x0));
+    label1->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (slider1 = new Slider (L"new slider"));
+    addAndMakeVisible (slider1 = new Slider ("new slider"));
     slider1->setRange (0, 1, 0);
     slider1->setSliderStyle (Slider::RotaryVerticalDrag);
     slider1->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
@@ -103,15 +90,15 @@ StompGui::StompGui (StompBoxAudioProcessor* ptr)
     slider1->setColour (Slider::rotarySliderFillColourId, Colours::black);
     slider1->addListener (this);
 
-    addAndMakeVisible (label2 = new Label (L"new label",
-                                           L"label text"));
-    label2->setFont (Font (15.0000f, Font::bold));
+    addAndMakeVisible (label2 = new Label ("new label",
+                                           "label text"));
+    label2->setFont (Font (15.00f, Font::bold));
     label2->setJustificationType (Justification::centred);
     label2->setEditable (false, false, false);
     label2->setColour (TextEditor::textColourId, Colours::black);
-    label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
+    label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (slider2 = new Slider (L"new slider"));
+    addAndMakeVisible (slider2 = new Slider ("new slider"));
     slider2->setRange (0, 1, 0);
     slider2->setSliderStyle (Slider::RotaryVerticalDrag);
     slider2->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
@@ -119,7 +106,7 @@ StompGui::StompGui (StompBoxAudioProcessor* ptr)
     slider2->setColour (Slider::rotarySliderFillColourId, Colours::black);
     slider2->addListener (this);
 
-    addAndMakeVisible (switchButton = new TextButton (L"new button"));
+    addAndMakeVisible (switchButton = new TextButton ("new button"));
     switchButton->setButtonText (String::empty);
     switchButton->addListener (this);
     switchButton->setColour (TextButton::buttonColourId, Colours::grey);
@@ -137,9 +124,9 @@ StompGui::StompGui (StompBoxAudioProcessor* ptr)
     processor = ptr;
 
     updateLabels();
-    menu->addItemList(processor->getPatchNames(), 1);
-    menu->setTextWhenNothingSelected(processor->getCurrentPatchName());
-    menu->setText(processor->getCurrentPatchName());
+    //menu->addItemList(processor->getPatchNames(), 1);
+   // menu->setTextWhenNothingSelected(processor->getCurrentPatchName());
+   // menu->setText(processor->getCurrentPatchName());
 
     slider1->setValue(processor->getParameter(0), dontSendNotification);
     slider2->setValue(processor->getParameter(1), dontSendNotification);
@@ -159,16 +146,16 @@ StompGui::~StompGui()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    deleteAndZero (slider4);
-    deleteAndZero (slider3);
-    deleteAndZero (label3);
-    deleteAndZero (label4);
-    deleteAndZero (menu);
-    deleteAndZero (label1);
-    deleteAndZero (slider1);
-    deleteAndZero (label2);
-    deleteAndZero (slider2);
-    deleteAndZero (switchButton);
+    slider4 = nullptr;
+    slider3 = nullptr;
+    label3 = nullptr;
+    label4 = nullptr;
+    menu = nullptr;
+    label1 = nullptr;
+    slider1 = nullptr;
+    label2 = nullptr;
+    slider2 = nullptr;
+    switchButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -184,7 +171,7 @@ void StompGui::paint (Graphics& g)
 
     g.fillAll (Colour (0xfffffefe));
 
-    g.setColour (Colours::black.withAlpha (0.3000f));
+    g.setColour (Colours::black.withAlpha (0.300f));
     g.drawImage (cachedImage_owlFaceplate_png,
                  -1, 1, 529, 351,
                  0, 0, cachedImage_owlFaceplate_png.getWidth(), cachedImage_owlFaceplate_png.getHeight());
@@ -259,9 +246,9 @@ void StompGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     if (comboBoxThatHasChanged == menu)
     {
         //[UserComboBoxCode_menu] -- add your combo box handling code here..
-        String js=menu->getText(); // JUCE string
-        std::string ss (js.toUTF8()); // convert to std::string
-        processor->setPatch(ss);
+       // String js=menu->getText(); // JUCE string
+        //std::string ss (js.toUTF8()); // convert to std::string
+       // processor->setPatch(ss);
 	updateLabels();
         //[/UserComboBoxCode_menu]
     }
@@ -314,6 +301,7 @@ void StompGui::timerCallback()
     slider2->setValue(processor->getParameter(1), dontSendNotification);
     slider3->setValue(processor->getParameter(2), dontSendNotification);
     slider4->setValue(processor->getParameter(3), dontSendNotification);
+    updateLabels();
 }
 
 //[/MiscUserCode]
@@ -321,19 +309,19 @@ void StompGui::timerCallback()
 
 //==============================================================================
 #if 0
-/*  -- Jucer information section --
+/*  -- Introjucer information section --
 
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
+    This is where the Introjucer stores the metadata that describe this GUI layout, so
+    make changes in here at your peril!
 
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="StompGui" componentName="StompGui"
                  parentClasses="public Component, public Timer" constructorParams="StompBoxAudioProcessor* ptr"
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
-                 overlayOpacity="0.330000013" fixedSize="1" initialWidth="529"
-                 initialHeight="350">
+                 overlayOpacity="0.330" fixedSize="1" initialWidth="529" initialHeight="350">
   <BACKGROUND backgroundColour="fffffefe">
-    <IMAGE pos="-1 1 529 351" resource="owlFaceplate_png" opacity="0.3"
+    <IMAGE pos="-1 1 529 351" resource="owlFaceplate_png" opacity="0.2999999999999999889"
            mode="0"/>
   </BACKGROUND>
   <SLIDER name="new slider" id="1c26ed829054fb4" memberName="slider4" virtualName=""
@@ -1798,7 +1786,6 @@ static const unsigned char resource_StompGui_owlFaceplate_png[] = { 137,80,78,71
 
 const char* StompGui::owlFaceplate_png = (const char*) resource_StompGui_owlFaceplate_png;
 const int StompGui::owlFaceplate_pngSize = 63100;
-
 
 
 //[EndFile] You can add extra defines here...
