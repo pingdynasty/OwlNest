@@ -142,8 +142,9 @@
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="" extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
-               externalLibraries="usb-1.0 " extraDefs="HAVE_NANOSLEEP=1" juceFolder="../juce">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="/opt/local/lib/libusb-1.0.a"
+               extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
+               externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" juceFolder="../juce">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="1" optimisation="1" targetName="OwlNest" headerPath="/opt/local/include/libusb-1.0"
