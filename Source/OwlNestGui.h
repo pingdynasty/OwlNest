@@ -103,6 +103,7 @@ private:
     ScopedPointer<Label> patchSlotALabel;
     ScopedPointer<ComboBox> patchSlotBComboBox;
     ScopedPointer<Label> patchSlotBLabel;
+    ScopedPointer<TextButton> resetButton;
 
 
     //==============================================================================

@@ -26,7 +26,6 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
   bool hasChanged = false;
   if(message.isController()){
     midiArray[message.getControllerNumber()]=message.getControllerValue();
-    int i=theUpdateGui.getValue();
     hasChanged = true;
   }else if(message.isSysEx() && message.getSysExDataSize() > 2){
     const uint8 *data = message.getSysExData();
