@@ -1,5 +1,9 @@
 #include "FirmwareLoader.h"
 
+#if defined(JUCE_WINDOWS)
+int FirmwareLoader::updateFirmware(File& firmware){ return 0;}
+#else
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -415,3 +419,4 @@ int FirmwareLoader::updateFirmware(File& firmware){
 
   return 0;
 }
+#endif /* WIN32 */

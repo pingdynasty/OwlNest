@@ -12,7 +12,6 @@
 
 SeriesDeviceCallBacks:: SeriesDeviceCallBacks()
 : source(NULL), buffer(NULL) {
-    processor.setProcessor(&stompbox);
 }
 
 SeriesDeviceCallBacks::~SeriesDeviceCallBacks(){
@@ -41,10 +40,12 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
 }
 
 void SeriesDeviceCallBacks::setInputFile(File input){
+#if defined(__APPLE__)
     FileInputStream* stream = input.createInputStream();
     CoreAudioFormat format;
     source = new AudioFormatReaderSource(format.createReaderFor(stream, false), true);
     player.setSource(source);
+#endif
 }
 
 
@@ -54,6 +55,8 @@ void SeriesDeviceCallBacks::audioDeviceAboutToStart (AudioIODevice *device){
     buffer = new float * [channels];
     for(int i=0; i<channels; ++i)
         buffer[i] = new float[samples];
+
+    processor.setProcessor(&stompbox);
     processor.audioDeviceAboutToStart(device);
     player.audioDeviceAboutToStart(device);
 }
@@ -61,12 +64,10 @@ void SeriesDeviceCallBacks::audioDeviceAboutToStart (AudioIODevice *device){
 void 	SeriesDeviceCallBacks::audioDeviceStopped (){
     processor.audioDeviceStopped();
     player.audioDeviceStopped();
+    processor.setProcessor(NULL);
+    if(buffer != NULL){
+        for(int i=0; i<channels; ++i)
+            delete buffer[i];
+        delete buffer;
+    }
 }
-
-/*
-SeriesDeviceCallBacks :: SeriesDeviceCallBacks
-
-: AudioIODeviceCallback
-
-
-*/
