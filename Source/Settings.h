@@ -13,6 +13,7 @@
 
 #endif  // SETTINGS_H_INCLUDED
 
+#include <stdint.h>
 #include "OpenWareMidiControl.h"
 #include "JuceHeader.h"
 
