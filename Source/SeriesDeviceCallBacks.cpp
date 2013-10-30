@@ -15,6 +15,7 @@ SeriesDeviceCallBacks:: SeriesDeviceCallBacks()
 }
 
 SeriesDeviceCallBacks::~SeriesDeviceCallBacks(){
+    processor.setProcessor(NULL); // avoid this being called from the AudioProcessorPlayer destructor
     if(buffer != NULL){
         for(int i=0; i<channels; ++i)
             delete buffer[i];
