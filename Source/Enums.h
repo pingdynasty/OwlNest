@@ -11,9 +11,11 @@
 #ifndef ENUMS_H_INCLUDED
 #define ENUMS_H_INCLUDED
 
-enum  ConfigModes { SINGLE = 1,DUAL = 2,SERIES = 3,PARALLEL = 4};
+enum  ConfigModes { SINGLE = 0,DUAL = 1,SERIES = 2,PARALLEL = 3};
 
 enum PatchModes { A = 0, B = 1};
+
+enum transportModes { PLAY= 0, PAUSE = 1, STOP = 2, RECORD = 3, AUDIOIN = 4, PREPAREFILEMODE = 5, FILEMODE = 6};
 
 
 #endif  // ENUMS_H_INCLUDED

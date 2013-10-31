@@ -10,10 +10,21 @@
 
 #include "SeriesDeviceCallBacks.h"
 
-SeriesDeviceCallBacks:: SeriesDeviceCallBacks()
-:  source(NULL), buffer(NULL) {
+SeriesDeviceCallBacks:: SeriesDeviceCallBacks(Value& patchChange,Value& owlConfig,Value& stompAPatch, Value& stompBPatch, Value& sdcbtransportValue)
+:    source(NULL), buffer(NULL), patchState(patchChange),owlConfig(owlConfig), stompAPatch(stompAPatch),stompBPatch(stompBPatch),transportValue(sdcbtransportValue)
+
+
+
+
+{
     processorA.setProcessor(&stompboxA);
     processorB.setProcessor(&stompboxB);
+    patchState.addListener(this);
+    owlConfig.addListener(this);
+    stompAPatch.addListener(this);
+    stompBPatch.addListener(this);
+    transportValue.addListener(this);
+    removeBuffer();
 }
 
 SeriesDeviceCallBacks::~SeriesDeviceCallBacks(){
@@ -40,7 +51,7 @@ StompBoxAudioProcessor& SeriesDeviceCallBacks::getStompboxB(){
 
 void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelData, int numInputChannels, float **outputChannelData, int numOutputChannels, int numSamples)
 {
-    float **processInput;
+   float **processInput;
     if(audioModeState) // audio file
     {
         jassert(channels >= numOutputChannels);
@@ -51,7 +62,7 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
         processInput = buffer;
     }
     else{
-        processInput = ( float** )inputChannelData;
+        	processInput = ( float** )inputChannelData;
     }
     
         
@@ -60,26 +71,49 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
             case SINGLE:
             {
           
-            processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
                 break;
             }
             case DUAL:
             {
-                processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
-                processorB.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                switch((int) patchState.getValue())
+                {
+                case A:
+                    {
+                         processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                        break;
+                    }
+                    case B:
+                    {
+                           processorB.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                        break;
+                    }
+                }
+               
+             
                 break;
             }
             case SERIES:
             {
                 processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, buffer, numOutputChannels, numSamples);
-                processorB.audioDeviceIOCallback(( const float**)buffer, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                    processorB.audioDeviceIOCallback(( const float**)buffer, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+
                 break;
             }
             case PARALLEL:
             {
-                processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
-                processorB.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                if(numInputChannels >= 1)
+                {
+                    float** leftInput = &processInput[0];
+                    float** rightInput = &processInput[1];
+                    float** leftOutput = &outputChannelData[0];
+                    float** rightOutput = &outputChannelData[1];
+                    processorA.audioDeviceIOCallback((const float**)rightInput, 1, leftOutput, 1, numSamples);
+                    processorB.audioDeviceIOCallback((const float**)leftInput, 1, rightOutput, 1, numSamples);
+               } 
                 break;
+                
+              
             }
         }
 
@@ -93,7 +127,8 @@ void SeriesDeviceCallBacks::setInputFile(File input){
 
     source = new AudioFormatReaderSource(format.createReaderFor(stream, false), true);
   
-   
+    audioModeState = true;
+ 
 }
 
 void SeriesDeviceCallBacks::audioInMode()
@@ -107,51 +142,93 @@ void SeriesDeviceCallBacks::fileMode()
     audioModeState = true;
 }
 
-void SeriesDeviceCallBacks::stompAChange(std::string patch)
+ void SeriesDeviceCallBacks::valueChanged(juce::Value& valueChange)
 {
-    stompboxA.setPatch(patch);
-    processorA.setProcessor(&stompboxA);
+    if(valueChange == patchState)
+    {
+    patchState.setValue(patchState.getValue());
+    }
+    else if (valueChange == owlConfig)
+    {
+        configuration  = ConfigModes((int) owlConfig.getValue());
+    }
+    else if (valueChange == stompAPatch)
+    {
+        String patch = stompAPatch.getValue();
+        std::string ss (patch.toUTF8()); // convert to std::string
+        stompboxA.setPatch(ss);
+        processorA.setProcessor(&stompboxA);
+    }
+    else if (valueChange == stompBPatch)
+    {
+        String patch = stompBPatch.getValue();
+        std::string ss (patch.toUTF8()); // convert to std::string
+        stompboxB.setPatch(ss);
+        processorB.setProcessor(&stompboxB);
+    }
+    else if (valueChange == transportValue)
+    {
+        switch((int) transportValue.getValue())
+        {
+            case PLAY:
+            {
+                if(player.getCurrentSource() != 0|| source != NULL)
+                {
+                    player.setSource(source);
+                }
+                break;
+            }
+                
+            case PAUSE:
+            {
+                 player.setSource(NULL);
+                break;
+            }
+            case STOP:
+            {
+                if(player.getCurrentSource() != 0|| source != NULL)
+                {
+                    player.setSource(NULL);
+                    source->releaseResources();
+                    source = NULL;
+                }
+                break;
+            }
+            case RECORD:
+            {
+                break;
+            }
+            case FILEMODE:
+            {
+                audioModeState = true;
+                break;
+            }
+            case AUDIOIN:
+            {
+                if(player.getCurrentSource() != 0|| source != NULL)
+                {
+                    player.setSource(NULL);
+                    source->releaseResources();
+                    source = NULL;
+                    
+                }
+                
+                audioModeState = false;
+                break;
+            }
+        }
+    }
 }
 
-void SeriesDeviceCallBacks::stompBChange(std::string patch)
+
+void SeriesDeviceCallBacks::audioDeviceAboutToStart (AudioIODevice *device)
 {
-    stompboxB.setPatch(patch);
-    processorB.setProcessor(&stompboxB);
-}
-
-
-
-StringArray SeriesDeviceCallBacks:: getpatchesA()
-{
-    return  stompboxA.getPatchNames();
-}
-
- String SeriesDeviceCallBacks::getCurrentPatchA()
-{
-    return stompboxA.getCurrentPatchName();
-}
-
-StringArray SeriesDeviceCallBacks:: getpatchesB()
-{
-    return  stompboxB.getPatchNames();
-}
-
-String SeriesDeviceCallBacks::getCurrentPatchB()
-{
-    return stompboxB.getCurrentPatchName();
-}
-
-void SeriesDeviceCallBacks::setConfiguration(int config)
-{
-    configuration  = ConfigModes(config);
-    
-	
-}
-
-void SeriesDeviceCallBacks::audioDeviceAboutToStart (AudioIODevice *device){
     
     channels = device->getActiveOutputChannels().toInteger();
     samples = device->getCurrentBufferSizeSamples();
+   
+    removeBuffer();
+    
     buffer = new float * [channels];
     for(int i=0; i<channels; ++i)
     {
@@ -163,6 +240,16 @@ void SeriesDeviceCallBacks::audioDeviceAboutToStart (AudioIODevice *device){
    
 }
 
+void SeriesDeviceCallBacks::removeBuffer()
+{
+     if(buffer != NULL){
+        for(int i=0; i<channels; ++i)
+            delete buffer[i];
+        delete buffer;
+    buffer = NULL;
+     }
+   
+}
 
 
 void SeriesDeviceCallBacks::play()
@@ -195,12 +282,7 @@ void 	SeriesDeviceCallBacks::audioDeviceStopped (){
     processorA.audioDeviceStopped();
     processorB.audioDeviceStopped();
     player.audioDeviceStopped();
-    if(buffer != NULL){
-        for(int i=0; i<channels; ++i)
-            delete buffer[i];
-        delete buffer;
-    }
-    buffer = NULL;
+    removeBuffer();
 }
 
 /*

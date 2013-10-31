@@ -5,7 +5,7 @@
     Created: 1 Oct 2013 1:09:07pm
     Author:  Christofero Pollano
 
-  ==============================================================================
+  ==================================/Users/Dino/Pictures/hendrix waiting.JPG============================================
 */
 
 #ifndef PATCHCOMPONENT_H_INCLUDED
@@ -27,12 +27,15 @@ class PatchComponent : public Component,
 
 {
 public: PatchComponent(AudioDeviceManager& dm);
-    SeriesDeviceCallBacks sdcb;
-   
-   
+  
     juce::Value patchState;
+    juce::Value owlConfig;
+    juce::Value stompAPatch;
+    juce::Value stompBPatch;
+    juce::Value transportValue;
     
-    void closeButtonPressed();
+    SeriesDeviceCallBacks sdcb;
+    
     void valueChanged(juce::Value &patchChange);
     
 private:
@@ -42,6 +45,7 @@ private:
     ScopedPointer<patchModeSwitching> patchButton;
     ScopedPointer<Component> stompboxAGui;
     ScopedPointer<Component> stompboxBGui;
+
 
 };
 

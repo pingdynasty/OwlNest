@@ -11,58 +11,74 @@
 #include "PatchComponent.h"
 
 
-PatchComponent ::  PatchComponent(AudioDeviceManager& dm) : Component("Patch")
+PatchComponent ::  PatchComponent(AudioDeviceManager& dm) : Component("Patch"), sdcb(patchState,owlConfig,stompAPatch,stompBPatch, transportValue)
+
 {
+ 
+    
     StompBoxAudioProcessor& stompboxA = sdcb.getStompboxA();
     StompBoxAudioProcessor& stompboxB = sdcb.getStompboxB();
     
     patchState.setValue(A);
-   
+    owlConfig.setValue(SINGLE);
+    stompAPatch.setValue(stompboxA.getCurrentPatchName());
+    stompBPatch.setValue(stompboxB.getCurrentPatchName());
+    
         
     dm.addAudioCallback(&sdcb);
-    addAndMakeVisible(dualPatchPanel = new DualPatchPanel(sdcb,patchState));
-    addAndMakeVisible(transportPanel = new TransportPanel(sdcb));
+    addAndMakeVisible(dualPatchPanel = new DualPatchPanel(stompboxA.getPatchNames(),patchState,owlConfig,stompAPatch,stompBPatch));
+    addAndMakeVisible(transportPanel = new TransportPanel(sdcb,transportValue));
     
     stompboxBGui = stompboxB.createEditor();
     stompboxAGui = stompboxA.createEditor();
-   
+
     addAndMakeVisible(stompboxBGui);
     addAndMakeVisible(stompboxAGui);
     
     
     addAndMakeVisible(patchButton = new patchModeSwitching(sdcb, patchState));
     
-   patchState.addListener(this);
+    patchState.addListener(this);
+    transportValue.addListener(this);
    
  
 }
 
 
-void PatchComponent::valueChanged(Value &patchChange)
+void PatchComponent::valueChanged(Value &valueChange)
 {
-   /*
-    switch((int) patchChange.getValue())
+   if(valueChange == patchState)
+   {
+    switch((int) patchState.getValue())
     {
         case A:
         {
-            patchState.setValue(A);
+            
+            stompboxAGui->toFront(true);
+            patchButton->toFront(true);
             break;
         }
         case B:
         {
-            patchState.setValue(B);
+            stompboxBGui->toFront(true);
+            patchButton->toFront(true);
             break;
         }
             
             
     }
-    */
+   }
+    else if (valueChange == transportValue)
+    {
+        if(transportValue == PREPAREFILEMODE)
+        {
+            
+            sdcb.setInputFile(transportPanel->getTestFile());
+//            transportValue.setValue(FILEMODE);
+        }
+    }
+    
 }
 
 
-void PatchComponent:: closeButtonPressed()
-{
-   // JUCEApplication::getInstance()->systemRequestedQuit();
-//    setVisible (false);
 
-}

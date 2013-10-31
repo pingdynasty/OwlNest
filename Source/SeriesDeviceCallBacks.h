@@ -15,7 +15,7 @@
 #include "PluginProcessor.h"
 #include "Enums.h"
 
-class SeriesDeviceCallBacks : public AudioIODeviceCallback
+class SeriesDeviceCallBacks : public AudioIODeviceCallback, public Value::Listener
 {
     
 private:
@@ -29,12 +29,17 @@ private:
     
     
    ConfigModes configuration = SINGLE;
+    Value& patchState;
+    Value& owlConfig;
+    Value& stompAPatch;
+    Value& stompBPatch;
+    Value& transportValue;
 
     float** buffer;
     int channels, samples;
 public:
     
-    SeriesDeviceCallBacks();
+    SeriesDeviceCallBacks(Value& patchChange,Value& owlConfig,Value& stompAPatch, Value& stompBPatch,Value& transportValue);
     ~SeriesDeviceCallBacks();
     
     virtual void 	audioDeviceIOCallback (const float **inputChannelData, int numInputChannels, float **outputChannelData, int numOutputChannels, int numSamples);
@@ -42,9 +47,12 @@ public:
     virtual void 	audioDeviceAboutToStart (AudioIODevice *device);
     
     virtual void 	audioDeviceStopped ();
-
+    
+    void valueChanged(juce::Value &patchChange);
+    
     StompBoxAudioProcessor& getStompboxA();
     StompBoxAudioProcessor& getStompboxB();
+    
     void setInputFile(File input);
     
     void play();
@@ -55,19 +63,13 @@ public:
     
     void fileMode();
     
-    void stompAChange(std::string patch);
-    void stompBChange(std::string patch);
-    
-    void setConfiguration(int config);
-
-    StringArray getpatchesA();
-    String getCurrentPatchA();
-    
-    StringArray getpatchesB();
-    String getCurrentPatchB();
+    void removeBuffer();
+   
     
     
     void audioInMode();
+    
+    
     
     
     

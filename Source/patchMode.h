@@ -42,7 +42,7 @@ class patchModeSwitching  : public Component,
 {
 public:
     //==============================================================================
-    patchModeSwitching (SeriesDeviceCallBacks& sdcb,Value& patchChange);
+    patchModeSwitching (SeriesDeviceCallBacks& sdcb,juce::Value& patchState);
     ~patchModeSwitching();
 
     //==============================================================================
@@ -52,8 +52,6 @@ public:
     void paint (Graphics& g);
     void resized();
     void buttonClicked (Button* buttonThatWasClicked);
-    
-    
 
 
 

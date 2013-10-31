@@ -27,8 +27,8 @@
 //[/MiscUserDefs]
 
 //==============================================================================
-patchModeSwitching::patchModeSwitching (SeriesDeviceCallBacks& sdcb, Value& patchChange)
-    : patchSdcb(sdcb), patchChange(patchChange)
+patchModeSwitching::patchModeSwitching (SeriesDeviceCallBacks& sdcb,juce::Value& patchState)
+    : patchSdcb(sdcb), patchChange(patchState)
 {
     addAndMakeVisible (patchModeButton = new TextButton (String::empty));
     patchModeButton->addListener (this);
@@ -84,25 +84,25 @@ void patchModeSwitching::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_patchModeButton] -- add your button handler code here..
 
-        
+
         switch ((int) patchChange.getValue()) {
             case A:
             {
                 patchChange.setValue(B);
-            
+
                 break;
             }
             case B:
             {
                 patchChange.setValue(A);
-               
+
                 break;
             }
-               
+
         }
-        
-        
-       
+
+
+
 
         //[/UserButtonCode_patchModeButton]
     }
@@ -127,10 +127,10 @@ void patchModeSwitching::buttonClicked (Button* buttonThatWasClicked)
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="patchModeSwitching" componentName=""
-                 parentClasses="public Component, public Value" constructorParams="SeriesDeviceCallBacks&amp; sdcb"
-                 variableInitialisers="patchSdcb(sdcb)" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330" fixedSize="0" initialWidth="30"
-                 initialHeight="30">
+                 parentClasses="public Component, public Value" constructorParams="SeriesDeviceCallBacks&amp; sdcb,juce::Value&amp; patchState"
+                 variableInitialisers="patchSdcb(sdcb), patchChange(patchState)"
+                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
+                 fixedSize="0" initialWidth="30" initialHeight="30">
   <BACKGROUND backgroundColour="ffffff"/>
   <TEXTBUTTON name="" id="c4aa3eaf9ceb752" memberName="patchModeButton" virtualName=""
               explicitFocusOrder="0" pos="3 3 24 24" bgColOff="ffbababa" buttonText=""

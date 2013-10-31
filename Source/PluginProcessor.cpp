@@ -158,9 +158,7 @@ void StompBoxAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer&
   if(!bypass)
     patch->processAudio(samples);
 
-  // clear any extra output channels
-  for(int i = 1; i < getNumOutputChannels(); ++i)
-    buffer.clear(i, 0, buffer.getNumSamples());    
+  
 }
 
 bool StompBoxAudioProcessor::hasEditor() const {

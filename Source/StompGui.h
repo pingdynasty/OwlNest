@@ -38,7 +38,6 @@
 class StompGui  : public Component,
                   public Timer,
                   public SliderListener,
-                  public ComboBoxListener,
                   public ButtonListener
 {
 public:
@@ -55,7 +54,6 @@ public:
     void paint (Graphics& g);
     void resized();
     void sliderValueChanged (Slider* sliderThatWasMoved);
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     void buttonClicked (Button* buttonThatWasClicked);
 
     // Binary resources:
@@ -75,7 +73,6 @@ private:
     ScopedPointer<Slider> slider3;
     ScopedPointer<Label> label3;
     ScopedPointer<Label> label4;
-    ScopedPointer<ComboBox> menu;
     ScopedPointer<Label> label1;
     ScopedPointer<Slider> slider1;
     ScopedPointer<Label> label2;

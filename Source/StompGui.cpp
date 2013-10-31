@@ -67,13 +67,6 @@ StompGui::StompGui (StompBoxAudioProcessor* ptr)
     label4->setColour (TextEditor::textColourId, Colours::black);
     label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (menu = new ComboBox ("PatchMenu"));
-    menu->setEditableText (false);
-    menu->setJustificationType (Justification::centredLeft);
-    menu->setTextWhenNothingSelected (String::empty);
-    menu->setTextWhenNoChoicesAvailable ("(no choices)");
-    menu->addListener (this);
-
     addAndMakeVisible (label1 = new Label ("new label",
                                            "label text"));
     label1->setFont (Font (15.00f, Font::bold));
@@ -150,7 +143,6 @@ StompGui::~StompGui()
     slider3 = nullptr;
     label3 = nullptr;
     label4 = nullptr;
-    menu = nullptr;
     label1 = nullptr;
     slider1 = nullptr;
     label2 = nullptr;
@@ -186,7 +178,6 @@ void StompGui::resized()
     slider3->setBounds (285, 61, 90, 90);
     label3->setBounds (285, 146, 90, 24);
     label4->setBounds (415, 146, 90, 24);
-    menu->setBounds (188, 8, 150, 24);
     label1->setBounds (25, 146, 90, 24);
     slider1->setBounds (25, 61, 90, 90);
     label2->setBounds (155, 146, 90, 24);
@@ -236,25 +227,6 @@ void StompGui::sliderValueChanged (Slider* sliderThatWasMoved)
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
-}
-
-void StompGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
-{
-    //[UsercomboBoxChanged_Pre]
-    //[/UsercomboBoxChanged_Pre]
-
-    if (comboBoxThatHasChanged == menu)
-    {
-        //[UserComboBoxCode_menu] -- add your combo box handling code here..
-       // String js=menu->getText(); // JUCE string
-        //std::string ss (js.toUTF8()); // convert to std::string
-       // processor->setPatch(ss);
-	updateLabels();
-        //[/UserComboBoxCode_menu]
-    }
-
-    //[UsercomboBoxChanged_Post]
-    //[/UsercomboBoxChanged_Post]
 }
 
 void StompGui::buttonClicked (Button* buttonThatWasClicked)
@@ -344,9 +316,6 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="label text" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="1" italic="0" justification="36"/>
-  <COMBOBOX name="PatchMenu" id="8b1d6ff87e1a42ab" memberName="menu" virtualName=""
-            explicitFocusOrder="0" pos="188 8 150 24" editable="0" layout="33"
-            items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="fbcc8348dda6e61" memberName="label1" virtualName=""
          explicitFocusOrder="0" pos="25 146 90 24" edTextCol="ff000000"
          edBkgCol="0" labelText="label text" editableSingleClick="0" editableDoubleClick="0"

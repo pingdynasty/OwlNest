@@ -22,7 +22,6 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
-#include "SeriesDeviceCallBacks.h"
 #include "Enums.h"
 //[/Headers]
 
@@ -43,12 +42,12 @@ class DualPatchPanel  : public Component,
 {
 public:
     //==============================================================================
-    DualPatchPanel (SeriesDeviceCallBacks& sdcb,Value& patchChange);
+    DualPatchPanel (StringArray patches,Value& patchChange,Value& owlConfig,Value& stompAPatch,                                 Value& stompBPatch);
     ~DualPatchPanel();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    void valueChanged(juce::Value& patchState);
+    void valueChanged(juce::Value& valueChange);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -60,9 +59,11 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    SeriesDeviceCallBacks& dualPatchSdcb;
+    
     Value& patchState;
-
+    Value& owlConfig;
+    Value& stompAPatch;
+    Value& stompBPatch;
     //[/UserVariables]
 
     //==============================================================================

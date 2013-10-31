@@ -23,6 +23,7 @@
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
 #include "SeriesDeviceCallBacks.h"
+#include "Enums.h"
 //[/Headers]
 
 
@@ -36,15 +37,19 @@
                                                                     //[/Comments]
 */
 class TransportPanel  : public Component,
+
                         public ButtonListener
 {
 public:
     //==============================================================================
-    TransportPanel ( SeriesDeviceCallBacks& sdcb);
+    TransportPanel ( SeriesDeviceCallBacks& sdcb, Value& transportValue);
     ~TransportPanel();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+   
+    File getTestFile();
+
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -80,11 +85,23 @@ public:
     static const int stop_jpgSize;
     static const char* record_jpg;
     static const int record_jpgSize;
+    static const char* play_png;
+    static const int play_pngSize;
+    static const char* pause_png;
+    static const int pause_pngSize;
+    static const char* stop_png;
+    static const int stop_pngSize;
+    static const char* stop_png2;
+    static const int stop_png2Size;
+    static const char* record_png;
+    static const int record_pngSize;
 
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-           SeriesDeviceCallBacks& transportSdcb;
+        SeriesDeviceCallBacks& transportSdcb;
+        Value& transportValue;
+         File testAudioFile;
     //[/UserVariables]
 
     //==============================================================================
@@ -92,7 +109,7 @@ private:
     ScopedPointer<ImageButton> PauseButton;
     ScopedPointer<ImageButton> StopButton;
     ScopedPointer<ImageButton> RecordButton;
-    ScopedPointer<TextEditor> filePatch;
+    ScopedPointer<TextEditor> filePath;
     ScopedPointer<TextButton> chooseFile;
     ScopedPointer<TextButton> audioInButton;
 
