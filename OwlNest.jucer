@@ -5,6 +5,7 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
+      <FILE id="pL8ffC" name="Enums.h" compile="0" resource="0" file="Source/Enums.h"/>
       <FILE id="P76MAW" name="PatchMode.cpp" compile="1" resource="0" file="Source/PatchMode.cpp"/>
       <FILE id="m2FwAK" name="PatchMode.h" compile="0" resource="0" file="Source/PatchMode.h"/>
       <FILE id="QZqLsC" name="DualPatchPanel.cpp" compile="1" resource="0"
