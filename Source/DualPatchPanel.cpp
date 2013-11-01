@@ -27,8 +27,8 @@
 //[/MiscUserDefs]
 
 //==============================================================================
-DualPatchPanel::DualPatchPanel (StringArray patches,Value& patchChange,Value& owlConfig,Value& stompAPatch,                                 Value& stompBPatch)
-    : patchState(patchChange), owlConfig(owlConfig),stompAPatch(stompAPatch), stompBPatch(stompBPatch)
+DualPatchPanel::DualPatchPanel (StringArray patches, Value& patchChange,Value& owlConfig,Value& stompAPatch,                                 Value& stompBPatch)
+    : patchState(patchChange), dualOwlConfig(owlConfig),dualStompAPatch(stompAPatch), dualStompBPatch(stompBPatch)
 {
     addAndMakeVisible (configMode = new ComboBox ("new combo box"));
     configMode->setEditableText (false);
@@ -146,7 +146,7 @@ void DualPatchPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         //[UserComboBoxCode_configMode] -- add your combo box handling code here..
 
 
-        owlConfig.setValue(configMode->getSelectedItemIndex());
+        dualOwlConfig.setValue(configMode->getSelectedItemIndex());
 
 
 
@@ -157,7 +157,7 @@ void DualPatchPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         //[UserComboBoxCode_patchA] -- add your combo box handling code here..
 
         String js=patchA->getText(); // JUCE string
-        stompAPatch.setValue(js);
+        dualStompAPatch.setValue(js);
 
 
 
@@ -169,7 +169,7 @@ void DualPatchPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         //[UserComboBoxCode_patchB] -- add your combo box handling code here..
 
         String js=patchB->getText(); // JUCE string
-        stompBPatch.setValue(js);
+        dualStompBPatch.setValue(js);
 
 
         //[/UserComboBoxCode_patchB]
@@ -249,8 +249,8 @@ void DualPatchPanel::valueChanged(juce::Value& valueChange)
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="DualPatchPanel" componentName=""
-                 parentClasses="public Component, public Value::Listener" constructorParams="Value&amp; patchChange,Value&amp; owlConfig,Value&amp; stompAPatch,                                 Value&amp; stompBPatch"
-                 variableInitialisers=" patchState(patchChange), owlConfig(owlConfig),stompAPatch(stompAPatch), stompBPatch(stompBPatch)"
+                 parentClasses="public Component, public Value::Listener" constructorParams="StringArray patches, Value&amp; patchChange,Value&amp; owlConfig,Value&amp; stompAPatch,                                 Value&amp; stompBPatch"
+                 variableInitialisers="patchState(patchChange), dualOwlConfig(owlConfig),dualStompAPatch(stompAPatch), dualStompBPatch(stompBPatch)&#10;"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="1" initialWidth="252" initialHeight="185">
   <BACKGROUND backgroundColour="ffffffff"/>

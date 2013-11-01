@@ -28,7 +28,7 @@
 
 //==============================================================================
 TransportPanel::TransportPanel ( SeriesDeviceCallBacks& sdcb, Value& transportValue)
-    : transportSdcb(sdcb), transportValue(transportValue)
+    : transportSdcb(sdcb), transportPanelValue(transportValue)
 {
     addAndMakeVisible (PlayButton = new ImageButton ("new button"));
     PlayButton->addListener (this);
@@ -93,6 +93,7 @@ TransportPanel::TransportPanel ( SeriesDeviceCallBacks& sdcb, Value& transportVa
     //[Constructor] You can add your own custom stuff here..
     setTopLeftPosition(0, 350);
     filePath->setReadOnly(true);
+    
 
     //[/Constructor]
 }
@@ -133,7 +134,7 @@ void TransportPanel::resized()
     PauseButton->setBounds (136, 8, 96, 88);
     StopButton->setBounds (248, 8, 120, 88);
     RecordButton->setBounds (384, 8, 104, 88);
-    filePath->setBounds (96, 88, 352, 24);
+    filePath->setBounds (96, 96, 352, 24);
     chooseFile->setBounds (0, 96, 96, 24);
     audioInButton->setBounds (448, 96, 80, 24);
     //[UserResized] Add your own custom resize handling here..
@@ -150,31 +151,31 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_PlayButton] -- add your button handler code here..
       //transportSdcb.play();
 
-        transportValue.setValue(PLAY);
-        
+        transportPanelValue.setValue(PLAY);
+
         //[/UserButtonCode_PlayButton]
     }
     else if (buttonThatWasClicked == PauseButton)
     {
         //[UserButtonCode_PauseButton] -- add your button handler code here..
         //transportSdcb.pause();
-        transportValue.setValue(PAUSE);
-        
+        transportPanelValue.setValue(PAUSE);
+
         //[/UserButtonCode_PauseButton]
     }
     else if (buttonThatWasClicked == StopButton)
     {
         //[UserButtonCode_StopButton] -- add your button handler code here..
        // transportSdcb.stop();
-        transportValue.setValue(STOP);
+        transportPanelValue.setValue(STOP);
         //[/UserButtonCode_StopButton]
     }
     else if (buttonThatWasClicked == RecordButton)
     {
         //[UserButtonCode_RecordButton] -- add your button handler code here..
-        
-        transportValue.setValue(RECORD);
-        
+
+        transportPanelValue.setValue(RECORD);
+
         //[/UserButtonCode_RecordButton]
     }
     else if (buttonThatWasClicked == chooseFile)
@@ -194,16 +195,16 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
 
         }
         //transportSdcb.fileMode();
-        
-        transportValue.setValue(PREPAREFILEMODE);
-        
+
+        transportPanelValue.setValue(PREPAREFILEMODE);
+
         //[/UserButtonCode_chooseFile]
     }
     else if (buttonThatWasClicked == audioInButton)
     {
         //[UserButtonCode_audioInButton] -- add your button handler code here..
        // transportSdcb.audioInMode();
-        transportValue.setValue(AUDIOIN);
+        transportPanelValue.setValue(AUDIOIN);
         //[/UserButtonCode_audioInButton]
     }
 
@@ -216,7 +217,7 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 File TransportPanel::getTestFile()
 {
-   
+
 
     return testAudioFile;
 }
@@ -233,8 +234,8 @@ File TransportPanel::getTestFile()
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="TransportPanel" componentName=""
-                 parentClasses="public Component, public Value" constructorParams=" SeriesDeviceCallBacks&amp; sdcb, value&amp; transportValue"
-                 variableInitialisers="transportSdcb(sdcb), transportValue(transportValue)"
+                 parentClasses="public Component, public Value" constructorParams=" SeriesDeviceCallBacks&amp; sdcb, Value&amp; transportValue"
+                 variableInitialisers="transportSdcb(sdcb), transportPanelValue(transportValue)"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="1" initialWidth="529" initialHeight="124">
   <BACKGROUND backgroundColour="ffffffff"/>
@@ -263,7 +264,7 @@ BEGIN_JUCER_METADATA
                resourceOver="" opacityOver="1" colourOver="0" resourceDown=""
                opacityDown="1" colourDown="0"/>
   <TEXTEDITOR name="new text editor" id="a9718246d1f4e82" memberName="filePath"
-              virtualName="" explicitFocusOrder="0" pos="96 88 352 24" initialText=""
+              virtualName="" explicitFocusOrder="0" pos="96 96 352 24" initialText=""
               multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="1"
               caret="1" popupmenu="1"/>
   <TEXTBUTTON name="new button" id="f11becd1c268abe0" memberName="chooseFile"

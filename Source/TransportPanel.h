@@ -37,7 +37,7 @@
                                                                     //[/Comments]
 */
 class TransportPanel  : public Component,
-
+                        public Value,
                         public ButtonListener
 {
 public:
@@ -47,7 +47,7 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-   
+
     File getTestFile();
 
     //[/UserMethods]
@@ -100,7 +100,7 @@ public:
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
         SeriesDeviceCallBacks& transportSdcb;
-        Value& transportValue;
+        Value& transportPanelValue;
          File testAudioFile;
     //[/UserVariables]
 

@@ -42,7 +42,7 @@ class DualPatchPanel  : public Component,
 {
 public:
     //==============================================================================
-    DualPatchPanel (StringArray patches,Value& patchChange,Value& owlConfig,Value& stompAPatch,                                 Value& stompBPatch);
+    DualPatchPanel (StringArray patches, Value& patchChange,Value& owlConfig,Value& stompAPatch,                                 Value& stompBPatch);
     ~DualPatchPanel();
 
     //==============================================================================
@@ -59,11 +59,11 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    
+
     Value& patchState;
-    Value& owlConfig;
-    Value& stompAPatch;
-    Value& stompBPatch;
+    Value& dualOwlConfig;
+    Value& dualStompAPatch;
+    Value& dualStompBPatch;
     //[/UserVariables]
 
     //==============================================================================

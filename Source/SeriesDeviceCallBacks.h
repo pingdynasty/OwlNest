@@ -30,10 +30,10 @@ private:
     
    ConfigModes configuration = SINGLE;
     Value& patchState;
-    Value& owlConfig;
-    Value& stompAPatch;
-    Value& stompBPatch;
-    Value& transportValue;
+    Value& sdcbOwlConfig;
+    Value& sdcbStompAPatch;
+    Value& sdcbStompBPatch;
+    Value& sdcbTransportValue;
 
     float** buffer;
     int channels, samples;
@@ -65,8 +65,6 @@ public:
     
     void removeBuffer();
    
-    
-    
     void audioInMode();
     
     

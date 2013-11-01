@@ -21,6 +21,7 @@ PatchComponent ::  PatchComponent(AudioDeviceManager& dm) : Component("Patch"), 
     
     patchState.setValue(A);
     owlConfig.setValue(SINGLE);
+    transportValue.setValue(AUDIOIN); 
     stompAPatch.setValue(stompboxA.getCurrentPatchName());
     stompBPatch.setValue(stompboxB.getCurrentPatchName());
     

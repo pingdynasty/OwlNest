@@ -10,8 +10,8 @@
 
 #include "SeriesDeviceCallBacks.h"
 
-SeriesDeviceCallBacks:: SeriesDeviceCallBacks(Value& patchChange,Value& owlConfig,Value& stompAPatch, Value& stompBPatch, Value& sdcbtransportValue)
-:    source(NULL), buffer(NULL), patchState(patchChange),owlConfig(owlConfig), stompAPatch(stompAPatch),stompBPatch(stompBPatch),transportValue(sdcbtransportValue)
+SeriesDeviceCallBacks:: SeriesDeviceCallBacks(Value& patchChange,Value& owlConfig,Value& stompAPatch, Value& stompBPatch, Value& transportValue)
+:    source(NULL), buffer(NULL), patchState(patchChange),sdcbOwlConfig(owlConfig), sdcbStompAPatch(stompAPatch),sdcbStompBPatch(stompBPatch),sdcbTransportValue(transportValue)
 
 
 
@@ -21,9 +21,9 @@ SeriesDeviceCallBacks:: SeriesDeviceCallBacks(Value& patchChange,Value& owlConfi
     processorB.setProcessor(&stompboxB);
     patchState.addListener(this);
     owlConfig.addListener(this);
-    stompAPatch.addListener(this);
-    stompBPatch.addListener(this);
-    transportValue.addListener(this);
+    sdcbStompAPatch.addListener(this);
+    sdcbStompBPatch.addListener(this);
+    sdcbTransportValue.addListener(this);
     removeBuffer();
 }
 
@@ -148,27 +148,27 @@ void SeriesDeviceCallBacks::fileMode()
     {
     patchState.setValue(patchState.getValue());
     }
-    else if (valueChange == owlConfig)
+    else if (valueChange == sdcbOwlConfig)
     {
-        configuration  = ConfigModes((int) owlConfig.getValue());
+        configuration  = ConfigModes((int) sdcbOwlConfig.getValue());
     }
-    else if (valueChange == stompAPatch)
+    else if (valueChange == sdcbStompAPatch)
     {
-        String patch = stompAPatch.getValue();
+        String patch = sdcbStompAPatch.getValue();
         std::string ss (patch.toUTF8()); // convert to std::string
         stompboxA.setPatch(ss);
         processorA.setProcessor(&stompboxA);
     }
-    else if (valueChange == stompBPatch)
+    else if (valueChange == sdcbStompBPatch)
     {
-        String patch = stompBPatch.getValue();
+        String patch = sdcbStompBPatch.getValue();
         std::string ss (patch.toUTF8()); // convert to std::string
         stompboxB.setPatch(ss);
         processorB.setProcessor(&stompboxB);
     }
-    else if (valueChange == transportValue)
+    else if (valueChange == sdcbTransportValue)
     {
-        switch((int) transportValue.getValue())
+        switch((int) sdcbTransportValue.getValue())
         {
             case PLAY:
             {
