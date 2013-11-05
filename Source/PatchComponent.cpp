@@ -71,12 +71,23 @@ void PatchComponent::valueChanged(Value &valueChange)
    }
     else if (valueChange == transportValue)
     {
-        if(transportValue == PREPAREFILEMODE)
+        
+        
+        switch((int)transportValue.getValue())
         {
-            
-            sdcb.setInputFile(transportPanel->getTestFile());
-//            transportValue.setValue(FILEMODE);
+            case PREPAREFILEMODE:
+            {
+                sdcb.setInputFile(transportPanel->getTestFile());
+            }
+                
+            case RECORD:
+            {
+                File recordingFile = transportPanel->getRecordFile();
+                sdcb.setOutputFile(recordingFile);
+            }
         }
+        
+        
     }
     
 }

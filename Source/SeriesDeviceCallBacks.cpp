@@ -13,9 +13,6 @@
 SeriesDeviceCallBacks:: SeriesDeviceCallBacks(Value& patchChange,Value& owlConfig,Value& stompAPatch, Value& stompBPatch, Value& transportValue)
 :    source(NULL), buffer(NULL), patchState(patchChange),sdcbOwlConfig(owlConfig), sdcbStompAPatch(stompAPatch),sdcbStompBPatch(stompBPatch),sdcbTransportValue(transportValue)
 
-
-
-
 {
     processorA.setProcessor(&stompboxA);
     processorB.setProcessor(&stompboxB);
@@ -34,8 +31,7 @@ SeriesDeviceCallBacks::~SeriesDeviceCallBacks(){
             delete buffer[i];
         delete buffer;
     }
-    
-    
+     
 }
 
 StompBoxAudioProcessor& SeriesDeviceCallBacks::getStompboxA(){
@@ -115,32 +111,37 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
                 
               
             }
+                
         }
+ 
+    if(recordState == true)
+    {
+        writer->writeFromFloatArrays((const float**)outputChannelData,numOutputChannels, numSamples);
+    }
 
 }
+void SeriesDeviceCallBacks::setOutputFile(File outputFile)
+{
+    outputFile.deleteFile();
+    FileOutputStream* outputStream = outputFile.createOutputStream(bufferSize);
+    WavAudioFormat recordingFormat;
+    StringPairArray metaData;
+    writer = recordingFormat.createWriterFor(outputStream,sampleRate,2,bitDepth,metaData,0);
+    recordState = true;
+}
 
-void SeriesDeviceCallBacks::setInputFile(File input){
+void SeriesDeviceCallBacks::setInputFile(File input)
+{
     
     
     FileInputStream* stream = input.createInputStream();
     CoreAudioFormat format;
-
     source = new AudioFormatReaderSource(format.createReaderFor(stream, false), true);
-  
     audioModeState = true;
  
 }
 
-void SeriesDeviceCallBacks::audioInMode()
-{
-    stop();
-    audioModeState = false;
-}
 
-void SeriesDeviceCallBacks::fileMode()
-{
-    audioModeState = true;
-}
 
  void SeriesDeviceCallBacks::valueChanged(juce::Value& valueChange)
 {
@@ -178,7 +179,6 @@ void SeriesDeviceCallBacks::fileMode()
                 }
                 break;
             }
-                
             case PAUSE:
             {
                  player.setSource(NULL);
@@ -194,8 +194,11 @@ void SeriesDeviceCallBacks::fileMode()
                 }
                 break;
             }
-            case RECORD:
+            case STOPRECORDING:
             {
+                
+                recordState = false;
+                writer = nullptr;
                 break;
             }
             case FILEMODE:
@@ -226,7 +229,11 @@ void SeriesDeviceCallBacks::audioDeviceAboutToStart (AudioIODevice *device)
     
     channels = device->getActiveOutputChannels().toInteger();
     samples = device->getCurrentBufferSizeSamples();
-   
+    sampleRate = device->getCurrentSampleRate();
+    bitDepth = device->getCurrentBitDepth();
+    bufferSize = device->getCurrentBufferSizeSamples();
+    
+    
     removeBuffer();
     
     buffer = new float * [channels];
@@ -251,31 +258,6 @@ void SeriesDeviceCallBacks::removeBuffer()
    
 }
 
-
-void SeriesDeviceCallBacks::play()
-{
-    if(player.getCurrentSource() != 0|| source != NULL)
-    {
-    player.setSource(source);
-    }
-}
-
-void SeriesDeviceCallBacks::stop()
-{
-    if(player.getCurrentSource() != 0|| source != NULL)
-    {
-    player.setSource(NULL);
-    source->releaseResources();
-    source = NULL;
-    }
-}
-
-
-void SeriesDeviceCallBacks::pause()
-{
-    player.setSource(NULL);
-    
-}
 
 
 void 	SeriesDeviceCallBacks::audioDeviceStopped (){

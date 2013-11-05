@@ -93,8 +93,8 @@ TransportPanel::TransportPanel ( SeriesDeviceCallBacks& sdcb, Value& transportVa
     //[Constructor] You can add your own custom stuff here..
     setTopLeftPosition(0, 350);
     filePath->setReadOnly(true);
+    transportRecordingState = true;
     
-
     //[/Constructor]
 }
 
@@ -149,7 +149,7 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
     if (buttonThatWasClicked == PlayButton)
     {
         //[UserButtonCode_PlayButton] -- add your button handler code here..
-      //transportSdcb.play();
+     
 
         transportPanelValue.setValue(PLAY);
 
@@ -158,7 +158,7 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == PauseButton)
     {
         //[UserButtonCode_PauseButton] -- add your button handler code here..
-        //transportSdcb.pause();
+      
         transportPanelValue.setValue(PAUSE);
 
         //[/UserButtonCode_PauseButton]
@@ -166,16 +166,39 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == StopButton)
     {
         //[UserButtonCode_StopButton] -- add your button handler code here..
-       // transportSdcb.stop();
+     
         transportPanelValue.setValue(STOP);
+        
         //[/UserButtonCode_StopButton]
     }
     else if (buttonThatWasClicked == RecordButton)
     {
         //[UserButtonCode_RecordButton] -- add your button handler code here..
+        
+        if(transportRecordingState == true)
+        {
+            FileChooser myRecordingChooser ("Please select the directory you want to record to...",
+                                   File::getSpecialLocation (File::userHomeDirectory),
+                                   "*.wav");
+            if (myRecordingChooser.browseForFileToSave(1))
+            {
+                recordingAudioFile   = myRecordingChooser.getResult();
+                filePath->setText(recordingAudioFile.getFullPathName());
+                
+                    transportPanelValue.setValue(RECORD);
+                    transportRecordingState = false;
+            }
 
-        transportPanelValue.setValue(RECORD);
-
+          
+        }
+        
+        else if(transportRecordingState == false)
+        {
+            transportPanelValue.setValue(STOPRECORDING);
+            filePath->clear();
+            transportRecordingState = true;
+            
+        }
         //[/UserButtonCode_RecordButton]
     }
     else if (buttonThatWasClicked == chooseFile)
@@ -187,14 +210,14 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
                                "*.wav");
         if (myChooser.browseForFileToOpen())
         {
-//            testAudioFile =  *new File(myChooser.getResult());
+
             testAudioFile = File(myChooser.getResult());
-         // transportSdcb.setInputFile(testAudioFile);
+
             filePath->setText(testAudioFile.getFullPathName());
 
 
         }
-        //transportSdcb.fileMode();
+     
 
         transportPanelValue.setValue(PREPAREFILEMODE);
 
@@ -220,6 +243,13 @@ File TransportPanel::getTestFile()
 
 
     return testAudioFile;
+}
+
+File TransportPanel::getRecordFile()
+{
+   
+    return recordingAudioFile;
+    
 }
 //[/MiscUserCode]
 

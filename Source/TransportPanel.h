@@ -49,6 +49,7 @@ public:
     //[UserMethods]     -- You can add your own custom methods in this section.
 
     File getTestFile();
+    File getRecordFile();
 
     //[/UserMethods]
 
@@ -101,7 +102,9 @@ private:
     //[UserVariables]   -- You can add your own custom variables in this section.
         SeriesDeviceCallBacks& transportSdcb;
         Value& transportPanelValue;
-         File testAudioFile;
+        File testAudioFile;
+        File recordingAudioFile;
+    bool transportRecordingState;
     //[/UserVariables]
 
     //==============================================================================

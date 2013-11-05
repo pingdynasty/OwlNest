@@ -26,7 +26,10 @@ private:
     StompBoxAudioProcessor stompboxA;
     StompBoxAudioProcessor stompboxB;
     bool audioModeState = false;
-    
+    bool recordState = false;
+    ScopedPointer<FileOutputStream> outputStream;
+    ScopedPointer<AudioFormatWriter> writer;
+
     
    ConfigModes configuration = SINGLE;
     Value& patchState;
@@ -37,6 +40,10 @@ private:
 
     float** buffer;
     int channels, samples;
+    double sampleRate;
+    int bitDepth;
+    int bufferSize;
+    
 public:
     
     SeriesDeviceCallBacks(Value& patchChange,Value& owlConfig,Value& stompAPatch, Value& stompBPatch,Value& transportValue);
@@ -54,18 +61,12 @@ public:
     StompBoxAudioProcessor& getStompboxB();
     
     void setInputFile(File input);
+    void setOutputFile(File output);
     
-    void play();
-    
-    void stop();
-    
-    void  pause();
-    
-    void fileMode();
     
     void removeBuffer();
    
-    void audioInMode();
+ 
     
     
     
