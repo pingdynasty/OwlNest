@@ -410,6 +410,7 @@
 		629600C8AD4D25976975269C = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_OggVorbisAudioFormat.h"; path = "../../JuceLibraryCode/modules/juce_audio_formats/codecs/juce_OggVorbisAudioFormat.h"; sourceTree = "SOURCE_ROOT"; };
 		629D475792B762E880397433 = { isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "juce_AudioUnitPluginFormat.mm"; path = "../../JuceLibraryCode/modules/juce_audio_processors/format_types/juce_AudioUnitPluginFormat.mm"; sourceTree = "SOURCE_ROOT"; };
 		62AC9DE4B221E6D8FA098BA8 = { isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "juce_MixerAudioSource.cpp"; path = "../../JuceLibraryCode/modules/juce_audio_basics/sources/juce_MixerAudioSource.cpp"; sourceTree = "SOURCE_ROOT"; };
+		62DC3FD57D0E4FD425534AFE = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Enums.h; path = ../../Source/Enums.h; sourceTree = "SOURCE_ROOT"; };
 		63840EE8CA55F5A60CFA70AB = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ParametricEqPatch.hpp; path = ../../Source/Patches/ParametricEqPatch.hpp; sourceTree = "SOURCE_ROOT"; };
 		63B33A8E2BA95574DF8559C6 = { isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "juce_graphics.mm"; path = "../../JuceLibraryCode/modules/juce_graphics/juce_graphics.mm"; sourceTree = "SOURCE_ROOT"; };
 		63C1E13AF94E3502D5B00A4B = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_AudioFormat.h"; path = "../../JuceLibraryCode/modules/juce_audio_formats/format/juce_AudioFormat.h"; sourceTree = "SOURCE_ROOT"; };
@@ -983,6 +984,7 @@
 		8BADBE4C63D9F0D225FB1818 = { isa = PBXGroup; children = (
 				C65493589B4D96C5E07DD339 ); name = Libraries; sourceTree = "<group>"; };
 		1590DB15647FDA7F08E521B4 = { isa = PBXGroup; children = (
+				62DC3FD57D0E4FD425534AFE,
 				9BA8E71D37D8231A1C696AEA,
 				AC818F10AB726D133C50A724,
 				7A62D7D75E819E9DBDB94514,
