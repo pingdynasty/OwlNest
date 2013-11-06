@@ -10,6 +10,7 @@
 
 #include "SeriesDeviceCallBacks.h"
 
+
 SeriesDeviceCallBacks:: SeriesDeviceCallBacks(Value& patchChange,Value& owlConfig,Value& stompAPatch, Value& stompBPatch, Value& transportValue)
 :    source(NULL), buffer(NULL), patchState(patchChange),sdcbOwlConfig(owlConfig), sdcbStompAPatch(stompAPatch),sdcbStompBPatch(stompBPatch),sdcbTransportValue(transportValue)
 
@@ -120,6 +121,7 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
     }
 
 }
+
 void SeriesDeviceCallBacks::setOutputFile(File outputFile)
 {
     outputFile.deleteFile();
@@ -129,6 +131,7 @@ void SeriesDeviceCallBacks::setOutputFile(File outputFile)
     writer = recordingFormat.createWriterFor(outputStream,sampleRate,2,bitDepth,metaData,0);
     recordState = true;
 }
+
 
 void SeriesDeviceCallBacks::setInputFile(File input)
 {
@@ -221,10 +224,10 @@ void SeriesDeviceCallBacks::setInputFile(File input)
             }
         }
     }
+
 }
 
-
-void SeriesDeviceCallBacks::audioDeviceAboutToStart (AudioIODevice *device)
+void SeriesDeviceCallBacks::audioDeviceAboutToStart(AudioIODevice *device)
 {
     
     channels = device->getActiveOutputChannels().toInteger();
@@ -260,17 +263,12 @@ void SeriesDeviceCallBacks::removeBuffer()
 
 
 
-void 	SeriesDeviceCallBacks::audioDeviceStopped (){
+void SeriesDeviceCallBacks::audioDeviceStopped ()
+    {
     processorA.audioDeviceStopped();
     processorB.audioDeviceStopped();
     player.audioDeviceStopped();
+
     removeBuffer();
+
 }
-
-/*
-SeriesDeviceCallBacks :: SeriesDeviceCallBacks
-
-: AudioIODeviceCallback
-
-
-*/

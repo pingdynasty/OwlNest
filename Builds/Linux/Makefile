@@ -19,7 +19,7 @@ ifeq ($(CONFIG),Debug)
   endif
 
   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 -I../../Libraries
+  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 -I../../Libraries -I ../../Source -I /usr/include/libusb-1.0
   CXXFLAGS += $(CFLAGS)
   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt -lusb-1.0 -L/opt/local/lib
   LDDEPS :=
@@ -39,7 +39,7 @@ ifeq ($(CONFIG),Release)
   endif
 
   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os -I../../Libraries
+  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os -I../../Libraries -I ../../Source -I /usr/include/libusb-1.0
   CXXFLAGS += $(CFLAGS)
   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt -lusb-1.0 -L/opt/local/lib
   LDDEPS :=
@@ -52,6 +52,7 @@ OBJECTS := \
   $(OBJDIR)/PatchMode_d85501ec.o \
   $(OBJDIR)/DualPatchPanel_2c59bfc1.o \
   $(OBJDIR)/TransportPanel_18909a64.o \
+  $(OBJDIR)/PluginPatchProcessor_a02b7946.o \
   $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
   $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
   $(OBJDIR)/PatchComponent_9fa7269e.o \
@@ -116,6 +117,11 @@ $(OBJDIR)/DualPatchPanel_2c59bfc1.o: ../../Source/DualPatchPanel.cpp
 $(OBJDIR)/TransportPanel_18909a64.o: ../../Source/TransportPanel.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling TransportPanel.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PluginPatchProcessor_a02b7946.o: ../../Source/PluginPatchProcessor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PluginPatchProcessor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ApplicationSettingsWindow_2723744.o: ../../Source/ApplicationSettingsWindow.cpp

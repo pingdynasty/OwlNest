@@ -1,4 +1,5 @@
 #include "PluginProcessor.h"
+#include "PluginPatchProcessor.h"
 #include "PluginEditor.h"
 #include "SampleBuffer.h"
 
@@ -6,9 +7,17 @@
 
 ThreadLocalValue<StompBoxAudioProcessor*> StompBoxAudioProcessor::instance;
 
-StompBoxAudioProcessor* StompBoxAudioProcessor::getThreadLocalInstance(){
-  return instance.get();
+// StompBoxAudioProcessor* StompBoxAudioProcessor::getThreadLocalInstance(){
+//   return instance.get();
+// }
+
+PatchProcessor* StompBoxAudioProcessor::getPatchProcessor(){
+  return instance.get()->patchprocessor;
 }
+
+// PatchProcessor* StompBoxAudioProcessor::getPatchProcessor(){
+//   return patchprocessor;
+// }
 
 StompBoxAudioProcessor::StompBoxAudioProcessor() : bypass(false) {
   // Init first parameters 
@@ -47,7 +56,8 @@ void StompBoxAudioProcessor::setPatch(std::string name){
   registerParameter(PARAMETER_E, "");
   currentPatchName = name;
   instance = this; // thread local instance must be set before Patch constructor is called
-  patch = patches.create(name);
+  patchprocessor = new PluginPatchProcessor(this);
+  patchprocessor->setPatch(patches.create(name));
 }
 
 const String StompBoxAudioProcessor::getName() const{
@@ -156,7 +166,7 @@ void StompBoxAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer&
 
   // let the patch do the audio processing if not bypassed
   if(!bypass)
-    patch->processAudio(samples);
+    patchprocessor->processAudio(samples);
 
   
 }
@@ -198,14 +208,14 @@ void StompBoxAudioProcessor::registerParameter(PatchParameterId pid, const std::
   parameterDescriptions.set(pid, description);
 }
 
-float StompBoxAudioProcessor::getParameterValue(PatchParameterId pid){
-  return getParameter(pid);
-}
+// float StompBoxAudioProcessor::getParameterValue(PatchParameterId pid){
+//   return getParameter(pid);
+// }
 
-int StompBoxAudioProcessor::getBlockSize(){
-  return AudioProcessor::getBlockSize();
-}
+// int StompBoxAudioProcessor::getBlockSize(){
+//   return AudioProcessor::getBlockSize();
+// }
 
-double StompBoxAudioProcessor::getSampleRate(){
-  return AudioProcessor::getSampleRate();
-}
+// double StompBoxAudioProcessor::getSampleRate(){
+//   return AudioProcessor::getSampleRate();
+// }

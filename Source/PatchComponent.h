@@ -5,7 +5,7 @@
     Created: 1 Oct 2013 1:09:07pm
     Author:  Christofero Pollano
 
-  ==================================/Users/Dino/Pictures/hendrix waiting.JPG============================================
+  ==============================================================================
 */
 
 #ifndef PATCHCOMPONENT_H_INCLUDED
@@ -17,7 +17,6 @@
 #include "DualPatchPanel.h"
 #include "PatchMode.h"
 #include "Enums.h"
-
 
 
 
@@ -45,6 +44,7 @@ private:
     ScopedPointer<patchModeSwitching> patchButton;
     ScopedPointer<Component> stompboxAGui;
     ScopedPointer<Component> stompboxBGui;
+
 
 
 };

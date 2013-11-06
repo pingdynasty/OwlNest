@@ -3,9 +3,6 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
 #ifndef min
 #define min(a,b) ((a)<(b)?(a):(b))
 #endif /* min */
@@ -15,6 +12,7 @@
 #ifndef abs
 #define abs(x) ((x)>0?(x):-(x))
 #endif /* abs */
+
 
 #include "Patches/GainPatch.hpp"
 #include "Patches/TemplatePatch.hpp"
@@ -45,10 +43,14 @@
 #include "Patches/Contest/SirenPatch.hpp"
 #include "Patches/Contest/blo_bleep.hpp"
 #include "Patches/ThreeOscSynthPatch.hpp"
+#include "OwlPatches/includes.h"
+
+
 
 #define REGISTER_PATCH(T, STR) registerPatch(STR, Register<T>::construct)
 
 PatchRegistry::PatchRegistry(){
+
   REGISTER_PATCH(GainPatch, "Gain");
   REGISTER_PATCH(TemplatePatch, "Template");
   REGISTER_PATCH(SimpleDelayPatch, "Simple Delay");
@@ -78,6 +80,9 @@ PatchRegistry::PatchRegistry(){
   REGISTER_PATCH(SirenPatch, "contest/SirenPatch");
   REGISTER_PATCH(little_blo_bleep, "Contest/blo_bleep");
     REGISTER_PATCH(ThreeOscSynthPatch, "Three Oscillator Synth");
+
+#include "OwlPatches/patches.cpp"
+
 }
 
 StringArray PatchRegistry::getNames(){

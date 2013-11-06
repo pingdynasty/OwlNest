@@ -1,15 +1,4 @@
-/*
-  ==============================================================================
-
-    PatchWindow.cpp
-    Created: 1 Oct 2013 1:09:07pm
-    Author:  Christofero Pollano
-
-  ==============================================================================
-*/
-
 #include "PatchComponent.h"
-
 
 PatchComponent ::  PatchComponent(AudioDeviceManager& dm) : Component("Patch"), sdcb(patchState,owlConfig,stompAPatch,stompBPatch, transportValue)
 
@@ -91,6 +80,7 @@ void PatchComponent::valueChanged(Value &valueChange)
     }
     
 }
+
 
 
 

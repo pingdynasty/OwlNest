@@ -55,13 +55,13 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     samplingRateLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (loadButton = new TextButton ("new button"));
-    loadButton->setButtonText ("load from owl");
+    loadButton->setButtonText ("Load from OWL");
     loadButton->addListener (this);
 
     addAndMakeVisible (leftGainSlider = new Slider ("new slider"));
     leftGainSlider->setRange (0, 127, 1);
     leftGainSlider->setSliderStyle (Slider::LinearHorizontal);
-    leftGainSlider->setTextBoxStyle (Slider::TextBoxRight, true, 35, 20);
+    leftGainSlider->setTextBoxStyle (Slider::TextBoxRight, false, 35, 20);
     leftGainSlider->addListener (this);
 
     addAndMakeVisible (leftGainLabel = new Label ("new label",
@@ -73,7 +73,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     leftGainLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (saveButton = new TextButton ("new button"));
-    saveButton->setButtonText ("save to owl");
+    saveButton->setButtonText ("Save to OWL");
     saveButton->addListener (this);
 
     addAndMakeVisible (dfuButton = new TextButton ("new button"));
@@ -99,13 +99,13 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     addAndMakeVisible (rightGainSlider = new Slider ("new slider"));
     rightGainSlider->setRange (0, 127, 1);
     rightGainSlider->setSliderStyle (Slider::LinearHorizontal);
-    rightGainSlider->setTextBoxStyle (Slider::TextBoxRight, true, 35, 20);
+    rightGainSlider->setTextBoxStyle (Slider::TextBoxRight, false, 35, 20);
     rightGainSlider->addListener (this);
 
     addAndMakeVisible (leftOutGainSlider = new Slider ("new slider"));
     leftOutGainSlider->setRange (0, 127, 1);
     leftOutGainSlider->setSliderStyle (Slider::LinearHorizontal);
-    leftOutGainSlider->setTextBoxStyle (Slider::TextBoxRight, true, 35, 20);
+    leftOutGainSlider->setTextBoxStyle (Slider::TextBoxRight, false, 35, 20);
     leftOutGainSlider->addListener (this);
 
     addAndMakeVisible (leftOutGainLabel = new Label ("new label",
@@ -127,7 +127,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     addAndMakeVisible (rightOutGainSlider = new Slider ("new slider"));
     rightOutGainSlider->setRange (0, 127, 1);
     rightOutGainSlider->setSliderStyle (Slider::LinearHorizontal);
-    rightOutGainSlider->setTextBoxStyle (Slider::TextBoxRight, true, 35, 20);
+    rightOutGainSlider->setTextBoxStyle (Slider::TextBoxRight, false, 35, 20);
     rightOutGainSlider->addListener (this);
 
     addAndMakeVisible (leftInputMuteButton = new ToggleButton ("new toggle button"));
@@ -173,20 +173,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     activePatchComboBox->setJustificationType (Justification::centredLeft);
     activePatchComboBox->setTextWhenNothingSelected (String::empty);
     activePatchComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    activePatchComboBox->addItem ("Copy", 1);
-    activePatchComboBox->addItem ("StereoGain", 2);
-    activePatchComboBox->addItem ("StereoMixer", 3);
-    activePatchComboBox->addItem ("ParametricEQ", 4);
-    activePatchComboBox->addItem ("Phaser", 5);
-    activePatchComboBox->addItem ("ResonantFilter", 6);
-    activePatchComboBox->addItem ("StateVariableFilter", 7);
-    activePatchComboBox->addItem ("LeakyIntegrator", 8);
-    activePatchComboBox->addItem ("DroneBox", 9);
-    activePatchComboBox->addItem ("SimpleDelay", 10);
-    activePatchComboBox->addItem ("LpfDelay", 11);
-    activePatchComboBox->addItem ("LpfDelayPhaser", 12);
-    activePatchComboBox->addItem ("TestTone", 13);
-    activePatchComboBox->addItem ("FixedDelay", 14);
+    activePatchComboBox->addItem ("...", 1);
     activePatchComboBox->addListener (this);
 
     addAndMakeVisible (activePatchLabel = new Label ("new label",
@@ -231,20 +218,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotAComboBox->setJustificationType (Justification::centredLeft);
     patchSlotAComboBox->setTextWhenNothingSelected (String::empty);
     patchSlotAComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    patchSlotAComboBox->addItem ("Copy", 1);
-    patchSlotAComboBox->addItem ("StereoGain", 2);
-    patchSlotAComboBox->addItem ("StereoMixer", 3);
-    patchSlotAComboBox->addItem ("ParametricEQ", 4);
-    patchSlotAComboBox->addItem ("Phaser", 5);
-    patchSlotAComboBox->addItem ("ResonantFilter", 6);
-    patchSlotAComboBox->addItem ("StateVariableFilter", 7);
-    patchSlotAComboBox->addItem ("LeakyIntegrator", 8);
-    patchSlotAComboBox->addItem ("DroneBox", 9);
-    patchSlotAComboBox->addItem ("SimpleDelay", 10);
-    patchSlotAComboBox->addItem ("LpfDelay", 11);
-    patchSlotAComboBox->addItem ("LpfDelayPhaser", 12);
-    patchSlotAComboBox->addItem ("TestTone", 13);
-    patchSlotAComboBox->addItem ("FixedDelay", 14);
+    patchSlotAComboBox->addItem ("...", 1);
     patchSlotAComboBox->addListener (this);
 
     addAndMakeVisible (patchSlotALabel = new Label ("new label",
@@ -260,20 +234,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotBComboBox->setJustificationType (Justification::centredLeft);
     patchSlotBComboBox->setTextWhenNothingSelected (String::empty);
     patchSlotBComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    patchSlotBComboBox->addItem ("Copy", 1);
-    patchSlotBComboBox->addItem ("StereoGain", 2);
-    patchSlotBComboBox->addItem ("StereoMixer", 3);
-    patchSlotBComboBox->addItem ("ParametricEQ", 4);
-    patchSlotBComboBox->addItem ("Phaser", 5);
-    patchSlotBComboBox->addItem ("ResonantFilter", 6);
-    patchSlotBComboBox->addItem ("StateVariableFilter", 7);
-    patchSlotBComboBox->addItem ("LeakyIntegrator", 8);
-    patchSlotBComboBox->addItem ("DroneBox", 9);
-    patchSlotBComboBox->addItem ("SimpleDelay", 10);
-    patchSlotBComboBox->addItem ("LpfDelay", 11);
-    patchSlotBComboBox->addItem ("LpfDelayPhaser", 12);
-    patchSlotBComboBox->addItem ("TestTone", 13);
-    patchSlotBComboBox->addItem ("FixedDelay", 14);
+    patchSlotBComboBox->addItem ("...", 1);
     patchSlotBComboBox->addListener (this);
 
     addAndMakeVisible (patchSlotBLabel = new Label ("new label",
@@ -283,6 +244,10 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotBLabel->setEditable (false, false, false);
     patchSlotBLabel->setColour (TextEditor::textColourId, Colours::black);
     patchSlotBLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (resetButton = new TextButton ("new button"));
+    resetButton->setButtonText ("Factory Reset");
+    resetButton->addListener (this);
 
 
     //[UserPreSize]
@@ -339,6 +304,7 @@ OwlNestGui::~OwlNestGui()
     patchSlotALabel = nullptr;
     patchSlotBComboBox = nullptr;
     patchSlotBLabel = nullptr;
+    resetButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -363,35 +329,36 @@ void OwlNestGui::resized()
     samplingRateComboBox->setBounds (129, 144, 150, 24);
     samplingRateLabel->setBounds (24, 144, 103, 24);
     loadButton->setBounds (24, 520, 150, 24);
-    leftGainSlider->setBounds (128, 246, 150, 24);
-    leftGainLabel->setBounds (24, 246, 103, 24);
+    leftGainSlider->setBounds (128, 262, 150, 24);
+    leftGainLabel->setBounds (24, 262, 103, 24);
     saveButton->setBounds (224, 520, 150, 24);
-    dfuButton->setBounds (224, 64, 150, 24);
+    dfuButton->setBounds (224, 24, 150, 24);
     bypassButton->setBounds (24, 64, 150, 24);
     swapLRButton->setBounds (24, 104, 150, 24);
-    rightGainLabel->setBounds (24, 275, 103, 24);
-    rightGainSlider->setBounds (128, 275, 150, 24);
-    leftOutGainSlider->setBounds (128, 310, 150, 24);
-    leftOutGainLabel->setBounds (24, 310, 103, 24);
-    rightOutGainLabel->setBounds (24, 339, 103, 24);
-    rightOutGainSlider->setBounds (128, 339, 150, 24);
-    leftInputMuteButton->setBounds (288, 246, 100, 24);
-    rightInputMuteButton->setBounds (288, 275, 100, 24);
-    leftOutputMuteButton->setBounds (288, 310, 100, 24);
-    rightOutputMuteButton->setBounds (288, 339, 100, 24);
+    rightGainLabel->setBounds (24, 291, 103, 24);
+    rightGainSlider->setBounds (128, 291, 150, 24);
+    leftOutGainSlider->setBounds (128, 326, 150, 24);
+    leftOutGainLabel->setBounds (24, 326, 103, 24);
+    rightOutGainLabel->setBounds (24, 355, 103, 24);
+    rightOutGainSlider->setBounds (128, 355, 150, 24);
+    leftInputMuteButton->setBounds (288, 262, 100, 24);
+    rightInputMuteButton->setBounds (288, 291, 100, 24);
+    leftOutputMuteButton->setBounds (288, 326, 100, 24);
+    rightOutputMuteButton->setBounds (288, 355, 100, 24);
     samplingBitsComboBox->setBounds (129, 176, 150, 24);
     samplingBitsLabel->setBounds (24, 176, 103, 24);
     ledButton->setBounds (224, 104, 150, 24);
-    activePatchComboBox->setBounds (129, 392, 150, 24);
-    activePatchLabel->setBounds (24, 392, 103, 24);
+    activePatchComboBox->setBounds (129, 408, 150, 24);
+    activePatchLabel->setBounds (24, 408, 103, 24);
     protocolComboBox->setBounds (129, 208, 150, 24);
     protocolLabel->setBounds (24, 208, 103, 24);
     masterButton->setBounds (288, 208, 96, 24);
     statusLabel->setBounds (24, 560, 352, 24);
-    patchSlotAComboBox->setBounds (129, 432, 150, 24);
-    patchSlotALabel->setBounds (24, 432, 103, 24);
-    patchSlotBComboBox->setBounds (129, 472, 150, 24);
+    patchSlotAComboBox->setBounds (129, 440, 150, 24);
+    patchSlotALabel->setBounds (24, 440, 103, 24);
+    patchSlotBComboBox->setBounds (128, 472, 150, 24);
     patchSlotBLabel->setBounds (24, 472, 103, 24);
+    resetButton->setBounds (224, 64, 150, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -565,6 +532,12 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_masterButton] -- add your button handler code here..
       theSettings.setCc(CODEC_MASTER, masterButton->getToggleState() ? 127 : 0);
         //[/UserButtonCode_masterButton]
+    }
+    else if (buttonThatWasClicked == resetButton)
+    {
+        //[UserButtonCode_resetButton] -- add your button handler code here..
+      theSettings.setCc(FACTORY_RESET, resetButton->getToggleState() ? 127 : 0);
+        //[/UserButtonCode_resetButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -746,22 +719,22 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="712a98a25b0d275e" memberName="loadButton"
-              virtualName="" explicitFocusOrder="0" pos="24 520 150 24" buttonText="load from owl"
+              virtualName="" explicitFocusOrder="0" pos="24 520 150 24" buttonText="Load from OWL"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="new slider" id="ce099269a95e9cf7" memberName="leftGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="128 246 150 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="128 262 150 24" min="0"
           max="127" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
-          textBoxEditable="0" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
+          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="2138fad0eb10f8ee" memberName="leftGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 246 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 262 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Input Gain L" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="f37a6fa0e6074e35" memberName="saveButton"
-              virtualName="" explicitFocusOrder="0" pos="224 520 150 24" buttonText="save to owl"
+              virtualName="" explicitFocusOrder="0" pos="224 520 150 24" buttonText="Save to OWL"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="49395e88504ed9a4" memberName="dfuButton"
-              virtualName="" explicitFocusOrder="0" pos="224 64 150 24" buttonText="Firmware Update"
+              virtualName="" explicitFocusOrder="0" pos="224 24 150 24" buttonText="Firmware Update"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
                 virtualName="" explicitFocusOrder="0" pos="24 64 150 24" buttonText="Bypass"
@@ -770,43 +743,43 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="0" pos="24 104 150 24" buttonText="Swap Left/Right"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="a4c7e40cc3b84fa1" memberName="rightGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 275 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 291 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Input Gain R" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="new slider" id="751638225df21da5" memberName="rightGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="128 275 150 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="128 291 150 24" min="0"
           max="127" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
-          textBoxEditable="0" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
+          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="new slider" id="59927295068e5acd" memberName="leftOutGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="128 310 150 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="128 326 150 24" min="0"
           max="127" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
-          textBoxEditable="0" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
+          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="d2acb69e045cd837" memberName="leftOutGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 310 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 326 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Output Gain L" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="f61d9f9ae7e5f004" memberName="rightOutGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 339 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 355 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Output Gain R" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="new slider" id="e520e83dc8199cec" memberName="rightOutGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="128 339 150 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="128 355 150 24" min="0"
           max="127" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
-          textBoxEditable="0" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
+          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <TOGGLEBUTTON name="new toggle button" id="c3d4453ea3e0bad0" memberName="leftInputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="288 246 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="288 262 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="9d0155fca059ad2b" memberName="rightInputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="288 275 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="288 291 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="e8b8a82e4cc96eab" memberName="leftOutputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="288 310 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="288 326 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="47ae93ef5d84135f" memberName="rightOutputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="288 339 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="288 355 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="68afb9201dff30b0" memberName="samplingBitsComboBox"
             virtualName="" explicitFocusOrder="0" pos="129 176 150 24" editable="0"
@@ -821,11 +794,10 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="224 104 150 24" buttonText="LED"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="2ffc2c8f2164d257" memberName="activePatchComboBox"
-            virtualName="" explicitFocusOrder="0" pos="129 392 150 24" editable="0"
-            layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay&#10;LpfDelay&#10;LpfDelayPhaser&#10;TestTone&#10;FixedDelay"
-            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+            virtualName="" explicitFocusOrder="0" pos="129 408 150 24" editable="0"
+            layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="f3938ff8c995b8ad" memberName="activePatchLabel"
-         virtualName="" explicitFocusOrder="0" pos="24 392 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 408 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Active Patch" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -846,23 +818,24 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <COMBOBOX name="new combo box" id="8a0d565fbe220bde" memberName="patchSlotAComboBox"
-            virtualName="" explicitFocusOrder="0" pos="129 432 150 24" editable="0"
-            layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay&#10;LpfDelay&#10;LpfDelayPhaser&#10;TestTone&#10;FixedDelay"
-            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+            virtualName="" explicitFocusOrder="0" pos="129 440 150 24" editable="0"
+            layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="54afa4d08d09d664" memberName="patchSlotALabel"
-         virtualName="" explicitFocusOrder="0" pos="24 432 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="24 440 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Slot A" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <COMBOBOX name="new combo box" id="ead688c04fb4a49e" memberName="patchSlotBComboBox"
-            virtualName="" explicitFocusOrder="0" pos="129 472 150 24" editable="0"
-            layout="33" items="Copy&#10;StereoGain&#10;StereoMixer&#10;ParametricEQ&#10;Phaser&#10;ResonantFilter&#10;StateVariableFilter&#10;LeakyIntegrator&#10;DroneBox&#10;SimpleDelay&#10;LpfDelay&#10;LpfDelayPhaser&#10;TestTone&#10;FixedDelay"
-            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+            virtualName="" explicitFocusOrder="0" pos="128 472 150 24" editable="0"
+            layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="a882f7d2f19281a4" memberName="patchSlotBLabel"
          virtualName="" explicitFocusOrder="0" pos="24 472 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Slot B" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
+  <TEXTBUTTON name="new button" id="6c02712dbfb4bb60" memberName="resetButton"
+              virtualName="" explicitFocusOrder="0" pos="224 64 150 24" buttonText="Factory Reset"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
