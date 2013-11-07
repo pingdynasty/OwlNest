@@ -166,7 +166,8 @@ void StompBoxAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer&
 
   // let the patch do the audio processing if not bypassed
   if(!bypass)
-    patchprocessor->processAudio(samples);
+      
+      patchprocessor->processAudio(samples);
 
   
 }

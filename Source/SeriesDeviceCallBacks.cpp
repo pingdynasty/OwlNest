@@ -184,7 +184,7 @@ void SeriesDeviceCallBacks::setInputFile(File input)
             }
             case PAUSE:
             {
-                 player.setSource(NULL);
+                player.setSource(NULL);
                 break;
             }
             case STOP:

@@ -133,7 +133,10 @@ void AudioProcessorPlayer::audioDeviceIOCallback (const float** const inputChann
         }
         else
         {
+            
             processor->processBlock (buffer, incomingMidi);
+               
+            
         }
     }
 }

@@ -67,12 +67,21 @@ void PatchComponent::valueChanged(Value &valueChange)
             case PREPAREFILEMODE:
             {
                 sdcb.setInputFile(transportPanel->getTestFile());
+                break;
             }
                 
             case RECORD:
             {
                 File recordingFile = transportPanel->getRecordFile();
                 sdcb.setOutputFile(recordingFile);
+                break;
+            }
+            case FILEMODE:
+            {
+                File testAudioFile = transportPanel->getTestFile();
+                sdcb.setInputFile(testAudioFile);
+                break; 
+                
             }
         }
         

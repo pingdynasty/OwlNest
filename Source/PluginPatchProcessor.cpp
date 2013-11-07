@@ -36,5 +36,6 @@ AudioBuffer* PluginPatchProcessor::createMemoryBuffer(int channels, int samples)
 }
   
 void PluginPatchProcessor::processAudio(AudioBuffer& buffer){
-  patch->processAudio(buffer);
+ 
+    patch->processAudio(buffer);
 }

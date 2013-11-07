@@ -94,7 +94,7 @@ TransportPanel::TransportPanel ( SeriesDeviceCallBacks& sdcb, Value& transportVa
     setTopLeftPosition(0, 350);
     filePath->setReadOnly(true);
     transportRecordingState = true;
-    
+
     //[/Constructor]
 }
 
@@ -149,7 +149,7 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
     if (buttonThatWasClicked == PlayButton)
     {
         //[UserButtonCode_PlayButton] -- add your button handler code here..
-     
+
 
         transportPanelValue.setValue(PLAY);
 
@@ -158,7 +158,7 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == PauseButton)
     {
         //[UserButtonCode_PauseButton] -- add your button handler code here..
-      
+
         transportPanelValue.setValue(PAUSE);
 
         //[/UserButtonCode_PauseButton]
@@ -166,15 +166,15 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == StopButton)
     {
         //[UserButtonCode_StopButton] -- add your button handler code here..
-     
+
         transportPanelValue.setValue(STOP);
-        
+
         //[/UserButtonCode_StopButton]
     }
     else if (buttonThatWasClicked == RecordButton)
     {
         //[UserButtonCode_RecordButton] -- add your button handler code here..
-        
+
         if(transportRecordingState == true)
         {
             FileChooser myRecordingChooser ("Please select the directory you want to record to...",
@@ -184,20 +184,20 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
             {
                 recordingAudioFile   = myRecordingChooser.getResult();
                 filePath->setText(recordingAudioFile.getFullPathName());
-                
+
                     transportPanelValue.setValue(RECORD);
                     transportRecordingState = false;
             }
 
-          
+
         }
-        
+
         else if(transportRecordingState == false)
         {
             transportPanelValue.setValue(STOPRECORDING);
             filePath->clear();
             transportRecordingState = true;
-            
+
         }
         //[/UserButtonCode_RecordButton]
     }
@@ -217,9 +217,9 @@ void TransportPanel::buttonClicked (Button* buttonThatWasClicked)
 
 
         }
-     
 
-        transportPanelValue.setValue(PREPAREFILEMODE);
+
+        transportPanelValue.setValue(FILEMODE);
 
         //[/UserButtonCode_chooseFile]
     }
@@ -247,9 +247,9 @@ File TransportPanel::getTestFile()
 
 File TransportPanel::getRecordFile()
 {
-   
+
     return recordingAudioFile;
-    
+
 }
 //[/MiscUserCode]
 
