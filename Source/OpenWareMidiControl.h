@@ -64,7 +64,7 @@ enum OpenWareMidiControl {
 
   LEFT_RIGHT_SWAP        = 63, /* swap left/right channels */
 
-  REQUEST_SETTINGS       = 67, /* load settings from device */
+  REQUEST_SETTINGS       = 67, /* load settings from device (127=all settings) (30 for LED) (more to come) */
   SAVE_SETTINGS          = 68, /* save settings to device */
   DEVICE_FIRMWARE_UPDATE = 69, /* enter Device Firmware Upgrade mode */
   FACTORY_RESET          = 70  /* reset all settings */

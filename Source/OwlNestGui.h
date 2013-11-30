@@ -38,6 +38,7 @@
 */
 class OwlNestGui  : public Component,
                     public Value::Listener,
+                    public Timer,
                     public ComboBoxListener,
                     public ButtonListener,
                     public SliderListener
@@ -53,6 +54,7 @@ public:
     void valueChanged(juce::Value &value);
     void updateFirmware();
     void setStatus(const String& msg);
+    void timerCallback();
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -68,6 +70,7 @@ private:
     OwlNestSettings& theSettings;
     AudioDeviceManager& theDm;
     ScopedPointer<AudioDeviceSelectorComponent> audioSelector;
+    int timerInterval;
     //[/UserVariables]
 
     //==============================================================================
@@ -104,6 +107,8 @@ private:
     ScopedPointer<TextButton> resetButton;
     ScopedPointer<ComboBox> patchSlotBComboBox2;
     ScopedPointer<Label> patchSlotBLabel2;
+    ScopedPointer<TextButton> ConnexionButton;
+    ScopedPointer<Label> connexionStatusLabel;
 
 
     //==============================================================================

@@ -26,7 +26,6 @@
 
 #include "OwlNestGui.h"
 
-
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 //[/MiscUserDefs]
 
@@ -251,6 +250,18 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotBLabel2->setColour (TextEditor::textColourId, Colours::black);
     patchSlotBLabel2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (ConnexionButton = new TextButton ("new button"));
+    ConnexionButton->setButtonText (String::empty);
+    ConnexionButton->setColour (TextButton::buttonColourId, Colours::grey);
+
+    addAndMakeVisible (connexionStatusLabel = new Label ("new label",
+                                                         "Connexion Status"));
+    connexionStatusLabel->setFont (Font (15.00f, Font::plain));
+    connexionStatusLabel->setJustificationType (Justification::centredRight);
+    connexionStatusLabel->setEditable (false, false, false);
+    connexionStatusLabel->setColour (TextEditor::textColourId, Colours::black);
+    connexionStatusLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -264,6 +275,8 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     updateGui.addListener(this);
     setVisible(true); // set the window visible
     setStatus("ready");
+    timerInterval=5000;
+    startTimer(timerInterval);
 
     //[/Constructor]
 }
@@ -306,6 +319,8 @@ OwlNestGui::~OwlNestGui()
     resetButton = nullptr;
     patchSlotBComboBox2 = nullptr;
     patchSlotBLabel2 = nullptr;
+    ConnexionButton = nullptr;
+    connexionStatusLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -360,6 +375,8 @@ void OwlNestGui::resized()
     resetButton->setBounds (616, 16, 150, 24);
     patchSlotBComboBox2->setBounds (552, 216, 150, 24);
     patchSlotBLabel2->setBounds (464, 216, 88, 24);
+    ConnexionButton->setBounds (19, 17, 16, 16);
+    connexionStatusLabel->setBounds (39, 13, 96, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -508,18 +525,8 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == ledButton)
     {
         //[UserButtonCode_ledButton] -- add your button handler code here..
-//      theSettings.setCc(PATCH_BUTTON, 127);
-      int val = theSettings.getCc(LED);
-      val = (val+42)%128;
-      Colour colour;
-      if(val < 42){
-          colour = Colour::fromRGB(0xbb, 0xbb, 0xff); // grey
-      }else if(val > 83){
-          colour = Colour::fromRGB(0xff, 0, 0); // red
-      }else{
-          colour = Colour::fromRGB(0, 0xff, 0); // green
-      }
-      ledButton->setColour(TextButton::buttonColourId, colour);
+      theSettings.setCc(PATCH_BUTTON, 127);
+      theSettings.setCc(REQUEST_SETTINGS, 30); // to get the updated LED value
         //[/UserButtonCode_ledButton]
     }
     else if (buttonThatWasClicked == masterButton)
@@ -662,7 +669,6 @@ void OwlNestGui::settingsChanged() {
       masterButton->setToggleState(false, dontSendNotification);
     else
       masterButton->setToggleState(true, dontSendNotification);
-
     setStatus("Loaded settings from OWL");
 }
 
@@ -682,6 +688,14 @@ void OwlNestGui::updateFirmware(){
     setStatus("Firmware update cancelled");
   }
 }
+
+void OwlNestGui::timerCallback()
+{
+    theSettings.setCc(REQUEST_SETTINGS,30); // ask to send a Midi Message to check connection
+    
+    
+       
+}
 //[/MiscUserCode]
 
 
@@ -695,7 +709,8 @@ void OwlNestGui::updateFirmware(){
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="OwlNestGui" componentName="MainGui"
-                 parentClasses="public Component, public Value::Listener" constructorParams="OwlNestSettings&amp; settings, AudioDeviceManager&amp; dm, Value&amp; updateGui"
+                 parentClasses="public Component, public Value::Listener, public Timer"
+                 constructorParams="OwlNestSettings&amp; settings, AudioDeviceManager&amp; dm, Value&amp; updateGui"
                  variableInitialisers="theSettings(settings), theDm(dm)&#10;&#10;"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="1" initialWidth="779" initialHeight="700">
@@ -825,6 +840,14 @@ BEGIN_JUCER_METADATA
   <LABEL name="new label" id="529eec60a7cf0c8b" memberName="patchSlotBLabel2"
          virtualName="" explicitFocusOrder="0" pos="464 216 88 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sensitivity" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="34"/>
+  <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="ConnexionButton"
+              virtualName="" explicitFocusOrder="0" pos="19 17 16 16" bgColOff="ff808080"
+              buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"/>
+  <LABEL name="new label" id="7aa7ef82c462108" memberName="connexionStatusLabel"
+         virtualName="" explicitFocusOrder="0" pos="39 13 96 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Connexion Status" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="34"/>
 </JUCER_COMPONENT>
