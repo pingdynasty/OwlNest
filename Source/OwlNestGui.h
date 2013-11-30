@@ -93,8 +93,6 @@ private:
     ScopedPointer<ComboBox> samplingBitsComboBox;
     ScopedPointer<Label> samplingBitsLabel;
     ScopedPointer<TextButton> ledButton;
-    ScopedPointer<ComboBox> activePatchComboBox;
-    ScopedPointer<Label> activePatchLabel;
     ScopedPointer<ComboBox> protocolComboBox;
     ScopedPointer<Label> protocolLabel;
     ScopedPointer<ToggleButton> masterButton;
@@ -104,6 +102,8 @@ private:
     ScopedPointer<ComboBox> patchSlotBComboBox;
     ScopedPointer<Label> patchSlotBLabel;
     ScopedPointer<TextButton> resetButton;
+    ScopedPointer<ComboBox> patchSlotBComboBox2;
+    ScopedPointer<Label> patchSlotBLabel2;
 
 
     //==============================================================================
