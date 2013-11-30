@@ -8,18 +8,20 @@
   ==============================================================================
 */
 
+#include <iomanip>
 #include "Settings.h"
+#include "sysex.h"
 #include "OpenWareMidiControl.h"
 
 OwlNestSettings::OwlNestSettings(AudioDeviceManager& dm, Value& updateGui):
 theDm(dm), theUpdateGui(updateGui)
 {
   memset(midiArray, 0, NB_CHANNELS);
-  theDm.addMidiInputCallback("OwlNest", this);
+  theDm.addMidiInputCallback(String::empty, this);
 }
 
 OwlNestSettings::~OwlNestSettings(){
-  theDm.removeMidiInputCallback("OwlNest", this);
+  theDm.removeMidiInputCallback(String::empty, this);
 }
 
 void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
@@ -40,11 +42,36 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
 	handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
 	hasChanged = true;
 	break;
+      case SYSEX_FIRMWARE_VERSION:
+	handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
+	break;
+      case SYSEX_DEVICE_ID:
+	int len = message.getSysExDataSize()-3;
+	uint8_t deviceId[len];
+	len = sysex_to_data((uint8_t*)(data+3), deviceId, len);
+	handleDeviceIdMessage(deviceId, len);
+	break;
       }
     }
   }
   if(hasChanged)
     theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
+}
+
+void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){
+#ifdef DEBUG
+  String str(name, size);
+  std::cout << "OWL: " << str << std::endl;
+#endif // DEBUG
+}
+
+void OwlNestSettings::handleDeviceIdMessage(uint8_t* data, int size){
+#ifdef DEBUG
+  std::cout << "Device ID: 0x";
+  for(int i=0; i<size; ++i)
+    std::cout << std::hex << std::setfill('0') << std::setw(2) << (int)data[i];
+  std::cout << std::endl;
+#endif // DEBUG
 }
 
 void OwlNestSettings::setCc(int cc,int value)

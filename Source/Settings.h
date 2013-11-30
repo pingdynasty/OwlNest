@@ -39,4 +39,6 @@ class OwlNestSettings: public MidiInputCallback {
                               const MidiMessage & 	message
                               )	;
   void handlePresetNameMessage(uint8_t index, const char* name, int size);
+  void handleFirmwareVersionMessage(const char* name, int size);
+  void handleDeviceIdMessage(uint8_t* data, int size);
 };
