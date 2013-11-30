@@ -84,7 +84,7 @@ DualPatchPanel::DualPatchPanel (StringArray patches, Value& patchChange,Value& o
     patchB->setText(stompBPatch.getValue());
 
 
-    StringArray modes = *new StringArray();
+    StringArray modes;
 
     modes.addTokens("Single Dual Series Parallel", FALSE);
 
