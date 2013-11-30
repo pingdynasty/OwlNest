@@ -5,6 +5,8 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
+      <FILE id="hGI8rn" name="sysex.c" compile="1" resource="0" file="Source/sysex.c"/>
+      <FILE id="XHp0f6" name="sysex.h" compile="0" resource="0" file="Source/sysex.h"/>
       <GROUP id="{DB625BC2-D638-342B-46F0-2C11332BEE69}" name="GUI">
         <FILE id="ALqvD7" name="PatchComponent.cpp" compile="1" resource="0"
               file="Source/PatchComponent.cpp"/>
@@ -106,7 +108,7 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="/opt/local/lib/libusb-1.0.a"
                extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
-               externalLibraries="" extraDefs="HAVE_NANOSLEEP=1">
+               externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "
@@ -131,7 +133,8 @@
       </MODULEPATHS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I ../../Source -I /usr/include/libusb-1.0"
-                extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 ">
+                extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 "
+                juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
@@ -153,7 +156,7 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2010 targetFolder="Builds/VisualStudio2010">
+    <VS2010 targetFolder="Builds/VisualStudio2010" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="OwlNest"/>
