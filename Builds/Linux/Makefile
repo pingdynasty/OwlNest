@@ -18,12 +18,12 @@ ifeq ($(CONFIG),Debug)
     TARGET_ARCH := -march=native
   endif
 
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 -I../../Libraries -I ../../Source -I /usr/include/libusb-1.0
   CXXFLAGS += $(CFLAGS)
   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt -lusb-1.0 -L/opt/local/lib
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   TARGET := OwlNest
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
@@ -38,18 +38,24 @@ ifeq ($(CONFIG),Release)
     TARGET_ARCH := -march=native
   endif
 
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os -I../../Libraries -I ../../Source -I /usr/include/libusb-1.0
   CXXFLAGS += $(CFLAGS)
   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt -lusb-1.0 -L/opt/local/lib
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   TARGET := OwlNest
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
 
 OBJECTS := \
-  $(OBJDIR)/sysex_4a684601.o \
+  $(OBJDIR)/dfu_ad6672eb.o \
+  $(OBJDIR)/dfu_file_6fdc65a.o \
+  $(OBJDIR)/dfu_load_118a6344.o \
+  $(OBJDIR)/dfu_util_21303760.o \
+  $(OBJDIR)/dfuse_edb4cf3d.o \
+  $(OBJDIR)/dfuse_mem_b06ad2d3.o \
+  $(OBJDIR)/quirks_144d50c7.o \
   $(OBJDIR)/PatchComponent_9fa7269e.o \
   $(OBJDIR)/StompGui_6de188b3.o \
   $(OBJDIR)/OwlNestGui_a87229a8.o \
@@ -60,20 +66,14 @@ OBJECTS := \
   $(OBJDIR)/PluginPatchProcessor_a02b7946.o \
   $(OBJDIR)/PluginEditor_94d4fb09.o \
   $(OBJDIR)/PluginProcessor_a059e380.o \
+  $(OBJDIR)/OwlNestSettings_f89e5d20.o \
+  $(OBJDIR)/sysex_4a684601.o \
   $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
   $(OBJDIR)/SampleBuffer_5a386a13.o \
   $(OBJDIR)/PatchRegistry_cb5b7186.o \
   $(OBJDIR)/PatchProcessor_b85b83b3.o \
   $(OBJDIR)/FirmwareLoader_f0d96237.o \
-  $(OBJDIR)/Settings_a85d2d2c.o \
   $(OBJDIR)/Main_90ebc5c2.o \
-  $(OBJDIR)/dfu_ad6672eb.o \
-  $(OBJDIR)/dfu_file_6fdc65a.o \
-  $(OBJDIR)/dfu_load_118a6344.o \
-  $(OBJDIR)/dfu_util_21303760.o \
-  $(OBJDIR)/dfuse_edb4cf3d.o \
-  $(OBJDIR)/dfuse_mem_b06ad2d3.o \
-  $(OBJDIR)/quirks_144d50c7.o \
   $(OBJDIR)/juce_audio_basics_2442e4ea.o \
   $(OBJDIR)/juce_audio_devices_a4c8a728.o \
   $(OBJDIR)/juce_audio_formats_d349f0c8.o \
@@ -105,9 +105,39 @@ strip:
 	@echo Stripping OwlNest
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
-$(OBJDIR)/sysex_4a684601.o: ../../Source/sysex.c
+$(OBJDIR)/dfu_ad6672eb.o: ../../Libraries/dfu-util/dfu.c
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling sysex.c"
+	@echo "Compiling dfu.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/dfu_file_6fdc65a.o: ../../Libraries/dfu-util/dfu_file.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling dfu_file.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/dfu_load_118a6344.o: ../../Libraries/dfu-util/dfu_load.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling dfu_load.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/dfu_util_21303760.o: ../../Libraries/dfu-util/dfu_util.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling dfu_util.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/dfuse_edb4cf3d.o: ../../Libraries/dfu-util/dfuse.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling dfuse.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/dfuse_mem_b06ad2d3.o: ../../Libraries/dfu-util/dfuse_mem.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling dfuse_mem.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/quirks_144d50c7.o: ../../Libraries/dfu-util/quirks.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling quirks.c"
 	@$(CC) $(CFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/PatchComponent_9fa7269e.o: ../../Source/PatchComponent.cpp
@@ -160,6 +190,16 @@ $(OBJDIR)/PluginProcessor_a059e380.o: ../../Source/PluginProcessor.cpp
 	@echo "Compiling PluginProcessor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/OwlNestSettings_f89e5d20.o: ../../Source/OwlNestSettings.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OwlNestSettings.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/sysex_4a684601.o: ../../Source/sysex.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling sysex.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/SeriesDeviceCallBacks_31482262.o: ../../Source/SeriesDeviceCallBacks.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling SeriesDeviceCallBacks.cpp"
@@ -185,50 +225,10 @@ $(OBJDIR)/FirmwareLoader_f0d96237.o: ../../Source/FirmwareLoader.cpp
 	@echo "Compiling FirmwareLoader.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/Settings_a85d2d2c.o: ../../Source/Settings.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling Settings.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Main.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/dfu_ad6672eb.o: ../../Libraries/dfu-util/dfu.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling dfu.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/dfu_file_6fdc65a.o: ../../Libraries/dfu-util/dfu_file.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling dfu_file.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/dfu_load_118a6344.o: ../../Libraries/dfu-util/dfu_load.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling dfu_load.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/dfu_util_21303760.o: ../../Libraries/dfu-util/dfu_util.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling dfu_util.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/dfuse_edb4cf3d.o: ../../Libraries/dfu-util/dfuse.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling dfuse.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/dfuse_mem_b06ad2d3.o: ../../Libraries/dfu-util/dfuse_mem.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling dfuse_mem.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/quirks_144d50c7.o: ../../Libraries/dfu-util/quirks.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling quirks.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/juce_audio_basics_2442e4ea.o: ../../JuceLibraryCode/modules/juce_audio_basics/juce_audio_basics.cpp
 	-@mkdir -p $(OBJDIR)

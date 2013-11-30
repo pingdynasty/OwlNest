@@ -5,8 +5,26 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
-      <FILE id="hGI8rn" name="sysex.c" compile="1" resource="0" file="Source/sysex.c"/>
-      <FILE id="XHp0f6" name="sysex.h" compile="0" resource="0" file="Source/sysex.h"/>
+      <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
+        <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">
+          <FILE id="vGsKMz" name="dfu.c" compile="1" resource="0" file="Libraries/dfu-util/dfu.c"/>
+          <FILE id="PzpQa1" name="dfu.h" compile="0" resource="0" file="Libraries/dfu-util/dfu.h"/>
+          <FILE id="BSzQC2" name="dfu_file.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_file.c"/>
+          <FILE id="oLOxkR" name="dfu_file.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_file.h"/>
+          <FILE id="PUHKJS" name="dfu_load.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_load.c"/>
+          <FILE id="My0es0" name="dfu_load.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_load.h"/>
+          <FILE id="JTwNEB" name="dfu_util.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_util.c"/>
+          <FILE id="ISAwQL" name="dfu_util.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_util.h"/>
+          <FILE id="cqHU5l" name="dfuse.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse.c"/>
+          <FILE id="vP1u6O" name="dfuse.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse.h"/>
+          <FILE id="Zj5KmQ" name="dfuse_mem.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse_mem.c"/>
+          <FILE id="gEU9As" name="dfuse_mem.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse_mem.h"/>
+          <FILE id="YWEpxW" name="portable.h" compile="0" resource="0" file="Libraries/dfu-util/portable.h"/>
+          <FILE id="PqFOUS" name="quirks.c" compile="1" resource="0" file="Libraries/dfu-util/quirks.c"/>
+          <FILE id="Pw0A3z" name="quirks.h" compile="0" resource="0" file="Libraries/dfu-util/quirks.h"/>
+          <FILE id="TZ2f7t" name="usb_dfu.h" compile="0" resource="0" file="Libraries/dfu-util/usb_dfu.h"/>
+        </GROUP>
+      </GROUP>
       <GROUP id="{DB625BC2-D638-342B-46F0-2C11332BEE69}" name="GUI">
         <FILE id="ALqvD7" name="PatchComponent.cpp" compile="1" resource="0"
               file="Source/PatchComponent.cpp"/>
@@ -44,6 +62,12 @@
         <FILE id="sEjXVv" name="PluginProcessor.h" compile="0" resource="0"
               file="Source/PluginProcessor.h"/>
       </GROUP>
+      <FILE id="mV7fGq" name="OwlNestSettings.cpp" compile="1" resource="0"
+            file="Source/OwlNestSettings.cpp"/>
+      <FILE id="IDIyJd" name="OwlNestSettings.h" compile="0" resource="0"
+            file="Source/OwlNestSettings.h"/>
+      <FILE id="hGI8rn" name="sysex.c" compile="1" resource="0" file="Source/sysex.c"/>
+      <FILE id="XHp0f6" name="sysex.h" compile="0" resource="0" file="Source/sysex.h"/>
       <FILE id="pL8ffC" name="Enums.h" compile="0" resource="0" file="Source/Enums.h"/>
       <FILE id="mgH8Dv" name="SeriesDeviceCallBacks.cpp" compile="1" resource="0"
             file="Source/SeriesDeviceCallBacks.cpp"/>
@@ -66,29 +90,7 @@
             file="Source/FirmwareLoader.h"/>
       <FILE id="fOoNsr" name="OpenWareMidiControl.h" compile="0" resource="0"
             file="Source/OpenWareMidiControl.h"/>
-      <FILE id="nHRZpa" name="Settings.h" compile="0" resource="0" file="Source/Settings.h"/>
-      <FILE id="si1Oew" name="Settings.cpp" compile="1" resource="0" file="Source/Settings.cpp"/>
       <FILE id="mpRW8n" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
-      <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
-        <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">
-          <FILE id="vGsKMz" name="dfu.c" compile="1" resource="0" file="Libraries/dfu-util/dfu.c"/>
-          <FILE id="PzpQa1" name="dfu.h" compile="0" resource="0" file="Libraries/dfu-util/dfu.h"/>
-          <FILE id="BSzQC2" name="dfu_file.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_file.c"/>
-          <FILE id="oLOxkR" name="dfu_file.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_file.h"/>
-          <FILE id="PUHKJS" name="dfu_load.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_load.c"/>
-          <FILE id="My0es0" name="dfu_load.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_load.h"/>
-          <FILE id="JTwNEB" name="dfu_util.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_util.c"/>
-          <FILE id="ISAwQL" name="dfu_util.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_util.h"/>
-          <FILE id="cqHU5l" name="dfuse.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse.c"/>
-          <FILE id="vP1u6O" name="dfuse.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse.h"/>
-          <FILE id="Zj5KmQ" name="dfuse_mem.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse_mem.c"/>
-          <FILE id="gEU9As" name="dfuse_mem.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse_mem.h"/>
-          <FILE id="YWEpxW" name="portable.h" compile="0" resource="0" file="Libraries/dfu-util/portable.h"/>
-          <FILE id="PqFOUS" name="quirks.c" compile="1" resource="0" file="Libraries/dfu-util/quirks.c"/>
-          <FILE id="Pw0A3z" name="quirks.h" compile="0" resource="0" file="Libraries/dfu-util/quirks.h"/>
-          <FILE id="TZ2f7t" name="usb_dfu.h" compile="0" resource="0" file="Libraries/dfu-util/usb_dfu.h"/>
-        </GROUP>
-      </GROUP>
     </GROUP>
   </MAINGROUP>
   <MODULES>
@@ -108,7 +110,7 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="/opt/local/lib/libusb-1.0.a"
                extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
-               externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" juceFolder="modules">
+               externalLibraries="" extraDefs="HAVE_NANOSLEEP=1">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "
@@ -133,8 +135,7 @@
       </MODULEPATHS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I ../../Source -I /usr/include/libusb-1.0"
-                extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 "
-                juceFolder="modules">
+                extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 ">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
@@ -156,7 +157,7 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2010 targetFolder="Builds/VisualStudio2010" juceFolder="modules">
+    <VS2010 targetFolder="Builds/VisualStudio2010">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="OwlNest"/>
@@ -164,12 +165,18 @@
                        isDebug="0" optimisation="2" targetName="OwlNest"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_audio_basics"/>
-        <MODULEPATH id="juce_audio_formats"/>
-        <MODULEPATH id="juce_audio_utils"/>
-        <MODULEPATH id="juce_events"/>
-        <MODULEPATH id="juce_gui_audio"/>
-        <MODULEPATH id="juce_gui_extra"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </VS2010>
   </EXPORTFORMATS>

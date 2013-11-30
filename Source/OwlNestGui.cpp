@@ -469,13 +469,13 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_loadButton] -- add your button handler code here..
 	setStatus("Loading settings...");
-        theSettings.LoadFromOwl();
+        theSettings.loadFromOwl();
         //[/UserButtonCode_loadButton]
     }
     else if (buttonThatWasClicked == saveButton)
     {
         //[UserButtonCode_saveButton] -- add your button handler code here..
-        theSettings.SaveToOwl();
+        theSettings.saveToOwl();
 	setStatus("Saved settings to OWL");
         //[/UserButtonCode_saveButton]
     }
