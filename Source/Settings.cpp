@@ -15,7 +15,11 @@ OwlNestSettings::OwlNestSettings(AudioDeviceManager& dm, Value& updateGui):
 theDm(dm), theUpdateGui(updateGui)
 {
   memset(midiArray, 0, NB_CHANNELS);
-  theDm.addMidiInputCallback("", this);
+  theDm.addMidiInputCallback("OwlNest", this);
+}
+
+OwlNestSettings::~OwlNestSettings(){
+  theDm.removeMidiInputCallback("OwlNest", this);
 }
 
 void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
@@ -41,9 +45,6 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
   }
   if(hasChanged)
     theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
-}
-
-OwlNestSettings::~OwlNestSettings(){
 }
 
 void OwlNestSettings::setCc(int cc,int value)
