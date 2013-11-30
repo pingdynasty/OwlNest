@@ -31,8 +31,8 @@
 
 //==============================================================================
 StompGui::StompGui (StompBoxAudioProcessor* ptr)
-    : Component ("StompGui")
 {
+    setName ("StompGui");
     addAndMakeVisible (slider4 = new Slider ("new slider"));
     slider4->setRange (0, 1, 0);
     slider4->setSliderStyle (Slider::RotaryVerticalDrag);
