@@ -49,19 +49,23 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
-  $(OBJDIR)/PatchMode_d85501ec.o \
-  $(OBJDIR)/DualPatchPanel_2c59bfc1.o \
-  $(OBJDIR)/TransportPanel_18909a64.o \
-  $(OBJDIR)/PluginPatchProcessor_a02b7946.o \
-  $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
-  $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
   $(OBJDIR)/PatchComponent_9fa7269e.o \
   $(OBJDIR)/StompGui_6de188b3.o \
-  $(OBJDIR)/SampleBuffer_5a386a13.o \
+  $(OBJDIR)/OwlNestGui_a87229a8.o \
+  $(OBJDIR)/DualPatchPanel_2c59bfc1.o \
+  $(OBJDIR)/TransportPanel_18909a64.o \
+  $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
+  $(OBJDIR)/PatchMode_d85501ec.o \
+  $(OBJDIR)/PluginPatchProcessor_a02b7946.o \
   $(OBJDIR)/PluginEditor_94d4fb09.o \
+  $(OBJDIR)/PluginProcessor_a059e380.o \
+  $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
+  $(OBJDIR)/SampleBuffer_5a386a13.o \
   $(OBJDIR)/PatchRegistry_cb5b7186.o \
   $(OBJDIR)/PatchProcessor_b85b83b3.o \
-  $(OBJDIR)/PluginProcessor_a059e380.o \
+  $(OBJDIR)/FirmwareLoader_f0d96237.o \
+  $(OBJDIR)/Settings_a85d2d2c.o \
+  $(OBJDIR)/Main_90ebc5c2.o \
   $(OBJDIR)/dfu_ad6672eb.o \
   $(OBJDIR)/dfu_file_6fdc65a.o \
   $(OBJDIR)/dfu_load_118a6344.o \
@@ -69,10 +73,6 @@ OBJECTS := \
   $(OBJDIR)/dfuse_edb4cf3d.o \
   $(OBJDIR)/dfuse_mem_b06ad2d3.o \
   $(OBJDIR)/quirks_144d50c7.o \
-  $(OBJDIR)/FirmwareLoader_f0d96237.o \
-  $(OBJDIR)/Settings_a85d2d2c.o \
-  $(OBJDIR)/OwlNestGui_a87229a8.o \
-  $(OBJDIR)/Main_90ebc5c2.o \
   $(OBJDIR)/juce_audio_basics_2442e4ea.o \
   $(OBJDIR)/juce_audio_devices_a4c8a728.o \
   $(OBJDIR)/juce_audio_formats_d349f0c8.o \
@@ -104,9 +104,19 @@ strip:
 	@echo Stripping OwlNest
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
-$(OBJDIR)/PatchMode_d85501ec.o: ../../Source/PatchMode.cpp
+$(OBJDIR)/PatchComponent_9fa7269e.o: ../../Source/PatchComponent.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PatchMode.cpp"
+	@echo "Compiling PatchComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/StompGui_6de188b3.o: ../../Source/StompGui.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling StompGui.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OwlNestGui_a87229a8.o: ../../Source/OwlNestGui.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OwlNestGui.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/DualPatchPanel_2c59bfc1.o: ../../Source/DualPatchPanel.cpp
@@ -119,14 +129,29 @@ $(OBJDIR)/TransportPanel_18909a64.o: ../../Source/TransportPanel.cpp
 	@echo "Compiling TransportPanel.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/ApplicationSettingsWindow_2723744.o: ../../Source/ApplicationSettingsWindow.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ApplicationSettingsWindow.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PatchMode_d85501ec.o: ../../Source/PatchMode.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PatchMode.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/PluginPatchProcessor_a02b7946.o: ../../Source/PluginPatchProcessor.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling PluginPatchProcessor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ApplicationSettingsWindow_2723744.o: ../../Source/ApplicationSettingsWindow.cpp
+$(OBJDIR)/PluginEditor_94d4fb09.o: ../../Source/PluginEditor.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling ApplicationSettingsWindow.cpp"
+	@echo "Compiling PluginEditor.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PluginProcessor_a059e380.o: ../../Source/PluginProcessor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PluginProcessor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/SeriesDeviceCallBacks_31482262.o: ../../Source/SeriesDeviceCallBacks.cpp
@@ -134,24 +159,9 @@ $(OBJDIR)/SeriesDeviceCallBacks_31482262.o: ../../Source/SeriesDeviceCallBacks.c
 	@echo "Compiling SeriesDeviceCallBacks.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/PatchComponent_9fa7269e.o: ../../Source/PatchComponent.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PatchComponent.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/StompGui_6de188b3.o: ../../Source/StompGui.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling StompGui.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/SampleBuffer_5a386a13.o: ../../Source/SampleBuffer.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling SampleBuffer.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PluginEditor_94d4fb09.o: ../../Source/PluginEditor.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PluginEditor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/PatchRegistry_cb5b7186.o: ../../Source/PatchRegistry.cpp
@@ -164,9 +174,19 @@ $(OBJDIR)/PatchProcessor_b85b83b3.o: ../../Source/PatchProcessor.cpp
 	@echo "Compiling PatchProcessor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/PluginProcessor_a059e380.o: ../../Source/PluginProcessor.cpp
+$(OBJDIR)/FirmwareLoader_f0d96237.o: ../../Source/FirmwareLoader.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PluginProcessor.cpp"
+	@echo "Compiling FirmwareLoader.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Settings_a85d2d2c.o: ../../Source/Settings.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Settings.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Main.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/dfu_ad6672eb.o: ../../Libraries/dfu-util/dfu.c
@@ -203,26 +223,6 @@ $(OBJDIR)/quirks_144d50c7.o: ../../Libraries/dfu-util/quirks.c
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling quirks.c"
 	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/FirmwareLoader_f0d96237.o: ../../Source/FirmwareLoader.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling FirmwareLoader.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Settings_a85d2d2c.o: ../../Source/Settings.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling Settings.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/OwlNestGui_a87229a8.o: ../../Source/OwlNestGui.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling OwlNestGui.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling Main.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/juce_audio_basics_2442e4ea.o: ../../JuceLibraryCode/modules/juce_audio_basics/juce_audio_basics.cpp
 	-@mkdir -p $(OBJDIR)
