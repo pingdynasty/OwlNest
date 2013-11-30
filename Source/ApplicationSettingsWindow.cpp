@@ -29,18 +29,19 @@
 //==============================================================================
 ApplicationSettingsWindow::ApplicationSettingsWindow (AudioDeviceManager& deviceManager)
 {
+    
     addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,2,0,2,true,true,false,false));
     audioSelector->setName ("new component");
-
+    
     //[UserPreSize]
 
     //[/UserPreSize]
 
     setSize (600, 400);
 
-
     //[Constructor] You can add your own custom stuff here..
-
+    deviceManager.setDefaultMidiOutput("OWL FS");
+    deviceManager.setMidiInputEnabled("OWL FS", 1);
     //[/Constructor]
 }
 
