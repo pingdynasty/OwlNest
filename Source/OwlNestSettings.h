@@ -30,6 +30,8 @@ class OwlNestSettings: public MidiInputCallback {
     StringArray& getPresetNames(){
       return presets;
     }
+    uint32 getLastMidiMessageTime();
+    
     private:
     int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
     Value& theUpdateGui;
@@ -38,7 +40,8 @@ class OwlNestSettings: public MidiInputCallback {
     void handleIncomingMidiMessage(	MidiInput * 	source,
                               const MidiMessage & 	message
                               )	;
-  void handlePresetNameMessage(uint8_t index, const char* name, int size);
-  void handleFirmwareVersionMessage(const char* name, int size);
-  void handleDeviceIdMessage(uint8_t* data, int size);
+    void handlePresetNameMessage(uint8_t index, const char* name, int size);
+    void handleFirmwareVersionMessage(const char* name, int size);
+    void handleDeviceIdMessage(uint8_t* data, int size);
+    uint32 lastMidiMessageTime;
 };

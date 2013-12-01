@@ -275,7 +275,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     updateGui.addListener(this);
     setVisible(true); // set the window visible
     setStatus("ready");
-    timerInterval=5000;
+    timerInterval=2000;
     startTimer(timerInterval);
 
     //[/Constructor]
@@ -691,10 +691,15 @@ void OwlNestGui::updateFirmware(){
 
 void OwlNestGui::timerCallback()
 {
-    theSettings.setCc(REQUEST_SETTINGS,30); // ask to send a Midi Message to check connection
-    
-    
-       
+    if ((Time::getApproximateMillisecondCounter()-theSettings.getLastMidiMessageTime())>1.5*timerInterval)
+    {
+        ConnexionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0xff, 0, 0)); // red
+    }
+    else
+    {
+        ConnexionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0, 0xff, 0)); // green
+    }
+    theSettings.setCc(REQUEST_SETTINGS,LED); // ask to send a Midi Message to check connection
 }
 //[/MiscUserCode]
 

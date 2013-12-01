@@ -18,6 +18,7 @@ theDm(dm), theUpdateGui(updateGui)
 {
   memset(midiArray, 0, NB_CHANNELS);
   theDm.addMidiInputCallback(String::empty, this);
+  lastMidiMessageTime=0;
 }
 
 OwlNestSettings::~OwlNestSettings(){
@@ -30,32 +31,42 @@ void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, i
 
 void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message){
   bool hasChanged = false;
-  if(message.isController()){
+  if(message.isController())
+  {
     midiArray[message.getControllerNumber()]=message.getControllerValue();
     hasChanged = true;
-  }else if(message.isSysEx() && message.getSysExDataSize() > 2){
-    const uint8 *data = message.getSysExData();
-    if(data[0] == MIDI_SYSEX_MANUFACTURER &&
-       data[1] == MIDI_SYSEX_DEVICE){
-      switch(data[2]){
-      case SYSEX_PRESET_NAME_COMMAND:
-	handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
-	hasChanged = true;
-	break;
-      case SYSEX_FIRMWARE_VERSION:
-	handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
-	break;
-      case SYSEX_DEVICE_ID:
-	int len = message.getSysExDataSize()-3;
-	uint8_t deviceId[len];
-	len = sysex_to_data((uint8_t*)(data+3), deviceId, len);
-	handleDeviceIdMessage(deviceId, len);
-	break;
+    // to check connexion status:
+      if (message.getControllerNumber()==LED) {
+          lastMidiMessageTime=Time::getApproximateMillisecondCounter();
       }
+  }
+  else if(message.isSysEx() && message.getSysExDataSize() > 2)
+  {
+    const uint8 *data = message.getSysExData();
+    if(data[0] == MIDI_SYSEX_MANUFACTURER && data[1] == MIDI_SYSEX_DEVICE)
+    {
+      switch(data[2])
+        {
+            case SYSEX_PRESET_NAME_COMMAND:
+                handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
+                hasChanged = true;
+                break;
+            case SYSEX_FIRMWARE_VERSION:
+                handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
+                break;
+            case SYSEX_DEVICE_ID:
+                int len = message.getSysExDataSize()-3;
+                uint8_t deviceId[len];
+                len = sysex_to_data((uint8_t*)(data+3), deviceId, len);
+                handleDeviceIdMessage(deviceId, len);
+                break;
+        }
     }
   }
   if(hasChanged)
+  {
     theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
+  }
 }
 
 void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){
@@ -106,4 +117,8 @@ void OwlNestSettings::loadFromOwl(){
     presets.clear();
     theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,REQUEST_SETTINGS,127)); // Will provoke incoming midi messages
   }
+}
+
+uint32 OwlNestSettings::getLastMidiMessageTime(){
+    return lastMidiMessageTime;
 }

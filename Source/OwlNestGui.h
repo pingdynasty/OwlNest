@@ -70,7 +70,7 @@ private:
     OwlNestSettings& theSettings;
     AudioDeviceManager& theDm;
     ScopedPointer<AudioDeviceSelectorComponent> audioSelector;
-    int timerInterval;
+    uint32 timerInterval;
     //[/UserVariables]
 
     //==============================================================================
