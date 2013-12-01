@@ -20,7 +20,7 @@
 //[Headers] You can add your own extra header files here...
 #include "FirmwareLoader.h"
 #include "OwlNestGui.h"
-
+#include "Enums.h"
 
 //[/Headers]
 
@@ -277,10 +277,11 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     timerInterval=2000;
     startTimer(timerInterval);
 
-    sensitivityComboBox->addItem("Low", 1);
-    sensitivityComboBox->addItem("Medium", 2);
-    sensitivityComboBox->addItem("High", 3);
-
+    sensitivityComboBox->addItem("Low",LOW);
+    sensitivityComboBox->addItem("Medium", MEDIUM);
+    sensitivityComboBox->addItem("High", HIGH);
+    sensitivityComboBox->addItem("Custom",CUSTOM);
+    sensitivityComboBox->setItemEnabled(CUSTOM, 0);
     //[/Constructor]
 }
 
@@ -455,6 +456,28 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == sensitivityComboBox)
     {
         //[UserComboBoxCode_sensitivityComboBox] -- add your combo box handling code here..
+        switch (sensitivityComboBox->getSelectedId()) {
+            case LOW:
+                leftGainSlider->setValue(0);
+                rightGainSlider->setValue(0);
+                leftOutGainSlider->setValue(0);
+                rightOutGainSlider->setValue(0);
+                break;
+            case MEDIUM:
+                leftGainSlider->setValue(3);
+                rightGainSlider->setValue(3);
+                leftOutGainSlider->setValue(-3);
+                rightOutGainSlider->setValue(-3);
+                break;
+            case HIGH:
+                leftGainSlider->setValue(6);
+                rightGainSlider->setValue(6);
+                leftOutGainSlider->setValue(-6);
+                rightOutGainSlider->setValue(-6);
+                break;
+            default:
+                break;
+        }
         //[/UserComboBoxCode_sensitivityComboBox]
     }
 
@@ -578,6 +601,7 @@ void OwlNestGui::sliderValueChanged (Slider* sliderThatWasMoved)
         theSettings.setCc(RIGHT_OUTPUT_GAIN,outGainDbToMidi(rightOutGainSlider->getValue()));
         //[/UserSliderCode_rightOutGainSlider]
     }
+    updateSensivity();
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -642,6 +666,7 @@ void OwlNestGui::settingsChanged() {
     rightGainSlider->setValue(midiToInGainDb(theSettings.getCc(RIGHT_INPUT_GAIN)),dontSendNotification);
     leftOutGainSlider->setValue(midiToOutGainDb(theSettings.getCc(LEFT_OUTPUT_GAIN)), dontSendNotification);
     rightOutGainSlider->setValue(midiToOutGainDb(theSettings.getCc(RIGHT_OUTPUT_GAIN)), dontSendNotification);
+    updateSensivity();
 
     // Mute
     if(theSettings.getCc(LEFT_INPUT_MUTE) == 127)
@@ -673,6 +698,25 @@ void OwlNestGui::settingsChanged() {
     else
       masterButton->setToggleState(true, dontSendNotification);
     setStatus("Loaded settings from OWL");
+}
+
+void OwlNestGui::updateSensivity(){
+    float inL = leftGainSlider->getValue();
+    float inR = rightGainSlider->getValue();
+    float outL = leftOutGainSlider->getValue();
+    float outR = rightOutGainSlider->getValue();
+    if (inL == 0 && inR == 0 && outL == 0 && outR == 0) {
+        sensitivityComboBox->setSelectedId(LOW, dontSendNotification);
+    }
+    else if (inL == 6 && inR == 6 && outL == -6 && outR == -6){
+        sensitivityComboBox->setSelectedId(HIGH, dontSendNotification);
+    }
+    else if (inL == 3 && inR == 3 && outL == -3 && outR == -3){
+        sensitivityComboBox->setSelectedId(MEDIUM, dontSendNotification);
+    }
+    else {
+        sensitivityComboBox->setSelectedId(CUSTOM, dontSendNotification);
+    }
 }
 
 int OwlNestGui::inGainDbToMidi(float gain){

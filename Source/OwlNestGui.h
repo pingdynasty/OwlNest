@@ -59,6 +59,7 @@ public:
     int outGainDbToMidi( float gain);
     float midiToInGainDb (int midiValue);
     float midiToOutGainDb (int midiValue);
+    void updateSensivity();
     //[/UserMethods]
 
     void paint (Graphics& g);
