@@ -5,6 +5,9 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
+      <GROUP id="{8F22A420-0146-8841-2169-A6FBA0B7BD49}" name="icons">
+        <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
+      </GROUP>
       <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
         <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">
           <FILE id="vGsKMz" name="dfu.c" compile="1" resource="0" file="Libraries/dfu-util/dfu.c"/>
@@ -110,7 +113,8 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="/opt/local/lib/libusb-1.0.a"
                extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
-               externalLibraries="" extraDefs="HAVE_NANOSLEEP=1">
+               externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" smallIcon="dMq0Lz"
+               bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "
@@ -135,7 +139,8 @@
       </MODULEPATHS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I ../../Source -I /usr/include/libusb-1.0"
-                extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 ">
+                extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 "
+                smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
@@ -157,7 +162,7 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2010 targetFolder="Builds/VisualStudio2010">
+    <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="OwlNest"/>
