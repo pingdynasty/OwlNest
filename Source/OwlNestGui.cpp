@@ -280,8 +280,32 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     sensitivityComboBox->addItem("Low",LOW);
     sensitivityComboBox->addItem("Medium", MEDIUM);
     sensitivityComboBox->addItem("High", HIGH);
-    sensitivityComboBox->addItem("Custom",CUSTOM);
-    sensitivityComboBox->setItemEnabled(CUSTOM, 0);
+    if (!HIDE_LOW_LEVEL_ITEMS){
+        sensitivityComboBox->addItem("Custom",CUSTOM);
+        sensitivityComboBox->setItemEnabled(CUSTOM, 0);}
+    if (HIDE_LOW_LEVEL_ITEMS){
+        leftGainSlider->setVisible(0);
+        leftGainLabel->setVisible(0);
+        leftInputMuteButton->setVisible(0);
+        leftOutGainSlider->setVisible(0);
+        leftOutGainLabel->setVisible(0);
+        leftOutputMuteButton->setVisible(0);
+        rightGainSlider->setVisible(0);
+        rightGainLabel->setVisible(0);
+        rightInputMuteButton->setVisible(0);
+        rightOutGainSlider->setVisible(0);
+        rightOutGainLabel->setVisible(0);
+        rightOutputMuteButton->setVisible(0);
+        bypassButton->setVisible(0);
+        swapLRButton->setVisible(0);
+        samplingRateComboBox->setVisible(0);
+        samplingRateLabel->setVisible(0);
+        samplingBitsComboBox->setVisible(0);
+        samplingBitsLabel->setVisible(0);
+        protocolLabel->setVisible(0);
+        protocolComboBox->setVisible(0);
+        masterButton->setVisible(0);
+    }
     //[/Constructor]
 }
 
