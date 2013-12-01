@@ -33,9 +33,27 @@ enum OpenWareMidiControl {
 				  84-127 = red */
   ACTIVE_SLOT            = 31, /* currently active slot: 0 for green slot, 127 for red */
 
-  LEFT_INPUT_GAIN        = 32, /* left channel input gain, -34.5dB to +12dB (92 = 0dB) */
+  LEFT_INPUT_GAIN        = 32, /* left channel input gain, -34.5dB to +12dB (92 = 0dB), 32 steps of 1.5 dB 
+                                0-3 = -34.5 dB
+                                4-7 = -33 dB
+                                ...
+                                92-95 = 0 dB
+                                96-99 = 1.5 dB
+                                100-103 = 3 dB
+                                104-107 = 4.5 dB
+                                108-111 = 6 dB
+                                124-127 = + 12 dB
+                                */
   RIGHT_INPUT_GAIN       = 33,
-  LEFT_OUTPUT_GAIN       = 34, /* left channel output gain, -73dB to +6dB (121 = 0dB) */
+  LEFT_OUTPUT_GAIN       = 34, /* left channel output gain, -73dB to +6dB (121 = 0dB),  
+                                0-47 = MUTE
+                                48 = -73 dB
+                                49 = -72 dB
+                                ...
+                                121 = 0 dB
+                                ...
+                                127 = +6 dB
+                                */
   RIGHT_OUTPUT_GAIN      = 35,
   LEFT_INPUT_MUTE        = 36, /* mute left input (127=muted) */
   RIGHT_INPUT_MUTE       = 37,

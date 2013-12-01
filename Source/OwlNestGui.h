@@ -55,6 +55,10 @@ public:
     void updateFirmware();
     void setStatus(const String& msg);
     void timerCallback();
+    int inGainDbToMidi( float gain);
+    int outGainDbToMidi( float gain);
+    float midiToInGainDb (int midiValue);
+    float midiToOutGainDb (int midiValue);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -105,7 +109,7 @@ private:
     ScopedPointer<ComboBox> patchSlotBComboBox;
     ScopedPointer<Label> patchSlotBLabel;
     ScopedPointer<TextButton> resetButton;
-    ScopedPointer<ComboBox> patchSlotBComboBox2;
+    ScopedPointer<ComboBox> sensitivityComboBox;
     ScopedPointer<Label> patchSlotBLabel2;
     ScopedPointer<TextButton> ConnexionButton;
     ScopedPointer<Label> connexionStatusLabel;
