@@ -249,17 +249,17 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotBLabel2->setColour (TextEditor::textColourId, Colours::black);
     patchSlotBLabel2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (ConnexionButton = new TextButton ("new button"));
-    ConnexionButton->setButtonText (String::empty);
-    ConnexionButton->setColour (TextButton::buttonColourId, Colours::grey);
+    addAndMakeVisible (connectionButton = new TextButton ("new button"));
+    connectionButton->setButtonText (String::empty);
+    connectionButton->setColour (TextButton::buttonColourId, Colours::grey);
 
-    addAndMakeVisible (connexionStatusLabel = new Label ("new label",
-                                                         "Connexion Status"));
-    connexionStatusLabel->setFont (Font (15.00f, Font::plain));
-    connexionStatusLabel->setJustificationType (Justification::centredRight);
-    connexionStatusLabel->setEditable (false, false, false);
-    connexionStatusLabel->setColour (TextEditor::textColourId, Colours::black);
-    connexionStatusLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    addAndMakeVisible (connectionStatusLabel = new Label ("new label",
+                                                          "Connection Status"));
+    connectionStatusLabel->setFont (Font (15.00f, Font::plain));
+    connectionStatusLabel->setJustificationType (Justification::centredRight);
+    connectionStatusLabel->setEditable (false, false, false);
+    connectionStatusLabel->setColour (TextEditor::textColourId, Colours::black);
+    connectionStatusLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
 
     //[UserPreSize]
@@ -347,8 +347,8 @@ OwlNestGui::~OwlNestGui()
     resetButton = nullptr;
     sensitivityComboBox = nullptr;
     patchSlotBLabel2 = nullptr;
-    ConnexionButton = nullptr;
-    connexionStatusLabel = nullptr;
+    connectionButton = nullptr;
+    connectionStatusLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -403,8 +403,8 @@ void OwlNestGui::resized()
     resetButton->setBounds (616, 16, 150, 24);
     sensitivityComboBox->setBounds (488, 244, 150, 24);
     patchSlotBLabel2->setBounds (488, 220, 144, 24);
-    ConnexionButton->setBounds (19, 17, 16, 16);
-    connexionStatusLabel->setBounds (39, 13, 96, 24);
+    connectionButton->setBounds (19, 17, 16, 16);
+    connectionStatusLabel->setBounds (39, 13, 96, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -625,7 +625,6 @@ void OwlNestGui::sliderValueChanged (Slider* sliderThatWasMoved)
         theSettings.setCc(RIGHT_OUTPUT_GAIN,outGainDbToMidi(rightOutGainSlider->getValue()));
         //[/UserSliderCode_rightOutGainSlider]
     }
-    updateSensivity();
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -785,11 +784,11 @@ void OwlNestGui::timerCallback()
 {
     if ((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())>1.5*timerInterval)
     {
-        ConnexionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0xff, 0, 0)); // red
+        connectionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0xff, 0, 0)); // red
     }
     else
     {
-        ConnexionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0, 0xff, 0)); // green
+        connectionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0, 0xff, 0)); // green
     }
     theSettings.setCc(REQUEST_SETTINGS,LED); // ask to send a Midi Message to check connection
 }
@@ -939,12 +938,12 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="Input Sensitivity" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="36"/>
-  <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="ConnexionButton"
+  <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="connectionButton"
               virtualName="" explicitFocusOrder="0" pos="19 17 16 16" bgColOff="ff808080"
               buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"/>
-  <LABEL name="new label" id="7aa7ef82c462108" memberName="connexionStatusLabel"
+  <LABEL name="new label" id="7aa7ef82c462108" memberName="connectionStatusLabel"
          virtualName="" explicitFocusOrder="0" pos="39 13 96 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Connexion Status" editableSingleClick="0"
+         edBkgCol="0" labelText="Connection Status" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="34"/>
 </JUCER_COMPONENT>

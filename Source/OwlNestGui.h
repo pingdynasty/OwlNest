@@ -114,8 +114,8 @@ private:
     ScopedPointer<TextButton> resetButton;
     ScopedPointer<ComboBox> sensitivityComboBox;
     ScopedPointer<Label> patchSlotBLabel2;
-    ScopedPointer<TextButton> ConnexionButton;
-    ScopedPointer<Label> connexionStatusLabel;
+    ScopedPointer<TextButton> connectionButton;
+    ScopedPointer<Label> connectionStatusLabel;
 
 
     //==============================================================================
