@@ -470,11 +470,13 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == patchSlotAComboBox)
     {
         //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
+        theSettings.setCc(PATCH_SLOT_GREEN, comboBoxThatHasChanged->getSelectedId()-1);
         //[/UserComboBoxCode_patchSlotAComboBox]
     }
     else if (comboBoxThatHasChanged == patchSlotBComboBox)
     {
         //[UserComboBoxCode_patchSlotBComboBox] -- add your combo box handling code here..
+        theSettings.setCc(PATCH_SLOT_RED, comboBoxThatHasChanged->getSelectedId()-1);
         //[/UserComboBoxCode_patchSlotBComboBox]
     }
     else if (comboBoxThatHasChanged == sensitivityComboBox)
