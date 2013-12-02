@@ -520,8 +520,9 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     if (buttonThatWasClicked == loadButton)
     {
         //[UserButtonCode_loadButton] -- add your button handler code here..
-	setStatus("Loading settings...");
+        setStatus("Loading settings...");
         theSettings.loadFromOwl();
+        setStatus("Settings loaded");
         //[/UserButtonCode_loadButton]
     }
     else if (buttonThatWasClicked == saveButton)
@@ -534,7 +535,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == dfuButton)
     {
         //[UserButtonCode_dfuButton] -- add your button handler code here..
-      setStatus("Updating firmware");
+      setStatus("Updating firmware...");
       updateFirmware();
         //[/UserButtonCode_dfuButton]
     }
@@ -590,7 +591,8 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == resetButton)
     {
         //[UserButtonCode_resetButton] -- add your button handler code here..
-      theSettings.setCc(FACTORY_RESET, resetButton->getToggleState() ? 127 : 0);
+        theSettings.setCc(FACTORY_RESET, 127);
+        setStatus("factory reset");
         //[/UserButtonCode_resetButton]
     }
 
