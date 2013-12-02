@@ -10,7 +10,8 @@ enum OpenWareMidiSysexCommand {
   SYSEX_PRESET_NAME_COMMAND     = 0x01,
   SYSEX_DFU_COMMAND             = 0x7e,
   SYSEX_FIRMWARE_VERSION        = 0x20,
-  SYSEX_DEVICE_ID               = 0x21
+  SYSEX_DEVICE_ID               = 0x21,
+  SYSEX_SELFTEST                = 0x22
 };
 
 /*

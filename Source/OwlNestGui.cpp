@@ -783,7 +783,7 @@ void OwlNestGui::updateFirmware(){
 
 void OwlNestGui::timerCallback()
 {
-    if ((Time::getApproximateMillisecondCounter()-theSettings.getLastMidiMessageTime())>1.5*timerInterval)
+    if ((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())>1.5*timerInterval)
     {
         ConnexionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0xff, 0, 0)); // red
     }

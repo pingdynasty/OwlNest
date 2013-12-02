@@ -30,43 +30,40 @@ void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, i
 }
 
 void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message){
+  lastMidiMessageTime = Time::currentTimeMillis();
   bool hasChanged = false;
-  if(message.isController())
-  {
+  if(message.isController()){
     midiArray[message.getControllerNumber()]=message.getControllerValue();
     hasChanged = true;
-    // to check connexion status:
-      if (message.getControllerNumber()==LED) {
-          lastMidiMessageTime=Time::getApproximateMillisecondCounter();
-      }
-  }
-  else if(message.isSysEx() && message.getSysExDataSize() > 2)
-  {
+  }else if(message.isSysEx() && message.getSysExDataSize() > 2){
     const uint8 *data = message.getSysExData();
-    if(data[0] == MIDI_SYSEX_MANUFACTURER && data[1] == MIDI_SYSEX_DEVICE)
-    {
-      switch(data[2])
-        {
-            case SYSEX_PRESET_NAME_COMMAND:
-                handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
-                hasChanged = true;
-                break;
-            case SYSEX_FIRMWARE_VERSION:
-                handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
-                break;
-            case SYSEX_DEVICE_ID:
-                int len = message.getSysExDataSize()-3;
-                uint8_t deviceId[len];
-                len = sysex_to_data((uint8_t*)(data+3), deviceId, len);
-                handleDeviceIdMessage(deviceId, len);
-                break;
-        }
+    if(data[0] == MIDI_SYSEX_MANUFACTURER && data[1] == MIDI_SYSEX_DEVICE){
+      switch(data[2]){
+      case SYSEX_PRESET_NAME_COMMAND:{
+	handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
+	hasChanged = true;
+	break;
+      }
+      case SYSEX_FIRMWARE_VERSION:{
+	handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
+	break;
+      }
+      case SYSEX_DEVICE_ID: {
+	int len = message.getSysExDataSize()-3;
+	uint8_t deviceId[len];
+	len = sysex_to_data((uint8_t*)(data+3), deviceId, len);
+	handleDeviceIdMessage(deviceId, len);
+	break;
+      }
+      case SYSEX_SELFTEST:{
+	handleSelfTestMessage(data[3]);
+	break;
+      }
+      }
     }
   }
   if(hasChanged)
-  {
     theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
-  }
 }
 
 void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){
@@ -84,6 +81,18 @@ void OwlNestSettings::handleDeviceIdMessage(uint8_t* data, int size){
   std::cout << std::endl;
 #endif // DEBUG
 }
+
+void OwlNestSettings::handleSelfTestMessage(uint8_t data){
+#ifdef DEBUG
+  if(data & 0x01)
+    std::cout << "Preset stored in FLASH" << std::endl;
+  else
+    std::cout << "Preset not stored in FLASH" << std::endl;
+  std::cout << ((data & 0x02) ? "PASSED" : "FAILED") << " Memory test" << std::endl;
+  std::cout << ((data & 0x04) ? "PASSED" : "FAILED") << " External 8MHz oscillator" << std::endl;
+#endif // DEBUG
+}
+
 
 void OwlNestSettings::setCc(int cc,int value)
 {
@@ -119,6 +128,6 @@ void OwlNestSettings::loadFromOwl(){
   }
 }
 
-uint32 OwlNestSettings::getLastMidiMessageTime(){
+uint64 OwlNestSettings::getLastMidiMessageTime(){
     return lastMidiMessageTime;
 }
