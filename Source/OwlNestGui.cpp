@@ -522,6 +522,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_loadButton] -- add your button handler code here..
         setStatus("Loading settings...");
         theSettings.loadFromOwl();
+	theSettings.setCc(REQUEST_SETTINGS, 1); // request patch names
         setStatus("Settings loaded");
         //[/UserButtonCode_loadButton]
     }
@@ -578,8 +579,8 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == ledButton)
     {
         //[UserButtonCode_ledButton] -- add your button handler code here..
-      theSettings.setCc(PATCH_BUTTON, 127);
-      theSettings.setCc(REQUEST_SETTINGS, 30); // to get the updated LED value
+      theSettings.setCc(PATCH_BUTTON, 127); 
+     theSettings.setCc(REQUEST_SETTINGS, LED); // to get the updated LED value
         //[/UserButtonCode_ledButton]
     }
     else if (buttonThatWasClicked == masterButton)
@@ -592,6 +593,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_resetButton] -- add your button handler code here..
         theSettings.setCc(FACTORY_RESET, 127);
+	theSettings.setCc(REQUEST_SETTINGS, 0); // request self test and device ID
         setStatus("factory reset");
         //[/UserButtonCode_resetButton]
     }
