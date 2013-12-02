@@ -722,7 +722,6 @@ void OwlNestGui::settingsChanged() {
       masterButton->setToggleState(false, dontSendNotification);
     else
       masterButton->setToggleState(true, dontSendNotification);
-    setStatus("Loaded settings from OWL");
 }
 
 void OwlNestGui::updateSensivity(){
