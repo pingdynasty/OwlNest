@@ -31,7 +31,6 @@ class OwlNestSettings: public MidiInputCallback {
       return presets;
     }
     uint64 getLastMidiMessageTime();
-    
  private:
     int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
     Value& theUpdateGui;

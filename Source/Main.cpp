@@ -42,8 +42,11 @@ public:
         // Add your application's initialisation code here..
         
         // Initialize audio/midi device
+#if HIDE_LOW_LEVEL_ITEMS == 1
+        dm.initialise(0, 0, nullptr, true);
+#else
         dm.initialise(2, 2, nullptr, true);
-        
+#endif        
    
         
 

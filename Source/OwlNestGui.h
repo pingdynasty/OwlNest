@@ -70,6 +70,9 @@ public:
     void buttonClicked (Button* buttonThatWasClicked);
     void sliderValueChanged (Slider* sliderThatWasMoved);
 
+    // Binary resources:
+    static const char* owlFaceplate_png;
+    static const int owlFaceplate_pngSize;
 
 
 private:
@@ -115,7 +118,7 @@ private:
     ScopedPointer<ComboBox> sensitivityComboBox;
     ScopedPointer<Label> patchSlotBLabel2;
     ScopedPointer<TextButton> connectionButton;
-    ScopedPointer<Label> connectionStatusLabel;
+    Image cachedImage_owlFaceplate_png;
 
 
     //==============================================================================
