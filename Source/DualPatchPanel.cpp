@@ -86,7 +86,7 @@ DualPatchPanel::DualPatchPanel (StringArray patches, Value& patchChange,Value& o
 
     StringArray modes;
 
-    modes.addTokens("Single Dual Series Parallel", FALSE);
+    modes.addTokens("Single Dual Series Parallel", false);
 
 
     configMode->addItemList(modes, 1);

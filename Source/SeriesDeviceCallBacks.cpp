@@ -12,7 +12,7 @@
 
 
 SeriesDeviceCallBacks:: SeriesDeviceCallBacks(Value& patchChange,Value& owlConfig,Value& stompAPatch, Value& stompBPatch, Value& transportValue)
-:    source(NULL), buffer(NULL), patchState(patchChange),sdcbOwlConfig(owlConfig), sdcbStompAPatch(stompAPatch),sdcbStompBPatch(stompBPatch),sdcbTransportValue(transportValue)
+:    source(NULL), audioModeState(false), recordState(false), configuration(SINGLE), buffer(NULL), patchState(patchChange),sdcbOwlConfig(owlConfig), sdcbStompAPatch(stompAPatch),sdcbStompBPatch(stompBPatch),sdcbTransportValue(transportValue)
 
 {
     processorA.setProcessor(&stompboxA);
@@ -136,13 +136,12 @@ void SeriesDeviceCallBacks::setOutputFile(File outputFile)
 
 void SeriesDeviceCallBacks::setInputFile(File input)
 {
-    
-    
-    FileInputStream* stream = input.createInputStream();
-    CoreAudioFormat format;
-    source = new AudioFormatReaderSource(format.createReaderFor(stream, false), true);
-    audioModeState = true;
- 
+    #if JUCE_MAC
+		FileInputStream* stream = input.createInputStream();
+		CoreAudioFormat format;
+		source = new AudioFormatReaderSource(format.createReaderFor(stream, false), true);
+		audioModeState = true;
+	#endif
 }
 
 
