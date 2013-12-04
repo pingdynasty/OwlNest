@@ -108,6 +108,7 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory=".\Release"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
@@ -139,7 +140,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="1"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;Libraries/win-util"
+				AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;..\..\Libraries/win-util"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;JUCER_VS2008_78A5006=1"
 				StringPooling="true"
 				RuntimeLibrary="0"
