@@ -8,17 +8,20 @@
     <Filter Include="OwlNest\Source">
       <UniqueIdentifier>{9C40025A-C475-3FA8-C4D3-2C7A0E12393A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\Source\GUI">
-      <UniqueIdentifier>{F5B62B84-3A58-A7F5-9AED-E97690B24443}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OwlNest\Source\Plugin">
-      <UniqueIdentifier>{55E5CF74-5D60-4012-2AF0-06A9DFA0AF57}</UniqueIdentifier>
+    <Filter Include="OwlNest\Source\icons">
+      <UniqueIdentifier>{4CBA20F5-B6CB-A99D-BCE2-5895415C4E1A}</UniqueIdentifier>
     </Filter>
     <Filter Include="OwlNest\Source\Libraries">
       <UniqueIdentifier>{40138BC0-218D-64EC-AC05-C44DEA229182}</UniqueIdentifier>
     </Filter>
     <Filter Include="OwlNest\Source\Libraries\dfu-util">
       <UniqueIdentifier>{7DFB0254-11F0-62E7-2DDE-39DD7DD242CB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\Source\GUI">
+      <UniqueIdentifier>{F5B62B84-3A58-A7F5-9AED-E97690B24443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\Source\Plugin">
+      <UniqueIdentifier>{55E5CF74-5D60-4012-2AF0-06A9DFA0AF57}</UniqueIdentifier>
     </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
@@ -289,8 +292,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\sysex.c">
-      <Filter>OwlNest\Source</Filter>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\quirks.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PatchComponent.cpp">
       <Filter>OwlNest\Source\GUI</Filter>
@@ -322,6 +343,12 @@
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>OwlNest\Source\Plugin</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\OwlNestSettings.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sysex.c">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp">
       <Filter>OwlNest\Source</Filter>
     </ClCompile>
@@ -337,32 +364,8 @@
     <ClCompile Include="..\..\Source\FirmwareLoader.cpp">
       <Filter>OwlNest\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Settings.cpp">
-      <Filter>OwlNest\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Main.cpp">
       <Filter>OwlNest\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\quirks.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>
@@ -1453,6 +1456,9 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_win32_WebBrowserComponent.cpp">
       <Filter>Juce Modules\juce_gui_extra\native</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp">
+      <Filter>Juce Library Code</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_audio_basics.cpp">
       <Filter>Juce Library Code</Filter>
     </ClCompile>
@@ -1488,8 +1494,32 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\sysex.h">
-      <Filter>OwlNest\Source</Filter>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\portable.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\quirks.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PatchComponent.h">
       <Filter>OwlNest\Source\GUI</Filter>
@@ -1521,6 +1551,12 @@
     <ClInclude Include="..\..\Source\PluginProcessor.h">
       <Filter>OwlNest\Source\Plugin</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\OwlNestSettings.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\sysex.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Enums.h">
       <Filter>OwlNest\Source</Filter>
     </ClInclude>
@@ -1544,36 +1580,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\OpenWareMidiControl.h">
       <Filter>OwlNest\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Settings.h">
-      <Filter>OwlNest\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\portable.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\quirks.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>
@@ -2790,11 +2796,17 @@
     <ClInclude Include="..\..\JuceLibraryCode\AppConfig.h">
       <Filter>Juce Library Code</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h">
+      <Filter>Juce Library Code</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h">
       <Filter>Juce Library Code</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\icons\icon.png">
+      <Filter>OwlNest\Source\icons</Filter>
+    </None>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_module_info">
       <Filter>Juce Modules\juce_audio_basics</Filter>
     </None>
@@ -2827,6 +2839,9 @@
     </None>
     <None Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_module_info">
       <Filter>Juce Modules\juce_gui_extra</Filter>
+    </None>
+    <None Include=".\icon.ico">
+      <Filter>Juce Library Code</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -114,7 +114,7 @@
     <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="/opt/local/lib/libusb-1.0.a"
                extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
                externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" smallIcon="dMq0Lz"
-               bigIcon="dMq0Lz">
+               bigIcon="dMq0Lz" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "
@@ -140,7 +140,7 @@
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I ../../Source -I /usr/include/libusb-1.0"
                 extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 "
-                smallIcon="dMq0Lz" bigIcon="dMq0Lz">
+                smallIcon="dMq0Lz" bigIcon="dMq0Lz" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
@@ -162,7 +162,8 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz">
+    <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz"
+            juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="OwlNest"/>

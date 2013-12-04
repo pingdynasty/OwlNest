@@ -127,7 +127,13 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\sysex.c"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu.c"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\quirks.c"/>
     <ClCompile Include="..\..\Source\PatchComponent.cpp"/>
     <ClCompile Include="..\..\Source\StompGui.cpp"/>
     <ClCompile Include="..\..\Source\OwlNestGui.cpp"/>
@@ -138,20 +144,14 @@
     <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
+    <ClCompile Include="..\..\Source\OwlNestSettings.cpp"/>
+    <ClCompile Include="..\..\Source\sysex.c"/>
     <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp"/>
     <ClCompile Include="..\..\Source\SampleBuffer.cpp"/>
     <ClCompile Include="..\..\Source\PatchRegistry.cpp"/>
     <ClCompile Include="..\..\Source\PatchProcessor.cpp"/>
     <ClCompile Include="..\..\Source\FirmwareLoader.cpp"/>
-    <ClCompile Include="..\..\Source\Settings.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu.c"/>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c"/>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c"/>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c"/>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c"/>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c"/>
-    <ClCompile Include="..\..\Libraries\dfu-util\quirks.c"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -1172,6 +1172,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_win32_WebBrowserComponent.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_devices\juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_formats\juce_audio_formats.cpp"/>
@@ -1185,7 +1186,15 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\sysex.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\portable.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\quirks.h"/>
+    <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h"/>
     <ClInclude Include="..\..\Source\PatchComponent.h"/>
     <ClInclude Include="..\..\Source\StompGui.h"/>
     <ClInclude Include="..\..\Source\OwlNestGui.h"/>
@@ -1196,6 +1205,8 @@
     <ClInclude Include="..\..\Source\PluginPatchProcessor.h"/>
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>
+    <ClInclude Include="..\..\Source\OwlNestSettings.h"/>
+    <ClInclude Include="..\..\Source\sysex.h"/>
     <ClInclude Include="..\..\Source\Enums.h"/>
     <ClInclude Include="..\..\Source\SeriesDeviceCallBacks.h"/>
     <ClInclude Include="..\..\Source\SampleBuffer.h"/>
@@ -1204,16 +1215,6 @@
     <ClInclude Include="..\..\Source\PatchProcessor.h"/>
     <ClInclude Include="..\..\Source\FirmwareLoader.h"/>
     <ClInclude Include="..\..\Source\OpenWareMidiControl.h"/>
-    <ClInclude Include="..\..\Source\Settings.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\portable.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\quirks.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioSampleBuffer.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_FloatVectorOperations.h"/>
@@ -1619,9 +1620,11 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_mac_CarbonViewWrapperComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\AppConfig.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\icons\icon.png"/>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_module_info"/>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_devices\juce_module_info"/>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_formats\juce_module_info"/>
@@ -1633,6 +1636,7 @@
     <None Include="..\..\JuceLibraryCode\modules\juce_graphics\juce_module_info"/>
     <None Include="..\..\JuceLibraryCode\modules\juce_gui_basics\juce_module_info"/>
     <None Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_module_info"/>
+    <None Include=".\icon.ico"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include=".\resources.rc"/>
