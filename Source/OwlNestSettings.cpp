@@ -49,11 +49,13 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
 	break;
       }
       case SYSEX_DEVICE_ID: {
-	int len = message.getSysExDataSize()-3;
-	uint8_t deviceId[len];
-	len = sysex_to_data((uint8_t*)(data+3), deviceId, len);
-	handleDeviceIdMessage(deviceId, len);
-	break;
+		#if JUCE_MAC
+			int len = message.getSysExDataSize()-3;
+			uint8_t deviceId[len];
+			len = sysex_to_data((uint8_t*)(data+3), deviceId, len);
+			handleDeviceIdMessage(deviceId, len);
+		#endif
+		break;
       }
       case SYSEX_SELFTEST:{
 	handleSelfTestMessage(data[3]);

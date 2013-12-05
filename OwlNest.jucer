@@ -114,7 +114,7 @@
     <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="/opt/local/lib/libusb-1.0.a"
                extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
                externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" smallIcon="dMq0Lz"
-               bigIcon="dMq0Lz" juceFolder="modules">
+               bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "
@@ -140,7 +140,7 @@
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I ../../Source -I /usr/include/libusb-1.0"
                 extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 "
-                smallIcon="dMq0Lz" bigIcon="dMq0Lz" juceFolder="modules">
+                smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
@@ -162,13 +162,12 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz"
-            juceFolder="modules">
+    <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlNest"/>
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="Libraries/win-util"/>
         <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlNest"/>
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="Libraries/win-util"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
@@ -185,6 +184,28 @@
         <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </VS2010>
+    <VS2008 targetFolder="Builds/VisualStudio2008">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
+                       optimisation="1" targetName="OwlNest" libraryPath="" headerPath="Libraries/win-util"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" isDebug="0"
+                       optimisation="2" targetName="OwlNest" libraryPath="" headerPath="Libraries/win-util"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </VS2008>
   </EXPORTFORMATS>
   <JUCEOPTIONS/>
 </JUCERPROJECT>

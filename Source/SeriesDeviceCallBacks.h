@@ -25,13 +25,13 @@ private:
     ScopedPointer<AudioFormatReaderSource> source;
     StompBoxAudioProcessor stompboxA;
     StompBoxAudioProcessor stompboxB;
-    bool audioModeState = false;
-    bool recordState = false;
+    bool audioModeState;
+    bool recordState;
     ScopedPointer<FileOutputStream> outputStream;
     ScopedPointer<AudioFormatWriter> writer;
 
     
-   ConfigModes configuration = SINGLE;
+    ConfigModes configuration;
     Value& patchState;
     Value& sdcbOwlConfig;
     Value& sdcbStompAPatch;
