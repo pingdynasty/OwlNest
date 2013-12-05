@@ -646,12 +646,12 @@ void OwlNestGui::setStatus(const juce::String& msg){
 
 void OwlNestGui::settingsChanged() {
     StringArray& names = theSettings.getPresetNames();
-    if(names.size() != patchSlotAComboBox->getNumItems()){
-      setStatus("Settings loaded");
+    if(names.size() != 0){
       patchSlotAComboBox->clear(dontSendNotification);
       patchSlotBComboBox->clear(dontSendNotification);
       patchSlotAComboBox->addItemList(names, 1);
       patchSlotBComboBox->addItemList(names, 1);
+      setStatus("Settings loaded");
     }
 
     // LED button
