@@ -27,7 +27,11 @@
 #include <errno.h>
 #include <string.h>
 
+#ifdef WIN32
+#include <libusb/libusb.h>
+#else
 #include <libusb.h>
+#endif
 
 #include "portable.h"
 #include "dfu.h"

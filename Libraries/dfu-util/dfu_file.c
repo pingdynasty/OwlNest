@@ -25,7 +25,13 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <time.h>
+
+#ifdef WIN32
+#include <wchar.h>
+#else
 #include <unistd.h>
+#endif
+
 #include <fcntl.h>
 
 #include "portable.h"
