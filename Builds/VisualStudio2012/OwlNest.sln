@@ -48,6 +48,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win-util", "win-util", "{1D5C4F3E-F31E-4BFC-9CDE-1FFDF5E6EB10}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\Libraries\win-util\stdint.h = ..\..\Libraries\win-util\stdint.h
+		..\..\Libraries\win-util\getopt.c = ..\..\Libraries\win-util\getopt.c
+		..\..\Libraries\win-util\getopt.h = ..\..\Libraries\win-util\getopt.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{8752F741-228D-4E68-A511-E30999588793}"
