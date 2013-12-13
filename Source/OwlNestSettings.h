@@ -13,7 +13,12 @@
 
 #endif  // SETTINGS_H_INCLUDED
 
+#ifdef WIN32
+#include "../Libraries/win-util/stdint.h"
+#else
 #include <stdint.h>
+#endif
+
 #include "OpenWareMidiControl.h"
 #include "JuceHeader.h"
 

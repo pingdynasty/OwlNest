@@ -45,6 +45,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contest", "Contest", "{FFF4
 		..\..\Source\OwlPatches\Contest\SirenPatch.hpp = ..\..\Source\OwlPatches\Contest\SirenPatch.hpp
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win-util", "win-util", "{1D5C4F3E-F31E-4BFC-9CDE-1FFDF5E6EB10}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Libraries\win-util\stdint.h = ..\..\Libraries\win-util\stdint.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{8752F741-228D-4E68-A511-E30999588793}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dfu-util", "dfu-util", "{38D3D78E-9D6A-4F22-BB33-7576239365D7}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Libraries\dfu-util\dfu.c = ..\..\Libraries\dfu-util\dfu.c
+		..\..\Libraries\dfu-util\dfu.h = ..\..\Libraries\dfu-util\dfu.h
+		..\..\Libraries\dfu-util\dfu_file.c = ..\..\Libraries\dfu-util\dfu_file.c
+		..\..\Libraries\dfu-util\dfu_file.h = ..\..\Libraries\dfu-util\dfu_file.h
+		..\..\Libraries\dfu-util\dfu_load.c = ..\..\Libraries\dfu-util\dfu_load.c
+		..\..\Libraries\dfu-util\dfu_load.h = ..\..\Libraries\dfu-util\dfu_load.h
+		..\..\Libraries\dfu-util\dfu_util.c = ..\..\Libraries\dfu-util\dfu_util.c
+		..\..\Libraries\dfu-util\dfu_util.h = ..\..\Libraries\dfu-util\dfu_util.h
+		..\..\Libraries\dfu-util\dfuse.c = ..\..\Libraries\dfu-util\dfuse.c
+		..\..\Libraries\dfu-util\dfuse.h = ..\..\Libraries\dfu-util\dfuse.h
+		..\..\Libraries\dfu-util\dfuse_mem.c = ..\..\Libraries\dfu-util\dfuse_mem.c
+		..\..\Libraries\dfu-util\dfuse_mem.h = ..\..\Libraries\dfu-util\dfuse_mem.h
+		..\..\Libraries\dfu-util\main.c = ..\..\Libraries\dfu-util\main.c
+		..\..\Libraries\dfu-util\portable.h = ..\..\Libraries\dfu-util\portable.h
+		..\..\Libraries\dfu-util\quirks.c = ..\..\Libraries\dfu-util\quirks.c
+		..\..\Libraries\dfu-util\quirks.h = ..\..\Libraries\dfu-util\quirks.h
+		..\..\Libraries\dfu-util\suffix.c = ..\..\Libraries\dfu-util\suffix.c
+		..\..\Libraries\dfu-util\usb_dfu.h = ..\..\Libraries\dfu-util\usb_dfu.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -61,5 +90,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FFF43014-5703-440A-B4F0-7C0ABF086C3F} = {3C7D4E68-C643-4C65-9927-713CEA3F9CA1}
+		{1D5C4F3E-F31E-4BFC-9CDE-1FFDF5E6EB10} = {8752F741-228D-4E68-A511-E30999588793}
+		{38D3D78E-9D6A-4F22-BB33-7576239365D7} = {8752F741-228D-4E68-A511-E30999588793}
 	EndGlobalSection
 EndGlobal

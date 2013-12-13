@@ -51,7 +51,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusb-1.0.9;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -92,7 +92,7 @@
     </Midl>
     <ClCompile>
       <Optimization>MinSpace</Optimization>
-      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusb-1.0.9;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -125,13 +125,6 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu.c" />
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c" />
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c" />
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c" />
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c" />
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c" />
-    <ClCompile Include="..\..\Libraries\dfu-util\quirks.c" />
     <ClCompile Include="..\..\Source\PatchComponent.cpp" />
     <ClCompile Include="..\..\Source\StompGui.cpp" />
     <ClCompile Include="..\..\Source\OwlNestGui.cpp" />
@@ -1178,15 +1171,6 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu.h" />
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h" />
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h" />
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h" />
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h" />
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h" />
-    <ClInclude Include="..\..\Libraries\dfu-util\portable.h" />
-    <ClInclude Include="..\..\Libraries\dfu-util\quirks.h" />
-    <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h" />
     <ClInclude Include="..\..\Source\PatchComponent.h" />
     <ClInclude Include="..\..\Source\StompGui.h" />
     <ClInclude Include="..\..\Source\OwlNestGui.h" />
@@ -1627,7 +1611,6 @@
     <None Include="..\..\JuceLibraryCode\modules\juce_graphics\juce_module_info" />
     <None Include="..\..\JuceLibraryCode\modules\juce_gui_basics\juce_module_info" />
     <None Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_module_info" />
-    <None Include=".\icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include=".\resources.rc" />
