@@ -2,7 +2,11 @@
 #ifndef DFU_FILE_H
 #define DFU_FILE_H
 
+#ifdef WIN32
+#include "../win-util/stdint.h"
+#else
 #include <stdint.h>
+#endif
 
 struct dfu_file {
     /* File name */

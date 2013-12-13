@@ -31,3 +31,7 @@ Builds/VisualStudio2010/OwlNest.opensdf
 Builds/VisualStudio2010/OwlNest.suo
 Builds/VisualStudio2010/OwlNest.sln.docstates.suo
 Builds/VisualStudio2010/OwlNest.vcxproj.user
+Builds/VisualStudio2012/dfu-util.vcxproj.user
+
+# libusbx compile path
+Builds/Win32/

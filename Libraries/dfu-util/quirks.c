@@ -16,7 +16,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#ifdef WIN32
+#include "../win-util/stdint.h"
+#else
 #include <stdint.h>
+#endif
+
 #include "quirks.h"
 
 uint16_t get_quirks(uint16_t vendor, uint16_t product, uint16_t bcdDevice)

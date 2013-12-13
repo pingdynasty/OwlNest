@@ -22,10 +22,17 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+
+#ifdef WIN32
+#include "../win-util/stdint.h"
+#include <wchar.h>
+#else
 #include <stdint.h>
+#include <unistd.h>
+#endif
+
 #include <stdlib.h>
 #include <time.h>
-#include <unistd.h>
 #include <fcntl.h>
 
 #include "portable.h"

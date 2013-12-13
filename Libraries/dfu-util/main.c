@@ -26,11 +26,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <getopt.h>
 #include <libusb.h>
 #include <errno.h>
 #include <fcntl.h>
+
+#ifdef WIN32
+#include "..\win-util\config.h"
+#include "..\win-util\getopt.h"
+//#include <wchar.h>
+#else
+#include <getopt.h>
 #include <unistd.h>
+#endif
 
 #include "portable.h"
 #include "dfu.h"

@@ -19,8 +19,16 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdint.h>
+
+#ifdef WIN32
+#include "../win-util/config.h"
+#include "../win-util/getopt.h"
+#include "../win-util/stdint.h"
+#else
 #include <getopt.h>
+#include <stdint.h>
+#endif
+
 #include <string.h>
 
 #include "portable.h"
