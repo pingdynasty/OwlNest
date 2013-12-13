@@ -21,12 +21,7 @@
 #ifndef DFU_H
 #define DFU_H
 
-#ifdef WIN32
-#include <libusb/libusb.h>
-#else
 #include <libusb.h>
-#endif
-
 #include "usb_dfu.h"
 
 /* DFU states */

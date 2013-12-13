@@ -15,7 +15,7 @@
 # define milli_sleep(msec) do {\
     struct timespec nanosleepDelay = { msec / 1000, (msec % 1000) * 1000000 };\
     nanosleep(&nanosleepDelay, NULL); } while (0)
-#elif defined WIN32
+#elif defined HAVE_WINDOWS_H
 # define milli_sleep(msec) Sleep(msec)
 #else
 # error "Can't get no sleep! Please report"
