@@ -58,7 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win-util", "win-util", "{1D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{8752F741-228D-4E68-A511-E30999588793}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dfu-util (static)", "dfu-util.vcxproj", "{35362792-4E70-4E8E-BB95-C161FFC753C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dfu-util (static)", "dfu-util (static).vcxproj", "{35362792-4E70-4E8E-BB95-C161FFC753C2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{349EE8F9-7D25-4909-AAF5-FF3FADE72187} = {349EE8F9-7D25-4909-AAF5-FF3FADE72187}
 	EndProjectSection
