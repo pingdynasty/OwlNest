@@ -6,6 +6,7 @@
 class FirmwareLoader {
 public:
   int updateFirmware(File& file);
+  int updateBootloader(File& file);
 };
 
 #endif  // FIRMWARELOADER_H_INCLUDED
