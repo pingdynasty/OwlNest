@@ -49,6 +49,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/ApplicationConfiguration_4b5ea10f.o \
   $(OBJDIR)/dfu_ad6672eb.o \
   $(OBJDIR)/dfu_file_6fdc65a.o \
   $(OBJDIR)/dfu_load_118a6344.o \
@@ -105,6 +106,11 @@ clean:
 strip:
 	@echo Stripping OwlNest
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/ApplicationConfiguration_4b5ea10f.o: ../../Source/ApplicationConfiguration.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ApplicationConfiguration.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/dfu_ad6672eb.o: ../../Libraries/dfu-util/dfu.c
 	-@mkdir -p $(OBJDIR)

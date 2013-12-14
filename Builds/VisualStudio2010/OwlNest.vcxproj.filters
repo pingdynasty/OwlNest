@@ -292,6 +292,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu.c">
       <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
     </ClCompile>
@@ -1494,6 +1497,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ApplicationConfiguration.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu.h">
       <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
     </ClInclude>
