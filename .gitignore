@@ -15,8 +15,7 @@
 *.a
 
 # Compiled Visual Studio Folders
-Builds/VisualStudio2010/Debug/
-Builds/VisualStudio2010/Release/
+Builds/Win32/
 Builds/VisualStudio2010/ipch/
 
 # Visual Studio Solution and User Settings
@@ -31,5 +30,3 @@ Builds/VisualStudio2010/OwlNest.sln.docstates.suo
 Builds/VisualStudio2010/OwlNest.vcxproj.user
 Builds/VisualStudio2012/dfu-util.vcxproj.user
 
-# libusbx compile path
-Builds/Win32/

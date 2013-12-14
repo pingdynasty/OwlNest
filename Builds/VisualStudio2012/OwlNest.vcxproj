@@ -60,7 +60,7 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries;..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;HAVE_WINDOWS_H;PACKAGE="package";PACKAGE_VERSION="package version";PACKAGE_STRING="package string";PACKAGE_BUGREPORT="package bug report";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader />
@@ -102,7 +102,7 @@
     <ClCompile>
       <Optimization>MinSpace</Optimization>
       <AdditionalIncludeDirectories>C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries;..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;JUCER_VS2010_78A501D=1;HAVE_WINDOWS_H;PACKAGE="package";PACKAGE_VERSION="package version";PACKAGE_STRING="package string";PACKAGE_BUGREPORT="package bug report";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;JUCER_VS2010_78A501D=1;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader />

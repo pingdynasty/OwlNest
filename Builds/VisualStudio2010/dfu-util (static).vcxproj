@@ -33,22 +33,19 @@
     <ClCompile Include="..\..\Libraries\dfu-util\suffix.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{35362792-4E70-4E8E-BB95-C161FFC753C2}</ProjectGuid>
+    <ProjectGuid>{D012B06F-B4A6-4CBB-AD75-14147DD62E97}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>dfuutil</RootNamespace>
-    <ProjectName>dfu-util (static)</ProjectName>
+    <RootNamespace>dfuutilstatic</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -64,12 +61,20 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\</OutDir>
-    <IntDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\dfu-util\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\dfu-util</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetName>dfu-util</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\</OutDir>
-    <IntDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\dfu-util\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\dfu-util</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetName>dfu-util</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -79,10 +84,9 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\SDKs\libusbx-1.0.17\libusb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -91,18 +95,20 @@
     <Lib>
       <OutputFile>$(OutDir)dfu-util.lib</OutputFile>
     </Lib>
+    <Lib>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>
-      </FunctionLevelLinking>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\SDKs\libusbx-1.0.17\libusb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
