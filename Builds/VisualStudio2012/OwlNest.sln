@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OwlNest", "OwlNest.vcxproj", "{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{35362792-4E70-4E8E-BB95-C161FFC753C2} = {35362792-4E70-4E8E-BB95-C161FFC753C2}
+		{349EE8F9-7D25-4909-AAF5-FF3FADE72187} = {349EE8F9-7D25-4909-AAF5-FF3FADE72187}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PatchRegistry", "PatchRegistry", "{3F0885BC-556D-42AC-8DF1-B8401FA80EA3}"
@@ -50,7 +51,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contest", "Contest", "{D21F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win-util", "win-util", "{1D5C4F3E-F31E-4BFC-9CDE-1FFDF5E6EB10}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\Libraries\win-util\config.h = ..\..\Libraries\win-util\config.h
 		..\..\Libraries\win-util\getopt.c = ..\..\Libraries\win-util\getopt.c
 		..\..\Libraries\win-util\getopt.h = ..\..\Libraries\win-util\getopt.h
 		..\..\Libraries\win-util\stdint.h = ..\..\Libraries\win-util\stdint.h
@@ -58,7 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win-util", "win-util", "{1D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{8752F741-228D-4E68-A511-E30999588793}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dfu-util", "dfu-util.vcxproj", "{35362792-4E70-4E8E-BB95-C161FFC753C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dfu-util (static)", "dfu-util.vcxproj", "{35362792-4E70-4E8E-BB95-C161FFC753C2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{349EE8F9-7D25-4909-AAF5-FF3FADE72187} = {349EE8F9-7D25-4909-AAF5-FF3FADE72187}
 	EndProjectSection

@@ -1,7 +1,7 @@
 #ifndef __SYSEX_H
 #define __SYSEX_H
 
-#ifdef WIN32
+#ifdef _MSC_VER
 #include "../Libraries/win-util/stdint.h"
 #else
 #include <stdint.h>

@@ -15,8 +15,6 @@
 *.a
 
 # Compiled Visual Studio Folders
-Builds/VisualStudio2012/Debug/
-Builds/VisualStudio2012/Release/
 Builds/VisualStudio2010/Debug/
 Builds/VisualStudio2010/Release/
 Builds/VisualStudio2010/ipch/

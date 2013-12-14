@@ -30,10 +30,9 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#ifdef WIN32
-#include "..\win-util\config.h"
+#ifdef _MSC_VER
 #include "..\win-util\getopt.h"
-//#include <wchar.h>
+#include <wchar.h>
 #else
 #include <getopt.h>
 #include <unistd.h>

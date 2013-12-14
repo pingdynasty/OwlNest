@@ -23,7 +23,7 @@
 #include <string.h>
 #include <errno.h>
 
-#ifdef WIN32
+#ifdef _MSC_VER
 #include "../win-util/stdint.h"
 #include <wchar.h>
 #else

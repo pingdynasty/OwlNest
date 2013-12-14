@@ -20,8 +20,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#ifdef WIN32
-#include "../win-util/config.h"
+#ifdef _MSC_VER
 #include "../win-util/getopt.h"
 #include "../win-util/stdint.h"
 #else

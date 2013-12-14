@@ -13,7 +13,7 @@
 
 #endif  // SETTINGS_H_INCLUDED
 
-#ifdef WIN32
+#ifdef _MSC_VER
 #include "../Libraries/win-util/stdint.h"
 #else
 #include <stdint.h>

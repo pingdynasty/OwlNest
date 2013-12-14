@@ -1,17 +1,24 @@
 #include "FirmwareLoader.h"
 
-#if defined(JUCE_WINDOWS)
-int FirmwareLoader::updateFirmware(File& firmware){ return 0;}
-#else
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <getopt.h>
-#include <libusb.h>
 #include <errno.h>
 #include <fcntl.h>
+
+#ifdef _MSC_VER
+#include "win-util/getopt.h"
+#include <wchar.h>
+#include <io.h>
+#define open(filename, oflag, pmode) _open(filename, oflag, pmode)
+#define close(fd) _close(fd)
+#define _SSIZE_T_DEFINED // libusb.h
+#else
+#include <getopt.h>
 #include <unistd.h>
+#endif
+
+#include <libusb.h>
 
 extern "C" {
 #include "dfu-util/portable.h"
@@ -419,4 +426,3 @@ int FirmwareLoader::updateFirmware(File& firmware){
 
   return 0;
 }
-#endif /* WIN32 */
