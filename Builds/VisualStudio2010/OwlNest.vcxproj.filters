@@ -1,8 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="OwlNest">
       <UniqueIdentifier>{CF459108-824D-88DF-C60F-E829BC67C22D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\Source">
+      <UniqueIdentifier>{9C40025A-C475-3FA8-C4D3-2C7A0E12393A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\Source\icons">
+      <UniqueIdentifier>{4CBA20F5-B6CB-A99D-BCE2-5895415C4E1A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\Source\Libraries">
+      <UniqueIdentifier>{40138BC0-218D-64EC-AC05-C44DEA229182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\Source\Libraries\dfu-util">
+      <UniqueIdentifier>{7DFB0254-11F0-62E7-2DDE-39DD7DD242CB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\Source\GUI">
+      <UniqueIdentifier>{F5B62B84-3A58-A7F5-9AED-E97690B24443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\Source\Plugin">
+      <UniqueIdentifier>{55E5CF74-5D60-4012-2AF0-06A9DFA0AF57}</UniqueIdentifier>
     </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
@@ -271,46 +290,85 @@
     <Filter Include="Juce Library Code">
       <UniqueIdentifier>{8B4D1BAA-6DB4-CAEC-A0FA-271F354D5C61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\GUI">
-      <UniqueIdentifier>{F5B62B84-3A58-A7F5-9AED-E97690B24443}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OwlNest\icons">
-      <UniqueIdentifier>{4CBA20F5-B6CB-A99D-BCE2-5895415C4E1A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OwlNest\Plugin">
-      <UniqueIdentifier>{55E5CF74-5D60-4012-2AF0-06A9DFA0AF57}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\quirks.c">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PatchComponent.cpp">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\StompGui.cpp">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\OwlNestGui.cpp">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\DualPatchPanel.cpp">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TransportPanel.cpp">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PatchMode.cpp">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp">
-      <Filter>OwlNest\Plugin</Filter>
+      <Filter>OwlNest\Source\Plugin</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PluginEditor.cpp">
-      <Filter>OwlNest\Plugin</Filter>
+      <Filter>OwlNest\Source\Plugin</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
-      <Filter>OwlNest\Plugin</Filter>
+      <Filter>OwlNest\Source\Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\OwlNestSettings.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sysex.c">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SampleBuffer.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PatchRegistry.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PatchProcessor.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FirmwareLoader.cpp">
+      <Filter>OwlNest\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Main.cpp">
+      <Filter>OwlNest\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>
@@ -414,6 +472,12 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_devices\native\juce_linux_Midi.cpp">
       <Filter>Juce Modules\juce_audio_devices\native</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_devices\native\juce_mac_AudioCDBurner.mm">
+      <Filter>Juce Modules\juce_audio_devices\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_devices\native\juce_mac_AudioCDReader.mm">
+      <Filter>Juce Modules\juce_audio_devices\native</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_devices\native\juce_mac_CoreAudio.cpp">
       <Filter>Juce Modules\juce_audio_devices\native</Filter>
     </ClCompile>
@@ -509,6 +573,9 @@
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_processors\format\juce_AudioPluginFormatManager.cpp">
       <Filter>Juce Modules\juce_audio_processors\format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_processors\format_types\juce_AudioUnitPluginFormat.mm">
+      <Filter>Juce Modules\juce_audio_processors\format_types</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_processors\format_types\juce_LADSPAPluginFormat.cpp">
       <Filter>Juce Modules\juce_audio_processors\format_types</Filter>
@@ -735,6 +802,21 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_linux_Threads.cpp">
       <Filter>Juce Modules\juce_core\native</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_mac_Files.mm">
+      <Filter>Juce Modules\juce_core\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_mac_Network.mm">
+      <Filter>Juce Modules\juce_core\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_mac_Strings.mm">
+      <Filter>Juce Modules\juce_core\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_mac_SystemStats.mm">
+      <Filter>Juce Modules\juce_core\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_mac_Threads.mm">
+      <Filter>Juce Modules\juce_core\native</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_posix_NamedPipe.cpp">
       <Filter>Juce Modules\juce_core\native</Filter>
     </ClCompile>
@@ -804,7 +886,13 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_events\native\juce_android_Messaging.cpp">
       <Filter>Juce Modules\juce_events\native</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_events\native\juce_ios_MessageManager.mm">
+      <Filter>Juce Modules\juce_events\native</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_events\native\juce_linux_Messaging.cpp">
+      <Filter>Juce Modules\juce_events\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_events\native\juce_mac_MessageManager.mm">
       <Filter>Juce Modules\juce_events\native</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_events\native\juce_win32_Messaging.cpp">
@@ -867,6 +955,12 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\geometry\juce_PathStrokeType.cpp">
       <Filter>Juce Modules\juce_graphics\geometry</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\geometry\juce_RectangleList.cpp">
+      <Filter>Juce Modules\juce_graphics\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\placement\juce_Justification.cpp">
+      <Filter>Juce Modules\juce_graphics\placement</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\placement\juce_RectanglePlacement.cpp">
       <Filter>Juce Modules\juce_graphics\placement</Filter>
     </ClCompile>
@@ -904,6 +998,12 @@
       <Filter>Juce Modules\juce_graphics\native</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\native\juce_linux_Fonts.cpp">
+      <Filter>Juce Modules\juce_graphics\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\native\juce_mac_CoreGraphicsContext.mm">
+      <Filter>Juce Modules\juce_graphics\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\native\juce_mac_Fonts.mm">
       <Filter>Juce Modules\juce_graphics\native</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\native\juce_win32_Direct2DGraphicsContext.cpp">
@@ -1251,6 +1351,12 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_android_Windowing.cpp">
       <Filter>Juce Modules\juce_gui_basics\native</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_ios_UIViewComponentPeer.mm">
+      <Filter>Juce Modules\juce_gui_basics\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_ios_Windowing.mm">
+      <Filter>Juce Modules\juce_gui_basics\native</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_linux_Clipboard.cpp">
       <Filter>Juce Modules\juce_gui_basics\native</Filter>
     </ClCompile>
@@ -1258,6 +1364,21 @@
       <Filter>Juce Modules\juce_gui_basics\native</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_linux_Windowing.cpp">
+      <Filter>Juce Modules\juce_gui_basics\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_mac_FileChooser.mm">
+      <Filter>Juce Modules\juce_gui_basics\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_mac_MainMenu.mm">
+      <Filter>Juce Modules\juce_gui_basics\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_mac_MouseCursor.mm">
+      <Filter>Juce Modules\juce_gui_basics\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_mac_NSViewComponentPeer.mm">
+      <Filter>Juce Modules\juce_gui_basics\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_mac_Windowing.mm">
       <Filter>Juce Modules\juce_gui_basics\native</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_win32_DragAndDrop.cpp">
@@ -1308,13 +1429,25 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_android_WebBrowserComponent.cpp">
       <Filter>Juce Modules\juce_gui_extra\native</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_ios_UIViewComponent.mm">
+      <Filter>Juce Modules\juce_gui_extra\native</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_linux_SystemTrayIcon.cpp">
       <Filter>Juce Modules\juce_gui_extra\native</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_linux_WebBrowserComponent.cpp">
       <Filter>Juce Modules\juce_gui_extra\native</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_mac_AppleRemote.mm">
+      <Filter>Juce Modules\juce_gui_extra\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_mac_NSViewComponent.mm">
+      <Filter>Juce Modules\juce_gui_extra\native</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_mac_SystemTrayIcon.cpp">
+      <Filter>Juce Modules\juce_gui_extra\native</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_mac_WebBrowserComponent.mm">
       <Filter>Juce Modules\juce_gui_extra\native</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\native\juce_win32_ActiveXComponent.cpp">
@@ -1362,61 +1495,97 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.cpp">
       <Filter>Juce Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FirmwareLoader.cpp">
-      <Filter>OwlNest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Main.cpp">
-      <Filter>OwlNest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\OwlNestSettings.cpp">
-      <Filter>OwlNest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\PatchProcessor.cpp">
-      <Filter>OwlNest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\PatchRegistry.cpp">
-      <Filter>OwlNest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SampleBuffer.cpp">
-      <Filter>OwlNest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp">
-      <Filter>OwlNest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\sysex.c">
-      <Filter>OwlNest</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ApplicationConfiguration.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\portable.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\quirks.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h">
+      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\PatchComponent.h">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\StompGui.h">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\OwlNestGui.h">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\DualPatchPanel.h">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TransportPanel.h">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PatchMode.h">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h">
-      <Filter>OwlNest\GUI</Filter>
+      <Filter>OwlNest\Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginPatchProcessor.h">
-      <Filter>OwlNest\Plugin</Filter>
+      <Filter>OwlNest\Source\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginEditor.h">
-      <Filter>OwlNest\Plugin</Filter>
+      <Filter>OwlNest\Source\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginProcessor.h">
-      <Filter>OwlNest\Plugin</Filter>
+      <Filter>OwlNest\Source\Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlNestSettings.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\sysex.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Enums.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SeriesDeviceCallBacks.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SampleBuffer.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PatchRegistry.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\StompBox.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PatchProcessor.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FirmwareLoader.h">
+      <Filter>OwlNest\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OpenWareMidiControl.h">
+      <Filter>OwlNest\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>
@@ -1614,6 +1783,9 @@
       <Filter>Juce Modules\juce_audio_processors\format</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_processors\format_types\juce_AudioUnitPluginFormat.h">
+      <Filter>Juce Modules\juce_audio_processors\format_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_processors\format_types\juce_DirectXPluginFormat.h">
       <Filter>Juce Modules\juce_audio_processors\format_types</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_processors\format_types\juce_LADSPAPluginFormat.h">
@@ -2555,6 +2727,9 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\application\juce_Application.h">
       <Filter>Juce Modules\juce_gui_basics\application</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\application\juce_Initialisation.h">
+      <Filter>Juce Modules\juce_gui_basics\application</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\native\juce_MultiTouchMapper.h">
       <Filter>Juce Modules\juce_gui_basics\native</Filter>
     </ClInclude>
@@ -2633,40 +2808,10 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h">
       <Filter>Juce Library Code</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\sysex.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Enums.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FirmwareLoader.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OpenWareMidiControl.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlNestSettings.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\PatchProcessor.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\PatchRegistry.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SampleBuffer.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SeriesDeviceCallBacks.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\StompBox.h">
-      <Filter>OwlNest</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\icons\icon.png">
-      <Filter>OwlNest\icons</Filter>
+      <Filter>OwlNest\Source\icons</Filter>
     </None>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_module_info">
       <Filter>Juce Modules\juce_audio_basics</Filter>
@@ -2701,8 +2846,8 @@
     <None Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_module_info">
       <Filter>Juce Modules\juce_gui_extra</Filter>
     </None>
-    <None Include="..\..\Source\icons\icon.ico">
-      <Filter>OwlNest\icons</Filter>
+    <None Include=".\icon.ico">
+      <Filter>Juce Library Code</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

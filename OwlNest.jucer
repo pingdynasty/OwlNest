@@ -211,6 +211,14 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </VS2008>
+    <VS2012 targetFolder="Builds/VisualStudio2012" juceFolder="modules">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="Libraries/win-util"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="Libraries/win-util"/>
+      </CONFIGURATIONS>
+    </VS2012>
   </EXPORTFORMATS>
   <JUCEOPTIONS/>
 </JUCERPROJECT>
