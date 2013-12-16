@@ -12,6 +12,8 @@
 #include "OwlNestSettings.h"
 #include "sysex.h"
 #include "OpenWareMidiControl.h"
+#include "FirmwareLoader.h"
+#include "ApplicationCommands.h"
 
 OwlNestSettings::OwlNestSettings(AudioDeviceManager& dm, Value& updateGui):
 theDm(dm), theUpdateGui(updateGui)
@@ -132,4 +134,54 @@ void OwlNestSettings::loadFromOwl(){
 
 uint64 OwlNestSettings::getLastMidiMessageTime(){
     return lastMidiMessageTime;
+}
+
+bool OwlNestSettings::updateFirmware(){
+  FileChooser chooser("Select Firmware",
+		      File::getSpecialLocation (File::currentApplicationFile),
+// 		      File::getSpecialLocation (File::userHomeDirectory/),
+		      "*.bin");
+  if(chooser.browseForFileToOpen()){
+    // put device into DFU mode
+    setCc(DEVICE_FIRMWARE_UPDATE, 127);
+    File file = chooser.getResult();
+    FirmwareLoader loader;
+    loader.updateFirmware(file);
+    return true;
+  }else{
+    return false;
+  }
+}
+
+void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
+  commands.add(ApplicationCommands::updateFirmware);
+  commands.add(ApplicationCommands::updateBootloader);
+}
+
+void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
+  switch(commandID){
+  case ApplicationCommands::updateFirmware:
+    result.setInfo("Update Firmware", String::empty, String::empty, 0);
+    break;
+  case ApplicationCommands::updateBootloader:
+    result.setInfo("Update Bootloader", String::empty, String::empty, 0);
+    result.setActive(false);
+    break;
+  }
+}
+
+bool OwlNestSettings::perform(const InvocationInfo& info){
+  switch(info.commandID){
+  case ApplicationCommands::updateFirmware:
+    updateFirmware();
+    break;
+  case ApplicationCommands::updateBootloader:
+    DBG("Update bootloader: todo!");
+    break;
+  }
+  return true;
+}
+
+ApplicationCommandTarget* OwlNestSettings::getNextCommandTarget(){
+  return NULL;
 }

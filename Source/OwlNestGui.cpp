@@ -18,7 +18,6 @@
 */
 
 //[Headers] You can add your own extra header files here...
-#include "FirmwareLoader.h"
 #include "OwlNestGui.h"
 #include "Enums.h"
 
@@ -770,20 +769,10 @@ float OwlNestGui::midiToOutGainDb(int midiValue){
 }
 
 void OwlNestGui::updateFirmware(){
-  FileChooser chooser("Select Firmware",
-		      File::getSpecialLocation (File::currentApplicationFile),
-// 		      File::getSpecialLocation (File::userHomeDirectory/),
-		      "*.bin");
-  if(chooser.browseForFileToOpen()){
-    // put device into DFU mode
-    theSettings.setCc(DEVICE_FIRMWARE_UPDATE, 127);
-    File file = chooser.getResult();
-    FirmwareLoader loader;
-    loader.updateFirmware(file);
+  if(theSettings.updateFirmware())
     setStatus("Updated OWL firmware");
-  }else{
+  else
     setStatus("Firmware update cancelled");
-  }
 }
 
 void OwlNestGui::timerCallback()

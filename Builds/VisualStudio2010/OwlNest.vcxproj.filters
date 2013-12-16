@@ -282,6 +282,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp">
+      <Filter>OwlNest</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PatchComponent.cpp">
       <Filter>OwlNest\GUI</Filter>
     </ClCompile>
@@ -1386,8 +1389,17 @@
     <ClCompile Include="..\..\Source\sysex.c">
       <Filter>OwlNest</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\placement\juce_Justification.cpp">
+      <Filter>Juce Modules\juce_graphics\placement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_graphics\geometry\juce_RectangleList.cpp">
+      <Filter>Juce Modules\juce_graphics\geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ApplicationConfiguration.h">
+      <Filter>OwlNest</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\PatchComponent.h">
       <Filter>OwlNest\GUI</Filter>
     </ClInclude>
@@ -2662,6 +2674,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\StompBox.h">
       <Filter>OwlNest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_processors\format_types\juce_DirectXPluginFormat.h">
+      <Filter>Juce Modules\juce_audio_processors\format_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\application\juce_Initialisation.h">
+      <Filter>Juce Modules\juce_gui_basics\application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

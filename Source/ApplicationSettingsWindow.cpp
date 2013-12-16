@@ -18,6 +18,7 @@
 */
 
 //[Headers] You can add your own extra header files here...
+#include "ApplicationConfiguration.h"
 //[/Headers]
 
 #include "ApplicationSettingsWindow.h"
@@ -40,8 +41,9 @@ ApplicationSettingsWindow::ApplicationSettingsWindow (AudioDeviceManager& device
     setSize (600, 400);
 
     //[Constructor] You can add your own custom stuff here..
-    deviceManager.setDefaultMidiOutput("OWL FS");
-    deviceManager.setMidiInputEnabled("OWL FS", 1);
+    PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
+    deviceManager.setDefaultMidiOutput(properties->getValue("midioutput"));
+    deviceManager.setMidiInputEnabled(properties->getValue("midiinput"), 1);
     //[/Constructor]
 }
 

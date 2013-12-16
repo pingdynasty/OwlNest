@@ -24,7 +24,7 @@
 
 #define NB_CHANNELS 128 
 
-class OwlNestSettings: public MidiInputCallback {
+class OwlNestSettings: public MidiInputCallback, public ApplicationCommandTarget {
  public:
     OwlNestSettings(AudioDeviceManager& dm, Value& updateGui);
     ~OwlNestSettings();
@@ -36,6 +36,13 @@ class OwlNestSettings: public MidiInputCallback {
       return presets;
     }
     uint64 getLastMidiMessageTime();
+    // bool isConnected();
+  bool updateFirmware();
+
+  void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);
+  void getAllCommands(Array< CommandID > &commands);
+  ApplicationCommandTarget* getNextCommandTarget();
+  bool perform(const InvocationInfo& info);
  private:
     int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
     Value& theUpdateGui;
