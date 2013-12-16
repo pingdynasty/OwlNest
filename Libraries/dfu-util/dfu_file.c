@@ -22,10 +22,23 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+
+#ifdef _MSC_VER
+#include "../win-util/stdint.h"
+#include <wchar.h>
+#include <io.h>
+#define open _open
+#define close _close
+#define read _read
+#define write _write
+#define lseek _lseek
+#else
 #include <stdint.h>
+#include <unistd.h>
+#endif
+
 #include <stdlib.h>
 #include <time.h>
-#include <unistd.h>
 #include <fcntl.h>
 
 #include "portable.h"

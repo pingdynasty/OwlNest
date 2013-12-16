@@ -1,7 +1,11 @@
 #ifndef __SYSEX_H
 #define __SYSEX_H
 
+#ifdef _MSC_VER
+#include <win-util/stdint.h>
+#else
 #include <stdint.h>
+#endif
 
 #ifdef __cplusplus
  extern "C" {

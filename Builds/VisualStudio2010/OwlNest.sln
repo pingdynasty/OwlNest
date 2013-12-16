@@ -1,6 +1,69 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{CFFD9643-0F2B-CBEB-DE0A-7F97F7A00C01}") = "OwlNest", "OwlNest.vcxproj", "{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OwlNest", "OwlNest.vcxproj", "{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D012B06F-B4A6-4CBB-AD75-14147DD62E97} = {D012B06F-B4A6-4CBB-AD75-14147DD62E97}
+		{349EE8F9-7D25-4909-AAF5-FF3FADE72187} = {349EE8F9-7D25-4909-AAF5-FF3FADE72187}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PatchRegistry", "PatchRegistry", "{3C7D4E68-C643-4C65-9927-713CEA3F9CA1}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Source\OwlPatches\CircularBuffer.hpp = ..\..\Source\OwlPatches\CircularBuffer.hpp
+		..\..\Source\OwlPatches\DroneBoxPatch.hpp = ..\..\Source\OwlPatches\DroneBoxPatch.hpp
+		..\..\Source\OwlPatches\EnvelopeFilterPatch.hpp = ..\..\Source\OwlPatches\EnvelopeFilterPatch.hpp
+		..\..\Source\OwlPatches\FixedDelayPatch.hpp = ..\..\Source\OwlPatches\FixedDelayPatch.hpp
+		..\..\Source\OwlPatches\FlangerPatch.hpp = ..\..\Source\OwlPatches\FlangerPatch.hpp
+		..\..\Source\OwlPatches\FreeVerbPatch.hpp = ..\..\Source\OwlPatches\FreeVerbPatch.hpp
+		..\..\Source\OwlPatches\GainPatch.hpp = ..\..\Source\OwlPatches\GainPatch.hpp
+		..\..\Source\OwlPatches\includes.h = ..\..\Source\OwlPatches\includes.h
+		..\..\Source\OwlPatches\LeakyIntegratorPatch.hpp = ..\..\Source\OwlPatches\LeakyIntegratorPatch.hpp
+		..\..\Source\OwlPatches\LpfDelayPatch.hpp = ..\..\Source\OwlPatches\LpfDelayPatch.hpp
+		..\..\Source\OwlPatches\LpfDelayPhaserPatch.hpp = ..\..\Source\OwlPatches\LpfDelayPhaserPatch.hpp
+		..\..\Source\OwlPatches\OctaveDownPatch.hpp = ..\..\Source\OwlPatches\OctaveDownPatch.hpp
+		..\..\Source\OwlPatches\OverdrivePatch.hpp = ..\..\Source\OwlPatches\OverdrivePatch.hpp
+		..\..\Source\OwlPatches\ParametricEqPatch.hpp = ..\..\Source\OwlPatches\ParametricEqPatch.hpp
+		..\..\Source\OwlPatches\patches.cpp = ..\..\Source\OwlPatches\patches.cpp
+		..\..\Source\OwlPatches\PhaserPatch.hpp = ..\..\Source\OwlPatches\PhaserPatch.hpp
+		..\..\Source\OwlPatches\ResonantFilterPatch.hpp = ..\..\Source\OwlPatches\ResonantFilterPatch.hpp
+		..\..\Source\OwlPatches\SampleBasedPatch.hpp = ..\..\Source\OwlPatches\SampleBasedPatch.hpp
+		..\..\Source\OwlPatches\SimpleDelayPatch.hpp = ..\..\Source\OwlPatches\SimpleDelayPatch.hpp
+		..\..\Source\OwlPatches\StateVariableFilterPatch.hpp = ..\..\Source\OwlPatches\StateVariableFilterPatch.hpp
+		..\..\Source\OwlPatches\StereoGainPatch.hpp = ..\..\Source\OwlPatches\StereoGainPatch.hpp
+		..\..\Source\OwlPatches\StereoMixerPatch.hpp = ..\..\Source\OwlPatches\StereoMixerPatch.hpp
+		..\..\Source\OwlPatches\TemplatePatch.hpp = ..\..\Source\OwlPatches\TemplatePatch.hpp
+		..\..\Source\OwlPatches\TestTonePatch.hpp = ..\..\Source\OwlPatches\TestTonePatch.hpp
+		..\..\Source\OwlPatches\WaveshaperPatch.hpp = ..\..\Source\OwlPatches\WaveshaperPatch.hpp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contest", "Contest", "{FFF43014-5703-440A-B4F0-7C0ABF086C3F}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Source\OwlPatches\Contest\BiasedDelayPatch.hpp = ..\..\Source\OwlPatches\Contest\BiasedDelayPatch.hpp
+		..\..\Source\OwlPatches\Contest\BiasPatch.hpp = ..\..\Source\OwlPatches\Contest\BiasPatch.hpp
+		..\..\Source\OwlPatches\Contest\BitH8rPatch.hpp = ..\..\Source\OwlPatches\Contest\BitH8rPatch.hpp
+		..\..\Source\OwlPatches\Contest\blo_bleep.hpp = ..\..\Source\OwlPatches\Contest\blo_bleep.hpp
+		..\..\Source\OwlPatches\Contest\ConnyPatch.hpp = ..\..\Source\OwlPatches\Contest\ConnyPatch.hpp
+		..\..\Source\OwlPatches\Contest\DroneBox.hpp = ..\..\Source\OwlPatches\Contest\DroneBox.hpp
+		..\..\Source\OwlPatches\Contest\DualTremoloPatch.hpp = ..\..\Source\OwlPatches\Contest\DualTremoloPatch.hpp
+		..\..\Source\OwlPatches\Contest\JumpDelay.hpp = ..\..\Source\OwlPatches\Contest\JumpDelay.hpp
+		..\..\Source\OwlPatches\Contest\SampleJitterPatch.hpp = ..\..\Source\OwlPatches\Contest\SampleJitterPatch.hpp
+		..\..\Source\OwlPatches\Contest\SirenPatch.hpp = ..\..\Source\OwlPatches\Contest\SirenPatch.hpp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win-util", "win-util", "{1D5C4F3E-F31E-4BFC-9CDE-1FFDF5E6EB10}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Libraries\win-util\getopt.c = ..\..\Libraries\win-util\getopt.c
+		..\..\Libraries\win-util\getopt.h = ..\..\Libraries\win-util\getopt.h
+		..\..\Libraries\win-util\stdint.h = ..\..\Libraries\win-util\stdint.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{8752F741-228D-4E68-A511-E30999588793}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libusb-1.0 (static)", "C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2010.vcxproj", "{349EE8F9-7D25-4909-AAF5-FF3FADE72187}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dfu-util (static)", "dfu-util (static).vcxproj", "{D012B06F-B4A6-4CBB-AD75-14147DD62E97}"
+	ProjectSection(ProjectDependencies) = postProject
+		{349EE8F9-7D25-4909-AAF5-FF3FADE72187} = {349EE8F9-7D25-4909-AAF5-FF3FADE72187}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,8 +75,20 @@ Global
 		{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}.Debug|Win32.Build.0 = Debug|Win32
 		{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}.Release|Win32.ActiveCfg = Release|Win32
 		{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}.Release|Win32.Build.0 = Release|Win32
+		{349EE8F9-7D25-4909-AAF5-FF3FADE72187}.Debug|Win32.ActiveCfg = Debug|Win32
+		{349EE8F9-7D25-4909-AAF5-FF3FADE72187}.Debug|Win32.Build.0 = Debug|Win32
+		{349EE8F9-7D25-4909-AAF5-FF3FADE72187}.Release|Win32.ActiveCfg = Release|Win32
+		{349EE8F9-7D25-4909-AAF5-FF3FADE72187}.Release|Win32.Build.0 = Release|Win32
+		{D012B06F-B4A6-4CBB-AD75-14147DD62E97}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D012B06F-B4A6-4CBB-AD75-14147DD62E97}.Debug|Win32.Build.0 = Debug|Win32
+		{D012B06F-B4A6-4CBB-AD75-14147DD62E97}.Release|Win32.ActiveCfg = Release|Win32
+		{D012B06F-B4A6-4CBB-AD75-14147DD62E97}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FFF43014-5703-440A-B4F0-7C0ABF086C3F} = {3C7D4E68-C643-4C65-9927-713CEA3F9CA1}
+		{1D5C4F3E-F31E-4BFC-9CDE-1FFDF5E6EB10} = {8752F741-228D-4E68-A511-E30999588793}
 	EndGlobalSection
 EndGlobal

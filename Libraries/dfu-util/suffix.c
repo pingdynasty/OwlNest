@@ -19,8 +19,15 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdint.h>
+
+#ifdef _MSC_VER
+#include "../win-util/getopt.h"
+#include "../win-util/stdint.h"
+#else
 #include <getopt.h>
+#include <stdint.h>
+#endif
+
 #include <string.h>
 
 #include "portable.h"

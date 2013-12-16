@@ -272,9 +272,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     sensitivityComboBox->addItem("Low",LOW);
     sensitivityComboBox->addItem("Medium", MEDIUM);
     sensitivityComboBox->addItem("High", HIGH);
-	#if JUCE_WINDOWS
-	dfuButton->setVisible(0);
-	#endif
+
     if(HIDE_LOW_LEVEL_ITEMS){
         saveButton->setVisible(0);
         leftGainSlider->setVisible(0);
