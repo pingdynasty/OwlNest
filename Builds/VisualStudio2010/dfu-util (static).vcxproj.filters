@@ -58,9 +58,6 @@
     <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Libraries\dfu-util\quirks.c">
       <Filter>Source Files</Filter>
     </ClCompile>

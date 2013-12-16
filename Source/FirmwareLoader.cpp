@@ -10,8 +10,8 @@
 #include <win-util/getopt.h>
 #include <wchar.h>
 #include <io.h>
-#define open(filename, oflag, pmode) _open(filename, oflag, pmode)
-#define close(fd) _close(fd)
+#define open _open
+#define close _close
 #else
 #include <getopt.h>
 #include <unistd.h>

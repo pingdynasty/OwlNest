@@ -28,7 +28,6 @@
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c" />
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c" />
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c" />
-    <ClCompile Include="..\..\Libraries\dfu-util\main.c" />
     <ClCompile Include="..\..\Libraries\dfu-util\quirks.c" />
     <ClCompile Include="..\..\Libraries\dfu-util\suffix.c" />
   </ItemGroup>
@@ -63,7 +62,7 @@
     <OutDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\dfu-util</IntDir>
+    <IntDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\dfu-util\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetName>dfu-util</TargetName>
@@ -72,7 +71,7 @@
     <OutDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\dfu-util</IntDir>
+    <IntDir>$(SolutionDir)..\$(Platform)\$(Configuration)\lib\dfu-util\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetName>dfu-util</TargetName>
@@ -82,9 +81,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\SDKs\libusbx-1.0.17\libusb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -101,12 +100,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\SDKs\libusbx-1.0.17\libusb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>

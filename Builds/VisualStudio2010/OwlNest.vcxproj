@@ -54,7 +54,7 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalIncludeDirectories>C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries;..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;JUCER_VS2010_78A501D=1;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader />
@@ -96,14 +96,14 @@
     <ClCompile>
       <Optimization>MinSpace</Optimization>
       <AdditionalIncludeDirectories>C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries;..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;JUCER_VS2010_78A501D=1;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;JUCER_VS2010_78A501D=1;HAVE_WINDOWS_H;PACKAGE="dfu-util";PACKAGE_VERSION="dfu-util 0.7 (maybe)";PACKAGE_STRING="dfu-util-0.7-maybe";PACKAGE_BUGREPORT="user@example.com";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader />
       <AssemblerListingLocation>$(IntDir)\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)\</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)\</ProgramDataBaseFileName>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -113,7 +113,7 @@
     <Link>
       <OutputFile>$(OutDir)OwlNest.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <ProgramDatabaseFile>$(IntDir)\OwlNest.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>

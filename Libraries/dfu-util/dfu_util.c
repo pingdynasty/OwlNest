@@ -34,6 +34,11 @@
 #include "dfuse.h"
 #include "quirks.h"
 
+
+#ifdef _MSC_VER
+#define strdup _strdup
+#endif
+
 #ifdef HAVE_USBPATH_H
 #include <usbpath.h>
 #endif
