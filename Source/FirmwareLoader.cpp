@@ -7,17 +7,17 @@
 #include <fcntl.h>
 
 #ifdef _MSC_VER
-#include "win-util/getopt.h"
+#include <win-util/getopt.h>
 #include <wchar.h>
 #include <io.h>
 #define open(filename, oflag, pmode) _open(filename, oflag, pmode)
 #define close(fd) _close(fd)
-#define _SSIZE_T_DEFINED // libusb.h
 #else
 #include <getopt.h>
 #include <unistd.h>
 #endif
 
+#define _SSIZE_T_DEFINED
 #include <libusb.h>
 
 extern "C" {
