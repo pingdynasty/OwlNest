@@ -32,7 +32,7 @@
             BufferSecurityCheck=""
             DebugInformationFormat="4"
             AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries\"
-            PreprocessorDefinitions="WIN32;_WINDOWS;DEBUG;_DEBUG;HAVE_WINDOWS_H;JUCER_VS2008_78A5006=1"
+            PreprocessorDefinitions="WIN32;_WINDOWS;DEBUG;_DEBUG;HAVE_WINDOWS_H;_CRT_SECURE_NO_WARNINGS;JUCER_VS2008_78A5006=1"
             RuntimeLibrary="1"
             RuntimeTypeInfo="true"
             UsePrecompiledHeader="0"
@@ -89,7 +89,7 @@
             InlineFunctionExpansion="1"
             StringPooling="true"
             AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries\"
-            PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HAVE_WINDOWS_H;JUCER_VS2008_78A5006=1"
+            PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HAVE_WINDOWS_H;_CRT_SECURE_NO_WARNINGS;JUCER_VS2008_78A5006=1"
             RuntimeLibrary="0"
             RuntimeTypeInfo="true"
             UsePrecompiledHeader="0"
@@ -129,11 +129,68 @@
   <References/>
   <Files>
     <Filter Name="OwlNest">
-      <Filter Name="Source">
+      <Filter Name="Application">
+        <Filter Name="GUI">
+          <File RelativePath="..\..\Source\ApplicationSettingsWindow.cpp"/>
+          <File RelativePath="..\..\Source\ApplicationSettingsWindow.h"/>
+          <File RelativePath="..\..\Source\DualPatchPanel.cpp"/>
+          <File RelativePath="..\..\Source\DualPatchPanel.h"/>
+          <File RelativePath="..\..\Source\OwlNestGui.cpp"/>
+          <File RelativePath="..\..\Source\OwlNestGui.h"/>
+          <File RelativePath="..\..\Source\PatchComponent.cpp"/>
+          <File RelativePath="..\..\Source\PatchComponent.h"/>
+          <File RelativePath="..\..\Source\PatchMode.cpp"/>
+          <File RelativePath="..\..\Source\PatchMode.h"/>
+          <File RelativePath="..\..\Source\StompGui.cpp"/>
+          <File RelativePath="..\..\Source\StompGui.h"/>
+          <File RelativePath="..\..\Source\TransportPanel.cpp"/>
+          <File RelativePath="..\..\Source\TransportPanel.h"/>
+        </Filter>
+        <Filter Name="Plugin">
+          <File RelativePath="..\..\Source\PluginEditor.cpp"/>
+          <File RelativePath="..\..\Source\PluginEditor.h"/>
+          <File RelativePath="..\..\Source\PluginPatchProcessor.cpp"/>
+          <File RelativePath="..\..\Source\PluginPatchProcessor.h"/>
+          <File RelativePath="..\..\Source\PluginProcessor.cpp"/>
+          <File RelativePath="..\..\Source\PluginProcessor.h"/>
+        </Filter>
+        <File RelativePath="..\..\Source\ApplicationCommands.h"/>
         <File RelativePath="..\..\Source\ApplicationConfiguration.cpp"/>
         <File RelativePath="..\..\Source\ApplicationConfiguration.h"/>
-        <Filter Name="icons">
-          <File RelativePath="..\..\Source\icons\icon.png">
+        <File RelativePath="..\..\Source\Enums.h"/>
+        <File RelativePath="..\..\Source\FirmwareLoader.cpp"/>
+        <File RelativePath="..\..\Source\FirmwareLoader.h"/>
+        <File RelativePath="..\..\Source\Main.cpp"/>
+        <File RelativePath="..\..\Source\OpenWareMidiControl.h"/>
+        <File RelativePath="..\..\Source\OwlNestSettings.cpp"/>
+        <File RelativePath="..\..\Source\OwlNestSettings.h"/>
+        <File RelativePath="..\..\Source\PatchProcessor.cpp"/>
+        <File RelativePath="..\..\Source\PatchProcessor.h"/>
+        <File RelativePath="..\..\Source\PatchRegistry.cpp"/>
+        <File RelativePath="..\..\Source\PatchRegistry.h"/>
+        <File RelativePath="..\..\Source\SampleBuffer.cpp"/>
+        <File RelativePath="..\..\Source\SampleBuffer.h"/>
+        <File RelativePath="..\..\Source\SeriesDeviceCallBacks.cpp"/>
+        <File RelativePath="..\..\Source\SeriesDeviceCallBacks.h"/>
+        <File RelativePath="..\..\Source\StompBox.h"/>
+        <File RelativePath="..\..\Source\sysex.c"/>
+        <File RelativePath="..\..\Source\sysex.h"/>
+      </Filter>
+      <Filter Name="Libraries">
+        <Filter Name="dfu-util">
+          <File RelativePath="..\..\Libraries\dfu-util\dfu.c"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfu.h"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfu_file.c"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfu_file.h"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfu_load.c"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfu_load.h"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfu_util.c"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfu_util.h"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfuse.c"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfuse.h"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfuse_mem.c"/>
+          <File RelativePath="..\..\Libraries\dfu-util\dfuse_mem.h"/>
+          <File RelativePath="..\..\Libraries\dfu-util\main.c">
             <FileConfiguration Name="Debug|Win32"
                                ExcludedFromBuild="true">
               <Tool Name="VCCLCompilerTool"/>
@@ -143,70 +200,94 @@
               <Tool Name="VCCLCompilerTool"/>
             </FileConfiguration>
           </File>
+          <File RelativePath="..\..\Libraries\dfu-util\portable.h"/>
+          <File RelativePath="..\..\Libraries\dfu-util\quirks.c"/>
+          <File RelativePath="..\..\Libraries\dfu-util\quirks.h"/>
+          <File RelativePath="..\..\Libraries\dfu-util\suffix.c">
+            <FileConfiguration Name="Debug|Win32"
+                               ExcludedFromBuild="true">
+              <Tool Name="VCCLCompilerTool"/>
+            </FileConfiguration>
+            <FileConfiguration Name="Release|Win32"
+                               ExcludedFromBuild="true">
+              <Tool Name="VCCLCompilerTool"/>
+            </FileConfiguration>
+          </File>
+          <File RelativePath="..\..\Libraries\dfu-util\usb_dfu.h"/>
         </Filter>
-        <Filter Name="Libraries">
-          <Filter Name="dfu-util">
-            <File RelativePath="..\..\Libraries\dfu-util\dfu.c"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfu.h"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfu_file.c"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfu_file.h"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfu_load.c"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfu_load.h"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfu_util.c"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfu_util.h"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfuse.c"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfuse.h"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfuse_mem.c"/>
-            <File RelativePath="..\..\Libraries\dfu-util\dfuse_mem.h"/>
-            <File RelativePath="..\..\Libraries\dfu-util\portable.h"/>
-            <File RelativePath="..\..\Libraries\dfu-util\quirks.c"/>
-            <File RelativePath="..\..\Libraries\dfu-util\quirks.h"/>
-            <File RelativePath="..\..\Libraries\dfu-util\usb_dfu.h"/>
-          </Filter>
+        <Filter Name="win-util">
+          <File RelativePath="..\..\Libraries\win-util\getopt.c">
+            <FileConfiguration Name="Debug|Win32"
+                               ExcludedFromBuild="true">
+              <Tool Name="VCCLCompilerTool"/>
+            </FileConfiguration>
+            <FileConfiguration Name="Release|Win32"
+                               ExcludedFromBuild="true">
+              <Tool Name="VCCLCompilerTool"/>
+            </FileConfiguration>
+          </File>
+          <File RelativePath="..\..\Libraries\win-util\getopt.h"/>
+          <File RelativePath="..\..\Libraries\win-util\stdint.h"/>
         </Filter>
-        <Filter Name="GUI">
-          <File RelativePath="..\..\Source\PatchComponent.cpp"/>
-          <File RelativePath="..\..\Source\PatchComponent.h"/>
-          <File RelativePath="..\..\Source\StompGui.cpp"/>
-          <File RelativePath="..\..\Source\StompGui.h"/>
-          <File RelativePath="..\..\Source\OwlNestGui.cpp"/>
-          <File RelativePath="..\..\Source\OwlNestGui.h"/>
-          <File RelativePath="..\..\Source\DualPatchPanel.cpp"/>
-          <File RelativePath="..\..\Source\DualPatchPanel.h"/>
-          <File RelativePath="..\..\Source\TransportPanel.cpp"/>
-          <File RelativePath="..\..\Source\TransportPanel.h"/>
-          <File RelativePath="..\..\Source\ApplicationSettingsWindow.cpp"/>
-          <File RelativePath="..\..\Source\PatchMode.cpp"/>
-          <File RelativePath="..\..\Source\PatchMode.h"/>
-          <File RelativePath="..\..\Source\ApplicationSettingsWindow.h"/>
-        </Filter>
-        <Filter Name="Plugin">
-          <File RelativePath="..\..\Source\PluginPatchProcessor.cpp"/>
-          <File RelativePath="..\..\Source\PluginPatchProcessor.h"/>
-          <File RelativePath="..\..\Source\PluginEditor.cpp"/>
-          <File RelativePath="..\..\Source\PluginEditor.h"/>
-          <File RelativePath="..\..\Source\PluginProcessor.cpp"/>
-          <File RelativePath="..\..\Source\PluginProcessor.h"/>
-        </Filter>
-        <File RelativePath="..\..\Source\OwlNestSettings.cpp"/>
-        <File RelativePath="..\..\Source\OwlNestSettings.h"/>
-        <File RelativePath="..\..\Source\sysex.c"/>
-        <File RelativePath="..\..\Source\sysex.h"/>
-        <File RelativePath="..\..\Source\Enums.h"/>
-        <File RelativePath="..\..\Source\SeriesDeviceCallBacks.cpp"/>
-        <File RelativePath="..\..\Source\SeriesDeviceCallBacks.h"/>
-        <File RelativePath="..\..\Source\SampleBuffer.cpp"/>
-        <File RelativePath="..\..\Source\SampleBuffer.h"/>
-        <File RelativePath="..\..\Source\PatchRegistry.cpp"/>
-        <File RelativePath="..\..\Source\PatchRegistry.h"/>
-        <File RelativePath="..\..\Source\StompBox.h"/>
-        <File RelativePath="..\..\Source\PatchProcessor.cpp"/>
-        <File RelativePath="..\..\Source\PatchProcessor.h"/>
-        <File RelativePath="..\..\Source\FirmwareLoader.cpp"/>
-        <File RelativePath="..\..\Source\FirmwareLoader.h"/>
-        <File RelativePath="..\..\Source\OpenWareMidiControl.h"/>
-        <File RelativePath="..\..\Source\Main.cpp"/>
       </Filter>
+      <Filter Name="OwlPatches">
+        <Filter Name="Contest">
+          <File RelativePath="..\..\Source\OwlPatches\Contest\BiasedDelayPatch.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\BiasPatch.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\BitH8rPatch.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\blo_bleep.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\ConnyPatch.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\DroneBox.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\DualTremoloPatch.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\JumpDelay.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\SampleJitterPatch.hpp"/>
+          <File RelativePath="..\..\Source\OwlPatches\Contest\SirenPatch.hpp"/>
+        </Filter>
+        <File RelativePath="..\..\Source\OwlPatches\CircularBuffer.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\DroneBoxPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\EnvelopeFilterPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\FixedDelayPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\FlangerPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\FreeVerbPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\GainPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\includes.h"/>
+        <File RelativePath="..\..\Source\OwlPatches\LeakyIntegratorPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\LpfDelayPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\LpfDelayPhaserPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\OctaveDownPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\OverdrivePatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\ParametricEqPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\patches.cpp">
+          <FileConfiguration Name="Debug|Win32"
+                             ExcludedFromBuild="true">
+            <Tool Name="VCCLCompilerTool"/>
+          </FileConfiguration>
+          <FileConfiguration Name="Release|Win32"
+                             ExcludedFromBuild="true">
+            <Tool Name="VCCLCompilerTool"/>
+          </FileConfiguration>
+        </File>
+        <File RelativePath="..\..\Source\OwlPatches\PhaserPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\ResonantFilterPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\SampleBasedPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\SimpleDelayPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\StateVariableFilterPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\StereoGainPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\StereoMixerPatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\TemplatePatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\TestTonePatch.hpp"/>
+        <File RelativePath="..\..\Source\OwlPatches\WaveshaperPatch.hpp"/>
+      </Filter>
+      <File RelativePath="..\..\Source\icons\icon.png">
+        <FileConfiguration Name="Debug|Win32"
+                           ExcludedFromBuild="true">
+          <Tool Name="VCCLCompilerTool"/>
+        </FileConfiguration>
+        <FileConfiguration Name="Release|Win32"
+                           ExcludedFromBuild="true">
+          <Tool Name="VCCLCompilerTool"/>
+        </FileConfiguration>
+      </File>
     </Filter>
     <Filter Name="Juce Modules">
       <Filter Name="juce_audio_basics">

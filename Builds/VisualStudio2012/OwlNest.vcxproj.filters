@@ -5,23 +5,29 @@
     <Filter Include="OwlNest">
       <UniqueIdentifier>{CF459108-824D-88DF-C60F-E829BC67C22D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\Source">
-      <UniqueIdentifier>{9C40025A-C475-3FA8-C4D3-2C7A0E12393A}</UniqueIdentifier>
+    <Filter Include="OwlNest\Application">
+      <UniqueIdentifier>{72A2A148-5C4E-9507-83F4-DBD6353E6349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\Source\icons">
-      <UniqueIdentifier>{4CBA20F5-B6CB-A99D-BCE2-5895415C4E1A}</UniqueIdentifier>
+    <Filter Include="OwlNest\Application\GUI">
+      <UniqueIdentifier>{E224F4DE-1D51-E68B-D323-BB00B2B9B356}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\Source\Libraries">
-      <UniqueIdentifier>{40138BC0-218D-64EC-AC05-C44DEA229182}</UniqueIdentifier>
+    <Filter Include="OwlNest\Application\Plugin">
+      <UniqueIdentifier>{C81D188F-3326-2FD3-84B6-2C90BB8479FD}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\Source\Libraries\dfu-util">
-      <UniqueIdentifier>{7DFB0254-11F0-62E7-2DDE-39DD7DD242CB}</UniqueIdentifier>
+    <Filter Include="OwlNest\Libraries">
+      <UniqueIdentifier>{BAA25B2F-3409-6F4A-41DA-4284C9619AEA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\Source\GUI">
-      <UniqueIdentifier>{F5B62B84-3A58-A7F5-9AED-E97690B24443}</UniqueIdentifier>
+    <Filter Include="OwlNest\Libraries\dfu-util">
+      <UniqueIdentifier>{ACB68D18-2C99-9410-4C60-C7FC8C186C01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\Source\Plugin">
-      <UniqueIdentifier>{55E5CF74-5D60-4012-2AF0-06A9DFA0AF57}</UniqueIdentifier>
+    <Filter Include="OwlNest\Libraries\win-util">
+      <UniqueIdentifier>{68FC28D7-DC5B-0081-7A33-D2BC08074CD9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\OwlPatches">
+      <UniqueIdentifier>{FA699DDB-C6B1-A798-C0FE-2F0B9DBF69B7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OwlNest\OwlPatches\Contest">
+      <UniqueIdentifier>{5FF3B9BE-C189-EE2E-1881-F043A06B8C46}</UniqueIdentifier>
     </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
@@ -292,83 +298,95 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp">
-      <Filter>OwlNest\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\quirks.c">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\PatchComponent.cpp">
-      <Filter>OwlNest\Source\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\StompGui.cpp">
-      <Filter>OwlNest\Source\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\OwlNestGui.cpp">
-      <Filter>OwlNest\Source\GUI</Filter>
+    <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp">
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\DualPatchPanel.cpp">
-      <Filter>OwlNest\Source\GUI</Filter>
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TransportPanel.cpp">
-      <Filter>OwlNest\Source\GUI</Filter>
+    <ClCompile Include="..\..\Source\OwlNestGui.cpp">
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp">
-      <Filter>OwlNest\Source\GUI</Filter>
+    <ClCompile Include="..\..\Source\PatchComponent.cpp">
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PatchMode.cpp">
-      <Filter>OwlNest\Source\GUI</Filter>
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp">
-      <Filter>OwlNest\Source\Plugin</Filter>
+    <ClCompile Include="..\..\Source\StompGui.cpp">
+      <Filter>OwlNest\Application\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TransportPanel.cpp">
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PluginEditor.cpp">
-      <Filter>OwlNest\Source\Plugin</Filter>
+      <Filter>OwlNest\Application\Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp">
+      <Filter>OwlNest\Application\Plugin</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
-      <Filter>OwlNest\Source\Plugin</Filter>
+      <Filter>OwlNest\Application\Plugin</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\OwlNestSettings.cpp">
-      <Filter>OwlNest\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\sysex.c">
-      <Filter>OwlNest\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp">
-      <Filter>OwlNest\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SampleBuffer.cpp">
-      <Filter>OwlNest\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\PatchRegistry.cpp">
-      <Filter>OwlNest\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\PatchProcessor.cpp">
-      <Filter>OwlNest\Source</Filter>
+    <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp">
+      <Filter>OwlNest\Application</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FirmwareLoader.cpp">
-      <Filter>OwlNest\Source</Filter>
+      <Filter>OwlNest\Application</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Main.cpp">
-      <Filter>OwlNest\Source</Filter>
+      <Filter>OwlNest\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\OwlNestSettings.cpp">
+      <Filter>OwlNest\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PatchProcessor.cpp">
+      <Filter>OwlNest\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PatchRegistry.cpp">
+      <Filter>OwlNest\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SampleBuffer.cpp">
+      <Filter>OwlNest\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp">
+      <Filter>OwlNest\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sysex.c">
+      <Filter>OwlNest\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\main.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\quirks.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\dfu-util\suffix.c">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\win-util\getopt.c">
+      <Filter>OwlNest\Libraries\win-util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\OwlPatches\patches.cpp">
+      <Filter>OwlNest\OwlPatches</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>
@@ -1497,95 +1515,206 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\ApplicationConfiguration.h">
-      <Filter>OwlNest\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\portable.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\quirks.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h">
-      <Filter>OwlNest\Source\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\PatchComponent.h">
-      <Filter>OwlNest\Source\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\StompGui.h">
-      <Filter>OwlNest\Source\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlNestGui.h">
-      <Filter>OwlNest\Source\GUI</Filter>
+    <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h">
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\DualPatchPanel.h">
-      <Filter>OwlNest\Source\GUI</Filter>
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TransportPanel.h">
-      <Filter>OwlNest\Source\GUI</Filter>
+    <ClInclude Include="..\..\Source\OwlNestGui.h">
+      <Filter>OwlNest\Application\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PatchComponent.h">
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PatchMode.h">
-      <Filter>OwlNest\Source\GUI</Filter>
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h">
-      <Filter>OwlNest\Source\GUI</Filter>
+    <ClInclude Include="..\..\Source\StompGui.h">
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\PluginPatchProcessor.h">
-      <Filter>OwlNest\Source\Plugin</Filter>
+    <ClInclude Include="..\..\Source\TransportPanel.h">
+      <Filter>OwlNest\Application\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginEditor.h">
-      <Filter>OwlNest\Source\Plugin</Filter>
+      <Filter>OwlNest\Application\Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PluginPatchProcessor.h">
+      <Filter>OwlNest\Application\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginProcessor.h">
-      <Filter>OwlNest\Source\Plugin</Filter>
+      <Filter>OwlNest\Application\Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\OwlNestSettings.h">
-      <Filter>OwlNest\Source</Filter>
+    <ClInclude Include="..\..\Source\ApplicationCommands.h">
+      <Filter>OwlNest\Application</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\sysex.h">
-      <Filter>OwlNest\Source</Filter>
+    <ClInclude Include="..\..\Source\ApplicationConfiguration.h">
+      <Filter>OwlNest\Application</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Enums.h">
-      <Filter>OwlNest\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SeriesDeviceCallBacks.h">
-      <Filter>OwlNest\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SampleBuffer.h">
-      <Filter>OwlNest\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\PatchRegistry.h">
-      <Filter>OwlNest\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\StompBox.h">
-      <Filter>OwlNest\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\PatchProcessor.h">
-      <Filter>OwlNest\Source</Filter>
+      <Filter>OwlNest\Application</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FirmwareLoader.h">
-      <Filter>OwlNest\Source</Filter>
+      <Filter>OwlNest\Application</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\OpenWareMidiControl.h">
-      <Filter>OwlNest\Source</Filter>
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlNestSettings.h">
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PatchProcessor.h">
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PatchRegistry.h">
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SampleBuffer.h">
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SeriesDeviceCallBacks.h">
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\StompBox.h">
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\sysex.h">
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\portable.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\quirks.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h">
+      <Filter>OwlNest\Libraries\dfu-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\win-util\getopt.h">
+      <Filter>OwlNest\Libraries\win-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\win-util\stdint.h">
+      <Filter>OwlNest\Libraries\win-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\BiasedDelayPatch.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\BiasPatch.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\BitH8rPatch.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\blo_bleep.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\ConnyPatch.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\DroneBox.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\DualTremoloPatch.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\JumpDelay.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\SampleJitterPatch.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\SirenPatch.hpp">
+      <Filter>OwlNest\OwlPatches\Contest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\CircularBuffer.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\DroneBoxPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\EnvelopeFilterPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\FixedDelayPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\FlangerPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\FreeVerbPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\GainPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\includes.h">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\LeakyIntegratorPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\LpfDelayPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\LpfDelayPhaserPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\OctaveDownPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\OverdrivePatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\ParametricEqPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\PhaserPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\ResonantFilterPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\SampleBasedPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\SimpleDelayPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\StateVariableFilterPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\StereoGainPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\StereoMixerPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\TemplatePatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\TestTonePatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\WaveshaperPatch.hpp">
+      <Filter>OwlNest\OwlPatches</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>
@@ -2811,7 +2940,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\icons\icon.png">
-      <Filter>OwlNest\Source\icons</Filter>
+      <Filter>OwlNest</Filter>
     </None>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_module_info">
       <Filter>Juce Modules\juce_audio_basics</Filter>
