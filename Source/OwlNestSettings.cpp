@@ -32,8 +32,16 @@ StringArray& OwlNestSettings::getPresetNames(){
   return presets;
 }
 
+StringArray& OwlNestSettings::getParameterNames(){
+  return parameters;
+}
+
 void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
   presets.set(index, String(name, size));
+}
+
+void OwlNestSettings::handleParameterNameMessage(uint8_t index, const char* name, int size){
+  parameters.set(index, String(name, size));
 }
 
 void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message){
@@ -46,12 +54,17 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
     const uint8 *data = message.getSysExData();
     if(data[0] == MIDI_SYSEX_MANUFACTURER && data[1] == MIDI_SYSEX_DEVICE){
       switch(data[2]){
-      case SYSEX_PRESET_NAME_COMMAND:{
+      case SYSEX_PRESET_NAME_COMMAND: {
 	handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
+	// hasChanged = true;
+	break;
+      }
+      case SYSEX_PARAMETER_NAME_COMMAND: {
+	handleParameterNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
 	hasChanged = true;
 	break;
       }
-      case SYSEX_FIRMWARE_VERSION:{
+      case SYSEX_FIRMWARE_VERSION: {
 	handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
 	break;
       }

@@ -90,7 +90,7 @@ private:
     ScopedPointer<Slider> leftGainSlider;
     ScopedPointer<Label> leftGainLabel;
     ScopedPointer<TextButton> saveButton;
-    ScopedPointer<TextButton> dfuButton;
+    ScopedPointer<TextButton> deviceInfoButton;
     ScopedPointer<ToggleButton> bypassButton;
     ScopedPointer<ToggleButton> swapLRButton;
     ScopedPointer<Label> rightGainLabel;
@@ -118,6 +118,14 @@ private:
     ScopedPointer<ComboBox> sensitivityComboBox;
     ScopedPointer<Label> patchSlotBLabel2;
     ScopedPointer<TextButton> connectionButton;
+    ScopedPointer<Slider> slider4;
+    ScopedPointer<Slider> slider3;
+    ScopedPointer<Label> label3;
+    ScopedPointer<Label> label4;
+    ScopedPointer<Label> label1;
+    ScopedPointer<Slider> slider1;
+    ScopedPointer<Label> label2;
+    ScopedPointer<Slider> slider2;
     Image cachedImage_owlFaceplate_png;
 
 

@@ -43,7 +43,7 @@ void JUCEApplicationBase::setApplicationReturnValue (const int newReturnValue) n
 {
     appReturnValue = newReturnValue;
 }
-
+    
 // This is called on the Mac and iOS where the OS doesn't allow the stack to unwind on shutdown..
 void JUCEApplicationBase::appWillTerminateByForce()
 {

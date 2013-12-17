@@ -33,6 +33,7 @@ public:
   int getCc(int cc);            // get value of a given cc
   void setCc(int cc,int value);  // set a value for a given cc
   StringArray& getPresetNames();
+  StringArray& getParameterNames();
   uint64 getLastMidiMessageTime();
   // bool isConnected();
   bool updateFirmware();
@@ -47,9 +48,11 @@ private:
   Value& theUpdateGui;
   AudioDeviceManager& theDm;
   StringArray presets;
+  StringArray parameters;
   uint64 lastMidiMessageTime;
   void handleIncomingMidiMessage(MidiInput* source, const MidiMessage& message);
   void handlePresetNameMessage(uint8_t index, const char* name, int size);
+  void handleParameterNameMessage(uint8_t index, const char* name, int size);
   void handleFirmwareVersionMessage(const char* name, int size);
   void handleDeviceIdMessage(uint8_t* data, int size);
   void handleSelfTestMessage(uint8_t data);
