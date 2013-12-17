@@ -14,6 +14,7 @@
 #include "OpenWareMidiControl.h"
 #include "FirmwareLoader.h"
 #include "ApplicationCommands.h"
+#include "ApplicationConfiguration.h"
 
 OwlNestSettings::OwlNestSettings(AudioDeviceManager& dm, Value& updateGui):
 theDm(dm), theUpdateGui(updateGui)
@@ -27,8 +28,20 @@ OwlNestSettings::~OwlNestSettings(){
   theDm.removeMidiInputCallback(String::empty, this);
 }
 
+StringArray& OwlNestSettings::getPresetNames(){
+  return presets;
+}
+
+StringArray& OwlNestSettings::getParameterNames(){
+  return parameters;
+}
+
 void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
   presets.set(index, String(name, size));
+}
+
+void OwlNestSettings::handleParameterNameMessage(uint8_t index, const char* name, int size){
+  parameters.set(index, String(name, size));
 }
 
 void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message){
@@ -41,12 +54,17 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
     const uint8 *data = message.getSysExData();
     if(data[0] == MIDI_SYSEX_MANUFACTURER && data[1] == MIDI_SYSEX_DEVICE){
       switch(data[2]){
-      case SYSEX_PRESET_NAME_COMMAND:{
+      case SYSEX_PRESET_NAME_COMMAND: {
 	handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
+	// hasChanged = true;
+	break;
+      }
+      case SYSEX_PARAMETER_NAME_COMMAND: {
+	handleParameterNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
 	hasChanged = true;
 	break;
       }
-      case SYSEX_FIRMWARE_VERSION:{
+      case SYSEX_FIRMWARE_VERSION: {
 	handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
 	break;
       }
@@ -136,17 +154,34 @@ uint64 OwlNestSettings::getLastMidiMessageTime(){
     return lastMidiMessageTime;
 }
 
-bool OwlNestSettings::updateFirmware(){
-  FileChooser chooser("Select Firmware",
-		      File::getSpecialLocation (File::currentApplicationFile),
-// 		      File::getSpecialLocation (File::userHomeDirectory/),
-		      "*.bin");
+bool OwlNestSettings::updateBootloader(){
+  DBG("Update bootloader");
+  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+  String options = props->getValue("bootloader-dfu-options");
+  FileChooser chooser("Select Bootloader", ApplicationConfiguration::getApplicationDirectory(), "*.bin");		      
   if(chooser.browseForFileToOpen()){
     // put device into DFU mode
     setCc(DEVICE_FIRMWARE_UPDATE, 127);
     File file = chooser.getResult();
     FirmwareLoader loader;
-    loader.updateFirmware(file);
+    loader.updateFirmware(file, options);
+    return true;
+  }else{
+    return false;
+  }
+}
+
+bool OwlNestSettings::updateFirmware(){
+  DBG("Update firmware!");
+  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+  String options = props->getValue("firmware-dfu-options");
+  FileChooser chooser("Select Firmware", ApplicationConfiguration::getApplicationDirectory(), "*.bin");		      
+  if(chooser.browseForFileToOpen()){
+    // put device into DFU mode
+    setCc(DEVICE_FIRMWARE_UPDATE, 127);
+    File file = chooser.getResult();
+    FirmwareLoader loader;
+    loader.updateFirmware(file, options);
     return true;
   }else{
     return false;
@@ -156,6 +191,7 @@ bool OwlNestSettings::updateFirmware(){
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
   commands.add(ApplicationCommands::updateFirmware);
   commands.add(ApplicationCommands::updateBootloader);
+  commands.add(ApplicationCommands::checkForUpdates);
 }
 
 void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
@@ -165,9 +201,18 @@ void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo
     break;
   case ApplicationCommands::updateBootloader:
     result.setInfo("Update Bootloader", String::empty, String::empty, 0);
-    result.setActive(false);
+    break;
+  case ApplicationCommands::checkForUpdates:
+    result.setInfo("Check for Updates", String::empty, String::empty, 0);
     break;
   }
+}
+
+void OwlNestSettings::checkForUpdates(){
+  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+  URL url(props->getValue("owl-updates-url"));
+  if(url.isWellFormed())
+    url.launchInDefaultBrowser();
 }
 
 bool OwlNestSettings::perform(const InvocationInfo& info){
@@ -176,7 +221,10 @@ bool OwlNestSettings::perform(const InvocationInfo& info){
     updateFirmware();
     break;
   case ApplicationCommands::updateBootloader:
-    DBG("Update bootloader: todo!");
+    updateBootloader();
+    break;
+  case ApplicationCommands::checkForUpdates:
+    checkForUpdates();
     break;
   }
   return true;

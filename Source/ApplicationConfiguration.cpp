@@ -16,22 +16,30 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
     opts.applicationName = "OwlNest";
     opts.filenameSuffix = ".properties";
     properties = new PropertiesFile(opts);
-    if(!properties->containsKey("presetdirectory"))
-      properties->setValue("presetdirectory", File::getSpecialLocation(File::userDocumentsDirectory)
+    if(!properties->containsKey("application-directory"))
+      properties->setValue("application-directory", File::getSpecialLocation(File::userDocumentsDirectory)
 			   .getChildFile(opts.applicationName).getFullPathName());
-    if(!properties->containsKey("midioutput"))
-      properties->setValue("midioutput", "OWL FS");
-    if(!properties->containsKey("midiinput"))
-      properties->setValue("midiinput", "OWL FS");
+    if(!properties->containsKey("midi-output"))
+      properties->setValue("midi-output", "OWL FS");
+    if(!properties->containsKey("midi-input"))
+      properties->setValue("midi-input", "OWL FS");
+    if(!properties->containsKey("bootloader-dfu-options"))
+      properties->setValue("bootloader-dfu-options", "0x8000000:leave");
+    if(!properties->containsKey("firmware-dfu-options"))
+      properties->setValue("firmware-dfu-options", "0x8008000:leave");
+    if(!properties->containsKey("owl-updates-url"))
+      properties->setValue("owl-updates-url", "http://hoxtonowl.com/software/updates");
     if(!properties->isValidFile())
       std::cerr << "Invalid properties file: " << properties->getFile().getFullPathName() << std::endl;
   }
   return properties;
 }
 
-File ApplicationConfiguration::getPresetDirectory(){
-  PropertiesFile* properties = getApplicationProperties();
-  File dir(properties->getValue("presetdirectory"));
+File ApplicationConfiguration::getApplicationDirectory(){
+  PropertySet* properties = getApplicationProperties();
+  File dir(properties->getValue("application-directory"));
+  if(!dir.exists())
+    dir.createDirectory();
   return dir;
 }
 

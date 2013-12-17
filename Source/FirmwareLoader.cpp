@@ -46,7 +46,7 @@ extern "C" {
   const char *match_serial_dfu;
 }
 
-int FirmwareLoader::updateFirmware(File& firmware){
+int FirmwareLoader::updateFirmware(File& firmware, const String& options){
   struct dfu_status status;
   libusb_context *ctx;
   int expected_size = 0;
@@ -69,7 +69,7 @@ int FirmwareLoader::updateFirmware(File& firmware){
   match_config_index = 1; // -c n
   match_iface_index = 0; // -i n
   match_iface_alt_index = 0; // -a n
-  dfuse_options = "0x8000000:leave"; // -s ccc
+  dfuse_options = options.toUTF8(); // -s ccc
   mode = MODE_DOWNLOAD;
   final_reset = 1;
 

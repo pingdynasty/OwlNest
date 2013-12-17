@@ -75,9 +75,9 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     saveButton->setButtonText ("Save to OWL");
     saveButton->addListener (this);
 
-    addAndMakeVisible (dfuButton = new TextButton ("new button"));
-    dfuButton->setButtonText ("Firmware Update");
-    dfuButton->addListener (this);
+    addAndMakeVisible (deviceInfoButton = new TextButton ("new button"));
+    deviceInfoButton->setButtonText ("Device Info");
+    deviceInfoButton->addListener (this);
 
     addAndMakeVisible (bypassButton = new ToggleButton ("new toggle button"));
     bypassButton->setButtonText ("Codec Bypass");
@@ -252,6 +252,72 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     connectionButton->setButtonText (String::empty);
     connectionButton->setColour (TextButton::buttonColourId, Colours::grey);
 
+    addAndMakeVisible (slider4 = new Slider ("new slider"));
+    slider4->setRange (0, 1, 0);
+    slider4->setSliderStyle (Slider::RotaryVerticalDrag);
+    slider4->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    slider4->setColour (Slider::backgroundColourId, Colours::azure);
+    slider4->setColour (Slider::thumbColourId, Colours::cornflowerblue);
+    slider4->setColour (Slider::rotarySliderFillColourId, Colours::black);
+    slider4->addListener (this);
+
+    addAndMakeVisible (slider3 = new Slider ("new slider"));
+    slider3->setRange (0, 1, 0);
+    slider3->setSliderStyle (Slider::RotaryVerticalDrag);
+    slider3->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    slider3->setColour (Slider::thumbColourId, Colours::cornflowerblue);
+    slider3->setColour (Slider::trackColourId, Colours::red);
+    slider3->setColour (Slider::rotarySliderFillColourId, Colours::black);
+    slider3->addListener (this);
+
+    addAndMakeVisible (label3 = new Label ("new label",
+                                           "C"));
+    label3->setFont (Font (15.00f, Font::bold));
+    label3->setJustificationType (Justification::centred);
+    label3->setEditable (false, false, false);
+    label3->setColour (TextEditor::textColourId, Colours::black);
+    label3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label4 = new Label ("new label",
+                                           "D"));
+    label4->setFont (Font (15.00f, Font::bold));
+    label4->setJustificationType (Justification::centred);
+    label4->setEditable (false, false, false);
+    label4->setColour (TextEditor::textColourId, Colours::black);
+    label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label1 = new Label ("new label",
+                                           "A"));
+    label1->setFont (Font (15.00f, Font::bold));
+    label1->setJustificationType (Justification::centred);
+    label1->setEditable (false, false, false);
+    label1->setColour (TextEditor::textColourId, Colours::black);
+    label1->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (slider1 = new Slider ("new slider"));
+    slider1->setRange (0, 1, 0);
+    slider1->setSliderStyle (Slider::RotaryVerticalDrag);
+    slider1->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    slider1->setColour (Slider::thumbColourId, Colours::cornflowerblue);
+    slider1->setColour (Slider::rotarySliderFillColourId, Colours::black);
+    slider1->addListener (this);
+
+    addAndMakeVisible (label2 = new Label ("new label",
+                                           "B"));
+    label2->setFont (Font (15.00f, Font::bold));
+    label2->setJustificationType (Justification::centred);
+    label2->setEditable (false, false, false);
+    label2->setColour (TextEditor::textColourId, Colours::black);
+    label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (slider2 = new Slider ("new slider"));
+    slider2->setRange (0, 1, 0);
+    slider2->setSliderStyle (Slider::RotaryVerticalDrag);
+    slider2->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    slider2->setColour (Slider::thumbColourId, Colours::cornflowerblue);
+    slider2->setColour (Slider::rotarySliderFillColourId, Colours::black);
+    slider2->addListener (this);
+
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
     //[UserPreSize]
@@ -272,6 +338,11 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     sensitivityComboBox->addItem("Low",LOW);
     sensitivityComboBox->addItem("Medium", MEDIUM);
     sensitivityComboBox->addItem("High", HIGH);
+
+    slider1->setEnabled(false);
+    slider2->setEnabled(false);
+    slider3->setEnabled(false);
+    slider4->setEnabled(false);
 
     if(HIDE_LOW_LEVEL_ITEMS){
         saveButton->setVisible(0);
@@ -314,7 +385,7 @@ OwlNestGui::~OwlNestGui()
     leftGainSlider = nullptr;
     leftGainLabel = nullptr;
     saveButton = nullptr;
-    dfuButton = nullptr;
+    deviceInfoButton = nullptr;
     bypassButton = nullptr;
     swapLRButton = nullptr;
     rightGainLabel = nullptr;
@@ -342,6 +413,14 @@ OwlNestGui::~OwlNestGui()
     sensitivityComboBox = nullptr;
     patchSlotBLabel2 = nullptr;
     connectionButton = nullptr;
+    slider4 = nullptr;
+    slider3 = nullptr;
+    label3 = nullptr;
+    label4 = nullptr;
+    label1 = nullptr;
+    slider1 = nullptr;
+    label2 = nullptr;
+    slider2 = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -375,7 +454,7 @@ void OwlNestGui::resized()
     leftGainSlider->setBounds (132, 492, 150, 24);
     leftGainLabel->setBounds (17, 492, 112, 24);
     saveButton->setBounds (216, 392, 150, 24);
-    dfuButton->setBounds (384, 392, 150, 24);
+    deviceInfoButton->setBounds (384, 392, 150, 24);
     bypassButton->setBounds (430, 488, 150, 24);
     swapLRButton->setBounds (614, 488, 150, 24);
     rightGainLabel->setBounds (17, 521, 112, 24);
@@ -403,6 +482,14 @@ void OwlNestGui::resized()
     sensitivityComboBox->setBounds (488, 348, 150, 24);
     patchSlotBLabel2->setBounds (488, 324, 144, 24);
     connectionButton->setBounds (16, 424, 16, 16);
+    slider4->setBounds (584, 29, 90, 90);
+    slider3->setBounds (416, 29, 90, 90);
+    label3->setBounds (416, 114, 90, 24);
+    label4->setBounds (584, 114, 90, 24);
+    label1->setBounds (80, 114, 90, 24);
+    slider1->setBounds (80, 29, 90, 90);
+    label2->setBounds (248, 114, 90, 24);
+    slider2->setBounds (248, 29, 90, 90);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -530,12 +617,12 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
 	setStatus("Saved settings to OWL");
         //[/UserButtonCode_saveButton]
     }
-    else if (buttonThatWasClicked == dfuButton)
+    else if (buttonThatWasClicked == deviceInfoButton)
     {
-        //[UserButtonCode_dfuButton] -- add your button handler code here..
-      setStatus("Updating firmware...");
-      updateFirmware();
-        //[/UserButtonCode_dfuButton]
+        //[UserButtonCode_deviceInfoButton] -- add your button handler code here..
+          theSettings.setCc(REQUEST_SETTINGS, 0);
+	  setStatus("Requested Device Information");
+        //[/UserButtonCode_deviceInfoButton]
     }
     else if (buttonThatWasClicked == bypassButton)
     {
@@ -590,8 +677,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_resetButton] -- add your button handler code here..
         theSettings.setCc(FACTORY_RESET, 127);
-	theSettings.setCc(REQUEST_SETTINGS, 0); // request self test and device ID
-        setStatus("factory reset");
+        setStatus("Factory Reset");
         //[/UserButtonCode_resetButton]
     }
 
@@ -628,6 +714,26 @@ void OwlNestGui::sliderValueChanged (Slider* sliderThatWasMoved)
         theSettings.setCc(RIGHT_OUTPUT_GAIN,outGainDbToMidi(rightOutGainSlider->getValue()));
         //[/UserSliderCode_rightOutGainSlider]
     }
+    else if (sliderThatWasMoved == slider4)
+    {
+        //[UserSliderCode_slider4] -- add your slider handling code here..
+        //[/UserSliderCode_slider4]
+    }
+    else if (sliderThatWasMoved == slider3)
+    {
+        //[UserSliderCode_slider3] -- add your slider handling code here..
+        //[/UserSliderCode_slider3]
+    }
+    else if (sliderThatWasMoved == slider1)
+    {
+        //[UserSliderCode_slider1] -- add your slider handling code here..
+        //[/UserSliderCode_slider1]
+    }
+    else if (sliderThatWasMoved == slider2)
+    {
+        //[UserSliderCode_slider2] -- add your slider handling code here..
+        //[/UserSliderCode_slider2]
+    }
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -645,14 +751,29 @@ void OwlNestGui::setStatus(const juce::String& msg){
 }
 
 void OwlNestGui::settingsChanged() {
-    StringArray& names = theSettings.getPresetNames();
-    if(names.size() != 0){
+    StringArray& presets = theSettings.getPresetNames();
+    if(presets.size() != 0){
       patchSlotAComboBox->clear(dontSendNotification);
       patchSlotBComboBox->clear(dontSendNotification);
-      patchSlotAComboBox->addItemList(names, 1);
-      patchSlotBComboBox->addItemList(names, 1);
+      patchSlotAComboBox->addItemList(presets, 1);
+      patchSlotBComboBox->addItemList(presets, 1);
       setStatus("Settings loaded");
     }
+
+    // Parameter names
+    StringArray& parameters = theSettings.getParameterNames();
+    if(parameters.size() == 4){      
+      label1->setText(parameters[0], dontSendNotification);
+      label2->setText(parameters[1], dontSendNotification);
+      label3->setText(parameters[2], dontSendNotification);
+      label4->setText(parameters[3], dontSendNotification);
+    }
+
+    // Parameter values
+    slider1->setValue(theSettings.getCc(PATCH_PARAMETER_A)/127.0);
+    slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0);
+    slider3->setValue(theSettings.getCc(PATCH_PARAMETER_C)/127.0);
+    slider4->setValue(theSettings.getCc(PATCH_PARAMETER_D)/127.0);
 
     // LED button
     int v = theSettings.getCc(LED);
@@ -833,8 +954,8 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="new button" id="f37a6fa0e6074e35" memberName="saveButton"
               virtualName="" explicitFocusOrder="0" pos="216 392 150 24" buttonText="Save to OWL"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="new button" id="49395e88504ed9a4" memberName="dfuButton"
-              virtualName="" explicitFocusOrder="0" pos="384 392 150 24" buttonText="Firmware Update"
+  <TEXTBUTTON name="new button" id="49395e88504ed9a4" memberName="deviceInfoButton"
+              virtualName="" explicitFocusOrder="0" pos="384 392 150 24" buttonText="Device Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
                 virtualName="" explicitFocusOrder="0" pos="430 488 150 24" buttonText="Codec Bypass"
@@ -939,6 +1060,46 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="connectionButton"
               virtualName="" explicitFocusOrder="0" pos="16 424 16 16" bgColOff="ff808080"
               buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"/>
+  <SLIDER name="new slider" id="1c26ed829054fb4" memberName="slider4" virtualName=""
+          explicitFocusOrder="0" pos="584 29 90 90" bkgcol="fff0ffff" thumbcol="ff6495ed"
+          rotarysliderfill="ff000000" min="0" max="1" int="0" style="RotaryVerticalDrag"
+          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
+          textBoxHeight="20" skewFactor="1"/>
+  <SLIDER name="new slider" id="e44596456ad5f45a" memberName="slider3"
+          virtualName="" explicitFocusOrder="0" pos="416 29 90 90" thumbcol="ff6495ed"
+          trackcol="ffff0000" rotarysliderfill="ff000000" min="0" max="1"
+          int="0" style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
+          textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
+  <LABEL name="new label" id="c6868610a29034d9" memberName="label3" virtualName=""
+         explicitFocusOrder="0" pos="416 114 90 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="C" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="1" italic="0" justification="36"/>
+  <LABEL name="new label" id="35cbf618dd2e7081" memberName="label4" virtualName=""
+         explicitFocusOrder="0" pos="584 114 90 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="D" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="1" italic="0" justification="36"/>
+  <LABEL name="new label" id="fbcc8348dda6e61" memberName="label1" virtualName=""
+         explicitFocusOrder="0" pos="80 114 90 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="A" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="1" italic="0" justification="36"/>
+  <SLIDER name="new slider" id="d09e9694cb2d845d" memberName="slider1"
+          virtualName="" explicitFocusOrder="0" pos="80 29 90 90" thumbcol="ff6495ed"
+          rotarysliderfill="ff000000" min="0" max="1" int="0" style="RotaryVerticalDrag"
+          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
+          textBoxHeight="20" skewFactor="1"/>
+  <LABEL name="new label" id="83868abb5ff5c18f" memberName="label2" virtualName=""
+         explicitFocusOrder="0" pos="248 114 90 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="B" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="1" italic="0" justification="36"/>
+  <SLIDER name="new slider" id="38cf3a8b43a9e95" memberName="slider2" virtualName=""
+          explicitFocusOrder="0" pos="248 29 90 90" thumbcol="ff6495ed"
+          rotarysliderfill="ff000000" min="0" max="1" int="0" style="RotaryVerticalDrag"
+          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
+          textBoxHeight="20" skewFactor="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

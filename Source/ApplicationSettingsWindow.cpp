@@ -41,9 +41,9 @@ ApplicationSettingsWindow::ApplicationSettingsWindow (AudioDeviceManager& device
     setSize (600, 400);
 
     //[Constructor] You can add your own custom stuff here..
-    PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
-    deviceManager.setDefaultMidiOutput(properties->getValue("midioutput"));
-    deviceManager.setMidiInputEnabled(properties->getValue("midiinput"), 1);
+    PropertySet* properties = ApplicationConfiguration::getApplicationProperties();
+    deviceManager.setDefaultMidiOutput(properties->getValue("midi-output"));
+    deviceManager.setMidiInputEnabled(properties->getValue("midi-input"), 1);
     //[/Constructor]
 }
 
