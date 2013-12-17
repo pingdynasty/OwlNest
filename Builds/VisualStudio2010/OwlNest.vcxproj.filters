@@ -352,9 +352,6 @@
     <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp">
       <Filter>OwlNest\Application</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sysex.c">
-      <Filter>OwlNest\Application</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu.c">
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClCompile>
@@ -385,8 +382,11 @@
     <ClCompile Include="..\..\Libraries\win-util\getopt.c">
       <Filter>OwlNest\Libraries\win-util</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Libraries\sysex.c">
+      <Filter>OwlNest\Libraries</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\OwlPatches\patches.cpp">
-      <Filter>OwlNest\OwlPatches</Filter>
+      <Filter>OwlNest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>
@@ -1578,9 +1578,6 @@
     <ClInclude Include="..\..\Source\StompBox.h">
       <Filter>OwlNest\Application</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\sysex.h">
-      <Filter>OwlNest\Application</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu.h">
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClInclude>
@@ -1613,6 +1610,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Libraries\win-util\stdint.h">
       <Filter>OwlNest\Libraries\win-util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\sysex.h">
+      <Filter>OwlNest\Libraries</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\OwlPatches\Contest\BiasedDelayPatch.hpp">
       <Filter>OwlNest\OwlPatches\Contest</Filter>
@@ -1665,9 +1665,6 @@
     <ClInclude Include="..\..\Source\OwlPatches\GainPatch.hpp">
       <Filter>OwlNest\OwlPatches</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\includes.h">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\OwlPatches\LeakyIntegratorPatch.hpp">
       <Filter>OwlNest\OwlPatches</Filter>
     </ClInclude>
@@ -1715,6 +1712,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\OwlPatches\WaveshaperPatch.hpp">
       <Filter>OwlNest\OwlPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OwlPatches\includes.h">
+      <Filter>OwlNest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>

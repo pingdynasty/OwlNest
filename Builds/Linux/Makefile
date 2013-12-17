@@ -67,7 +67,6 @@ OBJECTS := \
   $(OBJDIR)/PatchRegistry_cb5b7186.o \
   $(OBJDIR)/SampleBuffer_5a386a13.o \
   $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
-  $(OBJDIR)/sysex_4a684601.o \
   $(OBJDIR)/dfu_ad6672eb.o \
   $(OBJDIR)/dfu_file_6fdc65a.o \
   $(OBJDIR)/dfu_load_118a6344.o \
@@ -75,6 +74,7 @@ OBJECTS := \
   $(OBJDIR)/dfuse_edb4cf3d.o \
   $(OBJDIR)/dfuse_mem_b06ad2d3.o \
   $(OBJDIR)/quirks_144d50c7.o \
+  $(OBJDIR)/sysex_728d86ff.o \
   $(OBJDIR)/BinaryData_ce4232d4.o \
   $(OBJDIR)/juce_audio_basics_2442e4ea.o \
   $(OBJDIR)/juce_audio_devices_a4c8a728.o \
@@ -197,11 +197,6 @@ $(OBJDIR)/SeriesDeviceCallBacks_31482262.o: ../../Source/SeriesDeviceCallBacks.c
 	@echo "Compiling SeriesDeviceCallBacks.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/sysex_4a684601.o: ../../Source/sysex.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling sysex.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/dfu_ad6672eb.o: ../../Libraries/dfu-util/dfu.c
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling dfu.c"
@@ -235,6 +230,11 @@ $(OBJDIR)/dfuse_mem_b06ad2d3.o: ../../Libraries/dfu-util/dfuse_mem.c
 $(OBJDIR)/quirks_144d50c7.o: ../../Libraries/dfu-util/quirks.c
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling quirks.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/sysex_728d86ff.o: ../../Libraries/sysex.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling sysex.c"
 	@$(CC) $(CFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/BinaryData_ce4232d4.o: ../../JuceLibraryCode/BinaryData.cpp

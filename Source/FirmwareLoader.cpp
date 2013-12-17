@@ -21,14 +21,14 @@
 #include <libusb.h>
 
 extern "C" {
-#include "dfu-util/portable.h"
-#include "dfu-util/dfu.h"
-#include "dfu-util/usb_dfu.h"
-#include "dfu-util/dfu_file.h"
-#include "dfu-util/dfu_load.h"
-#include "dfu-util/dfu_util.h"
-#include "dfu-util/dfuse.h"
-#include "dfu-util/quirks.h"
+#include <dfu-util/portable.h>
+#include <dfu-util/dfu.h>
+#include <dfu-util/usb_dfu.h>
+#include <dfu-util/dfu_file.h>
+#include <dfu-util/dfu_load.h>
+#include <dfu-util/dfu_util.h>
+#include <dfu-util/dfuse.h>
+#include <dfu-util/quirks.h>
 
   int verbose = 0;
   struct dfu_if *dfu_root;

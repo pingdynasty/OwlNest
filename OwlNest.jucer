@@ -75,8 +75,6 @@
       <FILE id="b7QvIe" name="SeriesDeviceCallBacks.h" compile="0" resource="0"
             file="Source/SeriesDeviceCallBacks.h"/>
       <FILE id="fBeDu6" name="StompBox.h" compile="0" resource="0" file="Source/StompBox.h"/>
-      <FILE id="hGI8rn" name="sysex.c" compile="1" resource="0" file="Source/sysex.c"/>
-      <FILE id="XHp0f6" name="sysex.h" compile="0" resource="0" file="Source/sysex.h"/>
     </GROUP>
     <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
       <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">
@@ -104,6 +102,8 @@
         <FILE id="nb12yk" name="getopt.h" compile="0" resource="0" file="Libraries/win-util/getopt.h"/>
         <FILE id="BLpYzc" name="stdint.h" compile="0" resource="0" file="Libraries/win-util/stdint.h"/>
       </GROUP>
+      <FILE id="DTfdpv" name="sysex.c" compile="1" resource="0" file="Libraries/sysex.c"/>
+      <FILE id="f4xkxv" name="sysex.h" compile="0" resource="0" file="Libraries/sysex.h"/>
     </GROUP>
     <GROUP id="{692AC0D0-196C-0778-C9D0-843504D4DD87}" name="OwlPatches">
       <GROUP id="{6FC858EF-470A-B91A-2739-A7FF03F68FE9}" name="Contest">
@@ -134,7 +134,6 @@
       <FILE id="aGY9oi" name="FreeVerbPatch.hpp" compile="0" resource="0"
             file="Source/OwlPatches/FreeVerbPatch.hpp"/>
       <FILE id="X6TJMD" name="GainPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/GainPatch.hpp"/>
-      <FILE id="twHdBT" name="includes.h" compile="0" resource="0" file="Source/OwlPatches/includes.h"/>
       <FILE id="x48AZ3" name="LeakyIntegratorPatch.hpp" compile="0" resource="0"
             file="Source/OwlPatches/LeakyIntegratorPatch.hpp"/>
       <FILE id="OiKp9h" name="LpfDelayPatch.hpp" compile="0" resource="0"
@@ -147,7 +146,6 @@
             file="Source/OwlPatches/OverdrivePatch.hpp"/>
       <FILE id="XvdVg1" name="ParametricEqPatch.hpp" compile="0" resource="0"
             file="Source/OwlPatches/ParametricEqPatch.hpp"/>
-      <FILE id="BWOngI" name="patches.cpp" compile="0" resource="0" file="Source/OwlPatches/patches.cpp"/>
       <FILE id="pz8Kji" name="PhaserPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/PhaserPatch.hpp"/>
       <FILE id="QFXsDC" name="ResonantFilterPatch.hpp" compile="0" resource="0"
             file="Source/OwlPatches/ResonantFilterPatch.hpp"/>
@@ -169,6 +167,8 @@
             file="Source/OwlPatches/WaveshaperPatch.hpp"/>
     </GROUP>
     <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
+    <FILE id="twHdBT" name="includes.h" compile="0" resource="0" file="Source/OwlPatches/includes.h"/>
+    <FILE id="BWOngI" name="patches.cpp" compile="0" resource="0" file="Source/OwlPatches/patches.cpp"/>
   </MAINGROUP>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>

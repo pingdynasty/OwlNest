@@ -22,6 +22,7 @@
 #define DFU_H
 
 #include <libusb.h>
+
 #include "usb_dfu.h"
 
 /* DFU states */

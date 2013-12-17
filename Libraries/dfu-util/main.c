@@ -31,7 +31,7 @@
 #include <fcntl.h>
 
 #ifdef _MSC_VER
-#include "../win-util/getopt.h"
+#include <win-util/getopt.h>
 #include <wchar.h>
 #include <io.h>
 #define open _open
