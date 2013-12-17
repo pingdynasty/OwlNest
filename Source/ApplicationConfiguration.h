@@ -8,7 +8,7 @@ public:
   static void initialise();
   static void release();
   static PropertiesFile* getApplicationProperties();
-  static File getPresetDirectory();
+  static File getApplicationDirectory();
 private:
 };
 

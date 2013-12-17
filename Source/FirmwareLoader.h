@@ -5,8 +5,7 @@
 
 class FirmwareLoader {
 public:
-  int updateFirmware(File& file);
-  int updateBootloader(File& file);
+  int updateFirmware(File& file, const String& options);
 };
 
 #endif  // FIRMWARELOADER_H_INCLUDED

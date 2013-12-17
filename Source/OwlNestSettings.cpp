@@ -14,6 +14,7 @@
 #include "OpenWareMidiControl.h"
 #include "FirmwareLoader.h"
 #include "ApplicationCommands.h"
+#include "ApplicationConfiguration.h"
 
 OwlNestSettings::OwlNestSettings(AudioDeviceManager& dm, Value& updateGui):
 theDm(dm), theUpdateGui(updateGui)
@@ -25,6 +26,10 @@ theDm(dm), theUpdateGui(updateGui)
 
 OwlNestSettings::~OwlNestSettings(){
   theDm.removeMidiInputCallback(String::empty, this);
+}
+
+StringArray& OwlNestSettings::getPresetNames(){
+  return presets;
 }
 
 void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
@@ -136,17 +141,34 @@ uint64 OwlNestSettings::getLastMidiMessageTime(){
     return lastMidiMessageTime;
 }
 
-bool OwlNestSettings::updateFirmware(){
-  FileChooser chooser("Select Firmware",
-		      File::getSpecialLocation (File::currentApplicationFile),
-// 		      File::getSpecialLocation (File::userHomeDirectory/),
-		      "*.bin");
+bool OwlNestSettings::updateBootloader(){
+  DBG("Update bootloader");
+  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+  String options = props->getValue("bootloader-dfu-options");
+  FileChooser chooser("Select Bootloader", ApplicationConfiguration::getApplicationDirectory(), "*.bin");		      
   if(chooser.browseForFileToOpen()){
     // put device into DFU mode
     setCc(DEVICE_FIRMWARE_UPDATE, 127);
     File file = chooser.getResult();
     FirmwareLoader loader;
-    loader.updateFirmware(file);
+    loader.updateFirmware(file, options);
+    return true;
+  }else{
+    return false;
+  }
+}
+
+bool OwlNestSettings::updateFirmware(){
+  DBG("Update firmware!");
+  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+  String options = props->getValue("firmware-dfu-options");
+  FileChooser chooser("Select Firmware", ApplicationConfiguration::getApplicationDirectory(), "*.bin");		      
+  if(chooser.browseForFileToOpen()){
+    // put device into DFU mode
+    setCc(DEVICE_FIRMWARE_UPDATE, 127);
+    File file = chooser.getResult();
+    FirmwareLoader loader;
+    loader.updateFirmware(file, options);
     return true;
   }else{
     return false;
@@ -165,7 +187,6 @@ void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo
     break;
   case ApplicationCommands::updateBootloader:
     result.setInfo("Update Bootloader", String::empty, String::empty, 0);
-    result.setActive(false);
     break;
   }
 }
@@ -176,7 +197,7 @@ bool OwlNestSettings::perform(const InvocationInfo& info){
     updateFirmware();
     break;
   case ApplicationCommands::updateBootloader:
-    DBG("Update bootloader: todo!");
+    updateBootloader();
     break;
   }
   return true;
