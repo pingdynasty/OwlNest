@@ -29,5 +29,5 @@ END
 
 #endif
 
-IDI_ICON1 ICON DISCARDABLE "..\..\Source\icons\icon.ico"
-IDI_ICON2 ICON DISCARDABLE "..\..\Source\icons\icon.ico"
+IDI_ICON1 ICON DISCARDABLE "icon.ico"
+IDI_ICON2 ICON DISCARDABLE "icon.ico"
