@@ -38,6 +38,7 @@ public:
   // bool isConnected();
   bool updateFirmware();
   bool updateBootloader();
+  void checkForUpdates();
 
   void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);
   void getAllCommands(Array< CommandID > &commands);

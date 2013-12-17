@@ -191,6 +191,7 @@ bool OwlNestSettings::updateFirmware(){
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
   commands.add(ApplicationCommands::updateFirmware);
   commands.add(ApplicationCommands::updateBootloader);
+  commands.add(ApplicationCommands::checkForUpdates);
 }
 
 void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
@@ -201,7 +202,17 @@ void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo
   case ApplicationCommands::updateBootloader:
     result.setInfo("Update Bootloader", String::empty, String::empty, 0);
     break;
+  case ApplicationCommands::checkForUpdates:
+    result.setInfo("Check for Updates", String::empty, String::empty, 0);
+    break;
   }
+}
+
+void OwlNestSettings::checkForUpdates(){
+  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+  URL url(props->getValue("owl-updates-url"));
+  if(url.isWellFormed())
+    url.launchInDefaultBrowser();
 }
 
 bool OwlNestSettings::perform(const InvocationInfo& info){
@@ -211,6 +222,9 @@ bool OwlNestSettings::perform(const InvocationInfo& info){
     break;
   case ApplicationCommands::updateBootloader:
     updateBootloader();
+    break;
+  case ApplicationCommands::checkForUpdates:
+    checkForUpdates();
     break;
   }
   return true;

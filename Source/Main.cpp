@@ -75,10 +75,11 @@ public:
       toplevel.add("File");
       toplevel.add("Tools");
       PopupMenu file;
+      file.addCommandItem(commands, ApplicationCommands::checkForUpdates);
       file.addCommandItem(commands, StandardApplicationCommandIDs::quit);
       popups.add(file);
       PopupMenu tools;
-      tools.addCommandItem(commands, ApplicationCommands::updateFirmware, "Update Firmware");
+      tools.addCommandItem(commands, ApplicationCommands::updateFirmware);
       tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
       popups.add(tools);
     }
