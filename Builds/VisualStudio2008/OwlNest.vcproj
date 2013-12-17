@@ -31,8 +31,8 @@
             Optimization="0"
             BufferSecurityCheck=""
             DebugInformationFormat="4"
-            AdditionalIncludeDirectories="..\..\JuceLibraryCode;Libraries/win-util"
-            PreprocessorDefinitions="WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2008_78A5006=1"
+            AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries\"
+            PreprocessorDefinitions="WIN32;_WINDOWS;DEBUG;_DEBUG;HAVE_WINDOWS_H;JUCER_VS2008_78A5006=1"
             RuntimeLibrary="1"
             RuntimeTypeInfo="true"
             UsePrecompiledHeader="0"
@@ -54,7 +54,8 @@
             ProgramDatabaseFile="$(IntDir)\OwlNest.pdb"
             SubSystem="2"
             GenerateManifest="true"
-            TargetMachine="1"/>
+            TargetMachine="1"
+            AdditionalDependencies="C:\SDKs\libusbx-1.0.17\Win32\Release\lib\libusb-1.0.lib"/>
       <Tool Name="VCALinkTool"/>
       <Tool Name="VCManifestTool"/>
       <Tool Name="VCXDCMakeTool"/>
@@ -87,8 +88,8 @@
             Optimization="1"
             InlineFunctionExpansion="1"
             StringPooling="true"
-            AdditionalIncludeDirectories="..\..\JuceLibraryCode;Libraries/win-util"
-            PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;JUCER_VS2008_78A5006=1"
+            AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries\"
+            PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HAVE_WINDOWS_H;JUCER_VS2008_78A5006=1"
             RuntimeLibrary="0"
             RuntimeTypeInfo="true"
             UsePrecompiledHeader="0"
@@ -96,7 +97,7 @@
             AssemblerListingLocation="$(IntDir)\"
             ObjectFile="$(IntDir)\"
             ProgramDataBaseFileName="$(IntDir)\"
-            WarningLevel="4"
+            WarningLevel="3"
             SuppressStartupBanner="true"/>
       <Tool Name="VCManagedResourceCompilerTool"/>
       <Tool Name="VCResourceCompilerTool"
@@ -112,7 +113,8 @@
             GenerateManifest="true"
             OptimizeReferences="2"
             EnableCOMDATFolding="2"
-            TargetMachine="1"/>
+            TargetMachine="1"
+            AdditionalDependencies="C:\SDKs\libusbx-1.0.17\Win32\Release\lib\libusb-1.0.lib"/>
       <Tool Name="VCALinkTool"/>
       <Tool Name="VCManifestTool"/>
       <Tool Name="VCXDCMakeTool"/>
@@ -4335,6 +4337,7 @@
       <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\juce_gui_basics.cpp"/>
       <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.cpp"/>
       <File RelativePath="..\..\JuceLibraryCode\JuceHeader.h"/>
+      <File RelativePath="icon.ico"/>
       <File RelativePath="resources.rc"/>
     </Filter>
   </Files>
