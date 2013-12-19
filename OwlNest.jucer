@@ -290,11 +290,11 @@
             externalLibraries="$(SolutionDir)$(OutDir)libusb-1.0.lib" smallIcon="dMq0Lz"
             bigIcon="dMq0Lz" toolset="v110_xp" extraCompilerFlags="">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
-                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2012.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2012.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+        <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
                        prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2012.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
