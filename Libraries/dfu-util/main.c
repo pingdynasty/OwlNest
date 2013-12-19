@@ -29,15 +29,14 @@
 #include <libusb.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 
 #ifdef _MSC_VER
-#include <win-util/getopt.h>
 #include <wchar.h>
 #include <io.h>
 #define open _open
 #define close _close
 #else
-#include <getopt.h>
 #include <unistd.h>
 #endif
 

@@ -5,19 +5,18 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 
 #ifdef _MSC_VER
-#include <win-util/getopt.h>
 #include <wchar.h>
 #include <io.h>
 #define open _open
 #define close _close
+#define _SSIZE_T_DEFINED // Need to test if useful in non-VS project
 #else
-#include <getopt.h>
 #include <unistd.h>
 #endif
 
-#define _SSIZE_T_DEFINED
 #include <libusb.h>
 
 extern "C" {

@@ -379,9 +379,6 @@
     <ClCompile Include="..\..\Libraries\dfu-util\suffix.c">
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Libraries\win-util\getopt.c">
-      <Filter>OwlNest\Libraries\win-util</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Libraries\sysex.c">
       <Filter>OwlNest\Libraries</Filter>
     </ClCompile>
@@ -1604,9 +1601,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h">
       <Filter>OwlNest\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\win-util\getopt.h">
-      <Filter>OwlNest\Libraries\win-util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Libraries\win-util\stdint.h">
       <Filter>OwlNest\Libraries\win-util</Filter>

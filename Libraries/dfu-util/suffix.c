@@ -20,12 +20,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <getopt.h>
 
 #ifdef _MSC_VER
-#include <win-util/getopt.h>
 #include <win-util/stdint.h>
 #else
-#include <getopt.h>
+
 #include <stdint.h>
 #endif
 
