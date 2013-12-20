@@ -15,19 +15,31 @@
 *.a
 
 # Compiled Visual Studio Folders
-Builds/Win32/
+Builds/VisualStudio2012/Release/
+Builds/VisualStudio2012/Debug/
+
+Builds/VisualStudio2010/Release/
+Builds/VisualStudio2010/Debug/
 Builds/VisualStudio2010/ipch/
+
+Builds/VisualStudio2008/Release/
+Builds/VisualStudio2008/Debug/
+Builds/VisualStudio2008/ipch/
 
 # Visual Studio Solution and User Settings
 Builds/VisualStudio2012/OwlNest.sdf
 Builds/VisualStudio2012/OwlNest.opensdf
 Builds/VisualStudio2012/OwlNest.v11.suo
 Builds/VisualStudio2012/OwlNest.vcxproj.user
-Builds/VisualStudio2012/dfu-util (static).vcxproj.user
+
 Builds/VisualStudio2010/OwlNest.sdf
 Builds/VisualStudio2010/OwlNest.opensdf
 Builds/VisualStudio2010/OwlNest.suo
 Builds/VisualStudio2010/OwlNest.sln.docstates.suo
 Builds/VisualStudio2010/OwlNest.vcxproj.user
-Builds/VisualStudio2010/dfu-util (static).vcxproj.user
 
+Builds/VisualStudio2008/OwlNest.sdf
+Builds/VisualStudio2008/OwlNest.opensdf
+Builds/VisualStudio2008/OwlNest.suo
+Builds/VisualStudio2008/OwlNest.sln.docstates.suo
+Builds/VisualStudio2008/OwlNest.vcxproj.user

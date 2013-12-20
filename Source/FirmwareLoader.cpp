@@ -5,30 +5,29 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 
 #ifdef _MSC_VER
-#include <win-util/getopt.h>
 #include <wchar.h>
 #include <io.h>
 #define open _open
 #define close _close
+#define _SSIZE_T_DEFINED // Need to test if useful in non-VS project
 #else
-#include <getopt.h>
 #include <unistd.h>
 #endif
 
-#define _SSIZE_T_DEFINED
 #include <libusb.h>
 
 extern "C" {
-#include "dfu-util/portable.h"
-#include "dfu-util/dfu.h"
-#include "dfu-util/usb_dfu.h"
-#include "dfu-util/dfu_file.h"
-#include "dfu-util/dfu_load.h"
-#include "dfu-util/dfu_util.h"
-#include "dfu-util/dfuse.h"
-#include "dfu-util/quirks.h"
+#include <dfu-util/portable.h>
+#include <dfu-util/dfu.h>
+#include <dfu-util/usb_dfu.h>
+#include <dfu-util/dfu_file.h>
+#include <dfu-util/dfu_load.h>
+#include <dfu-util/dfu_util.h>
+#include <dfu-util/dfuse.h>
+#include <dfu-util/quirks.h>
 
   int verbose = 0;
   struct dfu_if *dfu_root;

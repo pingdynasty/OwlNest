@@ -4,101 +4,169 @@
               bundleIdentifier="com.pingdynasty.OwlNest" includeBinaryInAppConfig="1"
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
-    <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Source">
-      <FILE id="jKrXcu" name="ApplicationConfiguration.cpp" compile="1" resource="0"
-            file="Source/ApplicationConfiguration.cpp"/>
-      <FILE id="yZV1o6" name="ApplicationConfiguration.h" compile="0" resource="0"
-            file="Source/ApplicationConfiguration.h"/>
-      <GROUP id="{8F22A420-0146-8841-2169-A6FBA0B7BD49}" name="icons">
-        <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
-      </GROUP>
-      <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
-        <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">
-          <FILE id="vGsKMz" name="dfu.c" compile="1" resource="0" file="Libraries/dfu-util/dfu.c"/>
-          <FILE id="PzpQa1" name="dfu.h" compile="0" resource="0" file="Libraries/dfu-util/dfu.h"/>
-          <FILE id="BSzQC2" name="dfu_file.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_file.c"/>
-          <FILE id="oLOxkR" name="dfu_file.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_file.h"/>
-          <FILE id="PUHKJS" name="dfu_load.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_load.c"/>
-          <FILE id="My0es0" name="dfu_load.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_load.h"/>
-          <FILE id="JTwNEB" name="dfu_util.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_util.c"/>
-          <FILE id="ISAwQL" name="dfu_util.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_util.h"/>
-          <FILE id="cqHU5l" name="dfuse.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse.c"/>
-          <FILE id="vP1u6O" name="dfuse.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse.h"/>
-          <FILE id="Zj5KmQ" name="dfuse_mem.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse_mem.c"/>
-          <FILE id="gEU9As" name="dfuse_mem.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse_mem.h"/>
-          <FILE id="YWEpxW" name="portable.h" compile="0" resource="0" file="Libraries/dfu-util/portable.h"/>
-          <FILE id="PqFOUS" name="quirks.c" compile="1" resource="0" file="Libraries/dfu-util/quirks.c"/>
-          <FILE id="Pw0A3z" name="quirks.h" compile="0" resource="0" file="Libraries/dfu-util/quirks.h"/>
-          <FILE id="TZ2f7t" name="usb_dfu.h" compile="0" resource="0" file="Libraries/dfu-util/usb_dfu.h"/>
-        </GROUP>
-      </GROUP>
+    <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Application">
       <GROUP id="{DB625BC2-D638-342B-46F0-2C11332BEE69}" name="GUI">
-        <FILE id="ALqvD7" name="PatchComponent.cpp" compile="1" resource="0"
-              file="Source/PatchComponent.cpp"/>
-        <FILE id="XY1XBy" name="PatchComponent.h" compile="0" resource="0"
-              file="Source/PatchComponent.h"/>
-        <FILE id="E8t39G" name="StompGui.cpp" compile="1" resource="0" file="Source/StompGui.cpp"/>
-        <FILE id="Ox8vEb" name="StompGui.h" compile="0" resource="0" file="Source/StompGui.h"/>
-        <FILE id="p7DYsR" name="OwlNestGui.cpp" compile="1" resource="0" file="Source/OwlNestGui.cpp"/>
-        <FILE id="PjPrzx" name="OwlNestGui.h" compile="0" resource="0" file="Source/OwlNestGui.h"/>
+        <FILE id="lvttDF" name="ApplicationSettingsWindow.cpp" compile="1"
+              resource="0" file="Source/ApplicationSettingsWindow.cpp"/>
+        <FILE id="bvN4BV" name="ApplicationSettingsWindow.h" compile="0" resource="0"
+              file="Source/ApplicationSettingsWindow.h"/>
         <FILE id="QZqLsC" name="DualPatchPanel.cpp" compile="1" resource="0"
               file="Source/DualPatchPanel.cpp"/>
         <FILE id="eLm9S6" name="DualPatchPanel.h" compile="0" resource="0"
               file="Source/DualPatchPanel.h"/>
+        <FILE id="p7DYsR" name="OwlNestGui.cpp" compile="1" resource="0" file="Source/OwlNestGui.cpp"/>
+        <FILE id="PjPrzx" name="OwlNestGui.h" compile="0" resource="0" file="Source/OwlNestGui.h"/>
+        <FILE id="ALqvD7" name="PatchComponent.cpp" compile="1" resource="0"
+              file="Source/PatchComponent.cpp"/>
+        <FILE id="XY1XBy" name="PatchComponent.h" compile="0" resource="0"
+              file="Source/PatchComponent.h"/>
+        <FILE id="P76MAW" name="PatchMode.cpp" compile="1" resource="0" file="Source/PatchMode.cpp"/>
+        <FILE id="m2FwAK" name="PatchMode.h" compile="0" resource="0" file="Source/PatchMode.h"/>
+        <FILE id="E8t39G" name="StompGui.cpp" compile="1" resource="0" file="Source/StompGui.cpp"/>
+        <FILE id="Ox8vEb" name="StompGui.h" compile="0" resource="0" file="Source/StompGui.h"/>
         <FILE id="h4PIME" name="TransportPanel.cpp" compile="1" resource="0"
               file="Source/TransportPanel.cpp"/>
         <FILE id="CTzaMc" name="TransportPanel.h" compile="0" resource="0"
               file="Source/TransportPanel.h"/>
-        <FILE id="lvttDF" name="ApplicationSettingsWindow.cpp" compile="1"
-              resource="0" file="Source/ApplicationSettingsWindow.cpp"/>
-        <FILE id="P76MAW" name="PatchMode.cpp" compile="1" resource="0" file="Source/PatchMode.cpp"/>
-        <FILE id="m2FwAK" name="PatchMode.h" compile="0" resource="0" file="Source/PatchMode.h"/>
-        <FILE id="bvN4BV" name="ApplicationSettingsWindow.h" compile="0" resource="0"
-              file="Source/ApplicationSettingsWindow.h"/>
       </GROUP>
       <GROUP id="{3B980891-6AE6-F7E5-5B44-51D422CD0026}" name="Plugin">
+        <FILE id="EDoQ6M" name="PluginEditor.cpp" compile="1" resource="0"
+              file="Source/PluginEditor.cpp"/>
+        <FILE id="dwNJHN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
         <FILE id="KU2GlZ" name="PluginPatchProcessor.cpp" compile="1" resource="0"
               file="Source/PluginPatchProcessor.cpp"/>
         <FILE id="O14Un3" name="PluginPatchProcessor.h" compile="0" resource="0"
               file="Source/PluginPatchProcessor.h"/>
-        <FILE id="EDoQ6M" name="PluginEditor.cpp" compile="1" resource="0"
-              file="Source/PluginEditor.cpp"/>
-        <FILE id="dwNJHN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
         <FILE id="sEOYX7" name="PluginProcessor.cpp" compile="1" resource="0"
               file="Source/PluginProcessor.cpp"/>
         <FILE id="sEjXVv" name="PluginProcessor.h" compile="0" resource="0"
               file="Source/PluginProcessor.h"/>
       </GROUP>
-      <FILE id="mV7fGq" name="OwlNestSettings.cpp" compile="1" resource="0"
-            file="Source/OwlNestSettings.cpp"/>
-      <FILE id="IDIyJd" name="OwlNestSettings.h" compile="0" resource="0"
-            file="Source/OwlNestSettings.h"/>
-      <FILE id="hGI8rn" name="sysex.c" compile="1" resource="0" file="Source/sysex.c"/>
-      <FILE id="XHp0f6" name="sysex.h" compile="0" resource="0" file="Source/sysex.h"/>
+      <FILE id="fMKCC9" name="ApplicationCommands.h" compile="0" resource="0"
+            file="Source/ApplicationCommands.h"/>
+      <FILE id="jKrXcu" name="ApplicationConfiguration.cpp" compile="1" resource="0"
+            file="Source/ApplicationConfiguration.cpp"/>
+      <FILE id="yZV1o6" name="ApplicationConfiguration.h" compile="0" resource="0"
+            file="Source/ApplicationConfiguration.h"/>
       <FILE id="pL8ffC" name="Enums.h" compile="0" resource="0" file="Source/Enums.h"/>
-      <FILE id="mgH8Dv" name="SeriesDeviceCallBacks.cpp" compile="1" resource="0"
-            file="Source/SeriesDeviceCallBacks.cpp"/>
-      <FILE id="b7QvIe" name="SeriesDeviceCallBacks.h" compile="0" resource="0"
-            file="Source/SeriesDeviceCallBacks.h"/>
-      <FILE id="L1e6fx" name="SampleBuffer.cpp" compile="1" resource="0"
-            file="Source/SampleBuffer.cpp"/>
-      <FILE id="FTCZJ3" name="SampleBuffer.h" compile="0" resource="0" file="Source/SampleBuffer.h"/>
-      <FILE id="vFjzMG" name="PatchRegistry.cpp" compile="1" resource="0"
-            file="Source/PatchRegistry.cpp"/>
-      <FILE id="wz382r" name="PatchRegistry.h" compile="0" resource="0" file="Source/PatchRegistry.h"/>
-      <FILE id="fBeDu6" name="StompBox.h" compile="0" resource="0" file="Source/StompBox.h"/>
-      <FILE id="ndKe9y" name="PatchProcessor.cpp" compile="1" resource="0"
-            file="Source/PatchProcessor.cpp"/>
-      <FILE id="cxUeTL" name="PatchProcessor.h" compile="0" resource="0"
-            file="Source/PatchProcessor.h"/>
       <FILE id="Jf6p1r" name="FirmwareLoader.cpp" compile="1" resource="0"
             file="Source/FirmwareLoader.cpp"/>
       <FILE id="BPvtu3" name="FirmwareLoader.h" compile="0" resource="0"
             file="Source/FirmwareLoader.h"/>
+      <FILE id="mpRW8n" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="fOoNsr" name="OpenWareMidiControl.h" compile="0" resource="0"
             file="Source/OpenWareMidiControl.h"/>
-      <FILE id="mpRW8n" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="mV7fGq" name="OwlNestSettings.cpp" compile="1" resource="0"
+            file="Source/OwlNestSettings.cpp"/>
+      <FILE id="IDIyJd" name="OwlNestSettings.h" compile="0" resource="0"
+            file="Source/OwlNestSettings.h"/>
+      <FILE id="ndKe9y" name="PatchProcessor.cpp" compile="1" resource="0"
+            file="Source/PatchProcessor.cpp"/>
+      <FILE id="cxUeTL" name="PatchProcessor.h" compile="0" resource="0"
+            file="Source/PatchProcessor.h"/>
+      <FILE id="vFjzMG" name="PatchRegistry.cpp" compile="1" resource="0"
+            file="Source/PatchRegistry.cpp"/>
+      <FILE id="wz382r" name="PatchRegistry.h" compile="0" resource="0" file="Source/PatchRegistry.h"/>
+      <FILE id="L1e6fx" name="SampleBuffer.cpp" compile="1" resource="0"
+            file="Source/SampleBuffer.cpp"/>
+      <FILE id="FTCZJ3" name="SampleBuffer.h" compile="0" resource="0" file="Source/SampleBuffer.h"/>
+      <FILE id="mgH8Dv" name="SeriesDeviceCallBacks.cpp" compile="1" resource="0"
+            file="Source/SeriesDeviceCallBacks.cpp"/>
+      <FILE id="b7QvIe" name="SeriesDeviceCallBacks.h" compile="0" resource="0"
+            file="Source/SeriesDeviceCallBacks.h"/>
+      <FILE id="fBeDu6" name="StompBox.h" compile="0" resource="0" file="Source/StompBox.h"/>
     </GROUP>
+    <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
+      <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">
+        <FILE id="vGsKMz" name="dfu.c" compile="1" resource="0" file="Libraries/dfu-util/dfu.c"/>
+        <FILE id="PzpQa1" name="dfu.h" compile="0" resource="0" file="Libraries/dfu-util/dfu.h"/>
+        <FILE id="BSzQC2" name="dfu_file.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_file.c"/>
+        <FILE id="oLOxkR" name="dfu_file.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_file.h"/>
+        <FILE id="PUHKJS" name="dfu_load.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_load.c"/>
+        <FILE id="My0es0" name="dfu_load.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_load.h"/>
+        <FILE id="JTwNEB" name="dfu_util.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_util.c"/>
+        <FILE id="ISAwQL" name="dfu_util.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_util.h"/>
+        <FILE id="cqHU5l" name="dfuse.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse.c"/>
+        <FILE id="vP1u6O" name="dfuse.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse.h"/>
+        <FILE id="Zj5KmQ" name="dfuse_mem.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse_mem.c"/>
+        <FILE id="gEU9As" name="dfuse_mem.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse_mem.h"/>
+        <FILE id="PMLiaG" name="main.c" compile="0" resource="0" file="Libraries/dfu-util/main.c"/>
+        <FILE id="YWEpxW" name="portable.h" compile="0" resource="0" file="Libraries/dfu-util/portable.h"/>
+        <FILE id="PqFOUS" name="quirks.c" compile="1" resource="0" file="Libraries/dfu-util/quirks.c"/>
+        <FILE id="Pw0A3z" name="quirks.h" compile="0" resource="0" file="Libraries/dfu-util/quirks.h"/>
+        <FILE id="p2jbC1" name="suffix.c" compile="0" resource="0" file="Libraries/dfu-util/suffix.c"/>
+        <FILE id="TZ2f7t" name="usb_dfu.h" compile="0" resource="0" file="Libraries/dfu-util/usb_dfu.h"/>
+      </GROUP>
+      <GROUP id="{59FF1104-D181-FD84-8D7F-1959627618B9}" name="win-util">
+        <FILE id="BLpYzc" name="stdint.h" compile="0" resource="0" file="Libraries/win-util/stdint.h"/>
+      </GROUP>
+      <FILE id="DTfdpv" name="sysex.c" compile="1" resource="0" file="Libraries/sysex.c"/>
+      <FILE id="f4xkxv" name="sysex.h" compile="0" resource="0" file="Libraries/sysex.h"/>
+    </GROUP>
+    <GROUP id="{692AC0D0-196C-0778-C9D0-843504D4DD87}" name="OwlPatches">
+      <GROUP id="{6FC858EF-470A-B91A-2739-A7FF03F68FE9}" name="Contest">
+        <FILE id="ifci10" name="BiasedDelayPatch.hpp" compile="0" resource="0"
+              file="Source/OwlPatches/Contest/BiasedDelayPatch.hpp"/>
+        <FILE id="MMAwsq" name="BiasPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/BiasPatch.hpp"/>
+        <FILE id="dx9inN" name="BitH8rPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/BitH8rPatch.hpp"/>
+        <FILE id="QTd2rr" name="blo_bleep.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/blo_bleep.hpp"/>
+        <FILE id="sYU9xC" name="ConnyPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/ConnyPatch.hpp"/>
+        <FILE id="itno1A" name="DroneBox.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/DroneBox.hpp"/>
+        <FILE id="A791sK" name="DualTremoloPatch.hpp" compile="0" resource="0"
+              file="Source/OwlPatches/Contest/DualTremoloPatch.hpp"/>
+        <FILE id="QL65t2" name="JumpDelay.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/JumpDelay.hpp"/>
+        <FILE id="PRR6or" name="SampleJitterPatch.hpp" compile="0" resource="0"
+              file="Source/OwlPatches/Contest/SampleJitterPatch.hpp"/>
+        <FILE id="aF9Mnf" name="SirenPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/SirenPatch.hpp"/>
+      </GROUP>
+      <FILE id="TQsInX" name="CircularBuffer.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/CircularBuffer.hpp"/>
+      <FILE id="ngKXEs" name="DroneBoxPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/DroneBoxPatch.hpp"/>
+      <FILE id="JHd0tr" name="EnvelopeFilterPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/EnvelopeFilterPatch.hpp"/>
+      <FILE id="GnxKUu" name="FixedDelayPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/FixedDelayPatch.hpp"/>
+      <FILE id="p5hqNl" name="FlangerPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/FlangerPatch.hpp"/>
+      <FILE id="aGY9oi" name="FreeVerbPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/FreeVerbPatch.hpp"/>
+      <FILE id="X6TJMD" name="GainPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/GainPatch.hpp"/>
+      <FILE id="x48AZ3" name="LeakyIntegratorPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/LeakyIntegratorPatch.hpp"/>
+      <FILE id="OiKp9h" name="LpfDelayPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/LpfDelayPatch.hpp"/>
+      <FILE id="s3wjAo" name="LpfDelayPhaserPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/LpfDelayPhaserPatch.hpp"/>
+      <FILE id="m9ShZs" name="OctaveDownPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/OctaveDownPatch.hpp"/>
+      <FILE id="gtsP1O" name="OverdrivePatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/OverdrivePatch.hpp"/>
+      <FILE id="XvdVg1" name="ParametricEqPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/ParametricEqPatch.hpp"/>
+      <FILE id="pz8Kji" name="PhaserPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/PhaserPatch.hpp"/>
+      <FILE id="QFXsDC" name="ResonantFilterPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/ResonantFilterPatch.hpp"/>
+      <FILE id="GBzWCM" name="SampleBasedPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/SampleBasedPatch.hpp"/>
+      <FILE id="nC8oI3" name="SimpleDelayPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/SimpleDelayPatch.hpp"/>
+      <FILE id="JpLuKy" name="StateVariableFilterPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/StateVariableFilterPatch.hpp"/>
+      <FILE id="c384VQ" name="StereoGainPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/StereoGainPatch.hpp"/>
+      <FILE id="ARQ9AG" name="StereoMixerPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/StereoMixerPatch.hpp"/>
+      <FILE id="WBnqQ7" name="TemplatePatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/TemplatePatch.hpp"/>
+      <FILE id="HkhOkC" name="TestTonePatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/TestTonePatch.hpp"/>
+      <FILE id="wbKkUW" name="WaveshaperPatch.hpp" compile="0" resource="0"
+            file="Source/OwlPatches/WaveshaperPatch.hpp"/>
+    </GROUP>
+    <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
+    <FILE id="twHdBT" name="includes.h" compile="0" resource="0" file="Source/OwlPatches/includes.h"/>
+    <FILE id="BWOngI" name="patches.cpp" compile="0" resource="0" file="Source/OwlPatches/patches.cpp"/>
   </MAINGROUP>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
@@ -118,7 +186,7 @@
     <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="/opt/local/lib/libusb-1.0.a"
                extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
                externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" smallIcon="dMq0Lz"
-               bigIcon="dMq0Lz" juceFolder="modules">
+               bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "
@@ -144,7 +212,7 @@
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I ../../Source -I /usr/include/libusb-1.0"
                 extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 "
-                smallIcon="dMq0Lz" bigIcon="dMq0Lz" juceFolder="modules">
+                smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
@@ -166,35 +234,16 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz"
-            juceFolder="modules">
-      <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="Libraries/win-util"/>
-        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="Libraries/win-util"/>
-      </CONFIGURATIONS>
-      <MODULEPATHS>
-        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
-      </MODULEPATHS>
-    </VS2010>
-    <VS2008 targetFolder="Builds/VisualStudio2008" juceFolder="modules">
+    <VS2008 targetFolder="Builds/VisualStudio2008" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
+            externalLibraries="$(SolutionDir)$(OutDir)libusb-1.0.lib" smallIcon="dMq0Lz"
+            bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
-                       optimisation="1" targetName="OwlNest" libraryPath="" headerPath="Libraries/win-util"/>
-        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" isDebug="0"
-                       optimisation="2" targetName="OwlNest" libraryPath="" headerPath="Libraries/win-util"/>
+                       optimisation="1" targetName="OwlNest" libraryPath="" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2005.vcproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+        <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" isDebug="0"
+                       optimisation="2" targetName="OwlNest" libraryPath="" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2005.vcproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
@@ -211,13 +260,57 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </VS2008>
-    <VS2012 targetFolder="Builds/VisualStudio2012" juceFolder="modules">
+    <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz"
+            extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS" externalLibraries="$(SolutionDir)$(OutDir)libusb-1.0.lib"
+            extraCompilerFlags="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="Libraries/win-util"/>
-        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="Libraries/win-util"/>
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2010.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+        <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2010.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
       </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </VS2010>
+    <VS2012 targetFolder="Builds/VisualStudio2012" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
+            externalLibraries="$(SolutionDir)$(OutDir)libusb-1.0.lib" smallIcon="dMq0Lz"
+            bigIcon="dMq0Lz" toolset="v110_xp" extraCompilerFlags="">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2012.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+        <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2012.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
     </VS2012>
   </EXPORTFORMATS>
   <JUCEOPTIONS/>

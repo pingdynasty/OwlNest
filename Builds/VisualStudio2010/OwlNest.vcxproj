@@ -18,12 +18,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
@@ -53,8 +51,8 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;Libraries/win-util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusbx-1.0.17\examples\getopt;C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;HAVE_WINDOWS_H;_CRT_SECURE_NO_WARNINGS;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader/>
@@ -78,11 +76,15 @@
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <LargeAddressAware>true</LargeAddressAware>
+      <AdditionalDependencies>$(SolutionDir)$(OutDir)libusb-1.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <OutputFile>$(IntDir)\OwlNest.bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2010.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
@@ -94,15 +96,15 @@
     </Midl>
     <ClCompile>
       <Optimization>MinSpace</Optimization>
-      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;Libraries/win-util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusbx-1.0.17\examples\getopt;C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;HAVE_WINDOWS_H;_CRT_SECURE_NO_WARNINGS;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader/>
       <AssemblerListingLocation>$(IntDir)\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)\</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)\</ProgramDataBaseFileName>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -120,39 +122,52 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LargeAddressAware>true</LargeAddressAware>
+      <AdditionalDependencies>$(SolutionDir)$(OutDir)libusb-1.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <OutputFile>$(IntDir)\OwlNest.bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2010.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp"/>
+    <ClCompile Include="..\..\Source\DualPatchPanel.cpp"/>
+    <ClCompile Include="..\..\Source\OwlNestGui.cpp"/>
+    <ClCompile Include="..\..\Source\PatchComponent.cpp"/>
+    <ClCompile Include="..\..\Source\PatchMode.cpp"/>
+    <ClCompile Include="..\..\Source\StompGui.cpp"/>
+    <ClCompile Include="..\..\Source\TransportPanel.cpp"/>
+    <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
+    <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp"/>
+    <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp"/>
+    <ClCompile Include="..\..\Source\FirmwareLoader.cpp"/>
+    <ClCompile Include="..\..\Source\Main.cpp"/>
+    <ClCompile Include="..\..\Source\OwlNestSettings.cpp"/>
+    <ClCompile Include="..\..\Source\PatchProcessor.cpp"/>
+    <ClCompile Include="..\..\Source\PatchRegistry.cpp"/>
+    <ClCompile Include="..\..\Source\SampleBuffer.cpp"/>
+    <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\main.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Libraries\dfu-util\quirks.c"/>
-    <ClCompile Include="..\..\Source\PatchComponent.cpp"/>
-    <ClCompile Include="..\..\Source\StompGui.cpp"/>
-    <ClCompile Include="..\..\Source\OwlNestGui.cpp"/>
-    <ClCompile Include="..\..\Source\DualPatchPanel.cpp"/>
-    <ClCompile Include="..\..\Source\TransportPanel.cpp"/>
-    <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp"/>
-    <ClCompile Include="..\..\Source\PatchMode.cpp"/>
-    <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp"/>
-    <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
-    <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
-    <ClCompile Include="..\..\Source\OwlNestSettings.cpp"/>
-    <ClCompile Include="..\..\Source\sysex.c"/>
-    <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp"/>
-    <ClCompile Include="..\..\Source\SampleBuffer.cpp"/>
-    <ClCompile Include="..\..\Source\PatchRegistry.cpp"/>
-    <ClCompile Include="..\..\Source\PatchProcessor.cpp"/>
-    <ClCompile Include="..\..\Source\FirmwareLoader.cpp"/>
-    <ClCompile Include="..\..\Source\Main.cpp"/>
+    <ClCompile Include="..\..\Libraries\dfu-util\suffix.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\sysex.c"/>
+    <ClCompile Include="..\..\Source\OwlPatches\patches.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -1187,7 +1202,27 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h"/>
+    <ClInclude Include="..\..\Source\DualPatchPanel.h"/>
+    <ClInclude Include="..\..\Source\OwlNestGui.h"/>
+    <ClInclude Include="..\..\Source\PatchComponent.h"/>
+    <ClInclude Include="..\..\Source\PatchMode.h"/>
+    <ClInclude Include="..\..\Source\StompGui.h"/>
+    <ClInclude Include="..\..\Source\TransportPanel.h"/>
+    <ClInclude Include="..\..\Source\PluginEditor.h"/>
+    <ClInclude Include="..\..\Source\PluginPatchProcessor.h"/>
+    <ClInclude Include="..\..\Source\PluginProcessor.h"/>
+    <ClInclude Include="..\..\Source\ApplicationCommands.h"/>
     <ClInclude Include="..\..\Source\ApplicationConfiguration.h"/>
+    <ClInclude Include="..\..\Source\Enums.h"/>
+    <ClInclude Include="..\..\Source\FirmwareLoader.h"/>
+    <ClInclude Include="..\..\Source\OpenWareMidiControl.h"/>
+    <ClInclude Include="..\..\Source\OwlNestSettings.h"/>
+    <ClInclude Include="..\..\Source\PatchProcessor.h"/>
+    <ClInclude Include="..\..\Source\PatchRegistry.h"/>
+    <ClInclude Include="..\..\Source\SampleBuffer.h"/>
+    <ClInclude Include="..\..\Source\SeriesDeviceCallBacks.h"/>
+    <ClInclude Include="..\..\Source\StompBox.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h"/>
@@ -1197,26 +1232,42 @@
     <ClInclude Include="..\..\Libraries\dfu-util\portable.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\quirks.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h"/>
-    <ClInclude Include="..\..\Source\PatchComponent.h"/>
-    <ClInclude Include="..\..\Source\StompGui.h"/>
-    <ClInclude Include="..\..\Source\OwlNestGui.h"/>
-    <ClInclude Include="..\..\Source\DualPatchPanel.h"/>
-    <ClInclude Include="..\..\Source\TransportPanel.h"/>
-    <ClInclude Include="..\..\Source\PatchMode.h"/>
-    <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h"/>
-    <ClInclude Include="..\..\Source\PluginPatchProcessor.h"/>
-    <ClInclude Include="..\..\Source\PluginEditor.h"/>
-    <ClInclude Include="..\..\Source\PluginProcessor.h"/>
-    <ClInclude Include="..\..\Source\OwlNestSettings.h"/>
-    <ClInclude Include="..\..\Source\sysex.h"/>
-    <ClInclude Include="..\..\Source\Enums.h"/>
-    <ClInclude Include="..\..\Source\SeriesDeviceCallBacks.h"/>
-    <ClInclude Include="..\..\Source\SampleBuffer.h"/>
-    <ClInclude Include="..\..\Source\PatchRegistry.h"/>
-    <ClInclude Include="..\..\Source\StompBox.h"/>
-    <ClInclude Include="..\..\Source\PatchProcessor.h"/>
-    <ClInclude Include="..\..\Source\FirmwareLoader.h"/>
-    <ClInclude Include="..\..\Source\OpenWareMidiControl.h"/>
+    <ClInclude Include="..\..\Libraries\win-util\stdint.h"/>
+    <ClInclude Include="..\..\Libraries\sysex.h"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\BiasedDelayPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\BiasPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\BitH8rPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\blo_bleep.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\ConnyPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\DroneBox.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\DualTremoloPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\JumpDelay.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\SampleJitterPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\Contest\SirenPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\CircularBuffer.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\DroneBoxPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\EnvelopeFilterPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\FixedDelayPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\FlangerPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\FreeVerbPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\GainPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\LeakyIntegratorPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\LpfDelayPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\LpfDelayPhaserPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\OctaveDownPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\OverdrivePatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\ParametricEqPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\PhaserPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\ResonantFilterPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\SampleBasedPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\SimpleDelayPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\StateVariableFilterPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\StereoGainPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\StereoMixerPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\TemplatePatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\TestTonePatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\WaveshaperPatch.hpp"/>
+    <ClInclude Include="..\..\Source\OwlPatches\includes.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioSampleBuffer.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_FloatVectorOperations.h"/>

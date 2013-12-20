@@ -9,8 +9,8 @@
 */
 
 #include <iomanip>
+#include <sysex.h>
 #include "OwlNestSettings.h"
-#include "sysex.h"
 #include "OpenWareMidiControl.h"
 #include "FirmwareLoader.h"
 #include "ApplicationCommands.h"

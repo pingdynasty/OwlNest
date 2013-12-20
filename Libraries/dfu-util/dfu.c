@@ -21,7 +21,6 @@
  */
 
 #include <stdio.h>
-
 #include <libusb.h>
 
 #include "portable.h"

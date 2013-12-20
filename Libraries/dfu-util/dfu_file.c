@@ -24,7 +24,7 @@
 #include <errno.h>
 
 #ifdef _MSC_VER
-#include "../win-util/stdint.h"
+#include <win-util/stdint.h>
 #include <wchar.h>
 #include <io.h>
 #define open _open

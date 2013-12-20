@@ -17,7 +17,7 @@
  */
 
 #ifdef _MSC_VER
-#include "../win-util/stdint.h"
+#include <win-util/stdint.h>
 #else
 #include <stdint.h>
 #endif
