@@ -1,4 +1,4 @@
-#include <sysex.h>
+#include "sysex.h"
 
 /* convert to/from sysex 7-bit data 
  * taken from http://blogs.bl0rg.net/netzstaub/2008/08/14/encoding-8-bit-data-in-midi-sysex/
