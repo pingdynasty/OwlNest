@@ -370,20 +370,11 @@
     <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c">
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\main.c">
-      <Filter>OwlNest\Libraries\dfu-util</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Libraries\dfu-util\quirks.c">
-      <Filter>OwlNest\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\suffix.c">
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Libraries\sysex.c">
       <Filter>OwlNest\Libraries</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\OwlPatches\patches.cpp">
-      <Filter>OwlNest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>

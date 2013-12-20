@@ -90,11 +90,9 @@
         <FILE id="vP1u6O" name="dfuse.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse.h"/>
         <FILE id="Zj5KmQ" name="dfuse_mem.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse_mem.c"/>
         <FILE id="gEU9As" name="dfuse_mem.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse_mem.h"/>
-        <FILE id="PMLiaG" name="main.c" compile="0" resource="0" file="Libraries/dfu-util/main.c"/>
         <FILE id="YWEpxW" name="portable.h" compile="0" resource="0" file="Libraries/dfu-util/portable.h"/>
         <FILE id="PqFOUS" name="quirks.c" compile="1" resource="0" file="Libraries/dfu-util/quirks.c"/>
         <FILE id="Pw0A3z" name="quirks.h" compile="0" resource="0" file="Libraries/dfu-util/quirks.h"/>
-        <FILE id="p2jbC1" name="suffix.c" compile="0" resource="0" file="Libraries/dfu-util/suffix.c"/>
         <FILE id="TZ2f7t" name="usb_dfu.h" compile="0" resource="0" file="Libraries/dfu-util/usb_dfu.h"/>
       </GROUP>
       <GROUP id="{59FF1104-D181-FD84-8D7F-1959627618B9}" name="win-util">
@@ -166,7 +164,6 @@
     </GROUP>
     <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
     <FILE id="twHdBT" name="includes.h" compile="0" resource="0" file="Source/OwlPatches/includes.h"/>
-    <FILE id="BWOngI" name="patches.cpp" compile="0" resource="0" file="Source/OwlPatches/patches.cpp"/>
   </MAINGROUP>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
@@ -183,10 +180,10 @@
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="/opt/local/lib/libusb-1.0.a"
-               extraCompilerFlags="-I/opt/local/include/libusb-1.0 -I../../Libraries"
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.a"
+               extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx"
                externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" smallIcon="dMq0Lz"
-               bigIcon="dMq0Lz">
+               bigIcon="dMq0Lz" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "
@@ -210,9 +207,9 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I ../../Source -I /usr/include/libusb-1.0"
-                extraLinkerFlags="-L/opt/local/lib " externalLibraries="usb-1.0 "
-                smallIcon="dMq0Lz" bigIcon="dMq0Lz">
+    <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx -I../../Source"
+                extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.so" externalLibraries=""
+                smallIcon="dMq0Lz" bigIcon="dMq0Lz" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
@@ -235,15 +232,15 @@
       </MODULEPATHS>
     </LINUX_MAKE>
     <VS2008 targetFolder="Builds/VisualStudio2008" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
-            externalLibraries="$(SolutionDir)$(OutDir)libusb-1.0.lib" smallIcon="dMq0Lz"
-            bigIcon="dMq0Lz">
+            externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
+            smallIcon="dMq0Lz" bigIcon="dMq0Lz" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
-                       optimisation="1" targetName="OwlNest" libraryPath="" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
-                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2005.vcproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+                       optimisation="1" targetName="OwlNest" libraryPath="" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" isDebug="0"
-                       optimisation="2" targetName="OwlNest" libraryPath="" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
-                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2005.vcproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+                       optimisation="2" targetName="OwlNest" libraryPath="" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
@@ -261,15 +258,15 @@
       </MODULEPATHS>
     </VS2008>
     <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz"
-            extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS" externalLibraries="$(SolutionDir)$(OutDir)libusb-1.0.lib"
-            extraCompilerFlags="">
+            extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS" externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
+            extraCompilerFlags="" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
-                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2010.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
-                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2010.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
@@ -287,15 +284,16 @@
       </MODULEPATHS>
     </VS2010>
     <VS2012 targetFolder="Builds/VisualStudio2012" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
-            externalLibraries="$(SolutionDir)$(OutDir)libusb-1.0.lib" smallIcon="dMq0Lz"
-            bigIcon="dMq0Lz" toolset="v110_xp" extraCompilerFlags="">
+            externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
+            smallIcon="dMq0Lz" bigIcon="dMq0Lz" toolset="v110_xp" extraCompilerFlags=""
+            juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
-                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2012.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="C:\SDKs\libusbx-1.0.17\examples\getopt&#10;C:\SDKs\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
-                       prebuildCommand="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2012.vcxproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>

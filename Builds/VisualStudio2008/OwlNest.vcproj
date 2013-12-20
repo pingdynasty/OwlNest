@@ -16,9 +16,7 @@
                    UseOfMFC="0"
                    ATLMinimizesCRunTimeLibraryUsage="false"
                    CharacterSet="2">
-      <Tool Name="VCPreBuildEventTool"
-            Description="Pre-build"
-            CommandLine="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2005.vcproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+      <Tool Name="VCPreBuildEventTool"/>
       <Tool Name="VCCustomBuildTool"/>
       <Tool Name="VCXMLDataGeneratorTool"/>
       <Tool Name="VCWebServiceProxyGeneratorTool"/>
@@ -33,7 +31,7 @@
             Optimization="0"
             BufferSecurityCheck=""
             DebugInformationFormat="4"
-            AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusbx-1.0.17\examples\getopt;C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries\"
+            AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\Libraries\libusbx-1.0.17\examples\getopt;..\..\Libraries\libusbx-1.0.17\libusb;..\..\Libraries\"
             PreprocessorDefinitions="WIN32;_WINDOWS;DEBUG;_DEBUG;HAVE_WINDOWS_H;_CRT_SECURE_NO_WARNINGS;JUCER_VS2008_78A5006=1"
             RuntimeLibrary="1"
             RuntimeTypeInfo="true"
@@ -57,7 +55,7 @@
             SubSystem="2"
             GenerateManifest="true"
             TargetMachine="1"
-            AdditionalDependencies="$(SolutionDir)$(OutDir)libusb-1.0.lib"/>
+            AdditionalDependencies="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"/>
       <Tool Name="VCALinkTool"/>
       <Tool Name="VCManifestTool"/>
       <Tool Name="VCXDCMakeTool"/>
@@ -75,9 +73,7 @@
                    ATLMinimizesCRunTimeLibraryUsage="false"
                    CharacterSet="2"
                    WholeProgramOptimization="1">
-      <Tool Name="VCPreBuildEventTool"
-            Description="Pre-build"
-            CommandLine="msbuild C:\SDKs\libusbx-1.0.17\msvc\libusb_static_2005.vcproj /t:rebuild /p:Configuration=$(Configuration);OutDir=$(SolutionDir)$(OutDir)"/>
+      <Tool Name="VCPreBuildEventTool"/>
       <Tool Name="VCCustomBuildTool"/>
       <Tool Name="VCXMLDataGeneratorTool"/>
       <Tool Name="VCWebServiceProxyGeneratorTool"/>
@@ -92,7 +88,7 @@
             Optimization="1"
             InlineFunctionExpansion="1"
             StringPooling="true"
-            AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;C:\SDKs\libusbx-1.0.17\examples\getopt;C:\SDKs\libusbx-1.0.17\libusb;..\..\Libraries\"
+            AdditionalIncludeDirectories="..\..\JuceLibraryCode;..\..\Libraries\libusbx-1.0.17\examples\getopt;..\..\Libraries\libusbx-1.0.17\libusb;..\..\Libraries\"
             PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HAVE_WINDOWS_H;_CRT_SECURE_NO_WARNINGS;JUCER_VS2008_78A5006=1"
             RuntimeLibrary="0"
             RuntimeTypeInfo="true"
@@ -118,7 +114,7 @@
             OptimizeReferences="2"
             EnableCOMDATFolding="2"
             TargetMachine="1"
-            AdditionalDependencies="$(SolutionDir)$(OutDir)libusb-1.0.lib"/>
+            AdditionalDependencies="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"/>
       <Tool Name="VCALinkTool"/>
       <Tool Name="VCManifestTool"/>
       <Tool Name="VCXDCMakeTool"/>
@@ -192,29 +188,9 @@
           <File RelativePath="..\..\Libraries\dfu-util\dfuse.h"/>
           <File RelativePath="..\..\Libraries\dfu-util\dfuse_mem.c"/>
           <File RelativePath="..\..\Libraries\dfu-util\dfuse_mem.h"/>
-          <File RelativePath="..\..\Libraries\dfu-util\main.c">
-            <FileConfiguration Name="Debug|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-            <FileConfiguration Name="Release|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-          </File>
           <File RelativePath="..\..\Libraries\dfu-util\portable.h"/>
           <File RelativePath="..\..\Libraries\dfu-util\quirks.c"/>
           <File RelativePath="..\..\Libraries\dfu-util\quirks.h"/>
-          <File RelativePath="..\..\Libraries\dfu-util\suffix.c">
-            <FileConfiguration Name="Debug|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-            <FileConfiguration Name="Release|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-          </File>
           <File RelativePath="..\..\Libraries\dfu-util\usb_dfu.h"/>
         </Filter>
         <Filter Name="win-util">
@@ -271,16 +247,6 @@
         </FileConfiguration>
       </File>
       <File RelativePath="..\..\Source\OwlPatches\includes.h"/>
-      <File RelativePath="..\..\Source\OwlPatches\patches.cpp">
-        <FileConfiguration Name="Debug|Win32"
-                           ExcludedFromBuild="true">
-          <Tool Name="VCCLCompilerTool"/>
-        </FileConfiguration>
-        <FileConfiguration Name="Release|Win32"
-                           ExcludedFromBuild="true">
-          <Tool Name="VCCLCompilerTool"/>
-        </FileConfiguration>
-      </File>
     </Filter>
     <Filter Name="Juce Modules">
       <Filter Name="juce_audio_basics">
