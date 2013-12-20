@@ -156,36 +156,48 @@ uint64 OwlNestSettings::getLastMidiMessageTime(){
 
 bool OwlNestSettings::updateBootloader(){
   DBG("Update bootloader");
-  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-  String options = props->getValue("bootloader-dfu-options");
-  FileChooser chooser("Select Bootloader", ApplicationConfiguration::getApplicationDirectory(), "*.bin");		      
-  if(chooser.browseForFileToOpen()){
-    // put device into DFU mode
-    setCc(DEVICE_FIRMWARE_UPDATE, 127);
-    File file = chooser.getResult();
-    FirmwareLoader loader;
-    loader.updateFirmware(file, options);
-    return true;
-  }else{
-    return false;
+  AlertWindow alert("Update Bootloader", 
+		    "Changing the bootloader can make your OWL unresponsive! Are you sure you want to proceed?", 
+		    juce::AlertWindow::InfoIcon);
+  alert.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
+  alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+  if(alert.runModalLoop() == 1){
+    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+    String options = props->getValue("bootloader-dfu-options");
+    FileChooser chooser("Select Bootloader", ApplicationConfiguration::getApplicationDirectory(), "*.bin");
+    if(chooser.browseForFileToOpen()){
+      // put device into DFU mode
+      setCc(DEVICE_FIRMWARE_UPDATE, 127);
+      File file = chooser.getResult();
+      FirmwareLoader loader;
+      loader.updateFirmware(file, options);
+      return true;
+    }
   }
+  return false;
 }
 
 bool OwlNestSettings::updateFirmware(){
   DBG("Update firmware!");
-  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-  String options = props->getValue("firmware-dfu-options");
-  FileChooser chooser("Select Firmware", ApplicationConfiguration::getApplicationDirectory(), "*.bin");		      
-  if(chooser.browseForFileToOpen()){
-    // put device into DFU mode
-    setCc(DEVICE_FIRMWARE_UPDATE, 127);
-    File file = chooser.getResult();
-    FirmwareLoader loader;
-    loader.updateFirmware(file, options);
-    return true;
-  }else{
-    return false;
+  AlertWindow alert("Update Firmware", 
+		    "Changing the firmware can make your OWL unresponsive! Are you sure you want to proceed?", 
+		    juce::AlertWindow::InfoIcon);
+  alert.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
+  alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+  if(alert.runModalLoop() == 1){
+    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+    String options = props->getValue("firmware-dfu-options");
+    FileChooser chooser("Select Firmware", ApplicationConfiguration::getApplicationDirectory(), "*.bin");
+    if(chooser.browseForFileToOpen()){
+      // put device into DFU mode
+      setCc(DEVICE_FIRMWARE_UPDATE, 127);
+      File file = chooser.getResult();
+      FirmwareLoader loader;
+      loader.updateFirmware(file, options);
+      return true;
+    }
   }
+  return false;
 }
 
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){

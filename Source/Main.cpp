@@ -75,12 +75,14 @@ public:
       toplevel.add("File");
       toplevel.add("Tools");
       PopupMenu file;
-      file.addCommandItem(commands, ApplicationCommands::checkForUpdates);
       file.addCommandItem(commands, StandardApplicationCommandIDs::quit);
       popups.add(file);
       PopupMenu tools;
       tools.addCommandItem(commands, ApplicationCommands::updateFirmware);
+#if HIDE_LOW_LEVEL_ITEMS == 0
       tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
+#endif        
+      tools.addCommandItem(commands, ApplicationCommands::checkForUpdates);
       popups.add(tools);
     }
     StringArray getMenuBarNames(){

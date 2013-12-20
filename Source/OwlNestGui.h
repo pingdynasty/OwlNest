@@ -24,7 +24,7 @@
 #include "JuceHeader.h"
 #include "OwlNestSettings.h"
 
-#define HIDE_LOW_LEVEL_ITEMS    0
+#define HIDE_LOW_LEVEL_ITEMS    1
 
 //[/Headers]
 

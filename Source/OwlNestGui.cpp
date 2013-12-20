@@ -345,7 +345,8 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     slider4->setEnabled(false);
 
     if(HIDE_LOW_LEVEL_ITEMS){
-        saveButton->setVisible(0);
+        deviceInfoButton->setVisible(0);
+        resetButton->setVisible(0);
         leftGainSlider->setVisible(0);
         leftGainLabel->setVisible(0);
         leftInputMuteButton->setVisible(0);
@@ -759,21 +760,23 @@ void OwlNestGui::settingsChanged() {
       patchSlotBComboBox->addItemList(presets, 1);
       setStatus("Settings loaded");
     }
-
+    
     // Parameter names
     StringArray& parameters = theSettings.getParameterNames();
-    if(parameters.size() == 4){      
+    if(parameters.size() >= 4){
       label1->setText(parameters[0], dontSendNotification);
       label2->setText(parameters[1], dontSendNotification);
       label3->setText(parameters[2], dontSendNotification);
       label4->setText(parameters[3], dontSendNotification);
     }
 
+#if HIDE_LOW_LEVEL_ITEMS == 1
     // Parameter values
     slider1->setValue(theSettings.getCc(PATCH_PARAMETER_A)/127.0);
     slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0);
     slider3->setValue(theSettings.getCc(PATCH_PARAMETER_C)/127.0);
     slider4->setValue(theSettings.getCc(PATCH_PARAMETER_D)/127.0);
+#endif
 
     // LED button
     int v = theSettings.getCc(LED);
