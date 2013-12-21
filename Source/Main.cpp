@@ -66,22 +66,24 @@ public:
         // the other instance's command-line arguments were.
     }
 
-  class MainMenu : public MenuBarModel {
+  class MainMenuModel : public MenuBarModel {
   private:
     StringArray toplevel;
     Array<PopupMenu> popups;
   public:
-    MainMenu(ApplicationCommandManager* commands){
-      toplevel.add("File");
-      toplevel.add("Tools");
+    MainMenuModel(ApplicationCommandManager* commands){
+#if !JUCE_MAC
       PopupMenu file;
+      toplevel.add("File");
       file.addCommandItem(commands, StandardApplicationCommandIDs::quit);
       popups.add(file);
+#endif
       PopupMenu tools;
+      toplevel.add("Tools");
       tools.addCommandItem(commands, ApplicationCommands::updateFirmware);
 #if HIDE_LOW_LEVEL_ITEMS == 0
       tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
-#endif        
+#endif
       tools.addCommandItem(commands, ApplicationCommands::checkForUpdates);
       popups.add(tools);
     }
@@ -123,21 +125,31 @@ public:
 	  DocumentWindow(JUCEApplication::getInstance()->getApplicationName(),
 			 Colours::lightgrey, DocumentWindow::allButtons)
       {
-	setMenuBar(menu = new MainMenu(commands));
+	menu = new MainMenuModel(commands);
+#if JUCE_MAC
+	MenuBarModel::setMacMainMenu(menu);
+#else
+	setMenuBar(menu);
+#endif
 
 	tabs = new TabbedComponent(TabbedButtonBar::TabsAtTop);
 	setContentOwned(tabs, false);
 	tabs->addTab("Main", Colours::lightgrey, new OwlNestGui(settings, dm, updateGui), true, 1);
 	tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true, 2);
-	if (HIDE_LOW_LEVEL_ITEMS==0){
+#if HIDE_LOW_LEVEL_ITEMS == 0
 	  tabs->addTab("Simulator", Colours::lightgrey, new PatchComponent(dm), true, 3);
-	}
+#endif
 	tabs->setSize(779, 700);
 	centreWithSize (779, 700);
 	setVisible (true);
       }
       ~MainWindow(){
+#if JUCE_MAC
+	MenuBarModel::setMacMainMenu(NULL);
+#else
 	setMenuBar(NULL);
+#endif
+
       }
       void closeButtonPressed()
       {
@@ -156,7 +168,7 @@ public:
 
     private:
       ScopedPointer<TabbedComponent> tabs;
-      ScopedPointer<MainMenu> menu;
+      ScopedPointer<MainMenuModel> menu;
       JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
     };
 

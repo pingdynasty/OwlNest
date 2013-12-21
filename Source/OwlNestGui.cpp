@@ -344,34 +344,34 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     slider3->setEnabled(false);
     slider4->setEnabled(false);
 
-    if(HIDE_LOW_LEVEL_ITEMS){
-        deviceInfoButton->setVisible(0);
-        resetButton->setVisible(0);
-        leftGainSlider->setVisible(0);
-        leftGainLabel->setVisible(0);
-        leftInputMuteButton->setVisible(0);
-        leftOutGainSlider->setVisible(0);
-        leftOutGainLabel->setVisible(0);
-        leftOutputMuteButton->setVisible(0);
-        rightGainSlider->setVisible(0);
-        rightGainLabel->setVisible(0);
-        rightInputMuteButton->setVisible(0);
-        rightOutGainSlider->setVisible(0);
-        rightOutGainLabel->setVisible(0);
-        rightOutputMuteButton->setVisible(0);
-        bypassButton->setVisible(0);
-        swapLRButton->setVisible(0);
-        samplingRateComboBox->setVisible(0);
-        samplingRateLabel->setVisible(0);
-        samplingBitsComboBox->setVisible(0);
-        samplingBitsLabel->setVisible(0);
-        protocolLabel->setVisible(0);
-        protocolComboBox->setVisible(0);
-        masterButton->setVisible(0);
-    }else{
-        sensitivityComboBox->addItem("Custom", CUSTOM);
-        sensitivityComboBox->setItemEnabled(CUSTOM, 0);
-    }
+#if HIDE_LOW_LEVEL_ITEMS == 1
+    deviceInfoButton->setVisible(0);
+    resetButton->setVisible(0);
+    leftGainSlider->setVisible(0);
+    leftGainLabel->setVisible(0);
+    leftInputMuteButton->setVisible(0);
+    leftOutGainSlider->setVisible(0);
+    leftOutGainLabel->setVisible(0);
+    leftOutputMuteButton->setVisible(0);
+    rightGainSlider->setVisible(0);
+    rightGainLabel->setVisible(0);
+    rightInputMuteButton->setVisible(0);
+    rightOutGainSlider->setVisible(0);
+    rightOutGainLabel->setVisible(0);
+    rightOutputMuteButton->setVisible(0);
+    bypassButton->setVisible(0);
+    swapLRButton->setVisible(0);
+    samplingRateComboBox->setVisible(0);
+    samplingRateLabel->setVisible(0);
+    samplingBitsComboBox->setVisible(0);
+    samplingBitsLabel->setVisible(0);
+    protocolLabel->setVisible(0);
+    protocolComboBox->setVisible(0);
+    masterButton->setVisible(0);
+#else
+    sensitivityComboBox->addItem("Custom", CUSTOM);
+    sensitivityComboBox->setItemEnabled(CUSTOM, 0);
+#endif
     //[/Constructor]
 }
 
@@ -770,7 +770,7 @@ void OwlNestGui::settingsChanged() {
       label4->setText(parameters[3], dontSendNotification);
     }
 
-#if HIDE_LOW_LEVEL_ITEMS == 1
+#if HIDE_LOW_LEVEL_ITEMS == 0
     // Parameter values
     slider1->setValue(theSettings.getCc(PATCH_PARAMETER_A)/127.0);
     slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0);

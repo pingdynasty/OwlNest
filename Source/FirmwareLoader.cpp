@@ -5,6 +5,7 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
+#define __GNU_LIBRARY__
 #include <getopt.h>
 
 #ifdef _MSC_VER
