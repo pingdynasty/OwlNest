@@ -236,10 +236,10 @@
             smallIcon="dMq0Lz" bigIcon="dMq0Lz" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
-                       optimisation="1" targetName="OwlNest" libraryPath="" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       optimisation="1" targetName="OwlNest" libraryPath="" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
                        prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" isDebug="0"
-                       optimisation="2" targetName="OwlNest" libraryPath="" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       optimisation="2" targetName="OwlNest" libraryPath="" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
                        prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
@@ -262,10 +262,10 @@
             extraCompilerFlags="" juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
                        prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
                        prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
@@ -289,10 +289,10 @@
             juceFolder="modules">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
                        prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="..\..\Libraries\libusbx-1.0.17\examples\getopt&#10;..\..\Libraries\libusbx-1.0.17\libusb&#10;..\..\Libraries\"
+                       isDebug="0" optimisation="2" targetName="OwlNest" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
                        prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
