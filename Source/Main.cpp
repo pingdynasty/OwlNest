@@ -1,6 +1,6 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "OwlNestGui.h"
-#include "PluginProcessor.h"
+#include "StompBoxAudioProcessor.h"
 #include "PatchComponent.h"
 #include "SeriesDeviceCallBacks.h"
 #include "ApplicationConfiguration.h"

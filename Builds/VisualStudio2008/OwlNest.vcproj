@@ -147,12 +147,12 @@
           <File RelativePath="..\..\Source\TransportPanel.h"/>
         </Filter>
         <Filter Name="Plugin">
+          <File RelativePath="..\..\Source\StompBoxAudioProcessor.cpp"/>
+          <File RelativePath="..\..\Source\StompBoxAudioProcessor.h"/>
           <File RelativePath="..\..\Source\PluginEditor.cpp"/>
           <File RelativePath="..\..\Source\PluginEditor.h"/>
           <File RelativePath="..\..\Source\PluginPatchProcessor.cpp"/>
           <File RelativePath="..\..\Source\PluginPatchProcessor.h"/>
-          <File RelativePath="..\..\Source\PluginProcessor.cpp"/>
-          <File RelativePath="..\..\Source\PluginProcessor.h"/>
         </Filter>
         <File RelativePath="..\..\Source\ApplicationCommands.h"/>
         <File RelativePath="..\..\Source\ApplicationConfiguration.cpp"/>

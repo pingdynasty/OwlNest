@@ -1,4 +1,4 @@
-#include "PluginProcessor.h"
+#include "StompBoxAudioProcessor.h"
 #include "PluginPatchProcessor.h"
 #include "PluginEditor.h"
 #include "SampleBuffer.h"

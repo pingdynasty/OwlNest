@@ -319,13 +319,13 @@
     <ClCompile Include="..\..\Source\TransportPanel.cpp">
       <Filter>OwlNest\Application\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\StompBoxAudioProcessor.cpp">
+      <Filter>OwlNest\Application\Plugin</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PluginEditor.cpp">
       <Filter>OwlNest\Application\Plugin</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp">
-      <Filter>OwlNest\Application\Plugin</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>OwlNest\Application\Plugin</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp">
@@ -1524,13 +1524,13 @@
     <ClInclude Include="..\..\Source\TransportPanel.h">
       <Filter>OwlNest\Application\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\StompBoxAudioProcessor.h">
+      <Filter>OwlNest\Application\Plugin</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\PluginEditor.h">
       <Filter>OwlNest\Application\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginPatchProcessor.h">
-      <Filter>OwlNest\Application\Plugin</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\PluginProcessor.h">
       <Filter>OwlNest\Application\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ApplicationCommands.h">

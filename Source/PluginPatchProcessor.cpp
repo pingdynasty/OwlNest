@@ -1,5 +1,5 @@
 #include "PluginPatchProcessor.h"
-#include "PluginProcessor.h"
+#include "StompBoxAudioProcessor.h"
 
 PluginPatchProcessor::PluginPatchProcessor(StompBoxAudioProcessor* pl)
   : plugin(pl){

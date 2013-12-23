@@ -56,9 +56,9 @@ OBJECTS := \
   $(OBJDIR)/PatchMode_d85501ec.o \
   $(OBJDIR)/StompGui_6de188b3.o \
   $(OBJDIR)/TransportPanel_18909a64.o \
+  $(OBJDIR)/StompBoxAudioProcessor_ad448c3f.o \
   $(OBJDIR)/PluginEditor_94d4fb09.o \
   $(OBJDIR)/PluginPatchProcessor_a02b7946.o \
-  $(OBJDIR)/PluginProcessor_a059e380.o \
   $(OBJDIR)/ApplicationConfiguration_4b5ea10f.o \
   $(OBJDIR)/FirmwareLoader_f0d96237.o \
   $(OBJDIR)/Main_90ebc5c2.o \
@@ -142,6 +142,11 @@ $(OBJDIR)/TransportPanel_18909a64.o: ../../Source/TransportPanel.cpp
 	@echo "Compiling TransportPanel.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/StompBoxAudioProcessor_ad448c3f.o: ../../Source/StompBoxAudioProcessor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling StompBoxAudioProcessor.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/PluginEditor_94d4fb09.o: ../../Source/PluginEditor.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling PluginEditor.cpp"
@@ -150,11 +155,6 @@ $(OBJDIR)/PluginEditor_94d4fb09.o: ../../Source/PluginEditor.cpp
 $(OBJDIR)/PluginPatchProcessor_a02b7946.o: ../../Source/PluginPatchProcessor.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling PluginPatchProcessor.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PluginProcessor_a059e380.o: ../../Source/PluginProcessor.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PluginProcessor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ApplicationConfiguration_4b5ea10f.o: ../../Source/ApplicationConfiguration.cpp

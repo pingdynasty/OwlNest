@@ -12,7 +12,7 @@
 #define SERIESDEVICECALLBACKS_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "PluginProcessor.h"
+#include "StompBoxAudioProcessor.h"
 #include "Enums.h"
 
 class SeriesDeviceCallBacks : public AudioIODeviceCallback, public Value::Listener

@@ -30,6 +30,10 @@
               file="Source/TransportPanel.h"/>
       </GROUP>
       <GROUP id="{3B980891-6AE6-F7E5-5B44-51D422CD0026}" name="Plugin">
+        <FILE id="Ox76Pv" name="StompBoxAudioProcessor.cpp" compile="1" resource="0"
+              file="Source/StompBoxAudioProcessor.cpp"/>
+        <FILE id="jkoaLh" name="StompBoxAudioProcessor.h" compile="0" resource="0"
+              file="Source/StompBoxAudioProcessor.h"/>
         <FILE id="EDoQ6M" name="PluginEditor.cpp" compile="1" resource="0"
               file="Source/PluginEditor.cpp"/>
         <FILE id="dwNJHN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
@@ -37,10 +41,6 @@
               file="Source/PluginPatchProcessor.cpp"/>
         <FILE id="O14Un3" name="PluginPatchProcessor.h" compile="0" resource="0"
               file="Source/PluginPatchProcessor.h"/>
-        <FILE id="sEOYX7" name="PluginProcessor.cpp" compile="1" resource="0"
-              file="Source/PluginProcessor.cpp"/>
-        <FILE id="sEjXVv" name="PluginProcessor.h" compile="0" resource="0"
-              file="Source/PluginProcessor.h"/>
       </GROUP>
       <FILE id="fMKCC9" name="ApplicationCommands.h" compile="0" resource="0"
             file="Source/ApplicationCommands.h"/>

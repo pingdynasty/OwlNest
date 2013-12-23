@@ -2,7 +2,7 @@
 #define __PLUGINEDITOR_H__
 
 #include "JuceHeader.h"
-#include "PluginProcessor.h"
+#include "StompBoxAudioProcessor.h"
 
 class StompBoxAudioProcessorEditor  : public AudioProcessorEditor
 {

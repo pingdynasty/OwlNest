@@ -136,9 +136,9 @@
     <ClCompile Include="..\..\Source\PatchMode.cpp"/>
     <ClCompile Include="..\..\Source\StompGui.cpp"/>
     <ClCompile Include="..\..\Source\TransportPanel.cpp"/>
+    <ClCompile Include="..\..\Source\StompBoxAudioProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
     <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp"/>
-    <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp"/>
     <ClCompile Include="..\..\Source\FirmwareLoader.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
@@ -1196,9 +1196,9 @@
     <ClInclude Include="..\..\Source\PatchMode.h"/>
     <ClInclude Include="..\..\Source\StompGui.h"/>
     <ClInclude Include="..\..\Source\TransportPanel.h"/>
+    <ClInclude Include="..\..\Source\StompBoxAudioProcessor.h"/>
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
     <ClInclude Include="..\..\Source\PluginPatchProcessor.h"/>
-    <ClInclude Include="..\..\Source\PluginProcessor.h"/>
     <ClInclude Include="..\..\Source\ApplicationCommands.h"/>
     <ClInclude Include="..\..\Source\ApplicationConfiguration.h"/>
     <ClInclude Include="..\..\Source\Enums.h"/>

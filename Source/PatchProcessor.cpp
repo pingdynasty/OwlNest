@@ -1,7 +1,7 @@
 /*** Patch base class implementation for StompBoxAudioProcessor **/
 
 #include "PatchProcessor.h"
-#include "PluginProcessor.h"
+#include "StompBoxAudioProcessor.h"
 
 AudioBuffer::~AudioBuffer(){}
 

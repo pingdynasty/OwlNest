@@ -11,7 +11,7 @@
 #ifndef PATCHCOMPONENT_H_INCLUDED
 #define PATCHCOMPONENT_H_INCLUDED
 
-#include "PluginProcessor.h"
+#include "StompBoxAudioProcessor.h"
 #include "SeriesDeviceCallBacks.h"
 #include "TransportPanel.h"
 #include "DualPatchPanel.h"
