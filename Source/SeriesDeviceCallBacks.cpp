@@ -69,7 +69,7 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
             case SINGLE:
             {
           
-                processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                processorA.audioDeviceIOCallback((const float**)processInput, numInputChannels, outputChannelData, numOutputChannels, numSamples);
                 break;
             }
             case DUAL:
@@ -78,12 +78,12 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
                 {
                 case A:
                     {
-                         processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                         processorA.audioDeviceIOCallback((const float**)processInput, numInputChannels, outputChannelData, numOutputChannels, numSamples);
                         break;
                     }
                     case B:
                     {
-                           processorB.audioDeviceIOCallback((const float**)processInput, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
+                           processorB.audioDeviceIOCallback((const float**)processInput, numInputChannels, outputChannelData, numOutputChannels, numSamples);
                         break;
                     }
                 }
@@ -93,7 +93,7 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
             }
             case SERIES:
             {
-                processorA.audioDeviceIOCallback((const float**)processInput, numOutputChannels, buffer, numOutputChannels, numSamples);
+                processorA.audioDeviceIOCallback((const float**)processInput, numInputChannels, buffer, numOutputChannels, numSamples);
                     processorB.audioDeviceIOCallback(( const float**)buffer, numOutputChannels, outputChannelData, numOutputChannels, numSamples);
 
                 break;
@@ -110,15 +110,11 @@ void 	SeriesDeviceCallBacks::audioDeviceIOCallback (const float **inputChannelDa
                     processorB.audioDeviceIOCallback((const float**)leftInput, 1, rightOutput, 1, numSamples);
                } 
                 break;
-                
-              
-            }
-                
-        }
- 
+            }                
+        } 
     if(recordState == true)
     {
-        writer->writeFromFloatArrays((const float**)outputChannelData,numOutputChannels, numSamples);
+        writer->writeFromFloatArrays((const float**)outputChannelData, numOutputChannels, numSamples);
     }
 
 }
