@@ -22,9 +22,7 @@
   ==============================================================================
 */
 
-//==============================================================================
 static const char* const aiffFormatName = "AIFF file";
-static const char* const aiffExtensions[] = { ".aiff", ".aif", 0 };
 
 //==============================================================================
 const char* const AiffAudioFormat::appleOneShot         = "apple one shot";
@@ -101,7 +99,7 @@ namespace AiffFileHelpers
             if (values.getAllKeys().contains ("MidiUnityNote", true))
             {
                 block.setSize ((sizeof (InstChunk) + 3) & ~(size_t) 3, true);
-                InstChunk& inst = *static_cast <InstChunk*> (block.getData());
+                InstChunk& inst = *static_cast<InstChunk*> (block.getData());
 
                 inst.baseNote      = getValue8 (values, "MidiUnityNote", "60");
                 inst.detune        = getValue8 (values, "Detune", "0");
@@ -220,7 +218,7 @@ namespace AiffFileHelpers
         StringArray tagsArray;
 
         int bytesLeft = (int) mb.getSize();
-        const char* data = static_cast <const char*> (mb.getData());
+        const char* data = static_cast<const char*> (mb.getData());
 
         while (bytesLeft > 0)
         {
@@ -345,7 +343,7 @@ namespace AiffFileHelpers
                     out.writeIntBigEndian (values.getValue (prefix + "TimeStamp", "0").getIntValue());
                     out.writeShortBigEndian ((short) values.getValue (prefix + "Identifier", "0").getIntValue());
 
-                    const String comment (values.getValue (prefix + "Text", String::empty));
+                    const String comment (values.getValue (prefix + "Text", String()));
 
                     const size_t commentLength = jmin (comment.getNumBytesAsUTF8(), (size_t) 65534);
                     out.writeShortBigEndian ((short) commentLength + 1);
@@ -365,7 +363,7 @@ class AiffAudioFormatReader  : public AudioFormatReader
 {
 public:
     AiffAudioFormatReader (InputStream* in)
-        : AudioFormatReader (in, TRANS (aiffFormatName))
+        : AudioFormatReader (in, aiffFormatName)
     {
         using namespace AiffFileHelpers;
 
@@ -611,7 +609,7 @@ public:
     AiffAudioFormatWriter (OutputStream* out, double rate,
                            unsigned int numChans, unsigned int bits,
                            const StringPairArray& metadataValues)
-        : AudioFormatWriter (out, TRANS (aiffFormatName), rate, numChans, bits),
+        : AudioFormatWriter (out, aiffFormatName, rate, numChans, bits),
           lengthInSamples (0),
           bytesWritten (0),
           writeFailed (false)
@@ -879,8 +877,7 @@ private:
 };
 
 //==============================================================================
-AiffAudioFormat::AiffAudioFormat()
-    : AudioFormat (TRANS (aiffFormatName), StringArray (aiffExtensions))
+AiffAudioFormat::AiffAudioFormat()   : AudioFormat (aiffFormatName, ".aiff .aif")
 {
 }
 

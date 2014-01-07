@@ -90,8 +90,8 @@ File PropertiesFile::Options::getDefaultFile() const
     File dir (File::getSpecialLocation (commonToAllUsers ? File::commonApplicationDataDirectory
                                                          : File::userApplicationDataDirectory));
 
-    if (dir == File::nonexistent)
-        return File::nonexistent;
+    if (dir == File())
+        return File();
 
     dir = dir.getChildFile (folderName.isNotEmpty() ? folderName
                                                     : applicationName);
@@ -165,7 +165,7 @@ bool PropertiesFile::save()
     stopTimer();
 
     if (options.doNotSave
-         || file == File::nonexistent
+         || file == File()
          || file.isDirectory()
          || ! file.getParentDirectory().createDirectory())
         return false;
@@ -195,20 +195,18 @@ bool PropertiesFile::loadAsXml()
                 {
                     getAllProperties().set (name,
                                             e->getFirstChildElement() != nullptr
-                                                ? e->getFirstChildElement()->createDocument (String::empty, true)
+                                                ? e->getFirstChildElement()->createDocument ("", true)
                                                 : e->getStringAttribute (PropertyFileConstants::valueAttribute));
                 }
             }
 
             return true;
         }
-        else
-        {
-            // must be a pretty broken XML file we're trying to parse here,
-            // or a sign that this object needs an InterProcessLock,
-            // or just a failure reading the file.  This last reason is why
-            // we don't jassertfalse here.
-        }
+
+        // must be a pretty broken XML file we're trying to parse here,
+        // or a sign that this object needs an InterProcessLock,
+        // or just a failure reading the file.  This last reason is why
+        // we don't jassertfalse here.
     }
 
     return false;
@@ -236,7 +234,7 @@ bool PropertiesFile::saveAsXml()
     if (pl != nullptr && ! pl->isLocked())
         return false; // locking failure..
 
-    if (doc.writeToFile (file, String::empty))
+    if (doc.writeToFile (file, String()))
     {
         needsWriting = false;
         return true;
@@ -259,10 +257,9 @@ bool PropertiesFile::loadAsBinary()
             GZIPDecompressorInputStream gzip (subStream);
             return loadAsBinary (gzip);
         }
-        else if (magicNumber == PropertyFileConstants::magicNumber)
-        {
+
+        if (magicNumber == PropertyFileConstants::magicNumber)
             return loadAsBinary (fileStream);
-        }
     }
 
     return false;
@@ -295,7 +292,7 @@ bool PropertiesFile::saveAsBinary()
         return false; // locking failure..
 
     TemporaryFile tempFile (file);
-    ScopedPointer <OutputStream> out (tempFile.getFile().createOutputStream());
+    ScopedPointer<OutputStream> out (tempFile.getFile().createOutputStream());
 
     if (out != nullptr)
     {

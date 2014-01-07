@@ -183,7 +183,7 @@
     <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.a"
                extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx"
                externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" smallIcon="dMq0Lz"
-               bigIcon="dMq0Lz" juceFolder="modules">
+               bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="0" optimisation="2" targetName="OwlNest" libraryPath="/opt/local/lib "
@@ -209,7 +209,7 @@
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx -I../../Source"
                 extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.so" externalLibraries=""
-                smallIcon="dMq0Lz" bigIcon="dMq0Lz" juceFolder="modules">
+                smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlNest"/>
@@ -233,7 +233,7 @@
     </LINUX_MAKE>
     <VS2008 targetFolder="Builds/VisualStudio2008" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
             externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
-            smallIcon="dMq0Lz" bigIcon="dMq0Lz" juceFolder="modules">
+            smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
                        optimisation="1" targetName="OwlNest" libraryPath="" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
@@ -259,7 +259,7 @@
     </VS2008>
     <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz"
             extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS" externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
-            extraCompilerFlags="" juceFolder="modules">
+            extraCompilerFlags="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="OwlNest" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
@@ -285,8 +285,7 @@
     </VS2010>
     <VS2012 targetFolder="Builds/VisualStudio2012" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
             externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
-            smallIcon="dMq0Lz" bigIcon="dMq0Lz" toolset="v110_xp" extraCompilerFlags=""
-            juceFolder="modules">
+            smallIcon="dMq0Lz" bigIcon="dMq0Lz" toolset="v110_xp" extraCompilerFlags="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="OwlNest" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
