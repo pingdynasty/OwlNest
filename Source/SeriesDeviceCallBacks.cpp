@@ -28,12 +28,7 @@ SeriesDeviceCallBacks:: SeriesDeviceCallBacks(Value& patchChange,Value& owlConfi
 SeriesDeviceCallBacks::~SeriesDeviceCallBacks(){
   processorA.setProcessor(NULL);
   processorB.setProcessor(NULL);  // processor must be set to NULL to avoid a pure virtual method called in the destructor
-    if(buffer != NULL){
-        for(int i=0; i<channels; ++i)
-            delete buffer[i];
-        delete buffer;
-    }
-     
+    removeBuffer();
 }
 
 StompBoxAudioProcessor& SeriesDeviceCallBacks::getStompboxA(){

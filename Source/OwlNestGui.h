@@ -24,7 +24,7 @@
 #include "JuceHeader.h"
 #include "OwlNestSettings.h"
 
-#define HIDE_LOW_LEVEL_ITEMS    1
+#define HIDE_LOW_LEVEL_ITEMS    0
 
 //[/Headers]
 
@@ -126,6 +126,8 @@ private:
     ScopedPointer<Slider> slider1;
     ScopedPointer<Label> label2;
     ScopedPointer<Slider> slider2;
+    ScopedPointer<Slider> slider5;
+    ScopedPointer<Label> label5;
     Image cachedImage_owlFaceplate_png;
 
 

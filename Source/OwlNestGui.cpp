@@ -31,22 +31,22 @@
 
 //==============================================================================
 OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value& updateGui)
-    : Component ("MainGui"),
-      theSettings(settings), theDm(dm)
+    : theSettings(settings), theDm(dm)
 {
+    setName ("MainGui");
     addAndMakeVisible (samplingRateComboBox = new ComboBox ("new combo box"));
     samplingRateComboBox->setEditableText (false);
     samplingRateComboBox->setJustificationType (Justification::centredLeft);
     samplingRateComboBox->setTextWhenNothingSelected (String::empty);
-    samplingRateComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    samplingRateComboBox->addItem ("8 kHz", 1);
-    samplingRateComboBox->addItem ("32 kHz", 2);
-    samplingRateComboBox->addItem ("48 kHz", 3);
-    samplingRateComboBox->addItem ("96 kHz", 4);
+    samplingRateComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    samplingRateComboBox->addItem (TRANS("8 kHz"), 1);
+    samplingRateComboBox->addItem (TRANS("32 kHz"), 2);
+    samplingRateComboBox->addItem (TRANS("48 kHz"), 3);
+    samplingRateComboBox->addItem (TRANS("96 kHz"), 4);
     samplingRateComboBox->addListener (this);
 
     addAndMakeVisible (samplingRateLabel = new Label ("new label",
-                                                      "Sampling Rate"));
+                                                      TRANS("Sampling Rate")));
     samplingRateLabel->setFont (Font (15.00f, Font::plain));
     samplingRateLabel->setJustificationType (Justification::centredLeft);
     samplingRateLabel->setEditable (false, false, false);
@@ -54,7 +54,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     samplingRateLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (loadButton = new TextButton ("new button"));
-    loadButton->setButtonText ("Load from OWL");
+    loadButton->setButtonText (TRANS("Load from OWL"));
     loadButton->addListener (this);
 
     addAndMakeVisible (leftGainSlider = new Slider ("new slider"));
@@ -64,7 +64,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     leftGainSlider->addListener (this);
 
     addAndMakeVisible (leftGainLabel = new Label ("new label",
-                                                  "dB Input Gain L"));
+                                                  TRANS("dB Input Gain L")));
     leftGainLabel->setFont (Font (15.00f, Font::plain));
     leftGainLabel->setJustificationType (Justification::centredLeft);
     leftGainLabel->setEditable (false, false, false);
@@ -72,23 +72,23 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     leftGainLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (saveButton = new TextButton ("new button"));
-    saveButton->setButtonText ("Save to OWL");
+    saveButton->setButtonText (TRANS("Save to OWL"));
     saveButton->addListener (this);
 
     addAndMakeVisible (deviceInfoButton = new TextButton ("new button"));
-    deviceInfoButton->setButtonText ("Device Info");
+    deviceInfoButton->setButtonText (TRANS("Device Info"));
     deviceInfoButton->addListener (this);
 
     addAndMakeVisible (bypassButton = new ToggleButton ("new toggle button"));
-    bypassButton->setButtonText ("Codec Bypass");
+    bypassButton->setButtonText (TRANS("Codec Bypass"));
     bypassButton->addListener (this);
 
     addAndMakeVisible (swapLRButton = new ToggleButton ("new toggle button"));
-    swapLRButton->setButtonText ("Swap Left/Right");
+    swapLRButton->setButtonText (TRANS("Swap Left/Right"));
     swapLRButton->addListener (this);
 
     addAndMakeVisible (rightGainLabel = new Label ("new label",
-                                                   "dB Input Gain R"));
+                                                   TRANS("dB Input Gain R")));
     rightGainLabel->setFont (Font (15.00f, Font::plain));
     rightGainLabel->setJustificationType (Justification::centredLeft);
     rightGainLabel->setEditable (false, false, false);
@@ -108,7 +108,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     leftOutGainSlider->addListener (this);
 
     addAndMakeVisible (leftOutGainLabel = new Label ("new label",
-                                                     "dB Output Gain L"));
+                                                     TRANS("dB Output Gain L")));
     leftOutGainLabel->setFont (Font (15.00f, Font::plain));
     leftOutGainLabel->setJustificationType (Justification::centredLeft);
     leftOutGainLabel->setEditable (false, false, false);
@@ -116,7 +116,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     leftOutGainLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (rightOutGainLabel = new Label ("new label",
-                                                      "dB Output Gain R"));
+                                                      TRANS("dB Output Gain R")));
     rightOutGainLabel->setFont (Font (15.00f, Font::plain));
     rightOutGainLabel->setJustificationType (Justification::centredLeft);
     rightOutGainLabel->setEditable (false, false, false);
@@ -130,33 +130,33 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     rightOutGainSlider->addListener (this);
 
     addAndMakeVisible (leftInputMuteButton = new ToggleButton ("new toggle button"));
-    leftInputMuteButton->setButtonText ("Mute");
+    leftInputMuteButton->setButtonText (TRANS("Mute"));
     leftInputMuteButton->addListener (this);
 
     addAndMakeVisible (rightInputMuteButton = new ToggleButton ("new toggle button"));
-    rightInputMuteButton->setButtonText ("Mute");
+    rightInputMuteButton->setButtonText (TRANS("Mute"));
     rightInputMuteButton->addListener (this);
 
     addAndMakeVisible (leftOutputMuteButton = new ToggleButton ("new toggle button"));
-    leftOutputMuteButton->setButtonText ("Mute");
+    leftOutputMuteButton->setButtonText (TRANS("Mute"));
     leftOutputMuteButton->addListener (this);
 
     addAndMakeVisible (rightOutputMuteButton = new ToggleButton ("new toggle button"));
-    rightOutputMuteButton->setButtonText ("Mute");
+    rightOutputMuteButton->setButtonText (TRANS("Mute"));
     rightOutputMuteButton->addListener (this);
 
     addAndMakeVisible (samplingBitsComboBox = new ComboBox ("new combo box"));
     samplingBitsComboBox->setEditableText (false);
     samplingBitsComboBox->setJustificationType (Justification::centredLeft);
     samplingBitsComboBox->setTextWhenNothingSelected (String::empty);
-    samplingBitsComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    samplingBitsComboBox->addItem ("16 bit", 1);
-    samplingBitsComboBox->addItem ("24 bit", 2);
-    samplingBitsComboBox->addItem ("32 bit", 3);
+    samplingBitsComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    samplingBitsComboBox->addItem (TRANS("16 bit"), 1);
+    samplingBitsComboBox->addItem (TRANS("24 bit"), 2);
+    samplingBitsComboBox->addItem (TRANS("32 bit"), 3);
     samplingBitsComboBox->addListener (this);
 
     addAndMakeVisible (samplingBitsLabel = new Label ("new label",
-                                                      "Sampling Bits"));
+                                                      TRANS("Sampling Bits")));
     samplingBitsLabel->setFont (Font (15.00f, Font::plain));
     samplingBitsLabel->setJustificationType (Justification::centredLeft);
     samplingBitsLabel->setEditable (false, false, false);
@@ -164,7 +164,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     samplingBitsLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (ledButton = new TextButton ("new button"));
-    ledButton->setButtonText ("LED");
+    ledButton->setButtonText (TRANS("LED"));
     ledButton->addListener (this);
     ledButton->setColour (TextButton::buttonColourId, Colours::grey);
 
@@ -172,13 +172,13 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     protocolComboBox->setEditableText (false);
     protocolComboBox->setJustificationType (Justification::centredLeft);
     protocolComboBox->setTextWhenNothingSelected (String::empty);
-    protocolComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    protocolComboBox->addItem ("Philips", 1);
-    protocolComboBox->addItem ("MSB", 2);
+    protocolComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    protocolComboBox->addItem (TRANS("Philips"), 1);
+    protocolComboBox->addItem (TRANS("MSB"), 2);
     protocolComboBox->addListener (this);
 
     addAndMakeVisible (protocolLabel = new Label ("new label",
-                                                  "Protocol"));
+                                                  TRANS("Protocol")));
     protocolLabel->setFont (Font (15.00f, Font::plain));
     protocolLabel->setJustificationType (Justification::centredLeft);
     protocolLabel->setEditable (false, false, false);
@@ -186,11 +186,11 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     protocolLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (masterButton = new ToggleButton ("new toggle button"));
-    masterButton->setButtonText ("Master");
+    masterButton->setButtonText (TRANS("Master"));
     masterButton->addListener (this);
 
     addAndMakeVisible (statusLabel = new Label ("new label",
-                                                "Status: Initialising..."));
+                                                TRANS("Status: Initialising...")));
     statusLabel->setFont (Font (15.00f, Font::plain));
     statusLabel->setJustificationType (Justification::centredLeft);
     statusLabel->setEditable (false, false, false);
@@ -201,12 +201,12 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotAComboBox->setEditableText (false);
     patchSlotAComboBox->setJustificationType (Justification::centredLeft);
     patchSlotAComboBox->setTextWhenNothingSelected (String::empty);
-    patchSlotAComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    patchSlotAComboBox->addItem ("...", 1);
+    patchSlotAComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    patchSlotAComboBox->addItem (TRANS("..."), 1);
     patchSlotAComboBox->addListener (this);
 
     addAndMakeVisible (patchSlotALabel = new Label ("new label",
-                                                    "Green Slot"));
+                                                    TRANS("Green Slot")));
     patchSlotALabel->setFont (Font (15.00f, Font::plain));
     patchSlotALabel->setJustificationType (Justification::centredRight);
     patchSlotALabel->setEditable (false, false, false);
@@ -217,12 +217,12 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotBComboBox->setEditableText (false);
     patchSlotBComboBox->setJustificationType (Justification::centredLeft);
     patchSlotBComboBox->setTextWhenNothingSelected (String::empty);
-    patchSlotBComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
-    patchSlotBComboBox->addItem ("...", 1);
+    patchSlotBComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    patchSlotBComboBox->addItem (TRANS("..."), 1);
     patchSlotBComboBox->addListener (this);
 
     addAndMakeVisible (patchSlotBLabel = new Label ("new label",
-                                                    "Red Slot"));
+                                                    TRANS("Red Slot")));
     patchSlotBLabel->setFont (Font (15.00f, Font::plain));
     patchSlotBLabel->setJustificationType (Justification::centredRight);
     patchSlotBLabel->setEditable (false, false, false);
@@ -230,18 +230,18 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotBLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (resetButton = new TextButton ("new button"));
-    resetButton->setButtonText ("Factory Reset");
+    resetButton->setButtonText (TRANS("Factory Reset"));
     resetButton->addListener (this);
 
     addAndMakeVisible (sensitivityComboBox = new ComboBox ("new combo box"));
     sensitivityComboBox->setEditableText (false);
     sensitivityComboBox->setJustificationType (Justification::centredLeft);
     sensitivityComboBox->setTextWhenNothingSelected (String::empty);
-    sensitivityComboBox->setTextWhenNoChoicesAvailable ("(no choices)");
+    sensitivityComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     sensitivityComboBox->addListener (this);
 
     addAndMakeVisible (patchSlotBLabel2 = new Label ("new label",
-                                                     "Input Sensitivity"));
+                                                     TRANS("Input Sensitivity")));
     patchSlotBLabel2->setFont (Font (15.00f, Font::plain));
     patchSlotBLabel2->setJustificationType (Justification::centred);
     patchSlotBLabel2->setEditable (false, false, false);
@@ -271,7 +271,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     slider3->addListener (this);
 
     addAndMakeVisible (label3 = new Label ("new label",
-                                           "C"));
+                                           TRANS("C")));
     label3->setFont (Font (15.00f, Font::bold));
     label3->setJustificationType (Justification::centred);
     label3->setEditable (false, false, false);
@@ -279,7 +279,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     label3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (label4 = new Label ("new label",
-                                           "D"));
+                                           TRANS("D")));
     label4->setFont (Font (15.00f, Font::bold));
     label4->setJustificationType (Justification::centred);
     label4->setEditable (false, false, false);
@@ -287,7 +287,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (label1 = new Label ("new label",
-                                           "A"));
+                                           TRANS("A")));
     label1->setFont (Font (15.00f, Font::bold));
     label1->setJustificationType (Justification::centred);
     label1->setEditable (false, false, false);
@@ -303,7 +303,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     slider1->addListener (this);
 
     addAndMakeVisible (label2 = new Label ("new label",
-                                           "B"));
+                                           TRANS("B")));
     label2->setFont (Font (15.00f, Font::bold));
     label2->setJustificationType (Justification::centred);
     label2->setEditable (false, false, false);
@@ -317,6 +317,20 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     slider2->setColour (Slider::thumbColourId, Colours::cornflowerblue);
     slider2->setColour (Slider::rotarySliderFillColourId, Colours::black);
     slider2->addListener (this);
+
+    addAndMakeVisible (slider5 = new Slider ("new slider"));
+    slider5->setRange (0, 1, 0);
+    slider5->setSliderStyle (Slider::LinearVertical);
+    slider5->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    slider5->addListener (this);
+
+    addAndMakeVisible (label5 = new Label ("new label",
+                                           TRANS("E")));
+    label5->setFont (Font (15.00f, Font::bold));
+    label5->setJustificationType (Justification::centred);
+    label5->setEditable (false, false, false);
+    label5->setColour (TextEditor::textColourId, Colours::black);
+    label5->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
@@ -343,6 +357,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     slider2->setEnabled(false);
     slider3->setEnabled(false);
     slider4->setEnabled(false);
+    slider5->setEnabled(false);
 
 #if HIDE_LOW_LEVEL_ITEMS == 1
     deviceInfoButton->setVisible(0);
@@ -422,6 +437,8 @@ OwlNestGui::~OwlNestGui()
     slider1 = nullptr;
     label2 = nullptr;
     slider2 = nullptr;
+    slider5 = nullptr;
+    label5 = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -491,6 +508,8 @@ void OwlNestGui::resized()
     slider1->setBounds (80, 29, 90, 90);
     label2->setBounds (248, 114, 90, 24);
     slider2->setBounds (248, 29, 90, 90);
+    slider5->setBounds (728, 232, 24, 152);
+    label5->setBounds (728, 392, 24, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -735,6 +754,11 @@ void OwlNestGui::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_slider2] -- add your slider handling code here..
         //[/UserSliderCode_slider2]
     }
+    else if (sliderThatWasMoved == slider5)
+    {
+        //[UserSliderCode_slider5] -- add your slider handling code here..
+        //[/UserSliderCode_slider5]
+    }
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -760,7 +784,7 @@ void OwlNestGui::settingsChanged() {
       patchSlotBComboBox->addItemList(presets, 1);
       setStatus("Settings loaded");
     }
-    
+
     // Parameter names
     StringArray& parameters = theSettings.getParameterNames();
     if(parameters.size() >= 4){
@@ -776,6 +800,7 @@ void OwlNestGui::settingsChanged() {
     slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0);
     slider3->setValue(theSettings.getCc(PATCH_PARAMETER_C)/127.0);
     slider4->setValue(theSettings.getCc(PATCH_PARAMETER_D)/127.0);
+    slider5->setValue(theSettings.getCc(PATCH_PARAMETER_E)/127.0);
 #endif
 
     // LED button
@@ -1103,6 +1128,15 @@ BEGIN_JUCER_METADATA
           rotarysliderfill="ff000000" min="0" max="1" int="0" style="RotaryVerticalDrag"
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
           textBoxHeight="20" skewFactor="1"/>
+  <SLIDER name="new slider" id="1b8b800be2e437f7" memberName="slider5"
+          virtualName="" explicitFocusOrder="0" pos="728 232 24 152" min="0"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
+  <LABEL name="new label" id="4984964d1585aa57" memberName="label5" virtualName=""
+         explicitFocusOrder="0" pos="728 392 24 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="E" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="1" italic="0" justification="36"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
