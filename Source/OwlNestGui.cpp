@@ -240,13 +240,13 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     sensitivityComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     sensitivityComboBox->addListener (this);
 
-    addAndMakeVisible (patchSlotBLabel2 = new Label ("new label",
-                                                     TRANS("Input Sensitivity")));
-    patchSlotBLabel2->setFont (Font (15.00f, Font::plain));
-    patchSlotBLabel2->setJustificationType (Justification::centred);
-    patchSlotBLabel2->setEditable (false, false, false);
-    patchSlotBLabel2->setColour (TextEditor::textColourId, Colours::black);
-    patchSlotBLabel2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    addAndMakeVisible (sensitivityLabel = new Label ("new label",
+                                                     TRANS("Sensitivity")));
+    sensitivityLabel->setFont (Font (15.00f, Font::plain));
+    sensitivityLabel->setJustificationType (Justification::centredRight);
+    sensitivityLabel->setEditable (false, false, false);
+    sensitivityLabel->setColour (TextEditor::textColourId, Colours::black);
+    sensitivityLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (connectionButton = new TextButton ("new button"));
     connectionButton->setButtonText (String::empty);
@@ -331,6 +331,25 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     label5->setEditable (false, false, false);
     label5->setColour (TextEditor::textColourId, Colours::black);
     label5->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (modeComboBox = new ComboBox ("new combo box"));
+    modeComboBox->setEditableText (false);
+    modeComboBox->setJustificationType (Justification::centredLeft);
+    modeComboBox->setTextWhenNothingSelected (String::empty);
+    modeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    modeComboBox->addItem (TRANS("Single"), 1);
+    modeComboBox->addItem (TRANS("Dual"), 2);
+    modeComboBox->addItem (TRANS("Series"), 3);
+    modeComboBox->addItem (TRANS("Parallel"), 4);
+    modeComboBox->addListener (this);
+
+    addAndMakeVisible (modeLabel = new Label ("new label",
+                                              TRANS("Patch Mode")));
+    modeLabel->setFont (Font (15.00f, Font::plain));
+    modeLabel->setJustificationType (Justification::centredRight);
+    modeLabel->setEditable (false, false, false);
+    modeLabel->setColour (TextEditor::textColourId, Colours::black);
+    modeLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
@@ -427,7 +446,7 @@ OwlNestGui::~OwlNestGui()
     patchSlotBLabel = nullptr;
     resetButton = nullptr;
     sensitivityComboBox = nullptr;
-    patchSlotBLabel2 = nullptr;
+    sensitivityLabel = nullptr;
     connectionButton = nullptr;
     slider4 = nullptr;
     slider3 = nullptr;
@@ -439,6 +458,8 @@ OwlNestGui::~OwlNestGui()
     slider2 = nullptr;
     slider5 = nullptr;
     label5 = nullptr;
+    modeComboBox = nullptr;
+    modeLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -497,8 +518,8 @@ void OwlNestGui::resized()
     patchSlotBComboBox->setBounds (120, 352, 150, 24);
     patchSlotBLabel->setBounds (48, 352, 72, 24);
     resetButton->setBounds (544, 392, 150, 24);
-    sensitivityComboBox->setBounds (488, 348, 150, 24);
-    patchSlotBLabel2->setBounds (488, 324, 144, 24);
+    sensitivityComboBox->setBounds (552, 352, 150, 24);
+    sensitivityLabel->setBounds (448, 352, 101, 24);
     connectionButton->setBounds (16, 424, 16, 16);
     slider4->setBounds (584, 29, 90, 90);
     slider3->setBounds (416, 29, 90, 90);
@@ -510,6 +531,8 @@ void OwlNestGui::resized()
     slider2->setBounds (248, 29, 90, 90);
     slider5->setBounds (728, 232, 24, 152);
     label5->setBounds (728, 392, 24, 24);
+    modeComboBox->setBounds (551, 320, 150, 24);
+    modeLabel->setBounds (448, 320, 101, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -614,6 +637,12 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
                 break;
         }
         //[/UserComboBoxCode_sensitivityComboBox]
+    }
+    else if (comboBoxThatHasChanged == modeComboBox)
+    {
+        //[UserComboBoxCode_modeComboBox] -- add your combo box handling code here..
+      theSettings.setCc(PATCH_MODE, (comboBoxThatHasChanged->getSelectedId()-1) << 5);
+        //[/UserComboBoxCode_modeComboBox]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -828,6 +857,8 @@ void OwlNestGui::settingsChanged() {
     patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
     v = theSettings.getCc(PATCH_SLOT_RED);
     patchSlotBComboBox->setSelectedId(v+1, dontSendNotification);
+    v = theSettings.getCc(PATCH_MODE);
+    modeComboBox->setSelectedId((v>>5)+1, dontSendNotification);
 
     // Sampling rate and bits
     v = theSettings.getCc(SAMPLING_RATE)>>5;
@@ -1086,13 +1117,13 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="544 392 150 24" buttonText="Factory Reset"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="c9b0c725f2c0d34c" memberName="sensitivityComboBox"
-            virtualName="" explicitFocusOrder="0" pos="488 348 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="552 352 150 24" editable="0"
             layout="33" items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
-  <LABEL name="new label" id="529eec60a7cf0c8b" memberName="patchSlotBLabel2"
-         virtualName="" explicitFocusOrder="0" pos="488 324 144 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Input Sensitivity" editableSingleClick="0"
+  <LABEL name="new label" id="529eec60a7cf0c8b" memberName="sensitivityLabel"
+         virtualName="" explicitFocusOrder="0" pos="448 352 101 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Sensitivity" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
-         fontsize="15" bold="0" italic="0" justification="36"/>
+         fontsize="15" bold="0" italic="0" justification="34"/>
   <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="connectionButton"
               virtualName="" explicitFocusOrder="0" pos="16 424 16 16" bgColOff="ff808080"
               buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"/>
@@ -1145,6 +1176,15 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="E" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="1" italic="0" justification="36"/>
+  <COMBOBOX name="new combo box" id="f5aa30fb673ecdf6" memberName="modeComboBox"
+            virtualName="" explicitFocusOrder="0" pos="551 320 150 24" editable="0"
+            layout="33" items="Single&#10;Dual&#10;Series&#10;Parallel" textWhenNonSelected=""
+            textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="78f6e256a96569d8" memberName="modeLabel"
+         virtualName="" explicitFocusOrder="0" pos="448 320 101 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Patch Mode" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="34"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

@@ -162,6 +162,7 @@ bool OwlNestSettings::updateBootloader(){
   alert.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
   alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
   if(alert.runModalLoop() == 1){
+    alert.setVisible(false);
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     String options = props->getValue("bootloader-dfu-options");
     FileChooser chooser("Select Bootloader", ApplicationConfiguration::getApplicationDirectory(), "*.bin");
@@ -185,6 +186,7 @@ bool OwlNestSettings::updateFirmware(){
   alert.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
   alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
   if(alert.runModalLoop() == 1){
+    alert.setVisible(false);
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     String options = props->getValue("firmware-dfu-options");
     FileChooser chooser("Select Firmware", ApplicationConfiguration::getApplicationDirectory(), "*.bin");

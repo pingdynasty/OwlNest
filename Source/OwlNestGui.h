@@ -116,7 +116,7 @@ private:
     ScopedPointer<Label> patchSlotBLabel;
     ScopedPointer<TextButton> resetButton;
     ScopedPointer<ComboBox> sensitivityComboBox;
-    ScopedPointer<Label> patchSlotBLabel2;
+    ScopedPointer<Label> sensitivityLabel;
     ScopedPointer<TextButton> connectionButton;
     ScopedPointer<Slider> slider4;
     ScopedPointer<Slider> slider3;
@@ -128,6 +128,8 @@ private:
     ScopedPointer<Slider> slider2;
     ScopedPointer<Slider> slider5;
     ScopedPointer<Label> label5;
+    ScopedPointer<ComboBox> modeComboBox;
+    ScopedPointer<Label> modeLabel;
     Image cachedImage_owlFaceplate_png;
 
 
