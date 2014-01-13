@@ -576,12 +576,16 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     {
         //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
         theSettings.setCc(PATCH_SLOT_GREEN, comboBoxThatHasChanged->getSelectedId()-1);
+	Thread::sleep(100);
+	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
         //[/UserComboBoxCode_patchSlotAComboBox]
     }
     else if (comboBoxThatHasChanged == patchSlotBComboBox)
     {
         //[UserComboBoxCode_patchSlotBComboBox] -- add your combo box handling code here..
         theSettings.setCc(PATCH_SLOT_RED, comboBoxThatHasChanged->getSelectedId()-1);
+	Thread::sleep(100);
+	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
         //[/UserComboBoxCode_patchSlotBComboBox]
     }
     else if (comboBoxThatHasChanged == sensitivityComboBox)
@@ -627,7 +631,10 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_loadButton] -- add your button handler code here..
         setStatus("Loading settings...");
         theSettings.loadFromOwl();
+	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, 1); // request patch names
+	Thread::sleep(100);
+	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
         //[/UserButtonCode_loadButton]
     }
     else if (buttonThatWasClicked == saveButton)
@@ -684,7 +691,8 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_ledButton] -- add your button handler code here..
       theSettings.setCc(PATCH_BUTTON, 127);
-     theSettings.setCc(REQUEST_SETTINGS, LED); // to get the updated LED value
+      Thread::sleep(100);
+      theSettings.setCc(REQUEST_SETTINGS, LED); // to get the updated LED value
         //[/UserButtonCode_ledButton]
     }
     else if (buttonThatWasClicked == masterButton)
