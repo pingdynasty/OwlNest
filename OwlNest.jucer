@@ -187,10 +187,10 @@
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="10.6 SDK" osxCompatibility="10.6 SDK"
                        osxArchitecture="64BitUniversal" isDebug="0" optimisation="2"
-                       targetName="OwlNest" libraryPath="/opt/local/lib " headerPath="/opt/local/include/libusb-1.0"/>
+                       targetName="OwlNest" libraryPath="" headerPath="../../Libraries/libusbx&#10;../../Libraries"/>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="/opt/local/include/libusb-1.0"
-                       libraryPath="/opt/local/lib "/>
+                       isDebug="1" optimisation="1" targetName="OwlNest" headerPath="../../Libraries/libusbx&#10;../../Libraries"
+                       libraryPath=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
