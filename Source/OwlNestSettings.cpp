@@ -154,18 +154,81 @@ uint64 OwlNestSettings::getLastMidiMessageTime(){
     return lastMidiMessageTime;
 }
 
+class DeviceFirmwareUpdateTask  : public ThreadWithProgressWindow {
+private:
+  const File& file;
+  const String& options;
+public:
+  DeviceFirmwareUpdateTask(const File& theFile, const String& theOptions)    
+    : ThreadWithProgressWindow ("Device Firmware Update", true, true),
+      file(theFile), options(theOptions) {}
+  // DeviceFirmwareUpdateTask()
+  //   : ThreadWithProgressWindow ("Device Firmware Update", true, false) {}
+
+  void error(const String& msg){
+    setStatusMessage(msg);
+    while(!threadShouldExit())
+      Thread::sleep(100);
+  }
+
+  void run() {
+    setProgress(0.0);
+    setStatusMessage("Connecting to device");
+
+    if(threadShouldExit())
+      return;
+    FirmwareLoader loader;
+
+    if(!loader.init(file, options))
+      return error(loader.getMessage());
+
+    setProgress(0.02);
+    setStatusMessage("Probing for DFU device");
+
+    bool detected = loader.probeDevices();
+    for(int i=0; i<40 && ! detected; ++i){
+      Thread::sleep(100);
+      setProgress(0.02+i*0.15/40);
+      detected = loader.probeDevices();
+    }
+
+    if(!detected)
+      return error("Could not find a connected DFU device");
+
+    setProgress(0.2);
+    setStatusMessage("Connecting to device");
+    if(!loader.openDevice())
+      return error(loader.getMessage());
+    setProgress(0.25);
+    if(!loader.connectToDevice())
+      return error(loader.getMessage());
+    setProgress(0.3);
+
+    setStatusMessage("Uploading binary image");
+    if(!loader.loadToDevice())
+      return error(loader.getMessage());
+    setProgress(0.8);
+
+    loader.detachDevice();
+    setProgress(0.85);
+
+    loader.resetDevice();
+    setProgress(0.9);
+    loader.closeDevice();
+    setProgress(1.0);
+
+    setStatusMessage("Update complete");
+
+    while(!threadShouldExit())
+      Thread::sleep(100);
+  }
+};
+
 bool OwlNestSettings::deviceFirmwareUpdate(const File& file, const String& options){
   // put device into DFU mode
   setCc(DEVICE_FIRMWARE_UPDATE, 127);
-  FirmwareLoader loader;
-  if(loader.updateFirmware(file, options) == 0)
-    return true;
-  String msg("Firmware update failed with message:\n");
-  msg += loader.getMessage();
-  AlertWindow warning("Bootloader Update Error", msg, juce::AlertWindow::WarningIcon);
-  warning.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
-  warning.runModalLoop();
-  return false;
+  DeviceFirmwareUpdateTask task(file, options);
+  return task.runThread();
 }
 
 bool OwlNestSettings::updateBootloader(){
