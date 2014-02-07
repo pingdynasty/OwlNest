@@ -154,25 +154,35 @@ uint64 OwlNestSettings::getLastMidiMessageTime(){
     return lastMidiMessageTime;
 }
 
+bool OwlNestSettings::deviceFirmwareUpdate(const File& file, const String& options){
+  // put device into DFU mode
+  setCc(DEVICE_FIRMWARE_UPDATE, 127);
+  FirmwareLoader loader;
+  if(loader.updateFirmware(file, options) == 0)
+    return true;
+  String msg("Firmware update failed with message:\n");
+  msg += loader.getMessage();
+  AlertWindow warning("Bootloader Update Error", msg, juce::AlertWindow::WarningIcon);
+  warning.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+  warning.runModalLoop();
+  return false;
+}
+
 bool OwlNestSettings::updateBootloader(){
   DBG("Update bootloader");
   AlertWindow alert("Update Bootloader", 
-		    "Changing the bootloader can make your OWL unresponsive! Are you sure you want to proceed?", 
+		    "Updating the bootloader can brick your OWL! Are you sure you want to proceed?", 
 		    juce::AlertWindow::InfoIcon);
   alert.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
   alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
   if(alert.runModalLoop() == 1){
     alert.setVisible(false);
-    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-    String options = props->getValue("bootloader-dfu-options");
     FileChooser chooser("Select Bootloader", ApplicationConfiguration::getApplicationDirectory(), "*.bin");
     if(chooser.browseForFileToOpen()){
-      // put device into DFU mode
-      setCc(DEVICE_FIRMWARE_UPDATE, 127);
       File file = chooser.getResult();
-      FirmwareLoader loader;
-      loader.updateFirmware(file, options);
-      return true;
+      PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+      String options = props->getValue("bootloader-dfu-options");
+      return deviceFirmwareUpdate(file, options);
     }
   }
   return false;
@@ -187,16 +197,12 @@ bool OwlNestSettings::updateFirmware(){
   alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
   if(alert.runModalLoop() == 1){
     alert.setVisible(false);
-    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-    String options = props->getValue("firmware-dfu-options");
     FileChooser chooser("Select Firmware", ApplicationConfiguration::getApplicationDirectory(), "*.bin");
     if(chooser.browseForFileToOpen()){
-      // put device into DFU mode
-      setCc(DEVICE_FIRMWARE_UPDATE, 127);
+      PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+      String options = props->getValue("firmware-dfu-options");
       File file = chooser.getResult();
-      FirmwareLoader loader;
-      loader.updateFirmware(file, options);
-      return true;
+      return deviceFirmwareUpdate(file, options);
     }
   }
   return false;

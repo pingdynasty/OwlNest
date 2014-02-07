@@ -5,7 +5,12 @@
 
 class FirmwareLoader {
 public:
-  int updateFirmware(File& file, const String& options);
+  FirmwareLoader();
+  int updateFirmware(const File& file, const String& options);
+  String getMessage();
+  void errx(int errid, const String& msg);
+private:
+  String message;
 };
 
 #endif  // FIRMWARELOADER_H_INCLUDED

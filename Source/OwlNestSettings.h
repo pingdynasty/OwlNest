@@ -39,12 +39,12 @@ public:
   bool updateFirmware();
   bool updateBootloader();
   void checkForUpdates();
-
   void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);
   void getAllCommands(Array< CommandID > &commands);
   ApplicationCommandTarget* getNextCommandTarget();
   bool perform(const InvocationInfo& info);
 private:
+  bool deviceFirmwareUpdate(const File& file, const String& options);
   int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
   Value& theUpdateGui;
   AudioDeviceManager& theDm;
