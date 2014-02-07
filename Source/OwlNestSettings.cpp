@@ -188,7 +188,7 @@ public:
     bool detected = loader.probeDevices();
     for(int i=0; i<40 && ! detected; ++i){
       Thread::sleep(100);
-      setProgress(0.02+i*0.15/40);
+      setProgress(0.02+i*0.17/40);
       detected = loader.probeDevices();
     }
 
@@ -209,12 +209,16 @@ public:
       return error(loader.getMessage());
     setProgress(0.8);
 
-    loader.detachDevice();
+    if(!loader.detachDevice())
+      return error(loader.getMessage());
     setProgress(0.85);
 
-    loader.resetDevice();
+    if(!loader.resetDevice())
+      return error(loader.getMessage());
     setProgress(0.9);
-    loader.closeDevice();
+
+    if(!loader.closeDevice())
+      return error(loader.getMessage());
     setProgress(1.0);
 
     setStatusMessage("Update complete");
