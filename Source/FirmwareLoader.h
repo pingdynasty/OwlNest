@@ -6,7 +6,16 @@
 class FirmwareLoader {
 public:
   FirmwareLoader();
-  int updateFirmware(const File& file, const String& options);
+  bool init(const File& file, const String& options);
+  void listDevices();
+  bool probeDevices();
+  bool openDevice();
+  bool connectToDevice();
+  bool loadFromDevice();
+  bool loadToDevice();
+  bool resetDevice();
+  bool detachDevice();
+  bool closeDevice();
   String getMessage();
   void errx(int errid, const String& msg);
 private:
