@@ -210,7 +210,8 @@ bool OwlNestSettings::updateFirmware(){
 
 bool OwlNestSettings::updateFirmwareFromXml(){
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-    URL url(props->getValue("owl-updates-list-url"));
+    String xmlFilename ("updates.xml");
+    URL url(props->getValue("owl-updates-dir-url")+xmlFilename);
     XmlElement* xmlUpdates = nullptr;
     if(url.isWellFormed())
     {
@@ -246,14 +247,25 @@ bool OwlNestSettings::updateFirmwareFromXml(){
                           juce::AlertWindow::InfoIcon);
         popup.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
         popup.addButton("Update", 1, juce::KeyPress(), juce::KeyPress());
-        popup.addComboBox("Firmware", names);
-        popup.runModalLoop();
+        popup.addComboBox("box", names);
+        if (popup.runModalLoop()==0)
+            return false;
+        else
+        {
+            String selectedFilename(popup.getComboBoxComponent("box")->getText());
+            URL fwUrl(props->getValue("owl-updates-dir-url")+selectedFilename);
+            InputStream* strm = fwUrl.createInputStream(0);
+            File fw(props->getValue("application-directory")+selectedFilename);
+            if (fw.exists())
+                fw.deleteFile();
+            fw.createOutputStream()->writeFromInputStream(*strm, strm->getTotalLength());
+        }
     }
 }
 
 bool OwlNestSettings::updateBootloaderFromXml(){
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-    URL url(props->getValue("owl-updates-list-url"));
+    URL url(props->getValue("owl-updates-dir-url"));
     XmlElement* xmlUpdates = nullptr;
     if(url.isWellFormed())
     {
@@ -289,7 +301,7 @@ bool OwlNestSettings::updateBootloaderFromXml(){
                           juce::AlertWindow::InfoIcon);
         popup.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
         popup.addButton("Update", 1, juce::KeyPress(), juce::KeyPress());
-        popup.addComboBox("Firmware", names);
+        popup.addComboBox("box", names);
         popup.runModalLoop();
     }
 }
