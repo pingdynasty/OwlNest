@@ -81,10 +81,11 @@ public:
       PopupMenu tools;
       toplevel.add("Tools");
       tools.addCommandItem(commands, ApplicationCommands::updateFirmware);
+      tools.addCommandItem(commands, ApplicationCommands::checkForFirmwareUpdates);
 #if HIDE_LOW_LEVEL_ITEMS == 0
-      tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
+        tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
+        tools.addCommandItem(commands, ApplicationCommands::checkForBootloaderUpdates);
 #endif
-      tools.addCommandItem(commands, ApplicationCommands::checkForUpdates);
       popups.add(tools);
     }
     StringArray getMenuBarNames(){

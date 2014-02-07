@@ -29,6 +29,8 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
       properties->setValue("firmware-dfu-options", "0x8008000:leave");
     if(!properties->containsKey("owl-updates-url"))
       properties->setValue("owl-updates-url", "http://hoxtonowl.com/software/updates");
+      if(!properties->containsKey("owl-updates-list-url"))
+          properties->setValue("owl-updates-list-url", "http://hoxtonowl.com/wp-content/uploads/updates.xml");
     if(!properties->isValidFile())
       std::cerr << "Invalid properties file: " << properties->getFile().getFullPathName() << std::endl;
   }
