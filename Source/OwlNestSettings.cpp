@@ -271,7 +271,8 @@ bool OwlNestSettings::updateFirmware(){
   return false;
 }
 
-bool OwlNestSettings::updateFirmwareFromXml(){
+bool OwlNestSettings::updateFirmwareFromXml()
+{
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     String xmlFilename ("updates.xml");
     URL url(props->getValue("owl-updates-dir-url")+xmlFilename);
@@ -305,9 +306,7 @@ bool OwlNestSettings::updateFirmwareFromXml(){
             names.add(child->getStringAttribute("name"));
             child = child->getNextElement();
         }
-        AlertWindow popup("Select",
-                          "Choose file:",
-                          juce::AlertWindow::InfoIcon);
+        AlertWindow popup("Select", "Choose file:", juce::AlertWindow::InfoIcon);
         popup.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
         popup.addButton("Update", 1, juce::KeyPress(), juce::KeyPress());
         popup.addComboBox("box", names);
@@ -318,11 +317,22 @@ bool OwlNestSettings::updateFirmwareFromXml(){
             String selectedFilename(popup.getComboBoxComponent("box")->getText());
             URL fwUrl(props->getValue("owl-updates-dir-url")+selectedFilename);
             InputStream* strm = fwUrl.createInputStream(0);
-            File fw(props->getValue("application-directory")+selectedFilename);
-            if (fw.exists())
-                fw.deleteFile();
-            fw.createOutputStream()->writeFromInputStream(*strm, strm->getTotalLength());
+            File theTargetFile(props->getValue("application-directory")+selectedFilename);
+            TemporaryFile temp (theTargetFile);
+            ScopedPointer<FileOutputStream> out (temp.getFile().createOutputStream());
+            if (out != nullptr)
+            {
+                out->writeFromInputStream(*strm, strm->getTotalLength());
+                out = nullptr; // deletes the stream
+                bool succeeded = temp.overwriteTargetFileWithTemporary();
+                if (succeeded)
+                {
+                    String options = props->getValue("bootloader-dfu-options");
+                    return deviceFirmwareUpdate(theTargetFile, options);
+                }
+            }
         }
+    return false;
     }
 }
 
@@ -351,8 +361,10 @@ bool OwlNestSettings::updateBootloaderFromXml(){
         return false;
     else
     {
+        DBG("node:" << xmlUpdates->getTagName());
         XmlElement* bootloaders = xmlUpdates->getChildByName("bootloaders");
         StringArray names;
+        DBG("node:" << bootloaders->getTagName());
         XmlElement* child = bootloaders->getFirstChildElement();
         while (child != nullptr)
         {
@@ -365,7 +377,29 @@ bool OwlNestSettings::updateBootloaderFromXml(){
         popup.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
         popup.addButton("Update", 1, juce::KeyPress(), juce::KeyPress());
         popup.addComboBox("box", names);
-        popup.runModalLoop();
+        if (popup.runModalLoop()==0)
+            return false;
+        else
+        {
+            String selectedFilename(popup.getComboBoxComponent("box")->getText());
+            URL fwUrl(props->getValue("owl-updates-dir-url")+selectedFilename);
+            InputStream* strm = fwUrl.createInputStream(0);
+            File theTargetFile(props->getValue("application-directory")+selectedFilename);
+            TemporaryFile temp (theTargetFile);
+            ScopedPointer<FileOutputStream> out (temp.getFile().createOutputStream());
+            if (out != nullptr)
+            {
+                out->writeFromInputStream(*strm, strm->getTotalLength());
+                out = nullptr; // deletes the stream
+                bool succeeded = temp.overwriteTargetFileWithTemporary();
+                if (succeeded)
+                {
+                    String options = props->getValue("bootloader-dfu-options");
+                    return deviceFirmwareUpdate(theTargetFile, options);
+                }
+            }
+        }
+    return false;
     }
 }
 
