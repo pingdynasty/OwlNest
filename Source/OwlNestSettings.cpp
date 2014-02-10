@@ -275,10 +275,88 @@ bool OwlNestSettings::updateFirmware(){
   return false;
 }
 
+bool OwlNestSettings::updateDeviceFromServer(CommandID commandID)
+{
+    String warningString, nodeString, optionString;
+    switch (commandID){
+        case ApplicationCommands::checkForFirmwareUpdates:
+            warningString = "Beware that this procedure can make your OWL unresponsive!";
+            nodeString = "firmwares";
+            optionString = "firmware-dfu-options";
+            break;
+        case ApplicationCommands::checkForBootloaderUpdates:
+            warningString = "Beware that this procedure can brick your OWL!";
+            nodeString = "bootloaders";
+            optionString = "bootloader-dfu-options";
+            break;
+        default:
+            return false;
+    }
+    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+    String xmlFilename ("updates.xml");
+    URL url(props->getValue("owl-updates-dir-url")+xmlFilename);
+    XmlElement* xmlUpdates = nullptr;
+    if(url.isWellFormed())
+    {
+        xmlUpdates = url.readEntireXmlStream(0);
+    }
+    if (xmlUpdates==nullptr)
+    {
+        AlertWindow warning("Connection Error", "Server Connection failed.", juce::AlertWindow::WarningIcon);
+        warning.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+        warning.runModalLoop();
+        return false;
+    }
+    AlertWindow alert("Warning", warningString, juce::AlertWindow::InfoIcon);
+    alert.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
+    alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+    if (alert.runModalLoop() == 0)
+        return false;
+    else
+    {
+        XmlElement* filesNode = xmlUpdates->getChildByName(nodeString);
+        StringArray names;
+        XmlElement* child = filesNode->getFirstChildElement();
+        while (child != nullptr)
+        {
+            names.add(child->getStringAttribute("name"));
+            child = child->getNextElement();
+        }
+        AlertWindow popup("Select", "Choose file:", juce::AlertWindow::InfoIcon);
+        popup.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
+        popup.addButton("Update", 1, juce::KeyPress(), juce::KeyPress());
+        popup.addComboBox("box", names);
+        if (popup.runModalLoop()==0)
+            return false;
+        else
+        {
+            String selectedFilename(popup.getComboBoxComponent("box")->getText());
+            URL fwUrl(props->getValue("owl-updates-dir-url")+selectedFilename);
+            InputStream* strm = fwUrl.createInputStream(0);
+            File theTargetFile(props->getValue("application-directory")+selectedFilename);
+            TemporaryFile temp (theTargetFile);
+            ScopedPointer<FileOutputStream> out (temp.getFile().createOutputStream());
+            if (out != nullptr)
+            {
+                out->writeFromInputStream(*strm, strm->getTotalLength());
+                out = nullptr; // deletes the stream
+                bool succeeded = temp.overwriteTargetFileWithTemporary();
+                if (succeeded)
+                {
+                    String options = props->getValue(optionString);
+                    return deviceFirmwareUpdate(theTargetFile, options);
+                }
+            }
+        }
+    return false;
+    }
+}
+
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
   commands.add(ApplicationCommands::updateFirmware);
   commands.add(ApplicationCommands::updateBootloader);
-  commands.add(ApplicationCommands::checkForUpdates);
+  commands.add(ApplicationCommands::checkForFirmwareUpdates);
+  commands.add(ApplicationCommands::checkForBootloaderUpdates);
 }
 
 void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
@@ -289,17 +367,21 @@ void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo
   case ApplicationCommands::updateBootloader:
     result.setInfo("Update Bootloader", String::empty, String::empty, 0);
     break;
-  case ApplicationCommands::checkForUpdates:
-    result.setInfo("Check for Updates", String::empty, String::empty, 0);
+  case ApplicationCommands::checkForFirmwareUpdates:
+    result.setInfo("Check for Firmware Updates", String::empty, String::empty, 0);
     break;
+  case ApplicationCommands::checkForBootloaderUpdates:
+      result.setInfo("Check for Bootloader Updates", String::empty, String::empty, 0);
+      break;
   }
 }
 
 void OwlNestSettings::checkForUpdates(){
-  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-  URL url(props->getValue("owl-updates-url"));
-  if(url.isWellFormed())
-    url.launchInDefaultBrowser();
+//  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+//  URL url(props->getValue("owl-updates-url"));
+//  if(url.isWellFormed())
+//    url.launchInDefaultBrowser();
+//    OwlNestSettings::updateFromXml();
 }
 
 bool OwlNestSettings::perform(const InvocationInfo& info){
@@ -310,8 +392,11 @@ bool OwlNestSettings::perform(const InvocationInfo& info){
   case ApplicationCommands::updateBootloader:
     updateBootloader();
     break;
-  case ApplicationCommands::checkForUpdates:
-    checkForUpdates();
+  case ApplicationCommands::checkForFirmwareUpdates:
+    updateDeviceFromServer(info.commandID);
+    break;
+  case ApplicationCommands::checkForBootloaderUpdates:
+    updateDeviceFromServer(info.commandID);
     break;
   }
   return true;

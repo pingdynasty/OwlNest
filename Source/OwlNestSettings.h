@@ -39,6 +39,7 @@ public:
   bool updateFirmware();
   bool updateBootloader();
   void checkForUpdates();
+  bool updateDeviceFromServer(CommandID commandID);
   void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);
   void getAllCommands(Array< CommandID > &commands);
   ApplicationCommandTarget* getNextCommandTarget();
