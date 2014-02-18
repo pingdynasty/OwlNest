@@ -61,7 +61,14 @@ String DfuseLoader::getMessage(){
 
 void DfuseLoader::errx(int errid, const String& msg){
   DBG(msg);
+  alert->setStatusMessage(msg);
   message = msg;
+}
+
+void DfuseLoader::progress(const String& msg, int curr, int max){
+  DBG(String::formatted(msg+" %d/%d",curr, max));
+  alert->setStatusMessage(msg);
+  alert->setProgress(0.2+0.6*curr/max);
 }
 
 unsigned int quad2uint(unsigned char *p)
@@ -329,7 +336,7 @@ int DfuseLoader::do_upload(struct dfu_if *dif, int xfer_size, int fd,
 		printf("Limiting default upload to %i bytes\n", upload_limit);
 	}
 
-	dfu_progress_bar("Upload", 0, 1);
+	progress("Uploading", 0, 1);
 
 	transaction = 2;
 	while (1) {
@@ -355,10 +362,10 @@ int DfuseLoader::do_upload(struct dfu_if *dif, int xfer_size, int fd,
 			ret = total_bytes;
 			break;
 		}
-		dfu_progress_bar("Upload", total_bytes, upload_limit);
+		progress("Uploading", total_bytes, upload_limit);
 	}
 
-	dfu_progress_bar("Upload", total_bytes, total_bytes);
+	progress("Uploading", total_bytes, total_bytes);
 
  out_free:
 	free(buf);
@@ -422,7 +429,7 @@ int DfuseLoader::dfuse_dnload_element(struct dfu_if *dif, unsigned int dwElement
 						 dwElementAddress + dwElementSize - 1));
 	}
 
-	dfu_progress_bar("Download", 0, 1);
+	progress("Downloading", 0, 1);
 
 	for (p = 0; p < (int)dwElementSize; p += xfer_size) {
 		int page_size;
@@ -470,7 +477,7 @@ int DfuseLoader::dfuse_dnload_element(struct dfu_if *dif, unsigned int dwElement
 			       p, address, address + chunk_size - 1,
 			       chunk_size);
 		} else {
-			dfu_progress_bar("Download", p, dwElementSize);
+			progress("Downloading", p, dwElementSize);
 		}
 		
 		dfuse_special_command(dif, address, SET_ADDRESS);
@@ -484,7 +491,7 @@ int DfuseLoader::dfuse_dnload_element(struct dfu_if *dif, unsigned int dwElement
 		}
 	}
 	if (!verbose)
-		dfu_progress_bar("Download", p, p);
+		progress("Downloading", p, p);
 	return 0;
 }
 

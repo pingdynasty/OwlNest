@@ -190,6 +190,8 @@ public:
       Thread::sleep(100);
       setProgress(0.02+i*0.14/40);
       detected = loader.probeDevices();
+      if(threadShouldExit())
+	return error("Cancelled!");
     }
 
     if(!detected)
@@ -205,20 +207,24 @@ public:
       return error(loader.getMessage());
     setProgress(0.2);
 
-    setStatusMessage("Uploading binary image");
+    if(threadShouldExit())
+      return error("Cancelled!");
+
+    setStatusMessage("Downloading binary image to device");
     if(!loader.loadToDevice(*this))
       return error(loader.getMessage());
     setProgress(0.85);
 
-    setStatusMessage("Detaching from device");
+    setStatusMessage("Detaching device");
     if(!loader.detachDevice())
-      return error(loader.getMessage());
+      setStatusMessage(loader.getMessage()); // continue
     setProgress(0.90);
 
-    setStatusMessage("Resetting device");
-    if(!loader.resetDevice())
-      return error(loader.getMessage());
-    setProgress(0.95);
+    // setStatusMessage("Resetting device");
+    // if(!loader.resetDevice())
+    //   setStatusMessage(loader.getMessage()); // continue
+    // //   return error(loader.getMessage());
+    // setProgress(0.95);
 
     setStatusMessage("Closing device");
     if(!loader.closeDevice())
@@ -226,9 +232,6 @@ public:
     setProgress(1.0);
 
     setStatusMessage("Update complete");
-
-    while(!threadShouldExit())
-      Thread::sleep(100);
   }
 };
 
@@ -236,14 +239,24 @@ bool OwlNestSettings::deviceFirmwareUpdate(const File& file, const String& optio
   // put device into DFU mode
   setCc(DEVICE_FIRMWARE_UPDATE, 127);
   DeviceFirmwareUpdateTask task(file, options);
-  return task.runThread();
+  if(task.runThread()){
+    AlertWindow alert("Success", "Firmware Update Complete", juce::AlertWindow::InfoIcon);
+    alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+    alert.runModalLoop();
+    return true;
+  }else{
+    AlertWindow alert("Cancelled", "Firmware Update Cancelled", juce::AlertWindow::WarningIcon);
+    alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+    alert.runModalLoop();
+    return false;
+  }
 }
 
 bool OwlNestSettings::updateBootloader(){
   DBG("Update bootloader");
   AlertWindow alert("Update Bootloader", 
 		    "Updating the bootloader can brick your OWL! Are you sure you want to proceed?", 
-		    juce::AlertWindow::InfoIcon);
+		    juce::AlertWindow::WarningIcon);
   alert.addButton("Cancel", 0, juce::KeyPress(), juce::KeyPress());
   alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
   if(alert.runModalLoop() == 1){

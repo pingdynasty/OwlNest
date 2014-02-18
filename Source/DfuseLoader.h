@@ -56,6 +56,7 @@ private:
 			    struct dfu_file *file);
 
   void errx(int errid, const String& msg);
+  void progress(const String& msg, int curr, int max);
   ThreadWithProgressWindow* alert;
   String message;
 };
