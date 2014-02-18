@@ -20,6 +20,7 @@
 //[Headers] You can add your own extra header files here...
 #include "OwlNestGui.h"
 #include "Enums.h"
+#include "ApplicationConfiguration.h"
 
 //[/Headers]
 
@@ -378,34 +379,38 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     slider4->setEnabled(false);
     slider5->setEnabled(false);
 
-#if HIDE_LOW_LEVEL_ITEMS == 1
-    deviceInfoButton->setVisible(0);
-    resetButton->setVisible(0);
-    leftGainSlider->setVisible(0);
-    leftGainLabel->setVisible(0);
-    leftInputMuteButton->setVisible(0);
-    leftOutGainSlider->setVisible(0);
-    leftOutGainLabel->setVisible(0);
-    leftOutputMuteButton->setVisible(0);
-    rightGainSlider->setVisible(0);
-    rightGainLabel->setVisible(0);
-    rightInputMuteButton->setVisible(0);
-    rightOutGainSlider->setVisible(0);
-    rightOutGainLabel->setVisible(0);
-    rightOutputMuteButton->setVisible(0);
-    bypassButton->setVisible(0);
-    swapLRButton->setVisible(0);
-    samplingRateComboBox->setVisible(0);
-    samplingRateLabel->setVisible(0);
-    samplingBitsComboBox->setVisible(0);
-    samplingBitsLabel->setVisible(0);
-    protocolLabel->setVisible(0);
-    protocolComboBox->setVisible(0);
-    masterButton->setVisible(0);
-#else
-    sensitivityComboBox->addItem("Custom", CUSTOM);
-    sensitivityComboBox->setItemEnabled(CUSTOM, 0);
-#endif
+    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+    if(props->getBoolValue("hide-low-level-items") == true)
+    {
+        deviceInfoButton->setVisible(0);
+        resetButton->setVisible(0);
+        leftGainSlider->setVisible(0);
+        leftGainLabel->setVisible(0);
+        leftInputMuteButton->setVisible(0);
+        leftOutGainSlider->setVisible(0);
+        leftOutGainLabel->setVisible(0);
+        leftOutputMuteButton->setVisible(0);
+        rightGainSlider->setVisible(0);
+        rightGainLabel->setVisible(0);
+        rightInputMuteButton->setVisible(0);
+        rightOutGainSlider->setVisible(0);
+        rightOutGainLabel->setVisible(0);
+        rightOutputMuteButton->setVisible(0);
+        bypassButton->setVisible(0);
+        swapLRButton->setVisible(0);
+        samplingRateComboBox->setVisible(0);
+        samplingRateLabel->setVisible(0);
+        samplingBitsComboBox->setVisible(0);
+        samplingBitsLabel->setVisible(0);
+        protocolLabel->setVisible(0);
+        protocolComboBox->setVisible(0);
+        masterButton->setVisible(0);
+    }
+    else
+    {
+        sensitivityComboBox->addItem("Custom", CUSTOM);
+        sensitivityComboBox->setItemEnabled(CUSTOM, 0);
+    }
     //[/Constructor]
 }
 
@@ -831,14 +836,16 @@ void OwlNestGui::settingsChanged() {
       label4->setText(parameters[3], dontSendNotification);
     }
 
-#if HIDE_LOW_LEVEL_ITEMS == 0
-    // Parameter values
-    slider1->setValue(theSettings.getCc(PATCH_PARAMETER_A)/127.0);
-    slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0);
-    slider3->setValue(theSettings.getCc(PATCH_PARAMETER_C)/127.0);
-    slider4->setValue(theSettings.getCc(PATCH_PARAMETER_D)/127.0);
-    slider5->setValue(theSettings.getCc(PATCH_PARAMETER_E)/127.0);
-#endif
+    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+    if(props->getBoolValue("hide-low-level-items") != true)
+    {
+        // Parameter values
+        slider1->setValue(theSettings.getCc(PATCH_PARAMETER_A)/127.0);
+        slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0);
+        slider3->setValue(theSettings.getCc(PATCH_PARAMETER_C)/127.0);
+        slider4->setValue(theSettings.getCc(PATCH_PARAMETER_D)/127.0);
+        slider5->setValue(theSettings.getCc(PATCH_PARAMETER_E)/127.0);
+    }
 
     // LED button
     int v = theSettings.getCc(LED);

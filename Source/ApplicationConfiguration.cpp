@@ -31,6 +31,8 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
       properties->setValue("owl-updates-url", "http://hoxtonowl.com/software/updates");
       if(!properties->containsKey("owl-updates-dir-url"))
           properties->setValue("owl-updates-dir-url", "http://hoxtonowl.com/wp-content/uploads/");
+      if(!properties->containsKey("hide-low-level-items"))
+         properties->setValue("hide-low-level-items", true); // set to false to display low level items
     if(!properties->isValidFile())
       std::cerr << "Invalid properties file: " << properties->getFile().getFullPathName() << std::endl;
   }

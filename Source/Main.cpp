@@ -28,19 +28,23 @@ public:
     //==============================================================================
     void initialise (const String& commandLine)
     {
-	DBG("Initialising OwlNest");
-	ApplicationConfiguration::initialise();
-	commands = new ApplicationCommandManager();
-	commands->registerAllCommandsForTarget(this);
-	commands->registerAllCommandsForTarget(&settings);
-	commands->setFirstCommandTarget(&settings);
+        DBG("Initialising OwlNest");
+        ApplicationConfiguration::initialise();
+        commands = new ApplicationCommandManager();
+        commands->registerAllCommandsForTarget(this);
+        commands->registerAllCommandsForTarget(&settings);
+        commands->setFirstCommandTarget(&settings);
 
         // Initialize audio/midi device
-#if HIDE_LOW_LEVEL_ITEMS == 1
+        PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+        if(props->getBoolValue("hide-low-level-items") == true)
+        {
         dm.initialise(0, 0, nullptr, true);
-#else
+        }
+        else
+        {
         dm.initialise(2, 2, nullptr, true);
-#endif        
+        }
         // start GUI
         mainWindow = new MainWindow(commands, settings, dm, updateGui);        
     }
@@ -82,10 +86,13 @@ public:
       toplevel.add("Tools");
       tools.addCommandItem(commands, ApplicationCommands::updateFirmware);
       tools.addCommandItem(commands, ApplicationCommands::checkForFirmwareUpdates);
-#if HIDE_LOW_LEVEL_ITEMS == 0
-        tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
-        tools.addCommandItem(commands, ApplicationCommands::checkForBootloaderUpdates);
-#endif
+        
+       PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+       if(props->getBoolValue("hide-low-level-items") == true)
+       {
+            tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
+            tools.addCommandItem(commands, ApplicationCommands::checkForBootloaderUpdates);
+       }
       popups.add(tools);
     }
     StringArray getMenuBarNames(){
@@ -137,9 +144,11 @@ public:
 	setContentOwned(tabs, false);
 	tabs->addTab("Main", Colours::lightgrey, new OwlNestGui(settings, dm, updateGui), true, 1);
 	tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true, 2);
-#if HIDE_LOW_LEVEL_ITEMS == 0
+    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+    if(props->getBoolValue("hide-low-level-items") != true)
+    {
 	  tabs->addTab("Simulator", Colours::lightgrey, new PatchComponent(dm), true, 3);
-#endif
+    }
 	tabs->setSize(779, 700);
 	centreWithSize (779, 700);
 	setVisible (true);
