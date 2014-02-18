@@ -26,7 +26,6 @@ ifeq ($(CONFIG),Debug)
   RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   TARGET := OwlNest
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
-  CLEANCMD = rm -rf $(OUTDIR)/$(TARGET) $(OBJDIR)
 endif
 
 ifeq ($(CONFIG),Release)
@@ -47,10 +46,10 @@ ifeq ($(CONFIG),Release)
   RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "HAVE_NANOSLEEP=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   TARGET := OwlNest
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
-  CLEANCMD = rm -rf $(OUTDIR)/$(TARGET) $(OBJDIR)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/DfuseLoader_f2d40499.o \
   $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
   $(OBJDIR)/DualPatchPanel_2c59bfc1.o \
   $(OBJDIR)/OwlNestGui_a87229a8.o \
@@ -73,7 +72,6 @@ OBJECTS := \
   $(OBJDIR)/dfu_file_6fdc65a.o \
   $(OBJDIR)/dfu_load_118a6344.o \
   $(OBJDIR)/dfu_util_21303760.o \
-  $(OBJDIR)/dfuse_edb4cf3d.o \
   $(OBJDIR)/dfuse_mem_b06ad2d3.o \
   $(OBJDIR)/quirks_144d50c7.o \
   $(OBJDIR)/sysex_728d86ff.o \
@@ -101,11 +99,18 @@ $(OUTDIR)/$(TARGET): $(OBJECTS) $(LDDEPS) $(RESOURCES)
 
 clean:
 	@echo Cleaning OwlNest
-	@$(CLEANCMD)
+	-@rm -f $(OUTDIR)/$(TARGET)
+	-@rm -rf $(OBJDIR)/*
+	-@rm -rf $(OBJDIR)
 
 strip:
 	@echo Stripping OwlNest
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/DfuseLoader_f2d40499.o: ../../Source/DfuseLoader.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling DfuseLoader.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ApplicationSettingsWindow_2723744.o: ../../Source/ApplicationSettingsWindow.cpp
 	-@mkdir -p $(OBJDIR)
@@ -215,11 +220,6 @@ $(OBJDIR)/dfu_load_118a6344.o: ../../Libraries/dfu-util/dfu_load.c
 $(OBJDIR)/dfu_util_21303760.o: ../../Libraries/dfu-util/dfu_util.c
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling dfu_util.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/dfuse_edb4cf3d.o: ../../Libraries/dfu-util/dfuse.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling dfuse.c"
 	@$(CC) $(CFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/dfuse_mem_b06ad2d3.o: ../../Libraries/dfu-util/dfuse_mem.c

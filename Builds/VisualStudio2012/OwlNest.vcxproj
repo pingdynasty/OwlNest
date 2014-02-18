@@ -133,6 +133,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\DfuseLoader.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp"/>
     <ClCompile Include="..\..\Source\DualPatchPanel.cpp"/>
     <ClCompile Include="..\..\Source\OwlNestGui.cpp"/>
@@ -155,7 +156,6 @@
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c"/>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\quirks.c"/>
     <ClCompile Include="..\..\Libraries\sysex.c"/>
@@ -1211,6 +1211,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\DfuseLoader.h"/>
     <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h"/>
     <ClInclude Include="..\..\Source\DualPatchPanel.h"/>
     <ClInclude Include="..\..\Source\OwlNestGui.h"/>
@@ -1236,7 +1237,6 @@
     <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h"/>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\portable.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\quirks.h"/>

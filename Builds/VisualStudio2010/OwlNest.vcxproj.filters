@@ -295,6 +295,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\DfuseLoader.cpp">
+      <Filter>OwlNest\Application</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp">
       <Filter>OwlNest\Application\GUI</Filter>
     </ClCompile>
@@ -359,9 +362,6 @@
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_util.c">
-      <Filter>OwlNest\Libraries\dfu-util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\dfu-util\dfuse.c">
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Libraries\dfu-util\dfuse_mem.c">
@@ -1518,6 +1518,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\DfuseLoader.h">
+      <Filter>OwlNest\Application</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h">
       <Filter>OwlNest\Application\GUI</Filter>
     </ClInclude>
@@ -1591,9 +1594,6 @@
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu_util.h">
-      <Filter>OwlNest\Libraries\dfu-util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Libraries\dfu-util\dfuse.h">
       <Filter>OwlNest\Libraries\dfu-util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Libraries\dfu-util\dfuse_mem.h">

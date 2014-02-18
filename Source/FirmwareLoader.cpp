@@ -20,6 +20,8 @@
 
 #include <libusb.h>
 
+#include "DfuseLoader.h"
+
 extern "C" {
 #include <dfu-util/portable.h>
 #include <dfu-util/dfu.h>
@@ -27,7 +29,7 @@ extern "C" {
 #include <dfu-util/dfu_file.h>
 #include <dfu-util/dfu_load.h>
 #include <dfu-util/dfu_util.h>
-#include <dfu-util/dfuse.h>
+// #include <dfu-util/dfuse.h>
 #include <dfu-util/quirks.h>
 
   int verbose = 0;
@@ -61,6 +63,11 @@ FirmwareLoader::FirmwareLoader() : message("OK") {
 
 String FirmwareLoader::getMessage(){
   return message;
+}
+
+void FirmwareLoader::errx(int errid, const String& msg){
+  DBG(msg);
+  message = msg;
 }
 
 bool FirmwareLoader::init(const File& firmware, const String& options){
@@ -116,22 +123,6 @@ void FirmwareLoader::listDevices(){
 }
 
 bool FirmwareLoader::openDevice(){
-  // progress = 0.0;
-
-  // probe_devices(ctx);
-
-  // if (mode == MODE_LIST) {
-  //   list_dfu_interfaces();
-  //   return 0;
-  // }
-
-  // for(int i=0; i<20 && dfu_root == NULL; ++i) {
-  //   progress += 0.005;
-  //   printf("probing for DFU device...\n");
-  //   milli_sleep(500);
-  //   probe_devices(ctx);
-  // }
-
   if (dfu_root == NULL) {
     errx(EX_IOERR, "No DFU capable USB device found");
     return false;
@@ -147,7 +138,6 @@ bool FirmwareLoader::openDevice(){
   }
 
   /* We have exactly one device. Its libusb_device is now in dfu_root->dev */
-
   printf("Opening DFU capable USB device...\n");
   int ret = libusb_open(dfu_root->dev, &dfu_root->dev_handle);
   if(ret || !dfu_root->dev_handle){
@@ -421,7 +411,7 @@ bool FirmwareLoader::connectToDevice(){
   return true;
 }
 
-bool FirmwareLoader::loadFromDevice(){
+bool FirmwareLoader::loadFromDevice(ThreadWithProgressWindow& win){
   int expected_size = 0;
   /* open for "exclusive" writing */
   int fd = open(file.name, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC, 0666);
@@ -429,20 +419,23 @@ bool FirmwareLoader::loadFromDevice(){
     err(EX_IOERR, "Cannot open file %s for writing", file.name);
   
   if (dfuse_device || dfuse_options) {
-    if (dfuse_do_upload(dfu_root, transfer_size, fd,
-			dfuse_options) < 0)
-      return true;
+    DfuseLoader dfuse(&win);
+    if (dfuse.do_upload(dfu_root, transfer_size, fd,
+			dfuse_options) < 0){
+      errx(EX_IOERR, dfuse.getMessage());
+      return false;
+    }
   } else {
     if (dfuload_do_upload(dfu_root, transfer_size,
 			  expected_size, fd) < 0) {
-      return true;
+      return false;
     }
   }
   close(fd);
   return true;
 }
 
-bool FirmwareLoader::loadToDevice(){
+bool FirmwareLoader::loadToDevice(ThreadWithProgressWindow& win){
   if (((file.idVendor  != 0xffff && file.idVendor  != runtime_vendor) ||
        (file.idProduct != 0xffff && file.idProduct != runtime_product)) &&
       ((file.idVendor  != 0xffff && file.idVendor  != dfu_root->vendor) ||
@@ -455,12 +448,15 @@ bool FirmwareLoader::loadToDevice(){
     return false;
   }
   if (dfuse_device || dfuse_options || file.bcdDFU == 0x11a) {
-    if (dfuse_do_dnload(dfu_root, transfer_size, &file,
-			dfuse_options) < 0)
-      return true;
+    DfuseLoader dfuse(&win);
+    if (dfuse.do_dnload(dfu_root, transfer_size, &file,
+			dfuse_options) < 0){
+      errx(EX_IOERR, dfuse.getMessage());
+      return false;
+    }
   } else {
-    if (dfuload_do_dnload(dfu_root, transfer_size, &file) < 0)
-      return true;
+    errx(EX_IOERR, "Only dfuse uploads are supported");
+    return false;
   }
   return true;
 }
@@ -474,10 +470,6 @@ bool FirmwareLoader::detachDevice(){
 }
 
 bool FirmwareLoader::resetDevice(){
-  if (dfu_detach(dfu_root->dev_handle, dfu_root->interface, 1000) < 0) {
-    //       errx(EX_IOERR, "can't detach");
-    warnx("can't detach");
-  }
   printf("Resetting USB to switch back to runtime mode\n");
   int ret = libusb_reset_device(dfu_root->dev_handle);
   if (ret < 0 && ret != LIBUSB_ERROR_NOT_FOUND) {
@@ -492,9 +484,4 @@ bool FirmwareLoader::closeDevice(){
   dfu_root->dev_handle = NULL;
   libusb_exit(ctx);
   return true;
-}
-
-void FirmwareLoader::errx(int errid, const String& msg){
-  DBG(msg);
-  message = msg;
 }

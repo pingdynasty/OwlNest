@@ -188,35 +188,39 @@ public:
     bool detected = loader.probeDevices();
     for(int i=0; i<40 && ! detected; ++i){
       Thread::sleep(100);
-      setProgress(0.02+i*0.17/40);
+      setProgress(0.02+i*0.14/40);
       detected = loader.probeDevices();
     }
 
     if(!detected)
       return error("Could not find a connected DFU device");
 
-    setProgress(0.2);
-    setStatusMessage("Connecting to device");
+    setProgress(0.16);
+    setStatusMessage("Opening device");
     if(!loader.openDevice())
       return error(loader.getMessage());
-    setProgress(0.25);
+    setProgress(0.18);
+    setStatusMessage("Connecting to device");
     if(!loader.connectToDevice())
       return error(loader.getMessage());
-    setProgress(0.3);
+    setProgress(0.2);
 
     setStatusMessage("Uploading binary image");
-    if(!loader.loadToDevice())
-      return error(loader.getMessage());
-    setProgress(0.8);
-
-    if(!loader.detachDevice())
+    if(!loader.loadToDevice(*this))
       return error(loader.getMessage());
     setProgress(0.85);
 
+    setStatusMessage("Detaching from device");
+    if(!loader.detachDevice())
+      return error(loader.getMessage());
+    setProgress(0.90);
+
+    setStatusMessage("Resetting device");
     if(!loader.resetDevice())
       return error(loader.getMessage());
-    setProgress(0.9);
+    setProgress(0.95);
 
+    setStatusMessage("Closing device");
     if(!loader.closeDevice())
       return error(loader.getMessage());
     setProgress(1.0);

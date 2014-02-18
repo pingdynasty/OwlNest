@@ -130,6 +130,8 @@
   <Files>
     <Filter Name="OwlNest">
       <Filter Name="Application">
+        <File RelativePath="..\..\Source\DfuseLoader.cpp"/>
+        <File RelativePath="..\..\Source\DfuseLoader.h"/>
         <Filter Name="GUI">
           <File RelativePath="..\..\Source\ApplicationSettingsWindow.cpp"/>
           <File RelativePath="..\..\Source\ApplicationSettingsWindow.h"/>
@@ -184,8 +186,6 @@
           <File RelativePath="..\..\Libraries\dfu-util\dfu_load.h"/>
           <File RelativePath="..\..\Libraries\dfu-util\dfu_util.c"/>
           <File RelativePath="..\..\Libraries\dfu-util\dfu_util.h"/>
-          <File RelativePath="..\..\Libraries\dfu-util\dfuse.c"/>
-          <File RelativePath="..\..\Libraries\dfu-util\dfuse.h"/>
           <File RelativePath="..\..\Libraries\dfu-util\dfuse_mem.c"/>
           <File RelativePath="..\..\Libraries\dfu-util\dfuse_mem.h"/>
           <File RelativePath="..\..\Libraries\dfu-util\portable.h"/>

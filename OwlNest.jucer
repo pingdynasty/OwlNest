@@ -5,6 +5,8 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Application">
+      <FILE id="ww7UBI" name="DfuseLoader.cpp" compile="1" resource="0" file="Source/DfuseLoader.cpp"/>
+      <FILE id="Fp3e4U" name="DfuseLoader.h" compile="0" resource="0" file="Source/DfuseLoader.h"/>
       <GROUP id="{DB625BC2-D638-342B-46F0-2C11332BEE69}" name="GUI">
         <FILE id="lvttDF" name="ApplicationSettingsWindow.cpp" compile="1"
               resource="0" file="Source/ApplicationSettingsWindow.cpp"/>
@@ -86,8 +88,6 @@
         <FILE id="My0es0" name="dfu_load.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_load.h"/>
         <FILE id="JTwNEB" name="dfu_util.c" compile="1" resource="0" file="Libraries/dfu-util/dfu_util.c"/>
         <FILE id="ISAwQL" name="dfu_util.h" compile="0" resource="0" file="Libraries/dfu-util/dfu_util.h"/>
-        <FILE id="cqHU5l" name="dfuse.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse.c"/>
-        <FILE id="vP1u6O" name="dfuse.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse.h"/>
         <FILE id="Zj5KmQ" name="dfuse_mem.c" compile="1" resource="0" file="Libraries/dfu-util/dfuse_mem.c"/>
         <FILE id="gEU9As" name="dfuse_mem.h" compile="0" resource="0" file="Libraries/dfu-util/dfuse_mem.h"/>
         <FILE id="YWEpxW" name="portable.h" compile="0" resource="0" file="Libraries/dfu-util/portable.h"/>

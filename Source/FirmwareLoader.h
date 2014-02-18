@@ -11,14 +11,15 @@ public:
   bool probeDevices();
   bool openDevice();
   bool connectToDevice();
-  bool loadFromDevice();
-  bool loadToDevice();
+  int do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file, ThreadWithProgressWindow& win);
+  bool loadFromDevice(ThreadWithProgressWindow& win);
+  bool loadToDevice(ThreadWithProgressWindow& win);
   bool resetDevice();
   bool detachDevice();
   bool closeDevice();
   String getMessage();
-  void errx(int errid, const String& msg);
 private:
+  void errx(int errid, const String& msg);
   String message;
 };
 
