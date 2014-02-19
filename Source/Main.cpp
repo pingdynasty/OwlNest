@@ -88,8 +88,7 @@ public:
       tools.addCommandItem(commands, ApplicationCommands::checkForFirmwareUpdates);
         
        PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-       if(props->getBoolValue("hide-low-level-items") == true)
-       {
+       if(props->getBoolValue("hide-low-level-items") != true){
             tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
             tools.addCommandItem(commands, ApplicationCommands::checkForBootloaderUpdates);
        }
@@ -103,21 +102,6 @@ public:
     }
     void menuItemSelected(int menuItemID, int topLevelMenuIndex){
       DBG("menu item selected " << topLevelMenuIndex << "/" << menuItemID);
-      // switch(topLevelMenuIndex){
-      // case 0:
-      // 	switch(menuItemID){
-      // 	case 1: // Quit
-      // 	  JUCEApplication::getInstance()->systemRequestedQuit();	  
-      // 	  break;
-      // 	}
-      // case 1:
-      // 	switch(menuItemID){
-      // 	case 1: // Update Firmware
-      // 	  break;
-      // 	case 2: // Update Bootloader
-      // 	  break;
-      // 	}	
-      // }
     }
   };
 
