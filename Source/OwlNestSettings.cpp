@@ -311,7 +311,7 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     String xmlFilename ("updates.xml");
     URL url(props->getValue("owl-updates-dir-url")+xmlFilename);
-    XmlElement* xmlUpdates = nullptr;
+    ScopedPointer<XmlElement> xmlUpdates = nullptr;
     if(url.isWellFormed())
       xmlUpdates = url.readEntireXmlStream(0);
     if(xmlUpdates == nullptr) {
@@ -321,7 +321,7 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
     XmlElement* filesNode = xmlUpdates->getChildByName(nodeString);
     StringArray names;
     XmlElement* child = filesNode->getFirstChildElement();
-    while (child != nullptr){
+    while(child != nullptr){
       names.add(child->getStringAttribute("name"));
       child = child->getNextElement();
     }
@@ -331,6 +331,7 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
     popup.addComboBox("box", names);
     if(popup.runModalLoop()==0)
       return false;
+    popup.setVisible(false);
     String selectedFilename(popup.getComboBoxComponent("box")->getText());
     URL fwUrl(props->getValue("owl-updates-dir-url")+selectedFilename);
     ScopedPointer<InputStream> strm = fwUrl.createInputStream(0);
@@ -371,16 +372,16 @@ void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
 void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
   switch(commandID){
   case ApplicationCommands::updateFirmware:
-    result.setInfo("Update Device Firmware", String::empty, String::empty, 0);
+    result.setInfo("Update Device Firmware from File", String::empty, String::empty, 0);
     break;
   case ApplicationCommands::updateBootloader:
-    result.setInfo("Update Device Bootloader", String::empty, String::empty, 0);
+    result.setInfo("Update Device Bootloader from File", String::empty, String::empty, 0);
     break;
   case ApplicationCommands::checkForFirmwareUpdates:
-    result.setInfo("Download Firmware", String::empty, String::empty, 0);
+    result.setInfo("Download Firmware from Server", String::empty, String::empty, 0);
     break;
   case ApplicationCommands::checkForBootloaderUpdates:
-    result.setInfo("Download Bootloader", String::empty, String::empty, 0);
+    result.setInfo("Download Bootloader from Server", String::empty, String::empty, 0);
     break;
   }
 }
