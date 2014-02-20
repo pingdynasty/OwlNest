@@ -158,6 +158,7 @@ class DeviceFirmwareUpdateTask  : public ThreadWithProgressWindow {
 private:
   const File& file;
   const String& options;
+  FirmwareLoader loader;
 public:
   DeviceFirmwareUpdateTask(const File& theFile, const String& theOptions)    
     : ThreadWithProgressWindow ("Device Firmware Update", true, true),
@@ -167,6 +168,7 @@ public:
 
   void error(const String& msg){
     setStatusMessage(msg);
+    loader.closeDevice();
     while(!threadShouldExit())
       Thread::sleep(100);
   }
@@ -177,7 +179,6 @@ public:
 
     if(threadShouldExit())
       return;
-    FirmwareLoader loader;
 
     if(!loader.init(file, options))
       return error(loader.getMessage());
