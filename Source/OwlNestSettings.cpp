@@ -241,12 +241,12 @@ bool OwlNestSettings::deviceFirmwareUpdate(const File& file, const String& optio
   setCc(DEVICE_FIRMWARE_UPDATE, 127);
   DeviceFirmwareUpdateTask task(file, options);
   if(task.runThread()){
-    AlertWindow alert("Success", "Firmware Update Complete", juce::AlertWindow::InfoIcon);
+    AlertWindow alert("Success", "Device Update Complete. Please reboot your Owl and relaunch OwlNest.", juce::AlertWindow::InfoIcon);
     alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
     alert.runModalLoop();
     return true;
   }else{
-    AlertWindow alert("Cancelled", "Firmware Update Cancelled", juce::AlertWindow::WarningIcon);
+    AlertWindow alert("Cancelled", "Device Update Cancelled", juce::AlertWindow::WarningIcon);
     alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
     alert.runModalLoop();
     return false;
@@ -294,22 +294,23 @@ bool OwlNestSettings::updateFirmware(){
 }
 
 bool OwlNestSettings::downloadFromServer(CommandID commandID) {
-  String nodeString, optionString, warningString;
+    String nodeString, optionString, warningString;
+    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     switch (commandID){
     case ApplicationCommands::checkForFirmwareUpdates:
       warningString = "Beware that this procedure can make your OWL unresponsive!";
       nodeString = "firmwares";
-      optionString = "firmware-dfu-options";
+      optionString = props->getValue("firmware-dfu-options");
       break;
     case ApplicationCommands::checkForBootloaderUpdates:
       warningString = "Beware that this procedure can brick your OWL!";
       nodeString = "bootloaders";
-      optionString = "bootloader-dfu-options";
+      optionString = props->getValue("bootloader-dfu-options");
       break;
     default:
       return false;
     }
-    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+    
     String xmlFilename ("updates.xml");
     URL url(props->getValue("owl-updates-dir-url")+xmlFilename);
     ScopedPointer<XmlElement> xmlUpdates = nullptr;
@@ -359,7 +360,11 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
     }
     if(AlertWindow::showOkCancelBox(AlertWindow::QuestionIcon, "Update Device", 
 				    "Would you like to update your OWL with this binary now? "+warningString, "Yes", "No"))
-      return deviceFirmwareUpdate(theTargetFile, optionString);
+    {
+        DBG("pathName"<< theTargetFile.getFullPathName());
+        DBG("optionString " << optionString);
+        return deviceFirmwareUpdate(theTargetFile, optionString);
+    }
     return true;
 }
 
