@@ -241,7 +241,7 @@ bool OwlNestSettings::deviceFirmwareUpdate(const File& file, const String& optio
   setCc(DEVICE_FIRMWARE_UPDATE, 127);
   DeviceFirmwareUpdateTask task(file, options);
   if(task.runThread()){
-    AlertWindow alert("Success", "Device Update Complete. Please reboot your Owl and relaunch OwlNest.", juce::AlertWindow::InfoIcon);
+    AlertWindow alert("Success", "Device Update Complete. Please reboot your OWL and relaunch OwlNest.", juce::AlertWindow::InfoIcon);
     alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
     alert.runModalLoop();
     return true;
