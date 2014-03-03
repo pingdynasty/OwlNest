@@ -22,6 +22,7 @@ theDm(dm), theUpdateGui(updateGui)
   memset(midiArray, 0, NB_CHANNELS);
   theDm.addMidiInputCallback(String::empty, this);
   lastMidiMessageTime=0;
+  firmwareVersion="";
 }
 
 OwlNestSettings::~OwlNestSettings(){
@@ -34,6 +35,10 @@ StringArray& OwlNestSettings::getPresetNames(){
 
 StringArray& OwlNestSettings::getParameterNames(){
   return parameters;
+}
+
+String OwlNestSettings::getFirmwareVersion(){
+    return firmwareVersion;
 }
 
 void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
@@ -89,10 +94,12 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
 }
 
 void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){
-#ifdef DEBUG
   String str(name, size);
-  std::cout << "OWL: " << str << std::endl;
-#endif // DEBUG
+  firmwareVersion = str;
+  #ifdef DEBUG
+    std::cout << "OWL: " << str << std::endl;
+  #endif // DEBUG
+  
 }
 
 void OwlNestSettings::handleDeviceIdMessage(uint8_t* data, int size){

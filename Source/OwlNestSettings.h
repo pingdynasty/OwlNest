@@ -34,6 +34,7 @@ public:
   void setCc(int cc,int value);  // set a value for a given cc
   StringArray& getPresetNames();
   StringArray& getParameterNames();
+  String getFirmwareVersion();
   uint64 getLastMidiMessageTime();
   // bool isConnected();
   bool updateFirmware();
@@ -52,6 +53,7 @@ private:
   StringArray presets;
   StringArray parameters;
   uint64 lastMidiMessageTime;
+  String firmwareVersion;
   void handleIncomingMidiMessage(MidiInput* source, const MidiMessage& message);
   void handlePresetNameMessage(uint8_t index, const char* name, int size);
   void handleParameterNameMessage(uint8_t index, const char* name, int size);

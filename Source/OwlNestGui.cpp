@@ -681,8 +681,12 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == deviceInfoButton)
     {
         //[UserButtonCode_deviceInfoButton] -- add your button handler code here..
-          theSettings.setCc(REQUEST_SETTINGS, 0);
-	  setStatus("Requested Device Information");
+        theSettings.setCc(REQUEST_SETTINGS, 0);
+        setStatus("Requested Device Information");
+        Thread::sleep(500);
+        AlertWindow alert("Firmware version currently installed:",theSettings.getFirmwareVersion(), juce::AlertWindow::InfoIcon);
+        alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+        alert.runModalLoop();
         //[/UserButtonCode_deviceInfoButton]
     }
     else if (buttonThatWasClicked == bypassButton)
