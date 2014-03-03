@@ -19,7 +19,7 @@
 
 
 
-#define REGISTER_PATCH(T, STR) registerPatch(STR, Register<T>::construct)
+#define REGISTER_PATCH(T, STR, unused, unused2) registerPatch(STR, Register<T>::construct)
 
 PatchRegistry::PatchRegistry(){
 
