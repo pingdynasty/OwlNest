@@ -480,8 +480,10 @@ bool FirmwareLoader::resetDevice(){
 }
 
 bool FirmwareLoader::closeDevice(){
-  libusb_close(dfu_root->dev_handle);
-  dfu_root->dev_handle = NULL;
+  if(dfu_root != NULL){
+    libusb_close(dfu_root->dev_handle);
+    dfu_root->dev_handle = NULL;
+  }
   libusb_exit(ctx);
   return true;
 }
