@@ -60,4 +60,5 @@ private:
   void handleFirmwareVersionMessage(const char* name, int size);
   void handleDeviceIdMessage(uint8_t* data, int size);
   void handleSelfTestMessage(uint8_t data);
+  void handleErrorMessage(uint8_t data);
 };

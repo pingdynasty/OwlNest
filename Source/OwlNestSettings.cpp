@@ -10,6 +10,7 @@
 
 #include <iomanip>
 #include <sysex.h>
+#include <stdio.h>
 #include "OwlNestSettings.h"
 #include "OpenWareMidiControl.h"
 #include "FirmwareLoader.h"
@@ -84,6 +85,8 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
       }
       case SYSEX_SELFTEST:{
 	handleSelfTestMessage(data[3]);
+	if(message.getSysExDataSize() > 4)
+	  handleErrorMessage(data[4]);
 	break;
       }
       }
@@ -96,9 +99,13 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
 void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){
   String str(name, size);
   firmwareVersion = str;
-  #ifdef DEBUG
-    std::cout << "OWL: " << str << std::endl;
-  #endif // DEBUG
+#ifdef DEBUG
+  std::cout << "Device Firmware: " << str << std::endl;
+#endif // DEBUG
+  AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Device Firmware", "Currently installed: "+str);
+        // AlertWindow alert("Firmware version currently installed:", theSettings.getFirmwareVersion(), juce::AlertWindow::InfoIcon);
+        // alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
+        // alert.runModalLoop();
   
 }
 
@@ -108,6 +115,15 @@ void OwlNestSettings::handleDeviceIdMessage(uint8_t* data, int size){
   for(int i=0; i<size; ++i)
     std::cout << std::hex << std::setfill('0') << std::setw(2) << (int)data[i];
   std::cout << std::endl;
+#endif // DEBUG
+}
+
+void OwlNestSettings::handleErrorMessage(uint8_t data){
+#ifdef DEBUG
+  if(data == 0)
+    std::cout << "Error status 0: OK" << std::endl;
+  else
+    std::cout << "Error status " << data << ": " << strerror(data) << std::endl;
 #endif // DEBUG
 }
 
@@ -121,7 +137,6 @@ void OwlNestSettings::handleSelfTestMessage(uint8_t data){
   std::cout << ((data & 0x04) ? "PASSED" : "FAILED") << " External 8MHz oscillator" << std::endl;
 #endif // DEBUG
 }
-
 
 void OwlNestSettings::setCc(int cc,int value)
 {

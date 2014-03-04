@@ -682,11 +682,13 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_deviceInfoButton] -- add your button handler code here..
         theSettings.setCc(REQUEST_SETTINGS, 0);
+	// for newer firmware, request firmware version, device ID and selftest one by one:
+        // theSettings.setCc(REQUEST_SETTINGS, 3);
+        // Thread::sleep(500);
+        // theSettings.setCc(REQUEST_SETTINGS, 4);
+        // Thread::sleep(500);
+        // theSettings.setCc(REQUEST_SETTINGS, 5);
         setStatus("Requested Device Information");
-        Thread::sleep(500);
-        AlertWindow alert("Firmware version currently installed:",theSettings.getFirmwareVersion(), juce::AlertWindow::InfoIcon);
-        alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
-        alert.runModalLoop();
         //[/UserButtonCode_deviceInfoButton]
     }
     else if (buttonThatWasClicked == bypassButton)
