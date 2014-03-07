@@ -255,7 +255,7 @@ int DfuseLoader::dfuse_special_command(struct dfu_if *dif, unsigned int address,
 	/* wait while command is executed */
 	if (verbose)
 		printf("   Poll timeout %i ms\n", dst.bwPollTimeout);
-	milli_sleep(dst.bwPollTimeout);
+	milli_sleep((long)dst.bwPollTimeout);
 
 	if (command == READ_UNPROTECT)
 		return ret;
@@ -274,7 +274,7 @@ int DfuseLoader::dfuse_special_command(struct dfu_if *dif, unsigned int address,
 						 dfuse_command_name[command]));
 		return 1;
 	}
-	milli_sleep(dst.bwPollTimeout);
+	milli_sleep((long)dst.bwPollTimeout);
 
 	ret = dfu_abort(dif->dev_handle, dif->interface);
 	if (ret < 0) {
@@ -290,7 +290,7 @@ int DfuseLoader::dfuse_special_command(struct dfu_if *dif, unsigned int address,
 		errx(EX_IOERR, "Failed to enter idle state on abort");
 		return 1;
 	}
-	milli_sleep(dst.bwPollTimeout);
+	milli_sleep((long)dst.bwPollTimeout);
 	return ret;
 }
 
@@ -393,7 +393,7 @@ int DfuseLoader::dfuse_dnload_chunk(struct dfu_if *dif, unsigned char *data, int
 			errx(EX_IOERR, "Error during download get_status");
 			return ret;
 		}
-		milli_sleep(dst.bwPollTimeout);
+		milli_sleep((long)dst.bwPollTimeout);
 	} while (dst.bState != DFU_STATE_dfuDNLOAD_IDLE &&
 		 dst.bState != DFU_STATE_dfuERROR &&
 		 dst.bState != DFU_STATE_dfuMANIFEST);
