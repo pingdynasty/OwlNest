@@ -338,9 +338,9 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     modeComboBox->setJustificationType (Justification::centredLeft);
     modeComboBox->setTextWhenNothingSelected (String::empty);
     modeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    modeComboBox->addItem (TRANS("Single"), 1);
-    modeComboBox->addItem (TRANS("Dual"), 2);
-    modeComboBox->addItem (TRANS("Series"), 3);
+//    modeComboBox->addItem (TRANS("Single"), 1); // only Green Patch is active
+    modeComboBox->addItem (TRANS("Dual"), 2);   // default Owl Mode
+    modeComboBox->addItem (TRANS("Series"), 3); // Green then Red
     modeComboBox->addItem (TRANS("Parallel"), 4);
     modeComboBox->addListener (this);
 
@@ -382,8 +382,6 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     if(props->getBoolValue("hide-low-level-items") == true)
     {
-        deviceInfoButton->setVisible(0);
-        resetButton->setVisible(0);
         leftGainSlider->setVisible(0);
         leftGainLabel->setVisible(0);
         leftInputMuteButton->setVisible(0);
