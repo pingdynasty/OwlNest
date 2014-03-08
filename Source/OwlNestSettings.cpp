@@ -397,10 +397,16 @@ bool OwlNestSettings::compileTannhauserFirmware()
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     String optionString = props->getValue("firmware-dfu-options");
 	String compilerScript = String("/Users/Gouigoui/JuceDev/Tannhauser/python/Tannhauser.py");
-	String inputPdPatch = String("/Users/Gouigoui/JuceDev/Tannhauser/testpatches/t-owl-stereomixer.pd");
+//	String inputPdPatch = String("/Users/Gouigoui/JuceDev/Tannhauser/testpatches/t-owl-stereomixer.pd");
   String owlWareDir = String("/Users/Gouigoui/JuceDev/OwlWare"); // top level
   String tannName = String("tann");
   String tannOutputDir = owlWareDir + String("/Source/Tannhauser");
+    
+    // Choose pd patch
+    FileChooser chooser("Select PD patch", ApplicationConfiguration::getApplicationDirectory(), "*.pd");
+    if(chooser.browseForFileToOpen()){
+        File file = chooser.getResult();
+        String inputPdPatch = file.getFullPathName();
 
   // Clean tann output directory
   File owlWareTannDir(tannOutputDir);
@@ -435,7 +441,10 @@ bool OwlNestSettings::compileTannhauserFirmware()
     if (theTargetFile.exists()){
         deviceFirmwareUpdate(theTargetFile, optionString);}
 	DBG("Succeeded");
-	return true;
+        return true;
+    }
+    else
+    { return false;}
 }
 
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
