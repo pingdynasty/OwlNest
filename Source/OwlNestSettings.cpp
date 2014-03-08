@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <sysex.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "OwlNestSettings.h"
 #include "OpenWareMidiControl.h"
 #include "FirmwareLoader.h"
@@ -390,11 +391,59 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
     return true;
 }
 
+bool OwlNestSettings::compileTannhauserFirmware()
+{
+    
+    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+    String optionString = props->getValue("firmware-dfu-options");
+	String compilerScript = String("/Users/Gouigoui/JuceDev/Tannhauser/python/Tannhauser.py");
+	String inputPdPatch = String("/Users/Gouigoui/JuceDev/Tannhauser/testpatches/t-owl-stereomixer.pd");
+  String owlWareDir = String("/Users/Gouigoui/JuceDev/OwlWare"); // top level
+  String tannName = String("tann");
+  String tannOutputDir = owlWareDir + String("/Source/Tannhauser");
+
+  // Clean tann output directory
+  File owlWareTannDir(tannOutputDir);
+  Array<File>(owlWareTannDirArray);
+  owlWareTannDir.findChildFiles(owlWareTannDirArray, File::findFiles, false);
+  for (int i = 0; i < owlWareTannDirArray.size(); i++)
+  {
+    owlWareTannDirArray[i].deleteFile();
+  }
+  
+  // Compile Pd patch
+  String tannCompileCmd("python " + compilerScript + " " + inputPdPatch + \
+                            " " + tannOutputDir + " " + tannName);
+  int error = system(tannCompileCmd.toUTF8());
+  if (error != 0)
+  {
+    DBG(String("Something went wrong with tannhauser compiling\n Error: "
+               + String(error)));
+  }
+  // Compile OwlWare
+  String firmwareCompileCmd("cd " + owlWareDir + " && make clean && make bin");
+  DBG(firmwareCompileCmd);
+  error = system(firmwareCompileCmd.toUTF8());
+  if (error != 0)
+  {
+    DBG(String("Something went wrong with firmware compiling\n Error: "
+               + String(error)));
+  }
+  
+    File theTargetFile(owlWareDir + "/Build/OwlWare.bin");
+    DBG(theTargetFile.getFullPathName());
+    if (theTargetFile.exists()){
+        deviceFirmwareUpdate(theTargetFile, optionString);}
+	DBG("Succeeded");
+	return true;
+}
+
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
   commands.add(ApplicationCommands::updateFirmware);
   commands.add(ApplicationCommands::updateBootloader);
   commands.add(ApplicationCommands::checkForFirmwareUpdates);
   commands.add(ApplicationCommands::checkForBootloaderUpdates);
+  commands.add(ApplicationCommands::pdCompileTannhauserFirmware);
 }
 
 void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
@@ -410,6 +459,9 @@ void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo
     break;
   case ApplicationCommands::checkForBootloaderUpdates:
     result.setInfo("Download Bootloader from Server", String::empty, String::empty, 0);
+    break;
+  case ApplicationCommands::pdCompileTannhauserFirmware:
+    result.setInfo("Compile Pd Patch", String::empty, String::empty, 0);
     break;
   }
 }
@@ -435,6 +487,9 @@ bool OwlNestSettings::perform(const InvocationInfo& info){
     break;
   case ApplicationCommands::checkForBootloaderUpdates:
     downloadFromServer(info.commandID);
+    break;
+  case ApplicationCommands::pdCompileTannhauserFirmware:
+    compileTannhauserFirmware();
     break;
   }
   return true;

@@ -86,6 +86,7 @@ public:
       toplevel.add("Tools");
       tools.addCommandItem(commands, ApplicationCommands::updateFirmware);
       tools.addCommandItem(commands, ApplicationCommands::checkForFirmwareUpdates);
+      tools.addCommandItem(commands, ApplicationCommands::pdCompileTannhauserFirmware);
         
        PropertySet* props = ApplicationConfiguration::getApplicationProperties();
        if(props->getBoolValue("hide-low-level-items") != true){
