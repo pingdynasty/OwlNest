@@ -394,57 +394,57 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
 bool OwlNestSettings::compileTannhauserFirmware()
 {
     
-    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-    String optionString = props->getValue("firmware-dfu-options");
-	String compilerScript = String("/Users/Gouigoui/JuceDev/Tannhauser/python/Tannhauser.py");
-//	String inputPdPatch = String("/Users/Gouigoui/JuceDev/Tannhauser/testpatches/t-owl-stereomixer.pd");
+  PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+  String optionString = props->getValue("firmware-dfu-options");
+  String compilerScript = String("/Users/Gouigoui/JuceDev/Tannhauser/python/Tannhauser.py");
   String owlWareDir = String("/Users/Gouigoui/JuceDev/OwlWare"); // top level
   String tannName = String("tann");
   String tannOutputDir = owlWareDir + String("/Source/Tannhauser");
-    
-    // Choose pd patch
-    FileChooser chooser("Select PD patch", ApplicationConfiguration::getApplicationDirectory(), "*.pd");
-    if(chooser.browseForFileToOpen()){
-        File file = chooser.getResult();
-        String inputPdPatch = file.getFullPathName();
-
-  // Clean tann output directory
-  File owlWareTannDir(tannOutputDir);
-  Array<File>(owlWareTannDirArray);
-  owlWareTannDir.findChildFiles(owlWareTannDirArray, File::findFiles, false);
-  for (int i = 0; i < owlWareTannDirArray.size(); i++)
-  {
-    owlWareTannDirArray[i].deleteFile();
-  }
   
-  // Compile Pd patch
-  String tannCompileCmd("python " + compilerScript + " " + inputPdPatch + \
-                            " " + tannOutputDir + " " + tannName);
-  int error = system(tannCompileCmd.toUTF8());
-  if (error != 0)
+  // Choose pd patch
+  FileChooser chooser("Select PD patch", ApplicationConfiguration::getApplicationDirectory(), "*.pd");
+  if(chooser.browseForFileToOpen())
   {
-    DBG(String("Something went wrong with tannhauser compiling\n Error: "
-               + String(error)));
+      File file = chooser.getResult();
+      String inputPdPatch = file.getFullPathName();
+      // Clean tann output directory
+      File owlWareTannDir(tannOutputDir);
+      Array<File>(owlWareTannDirArray);
+      owlWareTannDir.findChildFiles(owlWareTannDirArray, File::findFiles, false);
+      for (int i = 0; i < owlWareTannDirArray.size(); i++)
+      {
+          owlWareTannDirArray[i].deleteFile();
+      }
+      // Compile Pd patch
+      String tannCompileCmd("python " + compilerScript + " " + inputPdPatch + \
+                                " " + tannOutputDir + " " + tannName);
+      int error = system(tannCompileCmd.toUTF8());
+      if (error != 0)
+      {
+        DBG(String("Something went wrong with tannhauser compiling\n Error: "
+                   + String(error)));
+      }
+      // Compile OwlWare
+      String firmwareCompileCmd("cd " + owlWareDir + " && make clean && make bin");
+      DBG(firmwareCompileCmd);
+      error = system(firmwareCompileCmd.toUTF8());
+      if (error != 0)
+      {
+        DBG(String("Something went wrong with firmware compiling\n Error: "
+                   + String(error)));
+      }
+      File theTargetFile(owlWareDir + "/Build/OwlWare.bin");
+      DBG(theTargetFile.getFullPathName());
+      if (theTargetFile.exists()){
+            deviceFirmwareUpdate(theTargetFile, optionString);
+      }
+      DBG("Succeeded");
+      return true;
   }
-  // Compile OwlWare
-  String firmwareCompileCmd("cd " + owlWareDir + " && make clean && make bin");
-  DBG(firmwareCompileCmd);
-  error = system(firmwareCompileCmd.toUTF8());
-  if (error != 0)
+  else
   {
-    DBG(String("Something went wrong with firmware compiling\n Error: "
-               + String(error)));
+      return false;
   }
-  
-    File theTargetFile(owlWareDir + "/Build/OwlWare.bin");
-    DBG(theTargetFile.getFullPathName());
-    if (theTargetFile.exists()){
-        deviceFirmwareUpdate(theTargetFile, optionString);}
-	DBG("Succeeded");
-        return true;
-    }
-    else
-    { return false;}
 }
 
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
