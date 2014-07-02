@@ -338,9 +338,9 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     modeComboBox->setJustificationType (Justification::centredLeft);
     modeComboBox->setTextWhenNothingSelected (String::empty);
     modeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-//    modeComboBox->addItem (TRANS("Single"), 1); // only Green Patch is active
-    modeComboBox->addItem (TRANS("Dual"), 2);   // default Owl Mode
-    modeComboBox->addItem (TRANS("Series"), 3); // Green then Red
+    modeComboBox->addItem (TRANS("Single"), 1);
+    modeComboBox->addItem (TRANS("Dual"), 2);
+    modeComboBox->addItem (TRANS("Series"), 3);
     modeComboBox->addItem (TRANS("Parallel"), 4);
     modeComboBox->addListener (this);
 
@@ -351,6 +351,10 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     modeLabel->setEditable (false, false, false);
     modeLabel->setColour (TextEditor::textColourId, Colours::black);
     modeLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (remoteControlButton = new ToggleButton ("new toggle button"));
+    remoteControlButton->setButtonText (TRANS("Remote Control"));
+    remoteControlButton->addListener (this);
 
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
@@ -463,6 +467,7 @@ OwlNestGui::~OwlNestGui()
     label5 = nullptr;
     modeComboBox = nullptr;
     modeLabel = nullptr;
+    remoteControlButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -497,8 +502,8 @@ void OwlNestGui::resized()
     leftGainLabel->setBounds (17, 492, 112, 24);
     saveButton->setBounds (216, 392, 150, 24);
     deviceInfoButton->setBounds (384, 392, 150, 24);
-    bypassButton->setBounds (430, 488, 150, 24);
-    swapLRButton->setBounds (614, 488, 150, 24);
+    bypassButton->setBounds (528, 488, 112, 24);
+    swapLRButton->setBounds (648, 488, 112, 24);
     rightGainLabel->setBounds (17, 521, 112, 24);
     rightGainSlider->setBounds (132, 521, 150, 24);
     leftOutGainSlider->setBounds (132, 556, 150, 24);
@@ -536,6 +541,7 @@ void OwlNestGui::resized()
     label5->setBounds (728, 392, 24, 24);
     modeComboBox->setBounds (551, 320, 150, 24);
     modeLabel->setBounds (448, 320, 101, 24);
+    remoteControlButton->setBounds (408, 488, 112, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -742,9 +748,15 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == resetButton)
     {
         //[UserButtonCode_resetButton] -- add your button handler code here..
-        theSettings.setCc(FACTORY_RESET, 127);
-        setStatus("Factory Reset");
+      theSettings.setCc(FACTORY_RESET, 127);
+      setStatus("Factory Reset");
         //[/UserButtonCode_resetButton]
+    }
+    else if (buttonThatWasClicked == remoteControlButton)
+    {
+        //[UserButtonCode_remoteControlButton] -- add your button handler code here..
+      theSettings.setCc(PATCH_CONTROL, remoteControlButton->getToggleState() ? 127 : 0);
+        //[/UserButtonCode_remoteControlButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -1036,10 +1048,10 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="384 392 150 24" buttonText="Device Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
-                virtualName="" explicitFocusOrder="0" pos="430 488 150 24" buttonText="Codec Bypass"
+                virtualName="" explicitFocusOrder="0" pos="528 488 112 24" buttonText="Codec Bypass"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="5e0a14ed17680a7" memberName="swapLRButton"
-                virtualName="" explicitFocusOrder="0" pos="614 488 150 24" buttonText="Swap Left/Right"
+                virtualName="" explicitFocusOrder="0" pos="648 488 112 24" buttonText="Swap Left/Right"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="a4c7e40cc3b84fa1" memberName="rightGainLabel"
          virtualName="" explicitFocusOrder="0" pos="17 521 112 24" edTextCol="ff000000"
@@ -1196,6 +1208,9 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="Patch Mode" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="34"/>
+  <TOGGLEBUTTON name="new toggle button" id="ae8c92622a32c986" memberName="remoteControlButton"
+                virtualName="" explicitFocusOrder="0" pos="408 488 112 24" buttonText="Remote Control"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
