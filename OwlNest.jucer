@@ -207,7 +207,7 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx -I../../Source"
+    <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx -I../../Source -I../../Libraries/dfu-util/"
                 extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.so" externalLibraries=""
                 smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>

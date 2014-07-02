@@ -174,6 +174,22 @@ private:
 };
 
 //==============================================================================
+struct FocusRestorer
+{
+    FocusRestorer()  : lastFocus (Component::getCurrentlyFocusedComponent()) {}
+
+    ~FocusRestorer()
+    {
+        if (lastFocus != nullptr && ! lastFocus->isCurrentlyBlockedByAnotherModalComponent())
+            lastFocus->grabKeyboardFocus();
+    }
+
+    WeakReference<Component> lastFocus;
+
+    JUCE_DECLARE_NON_COPYABLE (FocusRestorer)
+};
+
+//==============================================================================
 struct ScalingHelpers
 {
     template <typename PointOrRect>
@@ -643,7 +659,7 @@ void Component::addToDesktop (int styleWanted, void* nativeWindowToAttachTo)
 
         bool wasFullscreen = false;
         bool wasMinimised = false;
-        ComponentBoundsConstrainer* currentConstainer = nullptr;
+        ComponentBoundsConstrainer* currentConstrainer = nullptr;
         Rectangle<int> oldNonFullScreenBounds;
         int oldRenderingEngine = -1;
 
@@ -653,7 +669,7 @@ void Component::addToDesktop (int styleWanted, void* nativeWindowToAttachTo)
 
             wasFullscreen = peer->isFullScreen();
             wasMinimised = peer->isMinimised();
-            currentConstainer = peer->getConstrainer();
+            currentConstrainer = peer->getConstrainer();
             oldNonFullScreenBounds = peer->getNonFullScreenBounds();
             oldRenderingEngine = peer->getCurrentRenderingEngine();
 
@@ -704,7 +720,7 @@ void Component::addToDesktop (int styleWanted, void* nativeWindowToAttachTo)
                 peer->setAlwaysOnTop (true);
            #endif
 
-            peer->setConstrainer (currentConstainer);
+            peer->setConstrainer (currentConstrainer);
 
             repaint();
             internalHierarchyChanged();
@@ -2288,7 +2304,10 @@ void Component::addComponentListener (ComponentListener* const newListener)
 {
     // if component methods are being called from threads other than the message
     // thread, you'll need to use a MessageManagerLock object to make sure it's thread-safe.
-    CHECK_MESSAGE_MANAGER_IS_LOCKED
+    #if JUCE_DEBUG || JUCE_LOG_ASSERTIONS
+    if (getParentComponent() != nullptr)
+        CHECK_MESSAGE_MANAGER_IS_LOCKED;
+    #endif
 
     componentListeners.add (newListener);
 }

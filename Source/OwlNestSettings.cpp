@@ -335,10 +335,10 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
     
     String xmlFilename ("updates.xml");
     URL url(props->getValue("owl-updates-dir-url")+xmlFilename);
-    ScopedPointer<XmlElement> xmlUpdates = nullptr;
+    ScopedPointer<XmlElement> xmlUpdates;
     if(url.isWellFormed())
       xmlUpdates = url.readEntireXmlStream(0);
-    if(xmlUpdates == nullptr) {
+    if(xmlUpdates == NULL) {
       AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Connection Error", "Server connection failed");
       return false;
     }
@@ -358,8 +358,9 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
     popup.setVisible(false);
     String selectedFilename(popup.getComboBoxComponent("box")->getText());
     URL fwUrl(props->getValue("owl-updates-dir-url")+selectedFilename);
-    ScopedPointer<InputStream> strm = fwUrl.createInputStream(0);
-    if(strm == nullptr){
+    ScopedPointer<InputStream> strm;
+    strm = fwUrl.createInputStream(0);
+    if(strm == NULL){
       AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Connection Error", "File unavailable", "Continue");
       return false;
     }
