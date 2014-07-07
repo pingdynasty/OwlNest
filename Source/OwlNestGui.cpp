@@ -361,7 +361,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (779, 700);
+    setSize (760, 640);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -502,8 +502,8 @@ void OwlNestGui::resized()
     leftGainLabel->setBounds (17, 492, 112, 24);
     saveButton->setBounds (216, 392, 150, 24);
     deviceInfoButton->setBounds (384, 392, 150, 24);
-    bypassButton->setBounds (528, 488, 112, 24);
-    swapLRButton->setBounds (648, 488, 112, 24);
+    bypassButton->setBounds (520, 488, 112, 24);
+    swapLRButton->setBounds (640, 488, 112, 24);
     rightGainLabel->setBounds (17, 521, 112, 24);
     rightGainSlider->setBounds (132, 521, 150, 24);
     leftOutGainSlider->setBounds (132, 556, 150, 24);
@@ -520,7 +520,7 @@ void OwlNestGui::resized()
     protocolComboBox->setBounds (527, 584, 150, 24);
     protocolLabel->setBounds (422, 584, 103, 24);
     masterButton->setBounds (686, 584, 71, 24);
-    statusLabel->setBounds (40, 424, 648, 16);
+    statusLabel->setBounds (32, 424, 648, 16);
     patchSlotAComboBox->setBounds (120, 320, 150, 24);
     patchSlotALabel->setBounds (48, 320, 72, 24);
     patchSlotBComboBox->setBounds (120, 352, 150, 24);
@@ -528,7 +528,7 @@ void OwlNestGui::resized()
     resetButton->setBounds (544, 392, 150, 24);
     sensitivityComboBox->setBounds (552, 352, 150, 24);
     sensitivityLabel->setBounds (448, 352, 101, 24);
-    connectionButton->setBounds (16, 424, 16, 16);
+    connectionButton->setBounds (18, 424, 16, 16);
     slider4->setBounds (584, 29, 90, 90);
     slider3->setBounds (416, 29, 90, 90);
     label3->setBounds (416, 114, 90, 24);
@@ -541,7 +541,7 @@ void OwlNestGui::resized()
     label5->setBounds (728, 392, 24, 24);
     modeComboBox->setBounds (551, 320, 150, 24);
     modeLabel->setBounds (448, 320, 101, 24);
-    remoteControlButton->setBounds (408, 488, 112, 24);
+    remoteControlButton->setBounds (16, 448, 112, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -1023,7 +1023,7 @@ BEGIN_JUCER_METADATA
                  constructorParams="OwlNestSettings&amp; settings, AudioDeviceManager&amp; dm, Value&amp; updateGui"
                  variableInitialisers="theSettings(settings), theDm(dm)&#10;&#10;"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="1" initialWidth="779" initialHeight="700">
+                 fixedSize="1" initialWidth="760" initialHeight="640">
   <BACKGROUND backgroundColour="ffffffff">
     <IMAGE pos="-10 -68 780 700" resource="owlFaceplate_png" opacity="0.25800000000000000711"
            mode="1"/>
@@ -1056,10 +1056,10 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="384 392 150 24" buttonText="Device Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
-                virtualName="" explicitFocusOrder="0" pos="528 488 112 24" buttonText="Codec Bypass"
+                virtualName="" explicitFocusOrder="0" pos="520 488 112 24" buttonText="Codec Bypass"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="5e0a14ed17680a7" memberName="swapLRButton"
-                virtualName="" explicitFocusOrder="0" pos="648 488 112 24" buttonText="Swap Left/Right"
+                virtualName="" explicitFocusOrder="0" pos="640 488 112 24" buttonText="Swap Left/Right"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="a4c7e40cc3b84fa1" memberName="rightGainLabel"
          virtualName="" explicitFocusOrder="0" pos="17 521 112 24" edTextCol="ff000000"
@@ -1124,7 +1124,7 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="0" pos="686 584 71 24" buttonText="Master"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="2f07a4c0694077f7" memberName="statusLabel"
-         virtualName="" explicitFocusOrder="0" pos="40 424 648 16" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="32 424 648 16" edTextCol="ff000000"
          edBkgCol="0" labelText="Status: Initialising..." editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -1156,7 +1156,7 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="34"/>
   <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="connectionButton"
-              virtualName="" explicitFocusOrder="0" pos="16 424 16 16" bgColOff="ff808080"
+              virtualName="" explicitFocusOrder="0" pos="18 424 16 16" bgColOff="ff808080"
               buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"/>
   <SLIDER name="new slider" id="1c26ed829054fb4" memberName="slider4" virtualName=""
           explicitFocusOrder="0" pos="584 29 90 90" bkgcol="fff0ffff" thumbcol="ff6495ed"
@@ -1217,7 +1217,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="34"/>
   <TOGGLEBUTTON name="new toggle button" id="ae8c92622a32c986" memberName="remoteControlButton"
-                virtualName="" explicitFocusOrder="0" pos="408 488 112 24" buttonText="Remote Control"
+                virtualName="" explicitFocusOrder="0" pos="16 448 112 24" buttonText="Remote Control"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
 </JUCER_COMPONENT>
 
