@@ -57,7 +57,6 @@
       <FILE id="f4xkxv" name="sysex.h" compile="0" resource="0" file="Libraries/sysex.h"/>
     </GROUP>
     <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
-    <FILE id="twHdBT" name="includes.h" compile="0" resource="0" file="Source/OwlPatches/includes.h"/>
   </MAINGROUP>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>

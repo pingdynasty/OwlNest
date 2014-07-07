@@ -1214,7 +1214,6 @@
     <ClInclude Include="..\..\Libraries\dfu-util\usb_dfu.h"/>
     <ClInclude Include="..\..\Libraries\win-util\stdint.h"/>
     <ClInclude Include="..\..\Libraries\sysex.h"/>
-    <ClInclude Include="..\..\Source\OwlPatches\includes.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioSampleBuffer.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_FloatVectorOperations.h"/>

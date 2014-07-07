@@ -181,7 +181,6 @@
           <Tool Name="VCCLCompilerTool"/>
         </FileConfiguration>
       </File>
-      <File RelativePath="..\..\Source\OwlPatches\includes.h"/>
     </Filter>
     <Filter Name="Juce Modules">
       <Filter Name="juce_audio_basics">
