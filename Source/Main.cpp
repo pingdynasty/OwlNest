@@ -1,8 +1,5 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "OwlNestGui.h"
-#include "StompBoxAudioProcessor.h"
-#include "PatchComponent.h"
-#include "SeriesDeviceCallBacks.h"
 #include "ApplicationConfiguration.h"
 #include "ApplicationSettingsWindow.h"
 #include "ApplicationCommands.h"
@@ -20,8 +17,6 @@ public:
     AudioDeviceManager dm;
     OwlNestSettings settings;
    
-   // SeriesDeviceCallBacks sdcb;
-    
     Value updateGui; // flag used to update Gui when Owl settings are loaded
     
     
@@ -129,10 +124,6 @@ public:
 	tabs->addTab("Main", Colours::lightgrey, new OwlNestGui(settings, dm, updateGui), true, 1);
 	tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true, 2);
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-    if(props->getBoolValue("hide-low-level-items") != true)
-    {
-	  tabs->addTab("Simulator", Colours::lightgrey, new PatchComponent(dm), true, 3);
-    }
 	tabs->setSize(779, 700);
 	centreWithSize (779, 700);
 	setVisible (true);

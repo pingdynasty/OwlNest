@@ -135,23 +135,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\DfuseLoader.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp"/>
-    <ClCompile Include="..\..\Source\DualPatchPanel.cpp"/>
     <ClCompile Include="..\..\Source\OwlNestGui.cpp"/>
-    <ClCompile Include="..\..\Source\PatchComponent.cpp"/>
-    <ClCompile Include="..\..\Source\PatchMode.cpp"/>
-    <ClCompile Include="..\..\Source\StompGui.cpp"/>
-    <ClCompile Include="..\..\Source\TransportPanel.cpp"/>
-    <ClCompile Include="..\..\Source\StompBoxAudioProcessor.cpp"/>
-    <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
-    <ClCompile Include="..\..\Source\PluginPatchProcessor.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp"/>
     <ClCompile Include="..\..\Source\FirmwareLoader.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\Source\OwlNestSettings.cpp"/>
-    <ClCompile Include="..\..\Source\PatchProcessor.cpp"/>
-    <ClCompile Include="..\..\Source\PatchRegistry.cpp"/>
-    <ClCompile Include="..\..\Source\SampleBuffer.cpp"/>
-    <ClCompile Include="..\..\Source\SeriesDeviceCallBacks.cpp"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_file.c"/>
     <ClCompile Include="..\..\Libraries\dfu-util\dfu_load.c"/>
@@ -1077,9 +1065,6 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileChooserDialogBox.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileFilter.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileListComponent.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -1093,9 +1078,6 @@
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_ImagePreviewComponent.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_WildcardFileFilter.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\commands\juce_ApplicationCommandInfo.cpp">
@@ -1161,9 +1143,6 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\documents\juce_FileBasedDocument.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\lookandfeel\juce_OldSchoolLookAndFeel.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_BubbleMessageComponent.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -1225,26 +1204,12 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\DfuseLoader.h"/>
     <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h"/>
-    <ClInclude Include="..\..\Source\DualPatchPanel.h"/>
     <ClInclude Include="..\..\Source\OwlNestGui.h"/>
-    <ClInclude Include="..\..\Source\PatchComponent.h"/>
-    <ClInclude Include="..\..\Source\PatchMode.h"/>
-    <ClInclude Include="..\..\Source\StompGui.h"/>
-    <ClInclude Include="..\..\Source\TransportPanel.h"/>
-    <ClInclude Include="..\..\Source\StompBoxAudioProcessor.h"/>
-    <ClInclude Include="..\..\Source\PluginEditor.h"/>
-    <ClInclude Include="..\..\Source\PluginPatchProcessor.h"/>
     <ClInclude Include="..\..\Source\ApplicationCommands.h"/>
     <ClInclude Include="..\..\Source\ApplicationConfiguration.h"/>
-    <ClInclude Include="..\..\Source\Enums.h"/>
     <ClInclude Include="..\..\Source\FirmwareLoader.h"/>
     <ClInclude Include="..\..\Source\OpenWareMidiControl.h"/>
     <ClInclude Include="..\..\Source\OwlNestSettings.h"/>
-    <ClInclude Include="..\..\Source\PatchProcessor.h"/>
-    <ClInclude Include="..\..\Source\PatchRegistry.h"/>
-    <ClInclude Include="..\..\Source\SampleBuffer.h"/>
-    <ClInclude Include="..\..\Source\SeriesDeviceCallBacks.h"/>
-    <ClInclude Include="..\..\Source\StompBox.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu_file.h"/>
     <ClInclude Include="..\..\Libraries\dfu-util\dfu_load.h"/>
@@ -1401,6 +1366,7 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\memory\juce_OptionalScopedPointer.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\memory\juce_ReferenceCountedObject.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\memory\juce_ScopedPointer.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\memory\juce_SharedResourcePointer.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\memory\juce_Singleton.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\memory\juce_WeakReference.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\containers\juce_AbstractFifo.h"/>
@@ -1662,14 +1628,12 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileBrowserListener.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileChooser.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileChooserDialogBox.h"/>
-    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileFilter.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileListComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FilePreviewComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileSearchPathListComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileTreeComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FilenameComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_ImagePreviewComponent.h"/>
-    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_WildcardFileFilter.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\commands\juce_ApplicationCommandID.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\commands\juce_ApplicationCommandInfo.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\commands\juce_ApplicationCommandManager.h"/>
@@ -1691,7 +1655,6 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_ActiveXControlComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_NSViewComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_UIViewComponent.h"/>
-    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\lookandfeel\juce_OldSchoolLookAndFeel.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_AppleRemote.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_BubbleMessageComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_ColourSelector.h"/>

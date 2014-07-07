@@ -12,37 +12,8 @@
               resource="0" file="Source/ApplicationSettingsWindow.cpp"/>
         <FILE id="bvN4BV" name="ApplicationSettingsWindow.h" compile="0" resource="0"
               file="Source/ApplicationSettingsWindow.h"/>
-        <FILE id="QZqLsC" name="DualPatchPanel.cpp" compile="1" resource="0"
-              file="Source/DualPatchPanel.cpp"/>
-        <FILE id="eLm9S6" name="DualPatchPanel.h" compile="0" resource="0"
-              file="Source/DualPatchPanel.h"/>
         <FILE id="p7DYsR" name="OwlNestGui.cpp" compile="1" resource="0" file="Source/OwlNestGui.cpp"/>
         <FILE id="PjPrzx" name="OwlNestGui.h" compile="0" resource="0" file="Source/OwlNestGui.h"/>
-        <FILE id="ALqvD7" name="PatchComponent.cpp" compile="1" resource="0"
-              file="Source/PatchComponent.cpp"/>
-        <FILE id="XY1XBy" name="PatchComponent.h" compile="0" resource="0"
-              file="Source/PatchComponent.h"/>
-        <FILE id="P76MAW" name="PatchMode.cpp" compile="1" resource="0" file="Source/PatchMode.cpp"/>
-        <FILE id="m2FwAK" name="PatchMode.h" compile="0" resource="0" file="Source/PatchMode.h"/>
-        <FILE id="E8t39G" name="StompGui.cpp" compile="1" resource="0" file="Source/StompGui.cpp"/>
-        <FILE id="Ox8vEb" name="StompGui.h" compile="0" resource="0" file="Source/StompGui.h"/>
-        <FILE id="h4PIME" name="TransportPanel.cpp" compile="1" resource="0"
-              file="Source/TransportPanel.cpp"/>
-        <FILE id="CTzaMc" name="TransportPanel.h" compile="0" resource="0"
-              file="Source/TransportPanel.h"/>
-      </GROUP>
-      <GROUP id="{3B980891-6AE6-F7E5-5B44-51D422CD0026}" name="Plugin">
-        <FILE id="Ox76Pv" name="StompBoxAudioProcessor.cpp" compile="1" resource="0"
-              file="Source/StompBoxAudioProcessor.cpp"/>
-        <FILE id="jkoaLh" name="StompBoxAudioProcessor.h" compile="0" resource="0"
-              file="Source/StompBoxAudioProcessor.h"/>
-        <FILE id="EDoQ6M" name="PluginEditor.cpp" compile="1" resource="0"
-              file="Source/PluginEditor.cpp"/>
-        <FILE id="dwNJHN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-        <FILE id="KU2GlZ" name="PluginPatchProcessor.cpp" compile="1" resource="0"
-              file="Source/PluginPatchProcessor.cpp"/>
-        <FILE id="O14Un3" name="PluginPatchProcessor.h" compile="0" resource="0"
-              file="Source/PluginPatchProcessor.h"/>
       </GROUP>
       <FILE id="fMKCC9" name="ApplicationCommands.h" compile="0" resource="0"
             file="Source/ApplicationCommands.h"/>
@@ -50,7 +21,6 @@
             file="Source/ApplicationConfiguration.cpp"/>
       <FILE id="yZV1o6" name="ApplicationConfiguration.h" compile="0" resource="0"
             file="Source/ApplicationConfiguration.h"/>
-      <FILE id="pL8ffC" name="Enums.h" compile="0" resource="0" file="Source/Enums.h"/>
       <FILE id="Jf6p1r" name="FirmwareLoader.cpp" compile="1" resource="0"
             file="Source/FirmwareLoader.cpp"/>
       <FILE id="BPvtu3" name="FirmwareLoader.h" compile="0" resource="0"
@@ -62,21 +32,6 @@
             file="Source/OwlNestSettings.cpp"/>
       <FILE id="IDIyJd" name="OwlNestSettings.h" compile="0" resource="0"
             file="Source/OwlNestSettings.h"/>
-      <FILE id="ndKe9y" name="PatchProcessor.cpp" compile="1" resource="0"
-            file="Source/PatchProcessor.cpp"/>
-      <FILE id="cxUeTL" name="PatchProcessor.h" compile="0" resource="0"
-            file="Source/PatchProcessor.h"/>
-      <FILE id="vFjzMG" name="PatchRegistry.cpp" compile="1" resource="0"
-            file="Source/PatchRegistry.cpp"/>
-      <FILE id="wz382r" name="PatchRegistry.h" compile="0" resource="0" file="Source/PatchRegistry.h"/>
-      <FILE id="L1e6fx" name="SampleBuffer.cpp" compile="1" resource="0"
-            file="Source/SampleBuffer.cpp"/>
-      <FILE id="FTCZJ3" name="SampleBuffer.h" compile="0" resource="0" file="Source/SampleBuffer.h"/>
-      <FILE id="mgH8Dv" name="SeriesDeviceCallBacks.cpp" compile="1" resource="0"
-            file="Source/SeriesDeviceCallBacks.cpp"/>
-      <FILE id="b7QvIe" name="SeriesDeviceCallBacks.h" compile="0" resource="0"
-            file="Source/SeriesDeviceCallBacks.h"/>
-      <FILE id="fBeDu6" name="StompBox.h" compile="0" resource="0" file="Source/StompBox.h"/>
     </GROUP>
     <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
       <GROUP id="{1C5C2E4D-6CEC-53B7-9F52-6A28FD1B99AE}" name="dfu-util">

@@ -135,46 +135,18 @@
         <Filter Name="GUI">
           <File RelativePath="..\..\Source\ApplicationSettingsWindow.cpp"/>
           <File RelativePath="..\..\Source\ApplicationSettingsWindow.h"/>
-          <File RelativePath="..\..\Source\DualPatchPanel.cpp"/>
-          <File RelativePath="..\..\Source\DualPatchPanel.h"/>
           <File RelativePath="..\..\Source\OwlNestGui.cpp"/>
           <File RelativePath="..\..\Source\OwlNestGui.h"/>
-          <File RelativePath="..\..\Source\PatchComponent.cpp"/>
-          <File RelativePath="..\..\Source\PatchComponent.h"/>
-          <File RelativePath="..\..\Source\PatchMode.cpp"/>
-          <File RelativePath="..\..\Source\PatchMode.h"/>
-          <File RelativePath="..\..\Source\StompGui.cpp"/>
-          <File RelativePath="..\..\Source\StompGui.h"/>
-          <File RelativePath="..\..\Source\TransportPanel.cpp"/>
-          <File RelativePath="..\..\Source\TransportPanel.h"/>
-        </Filter>
-        <Filter Name="Plugin">
-          <File RelativePath="..\..\Source\StompBoxAudioProcessor.cpp"/>
-          <File RelativePath="..\..\Source\StompBoxAudioProcessor.h"/>
-          <File RelativePath="..\..\Source\PluginEditor.cpp"/>
-          <File RelativePath="..\..\Source\PluginEditor.h"/>
-          <File RelativePath="..\..\Source\PluginPatchProcessor.cpp"/>
-          <File RelativePath="..\..\Source\PluginPatchProcessor.h"/>
         </Filter>
         <File RelativePath="..\..\Source\ApplicationCommands.h"/>
         <File RelativePath="..\..\Source\ApplicationConfiguration.cpp"/>
         <File RelativePath="..\..\Source\ApplicationConfiguration.h"/>
-        <File RelativePath="..\..\Source\Enums.h"/>
         <File RelativePath="..\..\Source\FirmwareLoader.cpp"/>
         <File RelativePath="..\..\Source\FirmwareLoader.h"/>
         <File RelativePath="..\..\Source\Main.cpp"/>
         <File RelativePath="..\..\Source\OpenWareMidiControl.h"/>
         <File RelativePath="..\..\Source\OwlNestSettings.cpp"/>
         <File RelativePath="..\..\Source\OwlNestSettings.h"/>
-        <File RelativePath="..\..\Source\PatchProcessor.cpp"/>
-        <File RelativePath="..\..\Source\PatchProcessor.h"/>
-        <File RelativePath="..\..\Source\PatchRegistry.cpp"/>
-        <File RelativePath="..\..\Source\PatchRegistry.h"/>
-        <File RelativePath="..\..\Source\SampleBuffer.cpp"/>
-        <File RelativePath="..\..\Source\SampleBuffer.h"/>
-        <File RelativePath="..\..\Source\SeriesDeviceCallBacks.cpp"/>
-        <File RelativePath="..\..\Source\SeriesDeviceCallBacks.h"/>
-        <File RelativePath="..\..\Source\StompBox.h"/>
       </Filter>
       <Filter Name="Libraries">
         <Filter Name="dfu-util">
@@ -1358,6 +1330,7 @@
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_core\memory\juce_OptionalScopedPointer.h"/>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_core\memory\juce_ReferenceCountedObject.h"/>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_core\memory\juce_ScopedPointer.h"/>
+          <File RelativePath="..\..\JuceLibraryCode\modules\juce_core\memory\juce_SharedResourcePointer.h"/>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_core\memory\juce_Singleton.h"/>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_core\memory\juce_WeakReference.h"/>
         </Filter>
@@ -3934,17 +3907,6 @@
             </FileConfiguration>
           </File>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileChooserDialogBox.h"/>
-          <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileFilter.cpp">
-            <FileConfiguration Name="Debug|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-            <FileConfiguration Name="Release|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-          </File>
-          <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileFilter.h"/>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileListComponent.cpp">
             <FileConfiguration Name="Debug|Win32"
                                ExcludedFromBuild="true">
@@ -4001,17 +3963,6 @@
             </FileConfiguration>
           </File>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_ImagePreviewComponent.h"/>
-          <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_WildcardFileFilter.cpp">
-            <FileConfiguration Name="Debug|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-            <FileConfiguration Name="Release|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-          </File>
-          <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_WildcardFileFilter.h"/>
         </Filter>
         <Filter Name="commands">
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_basics\commands\juce_ApplicationCommandID.h"/>
@@ -4276,19 +4227,6 @@
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_ActiveXControlComponent.h"/>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_NSViewComponent.h"/>
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_UIViewComponent.h"/>
-        </Filter>
-        <Filter Name="lookandfeel">
-          <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_extra\lookandfeel\juce_OldSchoolLookAndFeel.cpp">
-            <FileConfiguration Name="Debug|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-            <FileConfiguration Name="Release|Win32"
-                               ExcludedFromBuild="true">
-              <Tool Name="VCCLCompilerTool"/>
-            </FileConfiguration>
-          </File>
-          <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_extra\lookandfeel\juce_OldSchoolLookAndFeel.h"/>
         </Filter>
         <Filter Name="misc">
           <File RelativePath="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_AppleRemote.h"/>

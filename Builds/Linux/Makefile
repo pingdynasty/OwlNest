@@ -53,23 +53,11 @@ endif
 OBJECTS := \
   $(OBJDIR)/DfuseLoader_f2d40499.o \
   $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
-  $(OBJDIR)/DualPatchPanel_2c59bfc1.o \
   $(OBJDIR)/OwlNestGui_a87229a8.o \
-  $(OBJDIR)/PatchComponent_9fa7269e.o \
-  $(OBJDIR)/PatchMode_d85501ec.o \
-  $(OBJDIR)/StompGui_6de188b3.o \
-  $(OBJDIR)/TransportPanel_18909a64.o \
-  $(OBJDIR)/StompBoxAudioProcessor_ad448c3f.o \
-  $(OBJDIR)/PluginEditor_94d4fb09.o \
-  $(OBJDIR)/PluginPatchProcessor_a02b7946.o \
   $(OBJDIR)/ApplicationConfiguration_4b5ea10f.o \
   $(OBJDIR)/FirmwareLoader_f0d96237.o \
   $(OBJDIR)/Main_90ebc5c2.o \
   $(OBJDIR)/OwlNestSettings_f89e5d20.o \
-  $(OBJDIR)/PatchProcessor_b85b83b3.o \
-  $(OBJDIR)/PatchRegistry_cb5b7186.o \
-  $(OBJDIR)/SampleBuffer_5a386a13.o \
-  $(OBJDIR)/SeriesDeviceCallBacks_31482262.o \
   $(OBJDIR)/dfu_ad6672eb.o \
   $(OBJDIR)/dfu_file_6fdc65a.o \
   $(OBJDIR)/dfu_load_118a6344.o \
@@ -117,49 +105,9 @@ $(OBJDIR)/ApplicationSettingsWindow_2723744.o: ../../Source/ApplicationSettingsW
 	@echo "Compiling ApplicationSettingsWindow.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/DualPatchPanel_2c59bfc1.o: ../../Source/DualPatchPanel.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling DualPatchPanel.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/OwlNestGui_a87229a8.o: ../../Source/OwlNestGui.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling OwlNestGui.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PatchComponent_9fa7269e.o: ../../Source/PatchComponent.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PatchComponent.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PatchMode_d85501ec.o: ../../Source/PatchMode.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PatchMode.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/StompGui_6de188b3.o: ../../Source/StompGui.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling StompGui.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/TransportPanel_18909a64.o: ../../Source/TransportPanel.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling TransportPanel.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/StompBoxAudioProcessor_ad448c3f.o: ../../Source/StompBoxAudioProcessor.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling StompBoxAudioProcessor.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PluginEditor_94d4fb09.o: ../../Source/PluginEditor.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PluginEditor.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PluginPatchProcessor_a02b7946.o: ../../Source/PluginPatchProcessor.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PluginPatchProcessor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ApplicationConfiguration_4b5ea10f.o: ../../Source/ApplicationConfiguration.cpp
@@ -180,26 +128,6 @@ $(OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
 $(OBJDIR)/OwlNestSettings_f89e5d20.o: ../../Source/OwlNestSettings.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling OwlNestSettings.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PatchProcessor_b85b83b3.o: ../../Source/PatchProcessor.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PatchProcessor.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PatchRegistry_cb5b7186.o: ../../Source/PatchRegistry.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling PatchRegistry.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/SampleBuffer_5a386a13.o: ../../Source/SampleBuffer.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling SampleBuffer.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/SeriesDeviceCallBacks_31482262.o: ../../Source/SeriesDeviceCallBacks.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling SeriesDeviceCallBacks.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/dfu_ad6672eb.o: ../../Libraries/dfu-util/dfu.c
