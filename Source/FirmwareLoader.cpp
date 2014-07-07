@@ -5,7 +5,9 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
-// #define __GNU_LIBRARY__
+#if JUCE_MAC
+#define __GNU_LIBRARY__
+#endif
 #include <getopt.h>
 
 #ifdef _MSC_VER
