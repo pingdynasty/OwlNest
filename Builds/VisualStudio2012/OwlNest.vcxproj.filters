@@ -20,12 +20,6 @@
     <Filter Include="OwlNest\Libraries\win-util">
       <UniqueIdentifier>{68FC28D7-DC5B-0081-7A33-D2BC08074CD9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OwlNest\OwlPatches">
-      <UniqueIdentifier>{FA699DDB-C6B1-A798-C0FE-2F0B9DBF69B7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OwlNest\OwlPatches\Contest">
-      <UniqueIdentifier>{5FF3B9BE-C189-EE2E-1881-F043A06B8C46}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
     </Filter>
@@ -1535,105 +1529,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Libraries\sysex.h">
       <Filter>OwlNest\Libraries</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\BiasedDelayPatch.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\BiasPatch.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\BitH8rPatch.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\blo_bleep.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\ConnyPatch.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\DroneBox.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\DualTremoloPatch.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\JumpDelay.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\SampleJitterPatch.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\Contest\SirenPatch.hpp">
-      <Filter>OwlNest\OwlPatches\Contest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\CircularBuffer.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\DroneBoxPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\EnvelopeFilterPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\FixedDelayPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\FlangerPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\FreeVerbPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\GainPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\LeakyIntegratorPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\LpfDelayPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\LpfDelayPhaserPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\OctaveDownPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\OverdrivePatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\ParametricEqPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\PhaserPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\ResonantFilterPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\SampleBasedPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\SimpleDelayPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\StateVariableFilterPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\StereoGainPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\StereoMixerPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\TemplatePatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\TestTonePatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\OwlPatches\WaveshaperPatch.hpp">
-      <Filter>OwlNest\OwlPatches</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\OwlPatches\includes.h">
       <Filter>OwlNest</Filter>

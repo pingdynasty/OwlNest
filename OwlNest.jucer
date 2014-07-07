@@ -56,67 +56,6 @@
       <FILE id="DTfdpv" name="sysex.c" compile="1" resource="0" file="Libraries/sysex.c"/>
       <FILE id="f4xkxv" name="sysex.h" compile="0" resource="0" file="Libraries/sysex.h"/>
     </GROUP>
-    <GROUP id="{692AC0D0-196C-0778-C9D0-843504D4DD87}" name="OwlPatches">
-      <GROUP id="{6FC858EF-470A-B91A-2739-A7FF03F68FE9}" name="Contest">
-        <FILE id="ifci10" name="BiasedDelayPatch.hpp" compile="0" resource="0"
-              file="Source/OwlPatches/Contest/BiasedDelayPatch.hpp"/>
-        <FILE id="MMAwsq" name="BiasPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/BiasPatch.hpp"/>
-        <FILE id="dx9inN" name="BitH8rPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/BitH8rPatch.hpp"/>
-        <FILE id="QTd2rr" name="blo_bleep.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/blo_bleep.hpp"/>
-        <FILE id="sYU9xC" name="ConnyPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/ConnyPatch.hpp"/>
-        <FILE id="itno1A" name="DroneBox.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/DroneBox.hpp"/>
-        <FILE id="A791sK" name="DualTremoloPatch.hpp" compile="0" resource="0"
-              file="Source/OwlPatches/Contest/DualTremoloPatch.hpp"/>
-        <FILE id="QL65t2" name="JumpDelay.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/JumpDelay.hpp"/>
-        <FILE id="PRR6or" name="SampleJitterPatch.hpp" compile="0" resource="0"
-              file="Source/OwlPatches/Contest/SampleJitterPatch.hpp"/>
-        <FILE id="aF9Mnf" name="SirenPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/Contest/SirenPatch.hpp"/>
-      </GROUP>
-      <FILE id="TQsInX" name="CircularBuffer.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/CircularBuffer.hpp"/>
-      <FILE id="ngKXEs" name="DroneBoxPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/DroneBoxPatch.hpp"/>
-      <FILE id="JHd0tr" name="EnvelopeFilterPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/EnvelopeFilterPatch.hpp"/>
-      <FILE id="GnxKUu" name="FixedDelayPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/FixedDelayPatch.hpp"/>
-      <FILE id="p5hqNl" name="FlangerPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/FlangerPatch.hpp"/>
-      <FILE id="aGY9oi" name="FreeVerbPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/FreeVerbPatch.hpp"/>
-      <FILE id="X6TJMD" name="GainPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/GainPatch.hpp"/>
-      <FILE id="x48AZ3" name="LeakyIntegratorPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/LeakyIntegratorPatch.hpp"/>
-      <FILE id="OiKp9h" name="LpfDelayPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/LpfDelayPatch.hpp"/>
-      <FILE id="s3wjAo" name="LpfDelayPhaserPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/LpfDelayPhaserPatch.hpp"/>
-      <FILE id="m9ShZs" name="OctaveDownPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/OctaveDownPatch.hpp"/>
-      <FILE id="gtsP1O" name="OverdrivePatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/OverdrivePatch.hpp"/>
-      <FILE id="XvdVg1" name="ParametricEqPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/ParametricEqPatch.hpp"/>
-      <FILE id="pz8Kji" name="PhaserPatch.hpp" compile="0" resource="0" file="Source/OwlPatches/PhaserPatch.hpp"/>
-      <FILE id="QFXsDC" name="ResonantFilterPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/ResonantFilterPatch.hpp"/>
-      <FILE id="GBzWCM" name="SampleBasedPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/SampleBasedPatch.hpp"/>
-      <FILE id="nC8oI3" name="SimpleDelayPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/SimpleDelayPatch.hpp"/>
-      <FILE id="JpLuKy" name="StateVariableFilterPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/StateVariableFilterPatch.hpp"/>
-      <FILE id="c384VQ" name="StereoGainPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/StereoGainPatch.hpp"/>
-      <FILE id="ARQ9AG" name="StereoMixerPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/StereoMixerPatch.hpp"/>
-      <FILE id="WBnqQ7" name="TemplatePatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/TemplatePatch.hpp"/>
-      <FILE id="HkhOkC" name="TestTonePatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/TestTonePatch.hpp"/>
-      <FILE id="wbKkUW" name="WaveshaperPatch.hpp" compile="0" resource="0"
-            file="Source/OwlPatches/WaveshaperPatch.hpp"/>
-    </GROUP>
     <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
     <FILE id="twHdBT" name="includes.h" compile="0" resource="0" file="Source/OwlPatches/includes.h"/>
   </MAINGROUP>
