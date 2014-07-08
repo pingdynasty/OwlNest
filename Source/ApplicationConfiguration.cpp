@@ -47,6 +47,12 @@ File ApplicationConfiguration::getApplicationDirectory(){
   return dir;
 }
 
+String ApplicationConfiguration::getApplicationDescription(){
+  return "OwlNest Rev4.004" + newLine
+    + "Built by the OWL Team" + newLine
+    + "see http://hoxtonowl.com for more information";
+}
+
 void ApplicationConfiguration::release(){
 /*     If you're leaking, it's probably because you're using old-fashioned, non-RAII techniques for */
 /*     your object management. Tut, tut. Always, always use ScopedPointers, OwnedArrays, */

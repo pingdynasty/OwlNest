@@ -89,10 +89,10 @@ public:
        }
       popups.add(tools);
         
-        PopupMenu about;
-        toplevel.add("About");
-        about.addCommandItem(commands, ApplicationCommands::owlNestVersionInfo);
-        popups.add(about);
+      PopupMenu help;
+      toplevel.add("Help");
+      help.addCommandItem(commands, ApplicationCommands::owlNestVersionInfo);
+      popups.add(help);
     }
     StringArray getMenuBarNames(){
       return toplevel;

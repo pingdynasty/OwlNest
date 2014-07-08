@@ -9,6 +9,7 @@ public:
   static void release();
   static PropertiesFile* getApplicationProperties();
   static File getApplicationDirectory();
+  static String getApplicationDescription();
 private:
 };
 

@@ -414,7 +414,7 @@ void OwlNestSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo
     result.setInfo("Download Bootloader from Server", String::empty, String::empty, 0);
     break;
   case ApplicationCommands::owlNestVersionInfo:
-    result.setInfo("Version info", String::empty, String::empty, 0);
+    result.setInfo("About", String::empty, String::empty, 0);
   }
 }
 
@@ -441,7 +441,7 @@ bool OwlNestSettings::perform(const InvocationInfo& info){
     downloadFromServer(info.commandID);
     break;
   case ApplicationCommands::owlNestVersionInfo:
-    AlertWindow alert("About", "OwlNest Rev4.004  -  built by the OWL Team", juce::AlertWindow::InfoIcon);
+    AlertWindow alert("About", ApplicationConfiguration::getApplicationDescription(), juce::AlertWindow::InfoIcon);
     alert.addButton("Close", 1, juce::KeyPress(), juce::KeyPress());
     alert.runModalLoop();
     break;
