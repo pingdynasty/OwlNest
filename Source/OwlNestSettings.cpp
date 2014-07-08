@@ -103,10 +103,6 @@ void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){
   std::cout << "Device Firmware: " << str << std::endl;
 #endif // DEBUG
   AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Device Firmware", "Currently installed: "+str);
-        // AlertWindow alert("Firmware version currently installed:", theSettings.getFirmwareVersion(), juce::AlertWindow::InfoIcon);
-        // alert.addButton("Continue", 1, juce::KeyPress(), juce::KeyPress());
-        // alert.runModalLoop();
-  
 }
 
 void OwlNestSettings::handleDeviceIdMessage(uint8_t* data, int size){
