@@ -88,6 +88,11 @@ public:
             tools.addCommandItem(commands, ApplicationCommands::checkForBootloaderUpdates);
        }
       popups.add(tools);
+        
+        PopupMenu about;
+        toplevel.add("About");
+        about.addCommandItem(commands, ApplicationCommands::owlNestVersionInfo);
+        popups.add(about);
     }
     StringArray getMenuBarNames(){
       return toplevel;

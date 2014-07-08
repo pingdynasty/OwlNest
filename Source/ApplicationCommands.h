@@ -16,7 +16,8 @@ enum ApplicationCommands {
   updateFirmware = 0x2001,
   updateBootloader = 0x2002,
   checkForFirmwareUpdates = 0x2003,
-  checkForBootloaderUpdates = 0x2004
+  checkForBootloaderUpdates = 0x2004,
+  owlNestVersionInfo = 0x2005
 };
 }
 
