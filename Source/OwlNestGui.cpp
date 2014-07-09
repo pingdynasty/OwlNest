@@ -737,6 +737,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
       theSettings.setCc(PATCH_BUTTON, 127);
       Thread::sleep(100);
       theSettings.setCc(REQUEST_SETTINGS, LED); // to get the updated LED value
+      theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
         //[/UserButtonCode_ledButton]
     }
     else if (buttonThatWasClicked == masterButton)
