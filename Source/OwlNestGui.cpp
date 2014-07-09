@@ -321,8 +321,9 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
 
     addAndMakeVisible (slider5 = new Slider ("new slider"));
     slider5->setRange (0, 1, 0);
-    slider5->setSliderStyle (Slider::LinearVertical);
+    slider5->setSliderStyle (Slider::LinearHorizontal);
     slider5->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    slider5->setColour (Slider::thumbColourId, Colour (0xff000005));
     slider5->addListener (this);
 
     addAndMakeVisible (label5 = new Label ("new label",
@@ -537,8 +538,8 @@ void OwlNestGui::resized()
     slider1->setBounds (80, 29, 90, 90);
     label2->setBounds (248, 114, 90, 24);
     slider2->setBounds (248, 29, 90, 90);
-    slider5->setBounds (728, 232, 24, 152);
-    label5->setBounds (728, 392, 24, 24);
+    slider5->setBounds (341, 153, 72, 17);
+    label5->setBounds (320, 171, 112, 24);
     modeComboBox->setBounds (551, 320, 150, 24);
     modeLabel->setBounds (448, 320, 101, 24);
     remoteControlButton->setBounds (16, 448, 112, 24);
@@ -857,11 +858,12 @@ void OwlNestGui::settingsChanged() {
 
     // Parameter names
     StringArray& parameters = theSettings.getParameterNames();
-    if(parameters.size() >= 4){
+    if(parameters.size() >= 5){
       label1->setText(parameters[0], dontSendNotification);
       label2->setText(parameters[1], dontSendNotification);
       label3->setText(parameters[2], dontSendNotification);
       label4->setText(parameters[3], dontSendNotification);
+      label5->setText(parameters[4], dontSendNotification);
     }
 
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
@@ -1200,11 +1202,11 @@ BEGIN_JUCER_METADATA
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
           textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="new slider" id="1b8b800be2e437f7" memberName="slider5"
-          virtualName="" explicitFocusOrder="0" pos="728 232 24 152" min="0"
-          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          virtualName="" explicitFocusOrder="0" pos="341 153 72 17" thumbcol="ff000005"
+          min="0" max="1" int="0" style="LinearHorizontal" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="4984964d1585aa57" memberName="label5" virtualName=""
-         explicitFocusOrder="0" pos="728 392 24 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="320 171 112 24" edTextCol="ff000000"
          edBkgCol="0" labelText="E" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="1" italic="0" justification="36"/>
