@@ -48,9 +48,9 @@ File ApplicationConfiguration::getApplicationDirectory(){
 }
 
 String ApplicationConfiguration::getApplicationDescription(){
-  return "OwlNest Rev4.004" + newLine
+  return "OwlNest Rev4.004b" + newLine
     + "Built by the OWL Team" + newLine
-    + "see http://hoxtonowl.com for more information";
+    + "see hoxtonowl.com for more information";
 }
 
 void ApplicationConfiguration::release(){
