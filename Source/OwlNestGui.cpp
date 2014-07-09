@@ -323,7 +323,9 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     slider5->setRange (0, 1, 0);
     slider5->setSliderStyle (Slider::LinearVertical);
     slider5->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    slider5->setColour (Slider::backgroundColourId, Colour (0x00fff000));
     slider5->setColour (Slider::thumbColourId, Colour (0xff000005));
+    slider5->setColour (Slider::rotarySliderFillColourId, Colours::black);
     slider5->addListener (this);
 
     addAndMakeVisible (label5 = new Label ("new label",
@@ -356,15 +358,6 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     addAndMakeVisible (remoteControlButton = new ToggleButton ("new toggle button"));
     remoteControlButton->setButtonText (TRANS("Remote Control"));
     remoteControlButton->addListener (this);
-
-    addAndMakeVisible (pedalLabel = new Label ("new label",
-                                               TRANS("pedal")));
-    pedalLabel->setFont (Font (15.00f, Font::plain));
-    pedalLabel->setJustificationType (Justification::centred);
-    pedalLabel->setEditable (false, false, false);
-    pedalLabel->setColour (Label::textColourId, Colour (0xfff7f3f3));
-    pedalLabel->setColour (TextEditor::textColourId, Colours::black);
-    pedalLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
@@ -478,7 +471,6 @@ OwlNestGui::~OwlNestGui()
     modeComboBox = nullptr;
     modeLabel = nullptr;
     remoteControlButton = nullptr;
-    pedalLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -548,12 +540,11 @@ void OwlNestGui::resized()
     slider1->setBounds (127, 29, 90, 90);
     label2->setBounds (264, 114, 90, 24);
     slider2->setBounds (264, 29, 90, 90);
-    slider5->setBounds (669, 25, 72, 90);
-    label5->setBounds (656, 114, 96, 24);
+    slider5->setBounds (621, 144, 72, 139);
+    label5->setBounds (608, 282, 96, 24);
     modeComboBox->setBounds (551, 320, 150, 24);
     modeLabel->setBounds (448, 320, 101, 24);
     remoteControlButton->setBounds (16, 448, 112, 24);
-    pedalLabel->setBounds (668, 9, 71, 16);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -1213,11 +1204,12 @@ BEGIN_JUCER_METADATA
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
           textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="new slider" id="1b8b800be2e437f7" memberName="slider5"
-          virtualName="" explicitFocusOrder="0" pos="669 25 72 90" thumbcol="ff000005"
-          min="0" max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
-          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
+          virtualName="" explicitFocusOrder="0" pos="621 144 72 139" bkgcol="fff000"
+          thumbcol="ff000005" rotarysliderfill="ff000000" min="0" max="1"
+          int="0" style="LinearVertical" textBoxPos="NoTextBox" textBoxEditable="1"
+          textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="4984964d1585aa57" memberName="label5" virtualName=""
-         explicitFocusOrder="0" pos="656 114 96 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="608 282 96 24" edTextCol="ff000000"
          edBkgCol="0" labelText="E" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="1" italic="0" justification="36"/>
@@ -1233,11 +1225,6 @@ BEGIN_JUCER_METADATA
   <TOGGLEBUTTON name="new toggle button" id="ae8c92622a32c986" memberName="remoteControlButton"
                 virtualName="" explicitFocusOrder="0" pos="16 448 112 24" buttonText="Remote Control"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
-  <LABEL name="new label" id="7a8fdd49a8b246dd" memberName="pedalLabel"
-         virtualName="" explicitFocusOrder="0" pos="668 9 71 16" textCol="fff7f3f3"
-         edTextCol="ff000000" edBkgCol="0" labelText="pedal" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
-         fontsize="15" bold="0" italic="0" justification="36"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

@@ -129,7 +129,6 @@ private:
     ScopedPointer<ComboBox> modeComboBox;
     ScopedPointer<Label> modeLabel;
     ScopedPointer<ToggleButton> remoteControlButton;
-    ScopedPointer<Label> pedalLabel;
     Image cachedImage_owlFaceplate_png;
 
 
