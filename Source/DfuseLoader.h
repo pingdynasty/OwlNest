@@ -21,12 +21,14 @@
 #ifndef DFUSELOADER_H
 #define DFUSELOADER_H
 
-#include "JuceHeader.h"
 
 extern "C" {
-#include "dfu.h"
+#include "dfu-util/portable.h"
+#include "dfu-util/dfu.h"
 enum dfuse_command { SET_ADDRESS, ERASE_PAGE, MASS_ERASE, READ_UNPROTECT };
 }
+
+#include "JuceHeader.h"
 
 class DfuseLoader {
 public:
@@ -55,7 +57,7 @@ private:
   int dfuse_do_dfuse_dnload(struct dfu_if *dif, int xfer_size,
 			    struct dfu_file *file);
 
-  void errx(int errid, const String& msg);
+  void error(int errid, const String& msg);
   void progress(const String& msg, int curr, int max);
   ThreadWithProgressWindow* alert;
   String message;

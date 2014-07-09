@@ -22,8 +22,6 @@
 
 #include <libusb.h>
 
-#include "DfuseLoader.h"
-
 extern "C" {
 #include <dfu-util/portable.h>
 #include <dfu-util/dfu.h>
@@ -31,6 +29,7 @@ extern "C" {
 #include <dfu-util/dfu_file.h>
 #include <dfu-util/dfu_load.h>
 #include <dfu-util/dfu_util.h>
+#include "DfuseLoader.h"
 // #include <dfu-util/dfuse.h>
 #include <dfu-util/quirks.h>
 
@@ -67,7 +66,7 @@ String FirmwareLoader::getMessage(){
   return message;
 }
 
-void FirmwareLoader::errx(int errid, const String& msg){
+void FirmwareLoader::error(int errid, const String& msg){
   DBG(msg);
   message = msg;
 }
@@ -106,7 +105,7 @@ bool FirmwareLoader::init(const File& firmware, const String& options){
   }
   int ret = libusb_init(&ctx);
   if (ret){
-    errx(EX_IOERR, String::formatted("unable to initialize libusb: %i", ret));
+    error(EX_IOERR, String::formatted("unable to initialize libusb: %i", ret));
     return false;
   }
   if (verbose > 2) {
@@ -126,14 +125,14 @@ void FirmwareLoader::listDevices(){
 
 bool FirmwareLoader::openDevice(){
   if (dfu_root == NULL) {
-    errx(EX_IOERR, "No DFU capable USB device found");
+    error(EX_IOERR, "No DFU capable USB device found");
     return false;
   } else if (dfu_root->next != NULL) {
     /* We cannot safely support more than one DFU capable device
      * with same vendor/product ID, since during DFU we need to do
      * a USB bus reset, after which the target device will get a
      * new address */
-    errx(EX_IOERR, "More than one DFU capable USB device found! "
+    error(EX_IOERR, "More than one DFU capable USB device found! "
 	 "Try `--list' and specify the serial number "
 	 "or disconnect all but one device\n");
     return false;
@@ -143,7 +142,7 @@ bool FirmwareLoader::openDevice(){
   printf("Opening DFU capable USB device...\n");
   int ret = libusb_open(dfu_root->dev, &dfu_root->dev_handle);
   if(ret || !dfu_root->dev_handle){
-    errx(EX_IOERR, "Cannot open device");
+    error(EX_IOERR, "Cannot open device");
     return false;
   }
   return true;
@@ -153,7 +152,7 @@ bool FirmwareLoader::connectToDevice(){
   int detach_delay = 5;
 
   if(!dfu_root->dev_handle){
-    errx(EX_IOERR, "Cannot open device");
+    error(EX_IOERR, "Cannot open device");
     return false;
   }
 
@@ -175,12 +174,12 @@ bool FirmwareLoader::connectToDevice(){
 
     printf("Claiming USB DFU Runtime Interface...\n");
     if (libusb_claim_interface(dfu_root->dev_handle, dfu_root->interface) < 0) {
-      errx(EX_IOERR, String::formatted("Cannot claim interface %d", dfu_root->interface));
+      error(EX_IOERR, String::formatted("Cannot claim interface %d", dfu_root->interface));
       return -1;
     }
 
     if (libusb_set_interface_alt_setting(dfu_root->dev_handle, dfu_root->interface, 0) < 0) {
-      errx(EX_IOERR, "Cannot set alt interface zero");
+      error(EX_IOERR, "Cannot set alt interface zero");
     }
 
     printf("Determining device status: ");
@@ -193,7 +192,7 @@ bool FirmwareLoader::connectToDevice(){
       status.bState  = DFU_STATE_appIDLE;
       status.iString = 0;
     } else if (err < 0) {
-      errx(EX_IOERR, "error get_status");
+      error(EX_IOERR, "error get_status");
       return false;
     } else {
       printf("state = %s, status = %d\n",
@@ -210,7 +209,7 @@ bool FirmwareLoader::connectToDevice(){
 	     "detach request...\n");
       if (dfu_detach(dfu_root->dev_handle,
 		     dfu_root->interface, 1000) < 0) {
-	errx(EX_IOERR, "error detaching");
+	error(EX_IOERR, "error detaching");
 	return false;
       }
       libusb_release_interface(dfu_root->dev_handle,
@@ -221,7 +220,7 @@ bool FirmwareLoader::connectToDevice(){
 	printf("Resetting USB...\n");
 	int ret = libusb_reset_device(dfu_root->dev_handle);
 	if (ret < 0 && ret != LIBUSB_ERROR_NOT_FOUND){
-	  errx(EX_IOERR, "error resetting "
+	  error(EX_IOERR, "error resetting "
 	       "after detach");
 	  return false;
 	}
@@ -231,7 +230,7 @@ bool FirmwareLoader::connectToDevice(){
       printf("dfuERROR, clearing status\n");
       if (dfu_clear_status(dfu_root->dev_handle,
 			   dfu_root->interface) < 0) {
-	errx(EX_IOERR, "error clear_status");
+	error(EX_IOERR, "error clear_status");
 	return false;
       }
       /* fall through */
@@ -263,10 +262,10 @@ bool FirmwareLoader::connectToDevice(){
     probe_devices(ctx);
 
     if (dfu_root == NULL) {
-      errx(EX_IOERR, "Lost device after RESET?");
+      error(EX_IOERR, "Lost device after RESET?");
       return false;
     } else if (dfu_root->next != NULL) {
-      errx(EX_IOERR, "More than one DFU capable USB device found! "
+      error(EX_IOERR, "More than one DFU capable USB device found! "
 	   "Try `--list' and specify the serial number "
 	   "or disconnect all but one device");
       return false;
@@ -274,14 +273,14 @@ bool FirmwareLoader::connectToDevice(){
 
     /* Check for DFU mode device */
     if (!(dfu_root->flags |= DFU_IFF_DFU)){
-      errx(EX_SOFTWARE, "Device is not in DFU mode");
+      error(EX_SOFTWARE, "Device is not in DFU mode");
       return false;
     }
 
     printf("Opening DFU USB Device...\n");
     int ret = libusb_open(dfu_root->dev, &dfu_root->dev_handle);
     if (ret || !dfu_root->dev_handle) {
-      errx(EX_IOERR, "Cannot open device");
+      error(EX_IOERR, "Cannot open device");
       return false;
     }
   } else {
@@ -297,26 +296,26 @@ bool FirmwareLoader::connectToDevice(){
 #if 0
   printf("Setting Configuration %u...\n", dfu_root->configuration);
   if (libusb_set_configuration(dfu_root->dev_handle, dfu_root->configuration) < 0) {
-    errx(EX_IOERR, "Cannot set configuration");
+    error(EX_IOERR, "Cannot set configuration");
     return false;
   }
 #endif
   printf("Claiming USB DFU Interface...\n");
   if (libusb_claim_interface(dfu_root->dev_handle, dfu_root->interface) < 0) {
-    errx(EX_IOERR, "Cannot claim interface");
+    error(EX_IOERR, "Cannot claim interface");
     return false;
   }
 
   printf("Setting Alternate Setting #%d ...\n", dfu_root->altsetting);
   if (libusb_set_interface_alt_setting(dfu_root->dev_handle, dfu_root->interface, dfu_root->altsetting) < 0) {
-    errx(EX_IOERR, "Cannot set alternate interface");
+    error(EX_IOERR, "Cannot set alternate interface");
     return false;
   }
 
  status_again:
   printf("Determining device status: ");
   if (dfu_get_status(dfu_root->dev_handle, dfu_root->interface, &status ) < 0) {
-    errx(EX_IOERR, "error get_status");
+    error(EX_IOERR, "error get_status");
     return false;
   }
   printf("state = %s, status = %d\n",
@@ -327,13 +326,13 @@ bool FirmwareLoader::connectToDevice(){
   switch (status.bState) {
   case DFU_STATE_appIDLE:
   case DFU_STATE_appDETACH:
-    errx(EX_IOERR, "Device still in Runtime Mode!");
+    error(EX_IOERR, "Device still in Runtime Mode!");
     return false;
     break;
   case DFU_STATE_dfuERROR:
     printf("dfuERROR, clearing status\n");
     if (dfu_clear_status(dfu_root->dev_handle, dfu_root->interface) < 0) {
-      errx(EX_IOERR, "error clear_status");
+      error(EX_IOERR, "error clear_status");
       return false;
     }
     goto status_again;
@@ -342,7 +341,7 @@ bool FirmwareLoader::connectToDevice(){
   case DFU_STATE_dfuUPLOAD_IDLE:
     printf("aborting previous incomplete transfer\n");
     if (dfu_abort(dfu_root->dev_handle, dfu_root->interface) < 0) {
-      errx(EX_IOERR, "can't send DFU_ABORT");
+      error(EX_IOERR, "can't send DFU_ABORT");
       return false;
     }
     goto status_again;
@@ -359,13 +358,13 @@ bool FirmwareLoader::connectToDevice(){
 	   dfu_status_to_string(status.bStatus));
     /* Clear our status & try again. */
     if (dfu_clear_status(dfu_root->dev_handle, dfu_root->interface) < 0){
-      errx(EX_IOERR, "USB communication error");
+      error(EX_IOERR, "USB communication error");
       return false;
     }if (dfu_get_status(dfu_root->dev_handle, dfu_root->interface, &status) < 0){
-      errx(EX_IOERR, "USB communication error");
+      error(EX_IOERR, "USB communication error");
       return false;
     }if (DFU_STATUS_OK != status.bStatus){
-      errx(EX_SOFTWARE, String::formatted("Status is not OK: %d", status.bStatus));
+      error(EX_SOFTWARE, String::formatted("Status is not OK: %d", status.bStatus));
       return false;
     }if (!(dfu_root->quirks & QUIRK_POLLTIMEOUT)){
       milli_sleep((long) status.bwPollTimeout);
@@ -388,7 +387,7 @@ bool FirmwareLoader::connectToDevice(){
       printf("Device returned transfer size %i\n",
 	     transfer_size);
     } else {
-      errx(EX_IOERR, "Transfer size must be "
+      error(EX_IOERR, "Transfer size must be "
 	   "specified");
       return false;
     }
@@ -424,7 +423,7 @@ bool FirmwareLoader::loadFromDevice(ThreadWithProgressWindow& win){
     DfuseLoader dfuse(&win);
     if (dfuse.do_upload(dfu_root, transfer_size, fd,
 			dfuse_options) < 0){
-      errx(EX_IOERR, dfuse.getMessage());
+      error(EX_IOERR, dfuse.getMessage());
       return false;
     }
   } else {
@@ -442,7 +441,7 @@ bool FirmwareLoader::loadToDevice(ThreadWithProgressWindow& win){
        (file.idProduct != 0xffff && file.idProduct != runtime_product)) &&
       ((file.idVendor  != 0xffff && file.idVendor  != dfu_root->vendor) ||
        (file.idProduct != 0xffff && file.idProduct != dfu_root->product))) {
-    errx(EX_IOERR, String::formatted("Error: File ID %04x:%04x does "
+    error(EX_IOERR, String::formatted("Error: File ID %04x:%04x does "
 				     "not match device (%04x:%04x or %04x:%04x)",
 				     file.idVendor, file.idProduct,
 				     runtime_vendor, runtime_product,
@@ -453,11 +452,11 @@ bool FirmwareLoader::loadToDevice(ThreadWithProgressWindow& win){
     DfuseLoader dfuse(&win);
     if (dfuse.do_dnload(dfu_root, transfer_size, &file,
 			dfuse_options) < 0){
-      errx(EX_IOERR, dfuse.getMessage());
+      error(EX_IOERR, dfuse.getMessage());
       return false;
     }
   } else {
-    errx(EX_IOERR, "Only dfuse uploads are supported");
+    error(EX_IOERR, "Only dfuse uploads are supported");
     return false;
   }
   return true;
@@ -465,7 +464,7 @@ bool FirmwareLoader::loadToDevice(ThreadWithProgressWindow& win){
 
 bool FirmwareLoader::detachDevice(){
   if (dfu_detach(dfu_root->dev_handle, dfu_root->interface, 1000) < 0) {
-    errx(EX_IOERR, "can't detach");
+    error(EX_IOERR, "can't detach");
     return false;
   }
   return true;
@@ -475,7 +474,7 @@ bool FirmwareLoader::resetDevice(){
   printf("Resetting USB to switch back to runtime mode\n");
   int ret = libusb_reset_device(dfu_root->dev_handle);
   if (ret < 0 && ret != LIBUSB_ERROR_NOT_FOUND) {
-    errx(EX_IOERR, "error resetting after download");
+    error(EX_IOERR, "error resetting after download");
     return false;
   }
   return true;
