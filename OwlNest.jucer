@@ -50,9 +50,13 @@
         <FILE id="Pw0A3z" name="quirks.h" compile="0" resource="0" file="Libraries/dfu-util/quirks.h"/>
         <FILE id="TZ2f7t" name="usb_dfu.h" compile="0" resource="0" file="Libraries/dfu-util/usb_dfu.h"/>
       </GROUP>
+      <GROUP id="{83F3ED46-B8AA-C95B-FA1B-662A08C06DB0}" name="libusbx">
+        <FILE id="o4IbfH" name="libusb.h" compile="0" resource="0" file="Libraries/libusbx/libusb.h"/>
+      </GROUP>
       <GROUP id="{59FF1104-D181-FD84-8D7F-1959627618B9}" name="win-util">
         <FILE id="BLpYzc" name="stdint.h" compile="0" resource="0" file="Libraries/win-util/stdint.h"/>
       </GROUP>
+      <FILE id="ipdniA" name="getopt.h" compile="0" resource="0" file="Libraries/getopt.h"/>
       <FILE id="DTfdpv" name="sysex.c" compile="1" resource="0" file="Libraries/sysex.c"/>
       <FILE id="f4xkxv" name="sysex.h" compile="0" resource="0" file="Libraries/sysex.h"/>
     </GROUP>

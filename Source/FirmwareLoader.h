@@ -19,7 +19,7 @@ public:
   bool closeDevice();
   String getMessage();
 private:
-  void errx(int errid, const String& msg);
+  void error(int errid, const String& msg);
   String message;
 };
 
