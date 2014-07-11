@@ -42,6 +42,7 @@ public:
         }
         // start GUI
         mainWindow = new MainWindow(commands, settings, dm, updateGui);        
+	mainWindow->addKeyListener(commands->getKeyMappings());
     }
 
     void shutdown()
