@@ -54,8 +54,13 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
   lastMidiMessageTime = Time::currentTimeMillis();
   bool hasChanged = false;
   if(message.isController()){
-    midiArray[message.getControllerNumber()]=message.getControllerValue();
+    int cc = message.getControllerNumber();
+    int value = message.getControllerValue();
+    midiArray[cc] = value;
     hasChanged = true;
+#ifdef DEBUG
+      std::cout << "rx cc " << cc << ": " << value << std::endl;
+#endif // DEBUG
   }else if(message.isSysEx() && message.getSysExDataSize() > 2){
     const uint8 *data = message.getSysExData();
     if(data[0] == MIDI_SYSEX_MANUFACTURER && data[1] == MIDI_SYSEX_DEVICE){
@@ -143,6 +148,9 @@ void OwlNestSettings::setCc(int cc,int value)
       midiArray[cc] = value;
       if(theDm.getDefaultMidiOutput() != NULL)
         theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,cc,value));
+#ifdef DEBUG
+      std::cout << "tx cc " << cc << ": " << value << std::endl;
+#endif // DEBUG
     }
 }
 

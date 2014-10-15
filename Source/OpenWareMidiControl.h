@@ -70,7 +70,11 @@ enum OpenWareMidiControl {
 				* 42-83 = 24bit
 				* 84-127 = 32bit
 				*/
-  SAMPLING_SIZE          = 62, /* block size in samples */
+  SAMPLING_SIZE          = 62, /* block size in log2
+				* 4 = 16 samples per channel
+				* 5 = 32, 6 = 64, 7 = 128, 8 = 256 ...
+				* 11 = 2048 samples per channel, et c.
+				*/
 
   LEFT_RIGHT_SWAP        = 63, /* swap left/right channels */
 

@@ -359,6 +359,29 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     remoteControlButton->setButtonText (TRANS("Remote Control"));
     remoteControlButton->addListener (this);
 
+    addAndMakeVisible (blockSizeComboBox = new ComboBox ("new combo box"));
+    blockSizeComboBox->setEditableText (false);
+    blockSizeComboBox->setJustificationType (Justification::centredLeft);
+    blockSizeComboBox->setTextWhenNothingSelected (String::empty);
+    blockSizeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    blockSizeComboBox->addItem (TRANS("16"), 1);
+    blockSizeComboBox->addItem (TRANS("32"), 2);
+    blockSizeComboBox->addItem (TRANS("64"), 3);
+    blockSizeComboBox->addItem (TRANS("128"), 4);
+    blockSizeComboBox->addItem (TRANS("256"), 5);
+    blockSizeComboBox->addItem (TRANS("512"), 6);
+    blockSizeComboBox->addItem (TRANS("1024"), 7);
+    blockSizeComboBox->addItem (TRANS("2048"), 8);
+    blockSizeComboBox->addListener (this);
+
+    addAndMakeVisible (blockSizeeLabel = new Label ("new label",
+                                                    TRANS("Block Size")));
+    blockSizeeLabel->setFont (Font (15.00f, Font::plain));
+    blockSizeeLabel->setJustificationType (Justification::centredLeft);
+    blockSizeeLabel->setEditable (false, false, false);
+    blockSizeeLabel->setColour (TextEditor::textColourId, Colours::black);
+    blockSizeeLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
     //[UserPreSize]
@@ -370,22 +393,14 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     //[Constructor] You can add your own custom stuff here..
 
     settingsChanged();
-    updateGui.addListener(this);
-    setVisible(true); // set the window visible
-    setStatus("ready");
-    timerInterval=2000;
-    startTimer(timerInterval);
-
     sensitivityComboBox->addItem("Low",LOW);
     sensitivityComboBox->addItem("Medium", MEDIUM);
     sensitivityComboBox->addItem("High", HIGH);
-
     slider1->setEnabled(false);
     slider2->setEnabled(false);
     slider3->setEnabled(false);
     slider4->setEnabled(false);
     slider5->setEnabled(false);
-
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     if(props->getBoolValue("hide-low-level-items") == true)
     {
@@ -416,6 +431,11 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
         sensitivityComboBox->addItem("Custom", CUSTOM);
         sensitivityComboBox->setItemEnabled(CUSTOM, 0);
     }
+    updateGui.addListener(this);
+    setVisible(true); // set the window visible
+    setStatus("ready");
+    timerInterval=2000;
+    startTimer(timerInterval);
     //[/Constructor]
 }
 
@@ -471,6 +491,8 @@ OwlNestGui::~OwlNestGui()
     modeComboBox = nullptr;
     modeLabel = nullptr;
     remoteControlButton = nullptr;
+    blockSizeComboBox = nullptr;
+    blockSizeeLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -505,8 +527,8 @@ void OwlNestGui::resized()
     leftGainLabel->setBounds (17, 492, 112, 24);
     saveButton->setBounds (216, 392, 150, 24);
     deviceInfoButton->setBounds (384, 392, 150, 24);
-    bypassButton->setBounds (520, 488, 112, 24);
-    swapLRButton->setBounds (640, 488, 112, 24);
+    bypassButton->setBounds (424, 448, 112, 24);
+    swapLRButton->setBounds (544, 448, 112, 24);
     rightGainLabel->setBounds (17, 521, 112, 24);
     rightGainSlider->setBounds (132, 521, 150, 24);
     leftOutGainSlider->setBounds (132, 556, 150, 24);
@@ -522,7 +544,7 @@ void OwlNestGui::resized()
     ledButton->setBounds (344, 312, 64, 64);
     protocolComboBox->setBounds (527, 584, 150, 24);
     protocolLabel->setBounds (422, 584, 103, 24);
-    masterButton->setBounds (686, 584, 71, 24);
+    masterButton->setBounds (664, 448, 71, 24);
     statusLabel->setBounds (32, 424, 648, 16);
     patchSlotAComboBox->setBounds (120, 320, 150, 24);
     patchSlotALabel->setBounds (48, 320, 72, 24);
@@ -545,6 +567,8 @@ void OwlNestGui::resized()
     modeComboBox->setBounds (551, 320, 150, 24);
     modeLabel->setBounds (448, 320, 101, 24);
     remoteControlButton->setBounds (16, 448, 112, 24);
+    blockSizeComboBox->setBounds (526, 488, 150, 24);
+    blockSizeeLabel->setBounds (421, 488, 103, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -578,6 +602,7 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
                 val = 64;
                 break;
         }
+	theSettings.setCc(cc, val);
         //[/UserComboBoxCode_samplingRateComboBox]
     }
     else if (comboBoxThatHasChanged == samplingBitsComboBox)
@@ -598,6 +623,7 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
                 val = 0;
                 break;
         }
+      theSettings.setCc(cc, val);
         //[/UserComboBoxCode_samplingBitsComboBox]
     }
     else if (comboBoxThatHasChanged == protocolComboBox)
@@ -605,6 +631,7 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         //[UserComboBoxCode_protocolComboBox] -- add your combo box handling code here..
       cc = CODEC_PROTOCOL;
       val = protocolComboBox->getSelectedId() == 1 ? 0 : 127;
+      theSettings.setCc(cc, val);
         //[/UserComboBoxCode_protocolComboBox]
     }
     else if (comboBoxThatHasChanged == patchSlotAComboBox)
@@ -648,6 +675,7 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
             default:
                 break;
         }
+      theSettings.setCc(cc, val);
         //[/UserComboBoxCode_sensitivityComboBox]
     }
     else if (comboBoxThatHasChanged == modeComboBox)
@@ -656,9 +684,16 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       theSettings.setCc(PATCH_MODE, (comboBoxThatHasChanged->getSelectedId()-1) << 5);
         //[/UserComboBoxCode_modeComboBox]
     }
+    else if (comboBoxThatHasChanged == blockSizeComboBox)
+    {
+        //[UserComboBoxCode_blockSizeComboBox] -- add your combo box handling code here..
+      cc = SAMPLING_SIZE;
+      val = log2(blockSizeComboBox->getText().getIntValue());
+      theSettings.setCc(cc, val);
+        //[/UserComboBoxCode_blockSizeComboBox]
+    }
 
     //[UsercomboBoxChanged_Post]
-    theSettings.setCc(cc, val);
     //[/UsercomboBoxChanged_Post]
 }
 
@@ -691,8 +726,8 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         theSettings.setCc(REQUEST_SETTINGS, 0);
 	// for newer firmware, request firmware version, device ID and selftest one by one:
         // theSettings.setCc(REQUEST_SETTINGS, 3);
-        // Thread::sleep(500);
-        // theSettings.setCc(REQUEST_SETTINGS, 4);
+        Thread::sleep(500);
+        theSettings.setCc(REQUEST_SETTINGS, 4);
         // Thread::sleep(500);
         // theSettings.setCc(REQUEST_SETTINGS, 5);
         setStatus("Requested Device Information");
@@ -896,6 +931,10 @@ void OwlNestGui::settingsChanged() {
     v = theSettings.getCc(PATCH_MODE);
     modeComboBox->setSelectedId((v>>5)+1, dontSendNotification);
 
+    // Block size
+    v = theSettings.getCc(SAMPLING_SIZE);
+    blockSizeComboBox->setText(String(1<<v), dontSendNotification);
+
     // Sampling rate and bits
     v = theSettings.getCc(SAMPLING_RATE)>>5;
     samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
@@ -941,9 +980,9 @@ void OwlNestGui::settingsChanged() {
 
     // Protocol
     if(theSettings.getCc(CODEC_PROTOCOL) < 64)
-      protocolComboBox->setSelectedId(1);
+      protocolComboBox->setSelectedId(1, dontSendNotification);
     else
-      protocolComboBox->setSelectedId(2);
+      protocolComboBox->setSelectedId(2, dontSendNotification);
 
     // Master
     if(theSettings.getCc(CODEC_MASTER) < 64)
@@ -1061,10 +1100,10 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="384 392 150 24" buttonText="Device Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
-                virtualName="" explicitFocusOrder="0" pos="520 488 112 24" buttonText="Codec Bypass"
+                virtualName="" explicitFocusOrder="0" pos="424 448 112 24" buttonText="Codec Bypass"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="5e0a14ed17680a7" memberName="swapLRButton"
-                virtualName="" explicitFocusOrder="0" pos="640 488 112 24" buttonText="Swap Left/Right"
+                virtualName="" explicitFocusOrder="0" pos="544 448 112 24" buttonText="Swap Left/Right"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="a4c7e40cc3b84fa1" memberName="rightGainLabel"
          virtualName="" explicitFocusOrder="0" pos="17 521 112 24" edTextCol="ff000000"
@@ -1126,7 +1165,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TOGGLEBUTTON name="new toggle button" id="7ae50b59d73384c8" memberName="masterButton"
-                virtualName="" explicitFocusOrder="0" pos="686 584 71 24" buttonText="Master"
+                virtualName="" explicitFocusOrder="0" pos="664 448 71 24" buttonText="Master"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="2f07a4c0694077f7" memberName="statusLabel"
          virtualName="" explicitFocusOrder="0" pos="32 424 648 16" edTextCol="ff000000"
@@ -1225,6 +1264,15 @@ BEGIN_JUCER_METADATA
   <TOGGLEBUTTON name="new toggle button" id="ae8c92622a32c986" memberName="remoteControlButton"
                 virtualName="" explicitFocusOrder="0" pos="16 448 112 24" buttonText="Remote Control"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <COMBOBOX name="new combo box" id="732ba8655b6d4ba5" memberName="blockSizeComboBox"
+            virtualName="" explicitFocusOrder="0" pos="526 488 150 24" editable="0"
+            layout="33" items="16&#10;32&#10;64&#10;128&#10;256&#10;512&#10;1024&#10;2048"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="a6d7772d29eecd54" memberName="blockSizeeLabel"
+         virtualName="" explicitFocusOrder="0" pos="421 488 103 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Block Size" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
