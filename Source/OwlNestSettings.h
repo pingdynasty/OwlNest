@@ -55,6 +55,7 @@ private:
   uint64 lastMidiMessageTime;
   String firmwareVersion;
   void handleIncomingMidiMessage(MidiInput* source, const MidiMessage& message);
+  void handleDeviceStatsMessage(const char* name, int size);
   void handlePresetNameMessage(uint8_t index, const char* name, int size);
   void handleParameterNameMessage(uint8_t index, const char* name, int size);
   void handleFirmwareVersionMessage(const char* name, int size);

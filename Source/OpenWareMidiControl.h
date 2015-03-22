@@ -4,15 +4,32 @@
 #define MIDI_SYSEX_MANUFACTURER        0x7d     /* Educational or development use only */
 #define MIDI_SYSEX_DEVICE              0x52     /* OWL Open Ware Laboratory */
 #define MIDI_SYSEX_VERSION             0x03     /* Revision */
-#define MIDI_MAX_MESSAGE_SIZE          0x0f
+
+enum PatchParameterId {
+  PARAMETER_A,
+  PARAMETER_B,
+  PARAMETER_C,
+  PARAMETER_D,
+  PARAMETER_E,
+  PARAMETER_F
+};
+
+enum PatchButtonId {
+  BYPASS_BUTTON,
+  PUSHBUTTON,
+  GREEN_BUTTON,
+  RED_BUTTON
+};
 
 enum OpenWareMidiSysexCommand {
   SYSEX_PRESET_NAME_COMMAND       = 0x01,
   SYSEX_PARAMETER_NAME_COMMAND    = 0x02,
   SYSEX_DFU_COMMAND               = 0x7e,
+  SYSEX_FIRMWARE_UPLOAD           = 0x10,
   SYSEX_FIRMWARE_VERSION          = 0x20,
   SYSEX_DEVICE_ID                 = 0x21,
-  SYSEX_SELFTEST                  = 0x22
+  SYSEX_SELFTEST                  = 0x22,
+  SYSEX_DEVICE_STATS              = 0x23
 };
 
 /*
@@ -70,18 +87,15 @@ enum OpenWareMidiControl {
 				* 42-83 = 24bit
 				* 84-127 = 32bit
 				*/
-  SAMPLING_SIZE          = 62, /* block size in log2
-				* 4 = 16 samples per channel
-				* 5 = 32, 6 = 64, 7 = 128, 8 = 256 ...
-				* 11 = 2048 samples per channel, et c.
-				*/
+  SAMPLING_SIZE          = 62, /* block size in samples */
 
   LEFT_RIGHT_SWAP        = 63, /* swap left/right channels */
 
   REQUEST_SETTINGS       = 67, /* load settings from device (127=all settings) (30 for LED) (more to come) */
   SAVE_SETTINGS          = 68, /* save settings to device */
   DEVICE_FIRMWARE_UPDATE = 69, /* enter Device Firmware Upgrade mode */
-  FACTORY_RESET          = 70  /* reset all settings */
+  FACTORY_RESET          = 70, /* reset all settings */
+  DEVICE_STATUS          = 71
 };
 
 #endif  // OPENWAREMIDICONTROL_H_INCLUDED

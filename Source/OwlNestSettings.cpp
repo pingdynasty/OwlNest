@@ -75,6 +75,10 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
 	hasChanged = true;
 	break;
       }
+      case SYSEX_DEVICE_STATS: {
+	handleDeviceStatsMessage((const char*)&data[3], message.getSysExDataSize()-3);
+	break;
+      }
       case SYSEX_FIRMWARE_VERSION: {
 	handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
 	break;
@@ -99,6 +103,14 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
   }
   if(hasChanged)
     theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
+}
+
+void OwlNestSettings::handleDeviceStatsMessage(const char* name, int size){
+  String str(name, size);
+#ifdef DEBUG
+  std::cout << "Device stats: " << str << std::endl;
+#endif // DEBUG
+  AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Device Statistics", str);
 }
 
 void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){
