@@ -166,6 +166,17 @@ void OwlNestSettings::setCc(int cc,int value)
     }
 }
 
+void OwlNestSettings::sendPc(int pc)
+{
+  // clip to valid value range
+  pc = std::min(127, std::max(0, pc));
+  if(theDm.getDefaultMidiOutput() != NULL)
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::programChange(1, pc));
+#ifdef DEBUG
+  std::cout << "tx pc: " << pc << std::endl;
+#endif // DEBUG
+}
+
 int OwlNestSettings::getCc(int cc)
 {
     if (cc>0 && cc<NB_CHANNELS){

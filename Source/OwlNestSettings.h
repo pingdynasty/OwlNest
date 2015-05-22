@@ -30,6 +30,7 @@ public:
   ~OwlNestSettings();
   void loadFromOwl();
   void saveToOwl();
+  void sendPc(int pc);
   int getCc(int cc);            // get value of a given cc
   void setCc(int cc,int value);  // set a value for a given cc
   StringArray& getPresetNames();

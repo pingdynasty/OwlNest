@@ -637,6 +637,7 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == patchSlotAComboBox)
     {
         //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
+        theSettings.sendPc(comboBoxThatHasChanged->getSelectedId()-1);
         theSettings.setCc(PATCH_SLOT_GREEN, comboBoxThatHasChanged->getSelectedId()-1);
 	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
