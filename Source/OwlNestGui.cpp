@@ -584,54 +584,51 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     if (comboBoxThatHasChanged == samplingRateComboBox)
     {
         //[UserComboBoxCode_samplingRateComboBox] -- add your combo box handling code here..
-        cc=SAMPLING_RATE;
-        switch (samplingRateComboBox->getSelectedId()) {
-            case 1: // 8kHz
-                val = 0;
-                break;
-            case 2: // 32kHz
-                val = 32;
-                break;
-            case 3: // 48kHz
-                val = 64;
-                break;
-            case 4: // 96kHz
-                val = 96;
-                break;
-            default:
-                val = 64;
-                break;
-        }
-	theSettings.setCc(cc, val);
+      switch(samplingRateComboBox->getSelectedId()) {
+      case 1: // 8kHz
+	val = 8000;
+	break;
+      case 2: // 32kHz
+	val = 32000;
+	break;
+      case 3: // 48kHz
+	val = 48000;
+	break;
+      case 4: // 96kHz
+	val = 96000;
+	break;
+      default:
+	val = 48000;
+	break;
+      }
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_AUDIO_RATE, val);
         //[/UserComboBoxCode_samplingRateComboBox]
     }
     else if (comboBoxThatHasChanged == samplingBitsComboBox)
     {
         //[UserComboBoxCode_samplingBitsComboBox] -- add your combo box handling code here..
-        cc=SAMPLING_BITS;
         switch (samplingBitsComboBox->getSelectedId()) {
             case 1: // 16bit
-                val = 0;
+                val = 16;
                 break;
             case 2: // 24bit
-                val = 42;
+                val = 24;
                 break;
             case 3: // 32bit
-                val = 84;
+                val = 32;
                 break;
             default:
-                val = 0;
+                val = 16;
                 break;
         }
-      theSettings.setCc(cc, val);
+	theSettings.setConfigurationValue(SYSEX_CONFIGURATION_AUDIO_WIDTH, val);
         //[/UserComboBoxCode_samplingBitsComboBox]
     }
     else if (comboBoxThatHasChanged == protocolComboBox)
     {
         //[UserComboBoxCode_protocolComboBox] -- add your combo box handling code here..
-      cc = CODEC_PROTOCOL;
-      val = protocolComboBox->getSelectedId() == 1 ? 0 : 127;
-      theSettings.setCc(cc, val);
+      val = protocolComboBox->getSelectedId() == 1 ? 0 : 16;
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_CODEC_PROTOCOL, val);
         //[/UserComboBoxCode_protocolComboBox]
     }
     else if (comboBoxThatHasChanged == patchSlotAComboBox)
@@ -688,9 +685,11 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == blockSizeComboBox)
     {
         //[UserComboBoxCode_blockSizeComboBox] -- add your combo box handling code here..
-      cc = SAMPLING_SIZE;
-      val = log2(blockSizeComboBox->getText().getIntValue());
-      theSettings.setCc(cc, val);
+      val = blockSizeComboBox->getText().getIntValue();
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE, val);
+      // cc = SAMPLING_SIZE;
+      // val = log2(blockSizeComboBox->getText().getIntValue());
+      // theSettings.setCc(cc, val);
         //[/UserComboBoxCode_blockSizeComboBox]
     }
 
@@ -737,13 +736,15 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == bypassButton)
     {
         //[UserButtonCode_bypassButton] -- add your button handler code here..
-      theSettings.setCc(BYPASS, bypassButton->getToggleState() ? 127 : 0);
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_CODEC_BYPASS, bypassButton->getToggleState());
+      // theSettings.setCc(BYPASS, bypassButton->getToggleState() ? 127 : 0);
         //[/UserButtonCode_bypassButton]
     }
     else if (buttonThatWasClicked == swapLRButton)
     {
         //[UserButtonCode_swapLRButton] -- add your button handler code here..
-      theSettings.setCc(LEFT_RIGHT_SWAP, swapLRButton->getToggleState() ? 127 : 0);
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_CODEC_SWAP, swapLRButton->getToggleState());
+      // theSettings.setCc(LEFT_RIGHT_SWAP, swapLRButton->getToggleState() ? 127 : 0);
         //[/UserButtonCode_swapLRButton]
     }
     else if (buttonThatWasClicked == leftInputMuteButton)
@@ -782,7 +783,8 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == masterButton)
     {
         //[UserButtonCode_masterButton] -- add your button handler code here..
-      theSettings.setCc(CODEC_MASTER, masterButton->getToggleState() ? 127 : 0);
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_CODEC_MASTER, masterButton->getToggleState());
+      // theSettings.setCc(CODEC_MASTER, masterButton->getToggleState() ? 127 : 0);
         //[/UserButtonCode_masterButton]
     }
     else if (buttonThatWasClicked == resetButton)
@@ -925,32 +927,35 @@ void OwlNestGui::settingsChanged() {
     ledButton->setColour(TextButton::buttonColourId, colour);
 
     // Patches
-    // todo: get current PC
-    // v = theSettings.getCc(PATCH_SLOT_GREEN);
-    // patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
+    v = theSettings.getPc();
+    patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
     // v = theSettings.getCc(PATCH_SLOT_RED);
     // patchSlotBComboBox->setSelectedId(v+1, dontSendNotification);
     // v = theSettings.getCc(PATCH_MODE);
     // modeComboBox->setSelectedId((v>>5)+1, dontSendNotification);
 
     // Block size
-    v = theSettings.getCc(SAMPLING_SIZE);
-    blockSizeComboBox->setText(String(1<<v), dontSendNotification);
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE);
+    blockSizeComboBox->setText(String(v), dontSendNotification);
 
     // Sampling rate and bits
-    v = theSettings.getCc(SAMPLING_RATE)>>5;
-    samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
-    v = (int) theSettings.getCc(SAMPLING_BITS)/42;
-    samplingBitsComboBox->setSelectedId(v+1, dontSendNotification);
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_AUDIO_RATE);
+    // samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
+    samplingRateComboBox->setText(String(v), dontSendNotification);
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_AUDIO_WIDTH);
+    // samplingBitsComboBox->setSelectedId(v+1, dontSendNotification);
+    samplingBitsComboBox->setText(String(v), dontSendNotification);
 
     // Bypass
-    if(theSettings.getCc(BYPASS) == 127)
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_CODEC_BYPASS);
+    if(v)
       bypassButton->setToggleState(true, dontSendNotification);
     else
       bypassButton->setToggleState(false, dontSendNotification);
 
     // LR SWAP
-    if(theSettings.getCc(LEFT_RIGHT_SWAP) == 127)
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_CODEC_SWAP);
+    if(v)
       swapLRButton->setToggleState(true, dontSendNotification);
     else
       swapLRButton->setToggleState(false, dontSendNotification);
@@ -981,16 +986,16 @@ void OwlNestGui::settingsChanged() {
         rightOutputMuteButton->setToggleState(false, dontSendNotification);
 
     // Protocol
-    if(theSettings.getCc(CODEC_PROTOCOL) < 64)
-      protocolComboBox->setSelectedId(1, dontSendNotification);
-    else
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_CODEC_PROTOCOL);
+    // if(theSettings.getCc(CODEC_PROTOCOL) < 64)
+    if(v == 16)
       protocolComboBox->setSelectedId(2, dontSendNotification);
+    else
+      protocolComboBox->setSelectedId(1, dontSendNotification);
 
     // Master
-    if(theSettings.getCc(CODEC_MASTER) < 64)
-      masterButton->setToggleState(false, dontSendNotification);
-    else
-      masterButton->setToggleState(true, dontSendNotification);
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_CODEC_MASTER);
+    masterButton->setToggleState(v, dontSendNotification);
 }
 
 void OwlNestGui::updateSensivity(){

@@ -50,8 +50,8 @@ public:
   void getAllCommands(Array< CommandID > &commands);
   ApplicationCommandTarget* getNextCommandTarget();
   bool perform(const InvocationInfo& info);
-  int getConfigurationValue(String& name);
-  void setConfigurationValue(String& name, int value);
+  int getConfigurationValue(const char* name);
+  void setConfigurationValue(const char* name, int value);
 private:
   bool deviceFirmwareUpdate(const File& file, const String& options);
   int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.

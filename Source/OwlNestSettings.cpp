@@ -133,12 +133,27 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
     theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
 }
 
-int OwlNestSettings::getConfigurationValue(String& name){
-  return configuration[name];
+int OwlNestSettings::getConfigurationValue(const char* name){
+  return configuration[String(name)];
 }
 
-void OwlNestSettings::setConfigurationValue(String& name, int value){
-  configuration.set(name, value);
+void OwlNestSettings::setConfigurationValue(const char* name, int value){
+  configuration.set(String(name), value);
+  if(theDm.getDefaultMidiOutput() != NULL){
+    String data(name);
+    data += String::toHexString(value);
+    uint8_t buf[data.length()+4];
+    buf[0] = MIDI_SYSEX_MANUFACTURER;
+    buf[1] = MIDI_SYSEX_DEVICE;
+    buf[2] = SYSEX_CONFIGURATION_COMMAND;
+    memcpy(&buf[3], data.getCharPointer(), data.length());
+    buf[sizeof(buf)-1] = '\0';
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
+  }
+#ifdef DEBUG
+  std::cout << "tx sysex " << name << ": " << value << std::endl;
+#endif // DEBUG
+  
 }
 
 void OwlNestSettings::handleSysexConfigurationCommand(const char* str, int size){  
@@ -147,7 +162,7 @@ void OwlNestSettings::handleSysexConfigurationCommand(const char* str, int size)
 #ifdef DEBUG
   std::cout << "Configuration " << name << ": " << value << std::endl;
 #endif // DEBUG
-  setConfigurationValue(name, value);
+  configuration.set(name, value);
 }
 
 void OwlNestSettings::handleDeviceStatsMessage(const char* name, int size){
