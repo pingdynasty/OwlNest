@@ -434,7 +434,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     updateGui.addListener(this);
     setVisible(true); // set the window visible
     setStatus("ready");
-    timerInterval=2000;
+    timerInterval = 10000;
     startTimer(timerInterval);
     //[/Constructor]
 }
@@ -638,7 +638,7 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     {
         //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
         theSettings.sendPc(comboBoxThatHasChanged->getSelectedId()-1);
-        theSettings.setCc(PATCH_SLOT_GREEN, comboBoxThatHasChanged->getSelectedId()-1);
+        // theSettings.setCc(PATCH_SLOT_GREEN, comboBoxThatHasChanged->getSelectedId()-1);
 	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
         //[/UserComboBoxCode_patchSlotAComboBox]
@@ -646,7 +646,7 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == patchSlotBComboBox)
     {
         //[UserComboBoxCode_patchSlotBComboBox] -- add your combo box handling code here..
-        theSettings.setCc(PATCH_SLOT_RED, comboBoxThatHasChanged->getSelectedId()-1);
+        // theSettings.setCc(PATCH_SLOT_RED, comboBoxThatHasChanged->getSelectedId()-1);
 	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
         //[/UserComboBoxCode_patchSlotBComboBox]
@@ -682,7 +682,7 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == modeComboBox)
     {
         //[UserComboBoxCode_modeComboBox] -- add your combo box handling code here..
-      theSettings.setCc(PATCH_MODE, (comboBoxThatHasChanged->getSelectedId()-1) << 5);
+      // theSettings.setCc(PATCH_MODE, (comboBoxThatHasChanged->getSelectedId()-1) << 5);
         //[/UserComboBoxCode_modeComboBox]
     }
     else if (comboBoxThatHasChanged == blockSizeComboBox)
@@ -888,9 +888,9 @@ void OwlNestGui::settingsChanged() {
     StringArray& presets = theSettings.getPresetNames();
     if(presets.size() != 0){
       patchSlotAComboBox->clear(dontSendNotification);
-      patchSlotBComboBox->clear(dontSendNotification);
+      // patchSlotBComboBox->clear(dontSendNotification);
       patchSlotAComboBox->addItemList(presets, 1);
-      patchSlotBComboBox->addItemList(presets, 1);
+      // patchSlotBComboBox->addItemList(presets, 1);
       setStatus("Settings loaded");
     }
 
@@ -925,12 +925,13 @@ void OwlNestGui::settingsChanged() {
     ledButton->setColour(TextButton::buttonColourId, colour);
 
     // Patches
-    v = theSettings.getCc(PATCH_SLOT_GREEN);
-    patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
-    v = theSettings.getCc(PATCH_SLOT_RED);
-    patchSlotBComboBox->setSelectedId(v+1, dontSendNotification);
-    v = theSettings.getCc(PATCH_MODE);
-    modeComboBox->setSelectedId((v>>5)+1, dontSendNotification);
+    // todo: get current PC
+    // v = theSettings.getCc(PATCH_SLOT_GREEN);
+    // patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
+    // v = theSettings.getCc(PATCH_SLOT_RED);
+    // patchSlotBComboBox->setSelectedId(v+1, dontSendNotification);
+    // v = theSettings.getCc(PATCH_MODE);
+    // modeComboBox->setSelectedId((v>>5)+1, dontSendNotification);
 
     // Block size
     v = theSettings.getCc(SAMPLING_SIZE);

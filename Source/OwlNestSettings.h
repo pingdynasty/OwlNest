@@ -28,11 +28,15 @@ class OwlNestSettings: public MidiInputCallback, public ApplicationCommandTarget
 public:
   OwlNestSettings(AudioDeviceManager& dm, Value& updateGui);
   ~OwlNestSettings();
+  void resetParameterNames();
   void loadFromOwl();
   void saveToOwl();
   void sendPc(int pc);
   int getCc(int cc);            // get value of a given cc
   void setCc(int cc,int value);  // set a value for a given cc
+  int getPc(){            // get value of program change
+    return pc;
+  }
   StringArray& getPresetNames();
   StringArray& getParameterNames();
   String getFirmwareVersion();
@@ -46,16 +50,21 @@ public:
   void getAllCommands(Array< CommandID > &commands);
   ApplicationCommandTarget* getNextCommandTarget();
   bool perform(const InvocationInfo& info);
+  int getConfigurationValue(String& name);
+  void setConfigurationValue(String& name, int value);
 private:
   bool deviceFirmwareUpdate(const File& file, const String& options);
   int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
+  int pc; // last received Program Change value
   Value& theUpdateGui;
   AudioDeviceManager& theDm;
   StringArray presets;
   StringArray parameters;
+  HashMap<String, int> configuration;
   uint64 lastMidiMessageTime;
   String firmwareVersion;
   void handleIncomingMidiMessage(MidiInput* source, const MidiMessage& message);
+  void handleProgramMessage(const char* name, int size);
   void handleDeviceStatsMessage(const char* name, int size);
   void handlePresetNameMessage(uint8_t index, const char* name, int size);
   void handleParameterNameMessage(uint8_t index, const char* name, int size);
@@ -63,4 +72,5 @@ private:
   void handleDeviceIdMessage(uint8_t* data, int size);
   void handleSelfTestMessage(uint8_t data);
   void handleErrorMessage(uint8_t data);
+  void handleSysexConfigurationCommand(const char* name, int size);
 };
