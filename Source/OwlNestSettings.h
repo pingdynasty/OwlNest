@@ -69,8 +69,9 @@ private:
   void handlePresetNameMessage(uint8_t index, const char* name, int size);
   void handleParameterNameMessage(uint8_t index, const char* name, int size);
   void handleFirmwareVersionMessage(const char* name, int size);
-  void handleDeviceIdMessage(uint8_t* data, int size);
+  void handleDeviceIdMessage(const char* data, int size);
   void handleSelfTestMessage(uint8_t data);
   void handleErrorMessage(uint8_t data);
   void handleSysexConfigurationCommand(const char* name, int size);
+  void storeFirmware(uint8_t slot);
 };

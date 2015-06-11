@@ -90,37 +90,22 @@ void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const j
 	hasChanged = true;
 	break;
       }
-      case SYSEX_DEVICE_STATS: {
+      case SYSEX_DEVICE_STATS:
+      case SYSEX_PROGRAM_STATS: 
 	handleDeviceStatsMessage((const char*)&data[3], message.getSysExDataSize()-3);
 	break;
-      }
-      case SYSEX_PROGRAM_MESSAGE: {
+      case SYSEX_PROGRAM_MESSAGE:
 	handleProgramMessage((const char*)&data[3], message.getSysExDataSize()-3);
 	break;
-      }
-      case SYSEX_FIRMWARE_VERSION: {
+      case SYSEX_FIRMWARE_VERSION:
 	handleFirmwareVersionMessage((const char*)&data[3], message.getSysExDataSize()-3);
 	break;
-      }
-      case SYSEX_CONFIGURATION_COMMAND: {
+      case SYSEX_CONFIGURATION_COMMAND:
 	handleSysexConfigurationCommand((const char*)&data[3], message.getSysExDataSize()-3);
 	break;
-      }
-      case SYSEX_DEVICE_ID: {
-#if JUCE_MAC || JUCE_LINUX
-	int len = message.getSysExDataSize()-3;
-	uint8_t deviceId[len];
-	len = sysex_to_data((uint8_t*)(data+3), deviceId, len);
-	handleDeviceIdMessage(deviceId, len);
-#endif
+      case SYSEX_DEVICE_ID:
+	handleDeviceIdMessage((const char*)&data[3], message.getSysExDataSize()-3);
 	break;
-      }
-      // case SYSEX_SELFTEST:{
-      // 	handleSelfTestMessage(data[3]);
-      // 	if(message.getSysExDataSize() > 4)
-      // 	  handleErrorMessage(data[4]);
-      // 	break;
-      // }
       }
     }
   }else if(message.isProgramChange()){
@@ -152,8 +137,7 @@ void OwlNestSettings::setConfigurationValue(const char* name, int value){
   }
 #ifdef DEBUG
   std::cout << "tx sysex " << name << ": " << value << std::endl;
-#endif // DEBUG
-  
+#endif // DEBUG  
 }
 
 void OwlNestSettings::handleSysexConfigurationCommand(const char* str, int size){  
@@ -190,12 +174,12 @@ void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){
   AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Device Firmware", "Currently installed: "+str);
 }
 
-void OwlNestSettings::handleDeviceIdMessage(uint8_t* data, int size){
+void OwlNestSettings::handleDeviceIdMessage(const char* data, int size){
 #ifdef DEBUG
-  std::cout << "Device ID: 0x";
-  for(int i=0; i<size; ++i)
-    std::cout << std::hex << std::setfill('0') << std::setw(2) << (int)data[i];
-  std::cout << std::endl;
+  std::cout << "Device ID: " << String(data, size) << std::endl;
+  // for(int i=0; i<size; ++i)
+  //   std::cout << std::hex << std::setfill('0') << std::setw(2) << (int)data[i];
+  // std::cout << std::endl;
 #endif // DEBUG
 }
 
@@ -257,9 +241,26 @@ int OwlNestSettings::getCc(int cc)
     }
 }
 
+void OwlNestSettings::storeFirmware(uint8_t slot){
+  if(theDm.getDefaultMidiOutput() != NULL){
+    uint8_t buf[4];
+    buf[0] = MIDI_SYSEX_MANUFACTURER;
+    buf[1] = MIDI_SYSEX_DEVICE;
+    buf[2] = SYSEX_FIRMWARE_STORE;
+    buf[3] = slot & 0x7f;
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
+  }
+#ifdef DEBUG
+  std::cout << "tx store firmware: " << slot << std::endl;
+#endif // DEBUG
+}
+
 void OwlNestSettings::saveToOwl(){
+  // if(theDm.getDefaultMidiOutput() != NULL)
+  //   theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,SAVE_SETTINGS,127));
+  // todo: change/fix
   if(theDm.getDefaultMidiOutput() != NULL)
-    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,SAVE_SETTINGS,127));
+    storeFirmware(0);
 }
 
 void OwlNestSettings::loadFromOwl(){

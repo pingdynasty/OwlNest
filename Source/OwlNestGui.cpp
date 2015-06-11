@@ -725,9 +725,9 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_deviceInfoButton] -- add your button handler code here..
         theSettings.setCc(REQUEST_SETTINGS, 0);
 	// for newer firmware, request firmware version, device ID and selftest one by one:
-        // theSettings.setCc(REQUEST_SETTINGS, 3);
+        // theSettings.setCc(REQUEST_SETTINGS, SYSEX_FIRMWARE_VERSION);
         Thread::sleep(500);
-        theSettings.setCc(REQUEST_SETTINGS, 4);
+        theSettings.setCc(REQUEST_SETTINGS, SYSEX_DEVICE_ID);
         // Thread::sleep(500);
         // theSettings.setCc(REQUEST_SETTINGS, 5);
         setStatus("Requested Device Information");
