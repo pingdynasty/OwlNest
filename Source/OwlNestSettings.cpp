@@ -251,7 +251,7 @@ void OwlNestSettings::storeFirmware(uint8_t slot){
     theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
   }
 #ifdef DEBUG
-  std::cout << "tx store firmware: " << slot << std::endl;
+  std::cout << "tx store firmware: " << (int)slot << std::endl;
 #endif // DEBUG
 }
 
