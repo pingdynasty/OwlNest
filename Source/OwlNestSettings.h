@@ -52,6 +52,7 @@ public:
   bool perform(const InvocationInfo& info);
   int getConfigurationValue(const char* name);
   void setConfigurationValue(const char* name, int value);
+  void storeFirmware(uint8_t slot);
 private:
   bool deviceFirmwareUpdate(const File& file, const String& options);
   int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
@@ -73,5 +74,4 @@ private:
   void handleSelfTestMessage(uint8_t data);
   void handleErrorMessage(uint8_t data);
   void handleSysexConfigurationCommand(const char* name, int size);
-  void storeFirmware(uint8_t slot);
 };

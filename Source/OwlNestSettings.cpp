@@ -256,11 +256,8 @@ void OwlNestSettings::storeFirmware(uint8_t slot){
 }
 
 void OwlNestSettings::saveToOwl(){
-  // if(theDm.getDefaultMidiOutput() != NULL)
-  //   theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,SAVE_SETTINGS,127));
-  // todo: change/fix
   if(theDm.getDefaultMidiOutput() != NULL)
-    storeFirmware(0);
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,SAVE_SETTINGS,127));
 }
 
 void OwlNestSettings::loadFromOwl(){

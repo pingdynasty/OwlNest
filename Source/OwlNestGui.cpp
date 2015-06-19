@@ -382,6 +382,21 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     blockSizeeLabel->setColour (TextEditor::textColourId, Colours::black);
     blockSizeeLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (saveSlotComboBox = new ComboBox ("new combo box"));
+    saveSlotComboBox->setEditableText (false);
+    saveSlotComboBox->setJustificationType (Justification::centredLeft);
+    saveSlotComboBox->setTextWhenNothingSelected (String::empty);
+    saveSlotComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    saveSlotComboBox->addItem (TRANS("Slot 1"), 1);
+    saveSlotComboBox->addItem (TRANS("Slot 2"), 2);
+    saveSlotComboBox->addItem (TRANS("Slot 3"), 3);
+    saveSlotComboBox->addItem (TRANS("Slot 4"), 4);
+    saveSlotComboBox->addListener (this);
+
+    addAndMakeVisible (saveSlotButton = new TextButton ("new button"));
+    saveSlotButton->setButtonText (TRANS("Save"));
+    saveSlotButton->addListener (this);
+
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
     //[UserPreSize]
@@ -493,6 +508,8 @@ OwlNestGui::~OwlNestGui()
     remoteControlButton = nullptr;
     blockSizeComboBox = nullptr;
     blockSizeeLabel = nullptr;
+    saveSlotComboBox = nullptr;
+    saveSlotButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -569,6 +586,8 @@ void OwlNestGui::resized()
     remoteControlButton->setBounds (16, 448, 112, 24);
     blockSizeComboBox->setBounds (526, 488, 150, 24);
     blockSizeeLabel->setBounds (421, 488, 103, 24);
+    saveSlotComboBox->setBounds (527, 616, 150, 24);
+    saveSlotButton->setBounds (416, 616, 80, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -692,6 +711,11 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       // theSettings.setCc(cc, val);
         //[/UserComboBoxCode_blockSizeComboBox]
     }
+    else if (comboBoxThatHasChanged == saveSlotComboBox)
+    {
+        //[UserComboBoxCode_saveSlotComboBox] -- add your combo box handling code here..
+        //[/UserComboBoxCode_saveSlotComboBox]
+    }
 
     //[UsercomboBoxChanged_Post]
     //[/UsercomboBoxChanged_Post]
@@ -805,6 +829,13 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
       slider4->setEnabled(remote);
       slider5->setEnabled(remote);
         //[/UserButtonCode_remoteControlButton]
+    }
+    else if (buttonThatWasClicked == saveSlotButton)
+    {
+        //[UserButtonCode_saveSlotButton] -- add your button handler code here..
+      int slot = saveSlotComboBox->getSelectedId()-1;
+      theSettings.storeFirmware(slot);
+        //[/UserButtonCode_saveSlotButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -1280,6 +1311,13 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="Block Size" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
+  <COMBOBOX name="new combo box" id="26db9aa1ede8465e" memberName="saveSlotComboBox"
+            virtualName="" explicitFocusOrder="0" pos="527 616 150 24" editable="0"
+            layout="33" items="Slot 1&#10;Slot 2&#10;Slot 3&#10;Slot 4" textWhenNonSelected=""
+            textWhenNoItems="(no choices)"/>
+  <TEXTBUTTON name="new button" id="22b45aec9c000e64" memberName="saveSlotButton"
+              virtualName="" explicitFocusOrder="0" pos="416 616 80 24" buttonText="Save"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

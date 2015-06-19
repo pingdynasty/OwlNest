@@ -131,6 +131,8 @@ private:
     ScopedPointer<ToggleButton> remoteControlButton;
     ScopedPointer<ComboBox> blockSizeComboBox;
     ScopedPointer<Label> blockSizeeLabel;
+    ScopedPointer<ComboBox> saveSlotComboBox;
+    ScopedPointer<TextButton> saveSlotButton;
     Image cachedImage_owlFaceplate_png;
 
 
