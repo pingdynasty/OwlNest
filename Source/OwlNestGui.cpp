@@ -837,6 +837,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == halfSpeedButton)
     {
         //[UserButtonCode_halfSpeedButton] -- add your button handler code here..
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_CODEC_HALFSPEED, halfSpeedButton->getToggleState());
         //[/UserButtonCode_halfSpeedButton]
     }
 
@@ -992,6 +993,10 @@ void OwlNestGui::settingsChanged() {
       swapLRButton->setToggleState(true, dontSendNotification);
     else
       swapLRButton->setToggleState(false, dontSendNotification);
+
+    // Half speed
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_CODEC_HALFSPEED);
+    halfSpeedButton->setToggleState(v, dontSendNotification);
 
     // Input/output Gains
     leftGainSlider->setValue(midiToInGainDb(theSettings.getCc(LEFT_INPUT_GAIN)), dontSendNotification);
