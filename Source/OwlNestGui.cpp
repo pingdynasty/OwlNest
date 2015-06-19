@@ -207,28 +207,12 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     patchSlotAComboBox->addListener (this);
 
     addAndMakeVisible (patchSlotALabel = new Label ("new label",
-                                                    TRANS("Green Slot")));
+                                                    TRANS("Patch")));
     patchSlotALabel->setFont (Font (15.00f, Font::plain));
     patchSlotALabel->setJustificationType (Justification::centredRight);
     patchSlotALabel->setEditable (false, false, false);
     patchSlotALabel->setColour (TextEditor::textColourId, Colours::black);
     patchSlotALabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-
-    addAndMakeVisible (patchSlotBComboBox = new ComboBox ("new combo box"));
-    patchSlotBComboBox->setEditableText (false);
-    patchSlotBComboBox->setJustificationType (Justification::centredLeft);
-    patchSlotBComboBox->setTextWhenNothingSelected (String::empty);
-    patchSlotBComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    patchSlotBComboBox->addItem (TRANS("..."), 1);
-    patchSlotBComboBox->addListener (this);
-
-    addAndMakeVisible (patchSlotBLabel = new Label ("new label",
-                                                    TRANS("Red Slot")));
-    patchSlotBLabel->setFont (Font (15.00f, Font::plain));
-    patchSlotBLabel->setJustificationType (Justification::centredRight);
-    patchSlotBLabel->setEditable (false, false, false);
-    patchSlotBLabel->setColour (TextEditor::textColourId, Colours::black);
-    patchSlotBLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (resetButton = new TextButton ("new button"));
     resetButton->setButtonText (TRANS("Factory Reset"));
@@ -397,6 +381,26 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     saveSlotButton->setButtonText (TRANS("Save"));
     saveSlotButton->addListener (this);
 
+    addAndMakeVisible (halfSpeedButton = new ToggleButton ("new toggle button"));
+    halfSpeedButton->setButtonText (TRANS("Half Speed"));
+    halfSpeedButton->addListener (this);
+
+    addAndMakeVisible (messageLabel = new Label ("new label",
+                                                 TRANS("...")));
+    messageLabel->setFont (Font (15.00f, Font::plain));
+    messageLabel->setJustificationType (Justification::centredLeft);
+    messageLabel->setEditable (false, false, false);
+    messageLabel->setColour (TextEditor::textColourId, Colours::black);
+    messageLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (statsLabel = new Label ("new label",
+                                               TRANS("...")));
+    statsLabel->setFont (Font (15.00f, Font::plain));
+    statsLabel->setJustificationType (Justification::centredLeft);
+    statsLabel->setEditable (false, false, false);
+    statsLabel->setColour (TextEditor::textColourId, Colours::black);
+    statsLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
     //[UserPreSize]
@@ -449,7 +453,7 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     updateGui.addListener(this);
     setVisible(true); // set the window visible
     setStatus("ready");
-    timerInterval = 10000;
+    timerInterval = 1000;
     startTimer(timerInterval);
     //[/Constructor]
 }
@@ -487,8 +491,6 @@ OwlNestGui::~OwlNestGui()
     statusLabel = nullptr;
     patchSlotAComboBox = nullptr;
     patchSlotALabel = nullptr;
-    patchSlotBComboBox = nullptr;
-    patchSlotBLabel = nullptr;
     resetButton = nullptr;
     sensitivityComboBox = nullptr;
     sensitivityLabel = nullptr;
@@ -510,6 +512,9 @@ OwlNestGui::~OwlNestGui()
     blockSizeeLabel = nullptr;
     saveSlotComboBox = nullptr;
     saveSlotButton = nullptr;
+    halfSpeedButton = nullptr;
+    messageLabel = nullptr;
+    statsLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -562,15 +567,13 @@ void OwlNestGui::resized()
     protocolComboBox->setBounds (527, 584, 150, 24);
     protocolLabel->setBounds (422, 584, 103, 24);
     masterButton->setBounds (664, 448, 71, 24);
-    statusLabel->setBounds (32, 424, 648, 16);
+    statusLabel->setBounds (384, 424, 336, 16);
     patchSlotAComboBox->setBounds (120, 320, 150, 24);
     patchSlotALabel->setBounds (48, 320, 72, 24);
-    patchSlotBComboBox->setBounds (120, 352, 150, 24);
-    patchSlotBLabel->setBounds (48, 352, 72, 24);
     resetButton->setBounds (544, 392, 150, 24);
     sensitivityComboBox->setBounds (552, 352, 150, 24);
     sensitivityLabel->setBounds (448, 352, 101, 24);
-    connectionButton->setBounds (18, 424, 16, 16);
+    connectionButton->setBounds (370, 424, 16, 16);
     slider4->setBounds (536, 29, 90, 90);
     slider3->setBounds (399, 29, 90, 90);
     label3->setBounds (399, 114, 90, 24);
@@ -583,11 +586,14 @@ void OwlNestGui::resized()
     label5->setBounds (608, 282, 96, 24);
     modeComboBox->setBounds (551, 320, 150, 24);
     modeLabel->setBounds (448, 320, 101, 24);
-    remoteControlButton->setBounds (16, 448, 112, 24);
+    remoteControlButton->setBounds (184, 448, 112, 24);
     blockSizeComboBox->setBounds (526, 488, 150, 24);
     blockSizeeLabel->setBounds (421, 488, 103, 24);
-    saveSlotComboBox->setBounds (527, 616, 150, 24);
-    saveSlotButton->setBounds (416, 616, 80, 24);
+    saveSlotComboBox->setBounds (119, 352, 150, 24);
+    saveSlotButton->setBounds (32, 352, 80, 24);
+    halfSpeedButton->setBounds (304, 448, 112, 24);
+    messageLabel->setBounds (16, 424, 328, 16);
+    statsLabel->setBounds (16, 448, 160, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -658,14 +664,6 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
         //[/UserComboBoxCode_patchSlotAComboBox]
-    }
-    else if (comboBoxThatHasChanged == patchSlotBComboBox)
-    {
-        //[UserComboBoxCode_patchSlotBComboBox] -- add your combo box handling code here..
-        // theSettings.setCc(PATCH_SLOT_RED, comboBoxThatHasChanged->getSelectedId()-1);
-	Thread::sleep(100);
-	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
-        //[/UserComboBoxCode_patchSlotBComboBox]
     }
     else if (comboBoxThatHasChanged == sensitivityComboBox)
     {
@@ -748,7 +746,6 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_deviceInfoButton] -- add your button handler code here..
         theSettings.setCc(REQUEST_SETTINGS, 0);
-	// for newer firmware, request firmware version, device ID and selftest one by one:
         // theSettings.setCc(REQUEST_SETTINGS, SYSEX_FIRMWARE_VERSION);
         Thread::sleep(500);
         theSettings.setCc(REQUEST_SETTINGS, SYSEX_DEVICE_ID);
@@ -836,6 +833,11 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
       int slot = saveSlotComboBox->getSelectedId()-1;
       theSettings.storeFirmware(slot);
         //[/UserButtonCode_saveSlotButton]
+    }
+    else if (buttonThatWasClicked == halfSpeedButton)
+    {
+        //[UserButtonCode_halfSpeedButton] -- add your button handler code here..
+        //[/UserButtonCode_halfSpeedButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -1027,6 +1029,10 @@ void OwlNestGui::settingsChanged() {
     // Master
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_CODEC_MASTER);
     masterButton->setToggleState(v, dontSendNotification);
+
+    // Messages
+    messageLabel->setText(theSettings.getProgramMessage(), dontSendNotification);
+    statsLabel->setText(theSettings.getStatsMessage(), dontSendNotification);
 }
 
 void OwlNestGui::updateSensivity(){
@@ -1078,7 +1084,7 @@ void OwlNestGui::updateFirmware(){
 
 void OwlNestGui::timerCallback()
 {
-    if ((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())>1.5*timerInterval)
+    if ((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())>5*timerInterval)
     {
         connectionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0xff, 0, 0)); // red
     }
@@ -1086,7 +1092,21 @@ void OwlNestGui::timerCallback()
     {
         connectionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0, 0xff, 0)); // green
     }
-    theSettings.setCc(REQUEST_SETTINGS,LED); // ask to send a Midi Message to check connection
+    static int counter = 0;
+    switch(counter++){
+    case 0:
+      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS);
+      break;
+    case 1:
+      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_MESSAGE);
+      break;
+    case 2:
+      theSettings.setCc(REQUEST_SETTINGS, LED);
+      break;
+    default:
+      counter = 0;
+      break;
+    }
 }
 //[/MiscUserCode]
 
@@ -1206,7 +1226,7 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="0" pos="664 448 71 24" buttonText="Master"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="2f07a4c0694077f7" memberName="statusLabel"
-         virtualName="" explicitFocusOrder="0" pos="32 424 648 16" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="384 424 336 16" edTextCol="ff000000"
          edBkgCol="0" labelText="Status: Initialising..." editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -1215,15 +1235,7 @@ BEGIN_JUCER_METADATA
             layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="54afa4d08d09d664" memberName="patchSlotALabel"
          virtualName="" explicitFocusOrder="0" pos="48 320 72 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Green Slot" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
-         bold="0" italic="0" justification="34"/>
-  <COMBOBOX name="new combo box" id="ead688c04fb4a49e" memberName="patchSlotBComboBox"
-            virtualName="" explicitFocusOrder="0" pos="120 352 150 24" editable="0"
-            layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
-  <LABEL name="new label" id="a882f7d2f19281a4" memberName="patchSlotBLabel"
-         virtualName="" explicitFocusOrder="0" pos="48 352 72 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Red Slot" editableSingleClick="0" editableDoubleClick="0"
+         edBkgCol="0" labelText="Patch" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="34"/>
   <TEXTBUTTON name="new button" id="6c02712dbfb4bb60" memberName="resetButton"
@@ -1238,7 +1250,7 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="34"/>
   <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="connectionButton"
-              virtualName="" explicitFocusOrder="0" pos="18 424 16 16" bgColOff="ff808080"
+              virtualName="" explicitFocusOrder="0" pos="370 424 16 16" bgColOff="ff808080"
               buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"/>
   <SLIDER name="new slider" id="1c26ed829054fb4" memberName="slider4" virtualName=""
           explicitFocusOrder="0" pos="536 29 90 90" bkgcol="fff0ffff" thumbcol="ff6495ed"
@@ -1300,7 +1312,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="34"/>
   <TOGGLEBUTTON name="new toggle button" id="ae8c92622a32c986" memberName="remoteControlButton"
-                virtualName="" explicitFocusOrder="0" pos="16 448 112 24" buttonText="Remote Control"
+                virtualName="" explicitFocusOrder="0" pos="184 448 112 24" buttonText="Remote Control"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="732ba8655b6d4ba5" memberName="blockSizeComboBox"
             virtualName="" explicitFocusOrder="0" pos="526 488 150 24" editable="0"
@@ -1312,12 +1324,25 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <COMBOBOX name="new combo box" id="26db9aa1ede8465e" memberName="saveSlotComboBox"
-            virtualName="" explicitFocusOrder="0" pos="527 616 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="119 352 150 24" editable="0"
             layout="33" items="Slot 1&#10;Slot 2&#10;Slot 3&#10;Slot 4" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <TEXTBUTTON name="new button" id="22b45aec9c000e64" memberName="saveSlotButton"
-              virtualName="" explicitFocusOrder="0" pos="416 616 80 24" buttonText="Save"
+              virtualName="" explicitFocusOrder="0" pos="32 352 80 24" buttonText="Save"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TOGGLEBUTTON name="new toggle button" id="249af80ac06ed5fd" memberName="halfSpeedButton"
+                virtualName="" explicitFocusOrder="0" pos="304 448 112 24" buttonText="Half Speed"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <LABEL name="new label" id="6d4885422c01a4ba" memberName="messageLabel"
+         virtualName="" explicitFocusOrder="0" pos="16 424 328 16" edTextCol="ff000000"
+         edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <LABEL name="new label" id="b5ed8539fe8cf330" memberName="statsLabel"
+         virtualName="" explicitFocusOrder="0" pos="16 448 160 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

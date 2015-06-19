@@ -53,7 +53,15 @@ public:
   int getConfigurationValue(const char* name);
   void setConfigurationValue(const char* name, int value);
   void storeFirmware(uint8_t slot);
+  String getProgramMessage(){
+    return programMessage;
+  }
+  String getStatsMessage(){
+    return statsMessage;
+  }
 private:
+  String programMessage;
+  String statsMessage;
   bool deviceFirmwareUpdate(const File& file, const String& options);
   int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
   int pc; // last received Program Change value

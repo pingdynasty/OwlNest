@@ -56,6 +56,7 @@ void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, i
 #ifdef DEBUG
   std::cout << "preset name " << (int)index << ": " << String(name, size) << std::endl;
 #endif // DEBUG
+  theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
 }
 
 void OwlNestSettings::handleParameterNameMessage(uint8_t index, const char* name, int size){
@@ -63,6 +64,7 @@ void OwlNestSettings::handleParameterNameMessage(uint8_t index, const char* name
 #ifdef DEBUG
   std::cout << "parameter name " << (int)index << ": " << String(name, size) << std::endl;
 #endif // DEBUG
+  theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
 }
 
 void OwlNestSettings::handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message){
@@ -150,19 +152,20 @@ void OwlNestSettings::handleSysexConfigurationCommand(const char* str, int size)
 }
 
 void OwlNestSettings::handleDeviceStatsMessage(const char* name, int size){
-  String str(name, size);
+  statsMessage = String(name, size);
 #ifdef DEBUG
-  std::cout << "Device stats: " << str << std::endl;
+  std::cout << "Device stats: " << statsMessage << std::endl;
 #endif // DEBUG
-  AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Device Statistics", str);
+  // AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Device Statistics", str);
+  theUpdateGui.setValue(!(bool)theUpdateGui.getValue());
 }
 
 void OwlNestSettings::handleProgramMessage(const char* name, int size){
-  String str(name, size);
+  programMessage = String(name, size);
 #ifdef DEBUG
-  std::cout << "Program message: " << str << std::endl;
+  std::cout << "Program message: " << programMessage << std::endl;
 #endif // DEBUG
-  AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Program Message", str);
+  // AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Program Message", str);
 }
 
 void OwlNestSettings::handleFirmwareVersionMessage(const char* name, int size){

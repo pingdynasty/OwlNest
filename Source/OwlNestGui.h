@@ -110,8 +110,6 @@ private:
     ScopedPointer<Label> statusLabel;
     ScopedPointer<ComboBox> patchSlotAComboBox;
     ScopedPointer<Label> patchSlotALabel;
-    ScopedPointer<ComboBox> patchSlotBComboBox;
-    ScopedPointer<Label> patchSlotBLabel;
     ScopedPointer<TextButton> resetButton;
     ScopedPointer<ComboBox> sensitivityComboBox;
     ScopedPointer<Label> sensitivityLabel;
@@ -133,6 +131,9 @@ private:
     ScopedPointer<Label> blockSizeeLabel;
     ScopedPointer<ComboBox> saveSlotComboBox;
     ScopedPointer<TextButton> saveSlotButton;
+    ScopedPointer<ToggleButton> halfSpeedButton;
+    ScopedPointer<Label> messageLabel;
+    ScopedPointer<Label> statsLabel;
     Image cachedImage_owlFaceplate_png;
 
 
