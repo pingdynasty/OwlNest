@@ -53,6 +53,10 @@ public:
   int getConfigurationValue(const char* name);
   void setConfigurationValue(const char* name, int value);
   void storeFirmware(uint8_t slot);
+  void clearMessages(){
+    programMessage = "";
+    statsMessage = "";
+  }
   String getProgramMessage(){
     return programMessage;
   }

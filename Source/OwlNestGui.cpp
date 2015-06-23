@@ -659,8 +659,8 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == patchSlotAComboBox)
     {
         //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
+        theSettings.clearMessages();
         theSettings.sendPc(comboBoxThatHasChanged->getSelectedId()-1);
-        // theSettings.setCc(PATCH_SLOT_GREEN, comboBoxThatHasChanged->getSelectedId()-1);
 	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
         //[/UserComboBoxCode_patchSlotAComboBox]
@@ -728,6 +728,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_loadButton] -- add your button handler code here..
         setStatus("Loading settings...");
+        theSettings.clearMessages();
         theSettings.loadFromOwl();
 	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, 1); // request patch names
@@ -745,13 +746,12 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == deviceInfoButton)
     {
         //[UserButtonCode_deviceInfoButton] -- add your button handler code here..
+        setStatus("Requesting Device Information");
+        theSettings.clearMessages();
         theSettings.setCc(REQUEST_SETTINGS, 0);
         // theSettings.setCc(REQUEST_SETTINGS, SYSEX_FIRMWARE_VERSION);
         Thread::sleep(500);
         theSettings.setCc(REQUEST_SETTINGS, SYSEX_DEVICE_ID);
-        // Thread::sleep(500);
-        // theSettings.setCc(REQUEST_SETTINGS, 5);
-        setStatus("Requested Device Information");
         //[/UserButtonCode_deviceInfoButton]
     }
     else if (buttonThatWasClicked == bypassButton)
@@ -963,10 +963,6 @@ void OwlNestGui::settingsChanged() {
     // Patches
     v = theSettings.getPc();
     patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
-    // v = theSettings.getCc(PATCH_SLOT_RED);
-    // patchSlotBComboBox->setSelectedId(v+1, dontSendNotification);
-    // v = theSettings.getCc(PATCH_MODE);
-    // modeComboBox->setSelectedId((v>>5)+1, dontSendNotification);
 
     // Block size
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE);
