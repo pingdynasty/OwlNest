@@ -20,9 +20,9 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
       properties->setValue("application-directory", File::getSpecialLocation(File::userDocumentsDirectory)
 			   .getChildFile(opts.applicationName).getFullPathName());
     if(!properties->containsKey("midi-output"))
-      properties->setValue("midi-output", "OWL FS");
+      properties->setValue("midi-output", "OWL-MIDI");
     if(!properties->containsKey("midi-input"))
-      properties->setValue("midi-input", "OWL FS");
+      properties->setValue("midi-input", "OWL-MIDI");
     if(!properties->containsKey("bootloader-dfu-options"))
       properties->setValue("bootloader-dfu-options", "0x8000000:leave");
     if(!properties->containsKey("firmware-dfu-options"))
@@ -31,8 +31,8 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
       properties->setValue("owl-updates-url", "http://hoxtonowl.com/software/updates");
       if(!properties->containsKey("owl-updates-dir-url"))
           properties->setValue("owl-updates-dir-url", "http://hoxtonowl.com/wp-content/uploads/");
-      if(!properties->containsKey("hide-low-level-items"))
-         properties->setValue("hide-low-level-items", true); // set to false to display low level items
+      if(!properties->containsKey("show-low-level-items"))
+         properties->setValue("show-low-level-items", "0");
     if(!properties->isValidFile())
       std::cerr << "Invalid properties file: " << properties->getFile().getFullPathName() << std::endl;
   }

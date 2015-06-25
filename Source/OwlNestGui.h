@@ -129,8 +129,6 @@ private:
     ScopedPointer<ToggleButton> remoteControlButton;
     ScopedPointer<ComboBox> blockSizeComboBox;
     ScopedPointer<Label> blockSizeeLabel;
-    ScopedPointer<ComboBox> saveSlotComboBox;
-    ScopedPointer<TextButton> saveSlotButton;
     ScopedPointer<ToggleButton> halfSpeedButton;
     ScopedPointer<Label> messageLabel;
     ScopedPointer<Label> statsLabel;

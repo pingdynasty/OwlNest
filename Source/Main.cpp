@@ -32,7 +32,7 @@ public:
 
         // Initialize audio/midi device
         PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-        if(props->getBoolValue("hide-low-level-items") == true)
+        if(props->getBoolValue("show-low-level-items") != true)
         {
         dm.initialise(0, 0, nullptr, true);
         }
@@ -84,7 +84,7 @@ public:
       tools.addCommandItem(commands, ApplicationCommands::checkForFirmwareUpdates);
         
        PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-       if(props->getBoolValue("hide-low-level-items") != true){
+       if(props->getBoolValue("show-low-level-items") == true){
             tools.addCommandItem(commands, ApplicationCommands::updateBootloader);
             tools.addCommandItem(commands, ApplicationCommands::checkForBootloaderUpdates);
        }
