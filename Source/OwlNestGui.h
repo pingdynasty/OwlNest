@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Introjucer version: 3.1.0
+  Created with Introjucer version: 3.1.1
 
   ------------------------------------------------------------------------------
 
@@ -108,8 +108,6 @@ private:
     ScopedPointer<Label> protocolLabel;
     ScopedPointer<ToggleButton> masterButton;
     ScopedPointer<Label> statusLabel;
-    ScopedPointer<ComboBox> patchSlotAComboBox;
-    ScopedPointer<Label> patchSlotALabel;
     ScopedPointer<TextButton> resetButton;
     ScopedPointer<ComboBox> sensitivityComboBox;
     ScopedPointer<Label> sensitivityLabel;
@@ -131,6 +129,9 @@ private:
     ScopedPointer<Label> blockSizeeLabel;
     ScopedPointer<ToggleButton> halfSpeedButton;
     ScopedPointer<Label> messageLabel;
+    ScopedPointer<TabbedComponent> patchTabbedComponent;
+    ScopedPointer<Label> currentPatchName;
+    ScopedPointer<ComboBox> patchSlotAComboBox;
     ScopedPointer<Label> statsLabel;
     Image cachedImage_owlFaceplate_png;
 

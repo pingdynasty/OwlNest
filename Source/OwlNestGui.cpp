@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Introjucer version: 3.1.0
+  Created with Introjucer version: 3.1.1
 
   ------------------------------------------------------------------------------
 
@@ -198,22 +198,6 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     statusLabel->setColour (TextEditor::textColourId, Colours::black);
     statusLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (patchSlotAComboBox = new ComboBox ("new combo box"));
-    patchSlotAComboBox->setEditableText (false);
-    patchSlotAComboBox->setJustificationType (Justification::centredLeft);
-    patchSlotAComboBox->setTextWhenNothingSelected (String::empty);
-    patchSlotAComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    patchSlotAComboBox->addItem (TRANS("..."), 1);
-    patchSlotAComboBox->addListener (this);
-
-    addAndMakeVisible (patchSlotALabel = new Label ("new label",
-                                                    TRANS("Patch")));
-    patchSlotALabel->setFont (Font (15.00f, Font::plain));
-    patchSlotALabel->setJustificationType (Justification::centredRight);
-    patchSlotALabel->setEditable (false, false, false);
-    patchSlotALabel->setColour (TextEditor::textColourId, Colours::black);
-    patchSlotALabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-
     addAndMakeVisible (resetButton = new TextButton ("new button"));
     resetButton->setButtonText (TRANS("Factory Reset"));
     resetButton->addListener (this);
@@ -378,10 +362,32 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     messageLabel->setColour (TextEditor::textColourId, Colours::black);
     messageLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (patchTabbedComponent = new TabbedComponent (TabbedButtonBar::TabsAtTop));
+    patchTabbedComponent->setTabBarDepth (30);
+    patchTabbedComponent->addTab (TRANS("Factory"), Colours::lightgrey, 0, false);
+    patchTabbedComponent->addTab (TRANS("User"), Colours::lightgrey, 0, false);
+    patchTabbedComponent->setCurrentTabIndex (0);
+
+    addAndMakeVisible (currentPatchName = new Label ("new label",
+                                                     TRANS("patchName")));
+    currentPatchName->setFont (Font (25.00f, Font::bold));
+    currentPatchName->setJustificationType (Justification::centred);
+    currentPatchName->setEditable (false, false, false);
+    currentPatchName->setColour (TextEditor::textColourId, Colours::black);
+    currentPatchName->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (patchSlotAComboBox = new ComboBox ("new combo box"));
+    patchSlotAComboBox->setEditableText (false);
+    patchSlotAComboBox->setJustificationType (Justification::centredLeft);
+    patchSlotAComboBox->setTextWhenNothingSelected (String::empty);
+    patchSlotAComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    patchSlotAComboBox->addItem (TRANS("..."), 1);
+    patchSlotAComboBox->addListener (this);
+
     addAndMakeVisible (statsLabel = new Label ("new label",
                                                TRANS("...")));
     statsLabel->setFont (Font (15.00f, Font::plain));
-    statsLabel->setJustificationType (Justification::centredLeft);
+    statsLabel->setJustificationType (Justification::centred);
     statsLabel->setEditable (false, false, false);
     statsLabel->setColour (TextEditor::textColourId, Colours::black);
     statsLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
@@ -478,8 +484,6 @@ OwlNestGui::~OwlNestGui()
     protocolLabel = nullptr;
     masterButton = nullptr;
     statusLabel = nullptr;
-    patchSlotAComboBox = nullptr;
-    patchSlotALabel = nullptr;
     resetButton = nullptr;
     sensitivityComboBox = nullptr;
     sensitivityLabel = nullptr;
@@ -501,6 +505,9 @@ OwlNestGui::~OwlNestGui()
     blockSizeeLabel = nullptr;
     halfSpeedButton = nullptr;
     messageLabel = nullptr;
+    patchTabbedComponent = nullptr;
+    currentPatchName = nullptr;
+    patchSlotAComboBox = nullptr;
     statsLabel = nullptr;
 
 
@@ -529,38 +536,39 @@ void OwlNestGui::paint (Graphics& g)
 
 void OwlNestGui::resized()
 {
-    samplingRateComboBox->setBounds (527, 520, 150, 24);
-    samplingRateLabel->setBounds (422, 520, 103, 24);
-    loadButton->setBounds (56, 392, 150, 24);
-    leftGainSlider->setBounds (132, 492, 150, 24);
-    leftGainLabel->setBounds (17, 492, 112, 24);
-    saveButton->setBounds (216, 392, 150, 24);
-    deviceInfoButton->setBounds (384, 392, 150, 24);
-    bypassButton->setBounds (424, 448, 112, 24);
-    swapLRButton->setBounds (544, 448, 112, 24);
-    rightGainLabel->setBounds (17, 521, 112, 24);
-    rightGainSlider->setBounds (132, 521, 150, 24);
-    leftOutGainSlider->setBounds (132, 556, 150, 24);
-    leftOutGainLabel->setBounds (16, 556, 120, 24);
-    rightOutGainLabel->setBounds (16, 585, 120, 24);
-    rightOutGainSlider->setBounds (132, 585, 150, 24);
-    leftInputMuteButton->setBounds (292, 492, 100, 24);
-    rightInputMuteButton->setBounds (292, 521, 100, 24);
-    leftOutputMuteButton->setBounds (292, 556, 100, 24);
-    rightOutputMuteButton->setBounds (292, 585, 100, 24);
-    samplingBitsComboBox->setBounds (527, 552, 150, 24);
-    samplingBitsLabel->setBounds (422, 552, 103, 24);
-    ledButton->setBounds (344, 312, 64, 64);
-    protocolComboBox->setBounds (527, 584, 150, 24);
-    protocolLabel->setBounds (422, 584, 103, 24);
-    masterButton->setBounds (664, 448, 71, 24);
-    statusLabel->setBounds (384, 424, 336, 16);
-    patchSlotAComboBox->setBounds (120, 320, 150, 24);
-    patchSlotALabel->setBounds (48, 320, 72, 24);
-    resetButton->setBounds (544, 392, 150, 24);
-    sensitivityComboBox->setBounds (552, 352, 150, 24);
-    sensitivityLabel->setBounds (448, 352, 101, 24);
-    connectionButton->setBounds (370, 424, 16, 16);
+    //[UserPreResize] Add your own custom resize code here..
+    //[/UserPreResize]
+
+    samplingRateComboBox->setBounds (527, 546, 150, 24);
+    samplingRateLabel->setBounds (422, 546, 103, 24);
+    loadButton->setBounds (56, 418, 150, 24);
+    leftGainSlider->setBounds (132, 518, 150, 24);
+    leftGainLabel->setBounds (17, 518, 112, 24);
+    saveButton->setBounds (216, 418, 150, 24);
+    deviceInfoButton->setBounds (384, 418, 150, 24);
+    bypassButton->setBounds (424, 474, 112, 24);
+    swapLRButton->setBounds (544, 474, 112, 24);
+    rightGainLabel->setBounds (17, 547, 112, 24);
+    rightGainSlider->setBounds (132, 547, 150, 24);
+    leftOutGainSlider->setBounds (132, 582, 150, 24);
+    leftOutGainLabel->setBounds (16, 582, 120, 24);
+    rightOutGainLabel->setBounds (16, 611, 120, 24);
+    rightOutGainSlider->setBounds (132, 611, 150, 24);
+    leftInputMuteButton->setBounds (292, 518, 100, 24);
+    rightInputMuteButton->setBounds (292, 547, 100, 24);
+    leftOutputMuteButton->setBounds (292, 582, 100, 24);
+    rightOutputMuteButton->setBounds (292, 611, 100, 24);
+    samplingBitsComboBox->setBounds (527, 578, 150, 24);
+    samplingBitsLabel->setBounds (422, 578, 103, 24);
+    ledButton->setBounds (344, 348, 64, 64);
+    protocolComboBox->setBounds (527, 610, 150, 24);
+    protocolLabel->setBounds (422, 610, 103, 24);
+    masterButton->setBounds (664, 474, 71, 24);
+    statusLabel->setBounds (384, 450, 336, 16);
+    resetButton->setBounds (544, 418, 150, 24);
+    sensitivityComboBox->setBounds (552, 378, 150, 24);
+    sensitivityLabel->setBounds (448, 378, 101, 24);
+    connectionButton->setBounds (370, 450, 16, 16);
     slider4->setBounds (536, 29, 90, 90);
     slider3->setBounds (399, 29, 90, 90);
     label3->setBounds (399, 114, 90, 24);
@@ -569,16 +577,19 @@ void OwlNestGui::resized()
     slider1->setBounds (127, 29, 90, 90);
     label2->setBounds (264, 114, 90, 24);
     slider2->setBounds (264, 29, 90, 90);
-    slider5->setBounds (621, 144, 72, 139);
-    label5->setBounds (608, 282, 96, 24);
-    modeComboBox->setBounds (551, 320, 150, 24);
-    modeLabel->setBounds (448, 320, 101, 24);
-    remoteControlButton->setBounds (184, 448, 112, 24);
-    blockSizeComboBox->setBounds (526, 488, 150, 24);
-    blockSizeeLabel->setBounds (421, 488, 103, 24);
-    halfSpeedButton->setBounds (304, 448, 112, 24);
-    messageLabel->setBounds (16, 424, 328, 16);
-    statsLabel->setBounds (16, 448, 160, 24);
+    slider5->setBounds (664, 28, 59, 80);
+    label5->setBounds (647, 114, 96, 24);
+    modeComboBox->setBounds (551, 346, 150, 24);
+    modeLabel->setBounds (448, 346, 101, 24);
+    remoteControlButton->setBounds (184, 474, 112, 24);
+    blockSizeComboBox->setBounds (526, 514, 150, 24);
+    blockSizeeLabel->setBounds (421, 514, 103, 24);
+    halfSpeedButton->setBounds (304, 474, 112, 24);
+    messageLabel->setBounds (16, 450, 328, 16);
+    patchTabbedComponent->setBounds (112, 190, 504, 160);
+    currentPatchName->setBounds (247, 152, 264, 24);
+    patchSlotAComboBox->setBounds (536, 160, 168, 24);
+    statsLabel->setBounds (296, 176, 160, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -641,15 +652,6 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       theSettings.setConfigurationValue(SYSEX_CONFIGURATION_CODEC_PROTOCOL, val);
         //[/UserComboBoxCode_protocolComboBox]
     }
-    else if (comboBoxThatHasChanged == patchSlotAComboBox)
-    {
-        //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
-        theSettings.clearMessages();
-        theSettings.sendPc(comboBoxThatHasChanged->getSelectedId()-1);
-	Thread::sleep(100);
-	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
-        //[/UserComboBoxCode_patchSlotAComboBox]
-    }
     else if (comboBoxThatHasChanged == sensitivityComboBox)
     {
         //[UserComboBoxCode_sensitivityComboBox] -- add your combo box handling code here..
@@ -693,6 +695,15 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       // val = log2(blockSizeComboBox->getText().getIntValue());
       // theSettings.setCc(cc, val);
         //[/UserComboBoxCode_blockSizeComboBox]
+    }
+    else if (comboBoxThatHasChanged == patchSlotAComboBox)
+    {
+        //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
+        theSettings.clearMessages();
+        theSettings.sendPc(comboBoxThatHasChanged->getSelectedId()-1);
+	Thread::sleep(100);
+	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
+        //[/UserComboBoxCode_patchSlotAComboBox]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -1105,126 +1116,118 @@ BEGIN_JUCER_METADATA
            mode="1"/>
   </BACKGROUND>
   <COMBOBOX name="new combo box" id="7eed9fbfa06bf85b" memberName="samplingRateComboBox"
-            virtualName="" explicitFocusOrder="0" pos="527 520 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="527 546 150 24" editable="0"
             layout="33" items="8 kHz&#10;32 kHz&#10;48 kHz&#10;96 kHz" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="aedcbbc865265e" memberName="samplingRateLabel"
-         virtualName="" explicitFocusOrder="0" pos="422 520 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="422 546 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sampling Rate" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="712a98a25b0d275e" memberName="loadButton"
-              virtualName="" explicitFocusOrder="0" pos="56 392 150 24" buttonText="Load from OWL"
+              virtualName="" explicitFocusOrder="0" pos="56 418 150 24" buttonText="Load from OWL"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="new slider" id="ce099269a95e9cf7" memberName="leftGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="132 492 150 24" min="-34.5"
+          virtualName="" explicitFocusOrder="0" pos="132 518 150 24" min="-34.5"
           max="12" int="1.5" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="2138fad0eb10f8ee" memberName="leftGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="17 492 112 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="17 518 112 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Input Gain L" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="f37a6fa0e6074e35" memberName="saveButton"
-              virtualName="" explicitFocusOrder="0" pos="216 392 150 24" buttonText="Save to OWL"
+              virtualName="" explicitFocusOrder="0" pos="216 418 150 24" buttonText="Save to OWL"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="49395e88504ed9a4" memberName="deviceInfoButton"
-              virtualName="" explicitFocusOrder="0" pos="384 392 150 24" buttonText="Device Info"
+              virtualName="" explicitFocusOrder="0" pos="384 418 150 24" buttonText="Device Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
-                virtualName="" explicitFocusOrder="0" pos="424 448 112 24" buttonText="Codec Bypass"
+                virtualName="" explicitFocusOrder="0" pos="424 474 112 24" buttonText="Codec Bypass"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="5e0a14ed17680a7" memberName="swapLRButton"
-                virtualName="" explicitFocusOrder="0" pos="544 448 112 24" buttonText="Swap Left/Right"
+                virtualName="" explicitFocusOrder="0" pos="544 474 112 24" buttonText="Swap Left/Right"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="a4c7e40cc3b84fa1" memberName="rightGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="17 521 112 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="17 547 112 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Input Gain R" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="new slider" id="751638225df21da5" memberName="rightGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="132 521 150 24" min="-34.5"
+          virtualName="" explicitFocusOrder="0" pos="132 547 150 24" min="-34.5"
           max="12" int="1.5" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="new slider" id="59927295068e5acd" memberName="leftOutGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="132 556 150 24" min="-73"
+          virtualName="" explicitFocusOrder="0" pos="132 582 150 24" min="-73"
           max="6" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="d2acb69e045cd837" memberName="leftOutGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 556 120 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="16 582 120 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Output Gain L" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="f61d9f9ae7e5f004" memberName="rightOutGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 585 120 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="16 611 120 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Output Gain R" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="new slider" id="e520e83dc8199cec" memberName="rightOutGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="132 585 150 24" min="-73"
+          virtualName="" explicitFocusOrder="0" pos="132 611 150 24" min="-73"
           max="6" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <TOGGLEBUTTON name="new toggle button" id="c3d4453ea3e0bad0" memberName="leftInputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="292 492 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="292 518 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="9d0155fca059ad2b" memberName="rightInputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="292 521 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="292 547 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="e8b8a82e4cc96eab" memberName="leftOutputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="292 556 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="292 582 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="47ae93ef5d84135f" memberName="rightOutputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="292 585 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="292 611 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="68afb9201dff30b0" memberName="samplingBitsComboBox"
-            virtualName="" explicitFocusOrder="0" pos="527 552 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="527 578 150 24" editable="0"
             layout="33" items="16 bit&#10;24 bit&#10;32 bit" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="f3258eff2173a09d" memberName="samplingBitsLabel"
-         virtualName="" explicitFocusOrder="0" pos="422 552 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="422 578 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sampling Bits" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="936c69781f0cac49" memberName="ledButton"
-              virtualName="" explicitFocusOrder="0" pos="344 312 64 64" bgColOff="ff808080"
+              virtualName="" explicitFocusOrder="0" pos="344 348 64 64" bgColOff="ff808080"
               buttonText="LED" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="8e9735eeb5b5f6cd" memberName="protocolComboBox"
-            virtualName="" explicitFocusOrder="0" pos="527 584 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="527 610 150 24" editable="0"
             layout="33" items="Philips&#10;MSB" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="6f96ad882d073112" memberName="protocolLabel"
-         virtualName="" explicitFocusOrder="0" pos="422 584 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="422 610 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Protocol" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TOGGLEBUTTON name="new toggle button" id="7ae50b59d73384c8" memberName="masterButton"
-                virtualName="" explicitFocusOrder="0" pos="664 448 71 24" buttonText="Master"
+                virtualName="" explicitFocusOrder="0" pos="664 474 71 24" buttonText="Master"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="2f07a4c0694077f7" memberName="statusLabel"
-         virtualName="" explicitFocusOrder="0" pos="384 424 336 16" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="384 450 336 16" edTextCol="ff000000"
          edBkgCol="0" labelText="Status: Initialising..." editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
-  <COMBOBOX name="new combo box" id="8a0d565fbe220bde" memberName="patchSlotAComboBox"
-            virtualName="" explicitFocusOrder="0" pos="120 320 150 24" editable="0"
-            layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
-  <LABEL name="new label" id="54afa4d08d09d664" memberName="patchSlotALabel"
-         virtualName="" explicitFocusOrder="0" pos="48 320 72 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Patch" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
-         bold="0" italic="0" justification="34"/>
   <TEXTBUTTON name="new button" id="6c02712dbfb4bb60" memberName="resetButton"
-              virtualName="" explicitFocusOrder="0" pos="544 392 150 24" buttonText="Factory Reset"
+              virtualName="" explicitFocusOrder="0" pos="544 418 150 24" buttonText="Factory Reset"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="c9b0c725f2c0d34c" memberName="sensitivityComboBox"
-            virtualName="" explicitFocusOrder="0" pos="552 352 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="552 378 150 24" editable="0"
             layout="33" items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="529eec60a7cf0c8b" memberName="sensitivityLabel"
-         virtualName="" explicitFocusOrder="0" pos="448 352 101 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="448 378 101 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sensitivity" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="34"/>
   <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="connectionButton"
-              virtualName="" explicitFocusOrder="0" pos="370 424 16 16" bgColOff="ff808080"
+              virtualName="" explicitFocusOrder="0" pos="370 450 16 16" bgColOff="ff808080"
               buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"/>
   <SLIDER name="new slider" id="1c26ed829054fb4" memberName="slider4" virtualName=""
           explicitFocusOrder="0" pos="536 29 90 90" bkgcol="fff0ffff" thumbcol="ff6495ed"
@@ -1267,49 +1270,65 @@ BEGIN_JUCER_METADATA
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
           textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="new slider" id="1b8b800be2e437f7" memberName="slider5"
-          virtualName="" explicitFocusOrder="0" pos="621 144 72 139" bkgcol="fff000"
+          virtualName="" explicitFocusOrder="0" pos="664 28 59 80" bkgcol="fff000"
           thumbcol="ff000005" rotarysliderfill="ff000000" min="0" max="1"
           int="0" style="LinearVertical" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="4984964d1585aa57" memberName="label5" virtualName=""
-         explicitFocusOrder="0" pos="608 282 96 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="647 114 96 24" edTextCol="ff000000"
          edBkgCol="0" labelText="E" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="1" italic="0" justification="36"/>
   <COMBOBOX name="new combo box" id="f5aa30fb673ecdf6" memberName="modeComboBox"
-            virtualName="" explicitFocusOrder="0" pos="551 320 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="551 346 150 24" editable="0"
             layout="33" items="Single&#10;Dual&#10;Series&#10;Parallel" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="78f6e256a96569d8" memberName="modeLabel"
-         virtualName="" explicitFocusOrder="0" pos="448 320 101 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="448 346 101 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Patch Mode" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="34"/>
   <TOGGLEBUTTON name="new toggle button" id="ae8c92622a32c986" memberName="remoteControlButton"
-                virtualName="" explicitFocusOrder="0" pos="184 448 112 24" buttonText="Remote Control"
+                virtualName="" explicitFocusOrder="0" pos="184 474 112 24" buttonText="Remote Control"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="732ba8655b6d4ba5" memberName="blockSizeComboBox"
-            virtualName="" explicitFocusOrder="0" pos="526 488 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="526 514 150 24" editable="0"
             layout="33" items="16&#10;32&#10;64&#10;128&#10;256&#10;512&#10;1024&#10;2048"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="a6d7772d29eecd54" memberName="blockSizeeLabel"
-         virtualName="" explicitFocusOrder="0" pos="421 488 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="421 514 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Block Size" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TOGGLEBUTTON name="new toggle button" id="249af80ac06ed5fd" memberName="halfSpeedButton"
-                virtualName="" explicitFocusOrder="0" pos="304 448 112 24" buttonText="Half Speed"
+                virtualName="" explicitFocusOrder="0" pos="304 474 112 24" buttonText="Half Speed"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="6d4885422c01a4ba" memberName="messageLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 424 328 16" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="16 450 328 16" edTextCol="ff000000"
          edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
+  <TABBEDCOMPONENT name="new tabbed component" id="2446d4cbdb4c2ad6" memberName="patchTabbedComponent"
+                   virtualName="" explicitFocusOrder="0" pos="112 190 504 160" orientation="top"
+                   tabBarDepth="30" initialTab="0">
+    <TAB name="Factory" colour="ffd3d3d3" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="factoryPatchesView.cpp"/>
+    <TAB name="User" colour="ffd3d3d3" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="userPatchesView.cpp"/>
+  </TABBEDCOMPONENT>
+  <LABEL name="new label" id="54afa4d08d09d664" memberName="currentPatchName"
+         virtualName="" explicitFocusOrder="0" pos="247 152 264 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="patchName" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="25"
+         bold="1" italic="0" justification="36"/>
+  <COMBOBOX name="new combo box" id="8a0d565fbe220bde" memberName="patchSlotAComboBox"
+            virtualName="" explicitFocusOrder="0" pos="536 160 168 24" editable="0"
+            layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="b5ed8539fe8cf330" memberName="statsLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 448 160 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="296 176 160 24" edTextCol="ff000000"
          edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
-         bold="0" italic="0" justification="33"/>
+         bold="0" italic="0" justification="36"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

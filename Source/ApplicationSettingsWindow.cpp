@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Introjucer version: 3.1.0
+  Created with Introjucer version: 3.1.1
 
   ------------------------------------------------------------------------------
 
@@ -74,6 +74,9 @@ void ApplicationSettingsWindow::paint (Graphics& g)
 
 void ApplicationSettingsWindow::resized()
 {
+    //[UserPreResize] Add your own custom resize code here..
+    //[/UserPreResize]
+
     audioSelector->setBounds (48, 40, 408, 512);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
