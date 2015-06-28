@@ -43,8 +43,8 @@ ApplicationSettingsWindow::ApplicationSettingsWindow (AudioDeviceManager& device
 
     //[Constructor] You can add your own custom stuff here..
     PropertySet* properties = ApplicationConfiguration::getApplicationProperties();
-    deviceManager.setDefaultMidiOutput(properties->getValue("midi-output"));
-    deviceManager.setMidiInputEnabled(properties->getValue("midi-input"), 1);
+    deviceManager.setDefaultMidiOutput("OWL-MIDI");
+    deviceManager.setMidiInputEnabled("OWL-MIDI", 1);
     //[/Constructor]
 }
 
