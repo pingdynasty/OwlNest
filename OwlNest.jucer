@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="cjPLB4" name="OwlNest" projectType="guiapp" version="1.0.0"
               bundleIdentifier="com.pingdynasty.OwlNest" includeBinaryInAppConfig="1"
-              jucerVersion="3.1.0" companyName="Rebel Technology">
+              jucerVersion="3.1.1" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlNest">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Application">
       <FILE id="ww7UBI" name="DfuseLoader.cpp" compile="1" resource="0" file="Source/DfuseLoader.cpp"/>
@@ -85,7 +85,7 @@
         <CONFIGURATION name="Release" osxSDK="10.6 SDK" osxCompatibility="10.6 SDK"
                        osxArchitecture="default" isDebug="0" optimisation="2" targetName="OwlNest"
                        libraryPath="" headerPath="../../Libraries/libusbx&#10;../../Libraries"/>
-        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+        <CONFIGURATION name="Debug" osxSDK="10.6 SDK" osxCompatibility="10.6 SDK" osxArchitecture="default"
                        isDebug="1" optimisation="1" targetName="OwlNest" headerPath="../../Libraries/libusbx&#10;../../Libraries"
                        libraryPath=""/>
       </CONFIGURATIONS>

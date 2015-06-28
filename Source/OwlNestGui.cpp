@@ -362,12 +362,6 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     messageLabel->setColour (TextEditor::textColourId, Colours::black);
     messageLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (patchTabbedComponent = new TabbedComponent (TabbedButtonBar::TabsAtTop));
-    patchTabbedComponent->setTabBarDepth (30);
-    patchTabbedComponent->addTab (TRANS("Factory"), Colours::lightgrey, 0, false);
-    patchTabbedComponent->addTab (TRANS("User"), Colours::lightgrey, 0, false);
-    patchTabbedComponent->setCurrentTabIndex (0);
-
     addAndMakeVisible (currentPatchName = new Label ("new label",
                                                      TRANS("patchName")));
     currentPatchName->setFont (Font (25.00f, Font::bold));
@@ -392,6 +386,33 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
     statsLabel->setColour (TextEditor::textColourId, Colours::black);
     statsLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (selectFromFileButton = new TextButton ("new button"));
+    selectFromFileButton->setButtonText (TRANS("Select"));
+    selectFromFileButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight | Button::ConnectedOnTop | Button::ConnectedOnBottom);
+    selectFromFileButton->addListener (this);
+    selectFromFileButton->setColour (TextButton::buttonOnColourId, Colour (0xf644449f));
+    selectFromFileButton->setColour (TextButton::textColourOnId, Colours::aliceblue);
+
+    addAndMakeVisible (cancelButton = new TextButton ("new button"));
+    cancelButton->setButtonText (TRANS("Cancel"));
+    cancelButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight | Button::ConnectedOnTop | Button::ConnectedOnBottom);
+    cancelButton->addListener (this);
+
+    addAndMakeVisible (okButton = new TextButton ("new button"));
+    okButton->setButtonText (TRANS("OK"));
+    okButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight | Button::ConnectedOnTop | Button::ConnectedOnBottom);
+    okButton->addListener (this);
+
+    addAndMakeVisible (factoryButton = new TextButton ("new button"));
+    factoryButton->setButtonText (TRANS("Factory"));
+    factoryButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight | Button::ConnectedOnTop | Button::ConnectedOnBottom);
+    factoryButton->addListener (this);
+
+    addAndMakeVisible (userButton = new TextButton ("new button"));
+    userButton->setButtonText (TRANS("User"));
+    userButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight | Button::ConnectedOnTop | Button::ConnectedOnBottom);
+    userButton->addListener (this);
+
     cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
     //[UserPreSize]
@@ -401,6 +422,13 @@ OwlNestGui::OwlNestGui (OwlNestSettings& settings, AudioDeviceManager& dm, Value
 
 
     //[Constructor] You can add your own custom stuff here..
+    factoryButton->setColour(TextButton::buttonColourId, Colours::lightgrey);
+    factoryButton->setColour(TextButton::buttonOnColourId, Colours::darkgrey);
+    factoryButton->setColour(TextButton::textColourOnId, Colours::whitesmoke);
+    userButton->setColour(TextButton::buttonColourId, Colours::lightgrey);
+    userButton->setColour(TextButton::buttonOnColourId, Colours::darkgrey);
+    userButton->setColour(TextButton::textColourOnId, Colours::whitesmoke);
+    buttonClicked(factoryButton);
 
     settingsChanged();
     sensitivityComboBox->addItem("Low",LOW);
@@ -505,10 +533,14 @@ OwlNestGui::~OwlNestGui()
     blockSizeeLabel = nullptr;
     halfSpeedButton = nullptr;
     messageLabel = nullptr;
-    patchTabbedComponent = nullptr;
     currentPatchName = nullptr;
     patchSlotAComboBox = nullptr;
     statsLabel = nullptr;
+    selectFromFileButton = nullptr;
+    cancelButton = nullptr;
+    okButton = nullptr;
+    factoryButton = nullptr;
+    userButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -530,6 +562,12 @@ void OwlNestGui::paint (Graphics& g)
                        RectanglePlacement::centred,
                        false);
 
+    g.setColour (Colour (0xff656363));
+    g.fillRect (183, 264, 410, 56);
+
+    g.setColour (Colour (0xff656363));
+    g.fillRect (183, 240, 112, 24);
+
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
 }
@@ -541,10 +579,10 @@ void OwlNestGui::resized()
 
     samplingRateComboBox->setBounds (527, 546, 150, 24);
     samplingRateLabel->setBounds (422, 546, 103, 24);
-    loadButton->setBounds (56, 418, 150, 24);
+    loadButton->setBounds (24, 416, 150, 24);
     leftGainSlider->setBounds (132, 518, 150, 24);
     leftGainLabel->setBounds (17, 518, 112, 24);
-    saveButton->setBounds (216, 418, 150, 24);
+    saveButton->setBounds (200, 416, 150, 24);
     deviceInfoButton->setBounds (384, 418, 150, 24);
     bypassButton->setBounds (424, 474, 112, 24);
     swapLRButton->setBounds (544, 474, 112, 24);
@@ -586,10 +624,14 @@ void OwlNestGui::resized()
     blockSizeeLabel->setBounds (421, 514, 103, 24);
     halfSpeedButton->setBounds (304, 474, 112, 24);
     messageLabel->setBounds (16, 450, 328, 16);
-    patchTabbedComponent->setBounds (112, 190, 504, 160);
     currentPatchName->setBounds (247, 152, 264, 24);
-    patchSlotAComboBox->setBounds (536, 160, 168, 24);
+    patchSlotAComboBox->setBounds (192, 280, 200, 24);
     statsLabel->setBounds (296, 176, 160, 24);
+    selectFromFileButton->setBounds (408, 280, 64, 24);
+    cancelButton->setBounds (480, 280, 48, 24);
+    okButton->setBounds (535, 280, 48, 24);
+    factoryButton->setBounds (183, 240, 56, 24);
+    userButton->setBounds (239, 240, 56, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -824,6 +866,44 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
       theSettings.setConfigurationValue(SYSEX_CONFIGURATION_CODEC_HALFSPEED, halfSpeedButton->getToggleState());
         //[/UserButtonCode_halfSpeedButton]
     }
+    else if (buttonThatWasClicked == selectFromFileButton)
+    {
+        //[UserButtonCode_selectFromFileButton] -- add your button handler code here..
+
+        //[/UserButtonCode_selectFromFileButton]
+    }
+    else if (buttonThatWasClicked == cancelButton)
+    {
+        //[UserButtonCode_cancelButton] -- add your button handler code here..
+        //[/UserButtonCode_cancelButton]
+    }
+    else if (buttonThatWasClicked == okButton)
+    {
+        //[UserButtonCode_okButton] -- add your button handler code here..
+        //[/UserButtonCode_okButton]
+    }
+    else if (buttonThatWasClicked == factoryButton)
+    {
+        //[UserButtonCode_factoryButton] -- add your button handler code here..
+        factoryButton->setToggleState(true, dontSendNotification);
+        userButton->setToggleState(false, dontSendNotification);
+        okButton->setVisible(false);
+        cancelButton->setVisible(false);
+        selectFromFileButton->setVisible(false);
+        //[/UserButtonCode_factoryButton]
+    }
+    else if (buttonThatWasClicked == userButton)
+    {
+        //[UserButtonCode_userButton] -- add your button handler code here..
+        factoryButton->setToggleState(false, dontSendNotification);
+        userButton->setToggleState(true, dontSendNotification);
+        okButton->setVisible(true);
+        okButton->setEnabled(false);
+        cancelButton->setVisible(true);
+        cancelButton->setEnabled(false);
+        selectFromFileButton->setVisible(true);
+        //[/UserButtonCode_userButton]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -896,6 +976,7 @@ void OwlNestGui::sliderValueChanged (Slider* sliderThatWasMoved)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+
 void OwlNestGui::valueChanged(juce::Value &value){
   settingsChanged();
 }
@@ -908,9 +989,7 @@ void OwlNestGui::settingsChanged() {
     StringArray& presets = theSettings.getPresetNames();
     if(presets.size() != 0){
       patchSlotAComboBox->clear(dontSendNotification);
-      // patchSlotBComboBox->clear(dontSendNotification);
       patchSlotAComboBox->addItemList(presets, 1);
-      // patchSlotBComboBox->addItemList(presets, 1);
       setStatus("Settings loaded");
     }
 
@@ -1114,6 +1193,8 @@ BEGIN_JUCER_METADATA
   <BACKGROUND backgroundColour="ffffffff">
     <IMAGE pos="-10 -68 780 700" resource="owlFaceplate_png" opacity="0.25800000000000000711"
            mode="1"/>
+    <RECT pos="183 264 410 56" fill="solid: ff656363" hasStroke="0"/>
+    <RECT pos="183 240 112 24" fill="solid: ff656363" hasStroke="0"/>
   </BACKGROUND>
   <COMBOBOX name="new combo box" id="7eed9fbfa06bf85b" memberName="samplingRateComboBox"
             virtualName="" explicitFocusOrder="0" pos="527 546 150 24" editable="0"
@@ -1125,7 +1206,7 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="712a98a25b0d275e" memberName="loadButton"
-              virtualName="" explicitFocusOrder="0" pos="56 418 150 24" buttonText="Load from OWL"
+              virtualName="" explicitFocusOrder="0" pos="24 416 150 24" buttonText="Load from OWL"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="new slider" id="ce099269a95e9cf7" memberName="leftGainSlider"
           virtualName="" explicitFocusOrder="0" pos="132 518 150 24" min="-34.5"
@@ -1137,7 +1218,7 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="f37a6fa0e6074e35" memberName="saveButton"
-              virtualName="" explicitFocusOrder="0" pos="216 418 150 24" buttonText="Save to OWL"
+              virtualName="" explicitFocusOrder="0" pos="200 416 150 24" buttonText="Save to OWL"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="49395e88504ed9a4" memberName="deviceInfoButton"
               virtualName="" explicitFocusOrder="0" pos="384 418 150 24" buttonText="Device Info"
@@ -1308,27 +1389,35 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
-  <TABBEDCOMPONENT name="new tabbed component" id="2446d4cbdb4c2ad6" memberName="patchTabbedComponent"
-                   virtualName="" explicitFocusOrder="0" pos="112 190 504 160" orientation="top"
-                   tabBarDepth="30" initialTab="0">
-    <TAB name="Factory" colour="ffd3d3d3" useJucerComp="1" contentClassName=""
-         constructorParams="" jucerComponentFile="factoryPatchesView.cpp"/>
-    <TAB name="User" colour="ffd3d3d3" useJucerComp="1" contentClassName=""
-         constructorParams="" jucerComponentFile="userPatchesView.cpp"/>
-  </TABBEDCOMPONENT>
   <LABEL name="new label" id="54afa4d08d09d664" memberName="currentPatchName"
          virtualName="" explicitFocusOrder="0" pos="247 152 264 24" edTextCol="ff000000"
          edBkgCol="0" labelText="patchName" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="25"
          bold="1" italic="0" justification="36"/>
   <COMBOBOX name="new combo box" id="8a0d565fbe220bde" memberName="patchSlotAComboBox"
-            virtualName="" explicitFocusOrder="0" pos="536 160 168 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="192 280 200 24" editable="0"
             layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="b5ed8539fe8cf330" memberName="statsLabel"
          virtualName="" explicitFocusOrder="0" pos="296 176 160 24" edTextCol="ff000000"
          edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="36"/>
+  <TEXTBUTTON name="new button" id="c9b3faaee7523fa3" memberName="selectFromFileButton"
+              virtualName="" explicitFocusOrder="0" pos="408 280 64 24" bgColOn="f644449f"
+              textCol="fff0f8ff" buttonText="Select" connectedEdges="15" needsCallback="1"
+              radioGroupId="0"/>
+  <TEXTBUTTON name="new button" id="ecf8d14d0152738e" memberName="cancelButton"
+              virtualName="" explicitFocusOrder="0" pos="480 280 48 24" buttonText="Cancel"
+              connectedEdges="15" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="new button" id="907bc1ca04aae35d" memberName="okButton"
+              virtualName="" explicitFocusOrder="0" pos="535 280 48 24" buttonText="OK"
+              connectedEdges="15" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="new button" id="a07307afa8b86c3d" memberName="factoryButton"
+              virtualName="" explicitFocusOrder="0" pos="183 240 56 24" buttonText="Factory"
+              connectedEdges="15" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="new button" id="46ac4326ae2b9fa2" memberName="userButton"
+              virtualName="" explicitFocusOrder="0" pos="239 240 56 24" buttonText="User"
+              connectedEdges="15" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

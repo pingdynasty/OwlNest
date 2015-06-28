@@ -129,10 +129,14 @@ private:
     ScopedPointer<Label> blockSizeeLabel;
     ScopedPointer<ToggleButton> halfSpeedButton;
     ScopedPointer<Label> messageLabel;
-    ScopedPointer<TabbedComponent> patchTabbedComponent;
     ScopedPointer<Label> currentPatchName;
     ScopedPointer<ComboBox> patchSlotAComboBox;
     ScopedPointer<Label> statsLabel;
+    ScopedPointer<TextButton> selectFromFileButton;
+    ScopedPointer<TextButton> cancelButton;
+    ScopedPointer<TextButton> okButton;
+    ScopedPointer<TextButton> factoryButton;
+    ScopedPointer<TextButton> userButton;
     Image cachedImage_owlFaceplate_png;
 
 
