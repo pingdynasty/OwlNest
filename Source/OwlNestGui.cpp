@@ -869,7 +869,7 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == selectFromFileButton)
     {
         //[UserButtonCode_selectFromFileButton] -- add your button handler code here..
-
+        theSettings.loadSysexPatchFromDisk();
         //[/UserButtonCode_selectFromFileButton]
     }
     else if (buttonThatWasClicked == cancelButton)

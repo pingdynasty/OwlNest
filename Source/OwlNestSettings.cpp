@@ -510,6 +510,23 @@ bool OwlNestSettings::downloadFromServer(CommandID commandID) {
     return true;
 }
 
+void OwlNestSettings::loadSysexPatchFromDisk(){
+    FileChooser chooser("Select Patch", ApplicationConfiguration::getApplicationDirectory(), "*.syx");
+    if(chooser.browseForFileToOpen()){
+        File file = chooser.getResult();
+        ScopedPointer<FileInputStream> stream = file.createInputStream();
+        if (stream->openedOk()){
+            void* data = malloc(stream->getTotalLength());
+            stream->read(data, stream->getTotalLength());
+            if (theDm.getDefaultMidiOutput() != nullptr){
+                theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage(data, stream->getTotalLength()));
+            }
+            data = nullptr;
+        }
+        
+    }
+}
+
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){
   commands.add(ApplicationCommands::updateFirmware);
   commands.add(ApplicationCommands::updateBootloader);
@@ -564,7 +581,6 @@ bool OwlNestSettings::perform(const InvocationInfo& info){
     alert.addButton("Close", 1, juce::KeyPress(), juce::KeyPress());
     alert.runModalLoop();
     break;
-          
   }
   return true;
 }
