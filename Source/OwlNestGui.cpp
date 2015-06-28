@@ -989,7 +989,10 @@ void OwlNestGui::settingsChanged() {
     StringArray& presets = theSettings.getPresetNames();
     if(presets.size() != 0){
       patchSlotAComboBox->clear(dontSendNotification);
+      if (factoryButton->getToggleStateValue() == true)
+      {
       patchSlotAComboBox->addItemList(presets, 1);
+      }
       setStatus("Settings loaded");
     }
 

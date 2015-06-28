@@ -43,6 +43,27 @@ StringArray& OwlNestSettings::getPresetNames(){
   return presets;
 }
 
+StringArray& OwlNestSettings::getUserPresetNames(){
+    userPresets = presets;
+    userPresets.removeRange(getFactoryPresetStartIndex(), presets.size()-5); // 5 because 1 RAM slot, 4 user slots
+    return userPresets;
+}
+
+StringArray& OwlNestSettings::getFactoryPresetNames(){
+    factoryPresets = presets;
+    factoryPresets.removeRange(getUserPresetStartIndex(), 4); // 4 user slots
+    factoryPresets.remove(0);
+    return factoryPresets;
+}
+
+int OwlNestSettings::getUserPresetStartIndex(){
+    return presets.size()-5;
+}
+
+int OwlNestSettings::getFactoryPresetStartIndex(){
+    return 1;
+}
+
 StringArray& OwlNestSettings::getParameterNames(){
   return parameters;
 }

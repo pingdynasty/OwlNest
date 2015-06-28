@@ -38,7 +38,11 @@ public:
     return pc;
   }
   StringArray& getPresetNames();
+  StringArray& getUserPresetNames();
+  StringArray& getFactoryPresetNames();
   StringArray& getParameterNames();
+  int getUserPresetStartIndex();
+  int getFactoryPresetStartIndex();
   String getFirmwareVersion();
   uint64 getLastMidiMessageTime();
   // bool isConnected();
@@ -72,6 +76,8 @@ private:
   Value& theUpdateGui;
   AudioDeviceManager& theDm;
   StringArray presets;
+  StringArray userPresets;
+  StringArray factoryPresets;
   StringArray parameters;
   HashMap<String, int> configuration;
   uint64 lastMidiMessageTime;
