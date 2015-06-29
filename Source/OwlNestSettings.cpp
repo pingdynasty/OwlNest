@@ -50,14 +50,14 @@ StringArray& OwlNestSettings::getUserPresetNames(){
 }
 
 StringArray& OwlNestSettings::getFactoryPresetNames(){
-    factoryPresets = presets;
-    factoryPresets.removeRange(getUserPresetStartIndex(), 4); // 4 user slots
+    factoryPresets = &presets; // TO DO GLN : debug
+    factoryPresets.removeRange(getUserPresetStartIndex(), presets.size()-getUserPresetStartIndex()); // 4 user slots
     factoryPresets.remove(0);
     return factoryPresets;
 }
 
 int OwlNestSettings::getUserPresetStartIndex(){
-    return presets.size()-5;
+    return 33;
 }
 
 int OwlNestSettings::getFactoryPresetStartIndex(){
@@ -523,8 +523,13 @@ void OwlNestSettings::loadSysexPatchFromDisk(){
             }
             data = nullptr;
         }
-        
     }
+}
+
+void OwlNestSettings::run(){
+    uint8_t buf[1];
+    buf[0] = SYSEX_FIRMWARE_RUN;
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
 }
 
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){

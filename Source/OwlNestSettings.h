@@ -49,6 +49,7 @@ public:
   bool updateFirmware();
   bool updateBootloader();
   void loadSysexPatchFromDisk();
+  void run();
   void checkForUpdates();
   bool downloadFromServer(CommandID commandID);
   void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);
