@@ -988,14 +988,14 @@ void OwlNestGui::setStatus(const juce::String& msg){
 void OwlNestGui::settingsChanged() {
     StringArray& presets=theSettings.getPresetNames();
     int offset=1;
-//    if (factoryButton->getToggleStateValue() == true){
-//        presets = theSettings.getFactoryPresetNames();
-//        offset = theSettings.getFactoryPresetStartIndex();
-//    }
-//    else {
-//        presets = theSettings.getUserPresetNames();
-//        offset = theSettings.getUserPresetStartIndex();
-//    }
+    if (factoryButton->getToggleStateValue() == true){
+        presets = theSettings.getFactoryPresetNames();
+        offset = theSettings.getFactoryPresetStartIndex();
+    }
+    else {
+        presets = theSettings.getUserPresetNames();
+        offset = theSettings.getUserPresetStartIndex();
+    }
     if(presets.size() != 0){
       patchSlotAComboBox->clear(dontSendNotification);
       

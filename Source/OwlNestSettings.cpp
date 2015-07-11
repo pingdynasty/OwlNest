@@ -17,6 +17,8 @@
 #include "ApplicationCommands.h"
 #include "ApplicationConfiguration.h"
 
+#define NUM_FACTORY_PRESETS 32
+
 void OwlNestSettings::resetParameterNames(){
   parameters.set(0, "A");
   parameters.set(1, "B");
@@ -44,15 +46,10 @@ StringArray& OwlNestSettings::getPresetNames(){
 }
 
 StringArray& OwlNestSettings::getUserPresetNames(){
-    userPresets = presets;
-    userPresets.removeRange(getFactoryPresetStartIndex(), presets.size()-5); // 5 because 1 RAM slot, 4 user slots
     return userPresets;
 }
 
 StringArray& OwlNestSettings::getFactoryPresetNames(){
-    factoryPresets = &presets; // TO DO GLN : debug
-    factoryPresets.removeRange(getUserPresetStartIndex(), presets.size()-getUserPresetStartIndex()); // 4 user slots
-    factoryPresets.remove(0);
     return factoryPresets;
 }
 
@@ -74,6 +71,12 @@ String OwlNestSettings::getFirmwareVersion(){
 
 void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
   presets.set(index, String(name, size));
+    if (index>0 && index<(NUM_FACTORY_PRESETS+1)) {
+        factoryPresets.set(index-1, String(name, size));
+    }
+    if (index>NUM_FACTORY_PRESETS + 1) {
+        userPresets.set(index-(NUM_FACTORY_PRESETS+1), String(name, size));
+    }
 #ifdef DEBUG
   std::cout << "preset name " << (int)index << ": " << String(name, size) << std::endl;
 #endif // DEBUG
@@ -287,6 +290,8 @@ void OwlNestSettings::saveToOwl(){
 void OwlNestSettings::loadFromOwl(){
   if(theDm.getDefaultMidiOutput() != NULL){
     presets.clear();
+    userPresets.clear();
+    factoryPresets.clear();
     theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,REQUEST_SETTINGS,127)); // Will provoke incoming midi messages
   }
 }
