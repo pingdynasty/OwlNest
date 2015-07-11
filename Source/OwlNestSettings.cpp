@@ -54,7 +54,7 @@ StringArray& OwlNestSettings::getFactoryPresetNames(){
 }
 
 int OwlNestSettings::getUserPresetStartIndex(){
-    return 33;
+    return NUM_FACTORY_PRESETS+1;
 }
 
 int OwlNestSettings::getFactoryPresetStartIndex(){
@@ -74,7 +74,7 @@ void OwlNestSettings::handlePresetNameMessage(uint8_t index, const char* name, i
     if (index>0 && index<(NUM_FACTORY_PRESETS+1)) {
         factoryPresets.set(index-1, String(name, size));
     }
-    if (index>NUM_FACTORY_PRESETS + 1) {
+    if (index>NUM_FACTORY_PRESETS) {
         userPresets.set(index-(NUM_FACTORY_PRESETS+1), String(name, size));
     }
 #ifdef DEBUG

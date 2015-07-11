@@ -990,7 +990,7 @@ void OwlNestGui::settingsChanged() {
     int offset=1;
     if (factoryButton->getToggleStateValue() == true){
         presets = theSettings.getFactoryPresetNames();
-        offset = theSettings.getFactoryPresetStartIndex();
+        offset = theSettings.getFactoryPresetStartIndex()+1;
     }
     else {
         presets = theSettings.getUserPresetNames();
