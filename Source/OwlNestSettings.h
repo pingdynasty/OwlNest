@@ -23,6 +23,7 @@
 #include "JuceHeader.h"
 
 #define NB_CHANNELS 128 
+#define NUM_FACTORY_PRESETS 32
 
 class OwlNestSettings: public MidiInputCallback, public ApplicationCommandTarget {
 public:
@@ -41,6 +42,7 @@ public:
   StringArray& getUserPresetNames();
   StringArray& getFactoryPresetNames();
   StringArray& getParameterNames();
+    String getCurrentPresetName();
   int getUserPresetStartIndex();
   int getFactoryPresetStartIndex();
   String getFirmwareVersion();
@@ -49,7 +51,8 @@ public:
   bool updateFirmware();
   bool updateBootloader();
   void loadSysexPatchFromDisk();
-  void run();
+  void runSysexPatch();
+  void storeSysexPatch(uint8_t userSlot);
   void checkForUpdates();
   bool downloadFromServer(CommandID commandID);
   void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);

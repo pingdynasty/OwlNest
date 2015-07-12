@@ -17,8 +17,6 @@
 #include "ApplicationCommands.h"
 #include "ApplicationConfiguration.h"
 
-#define NUM_FACTORY_PRESETS 32
-
 void OwlNestSettings::resetParameterNames(){
   parameters.set(0, "A");
   parameters.set(1, "B");
@@ -47,6 +45,18 @@ StringArray& OwlNestSettings::getPresetNames(){
 
 StringArray& OwlNestSettings::getUserPresetNames(){
     return userPresets;
+}
+
+String OwlNestSettings::getCurrentPresetName(){
+    int v=getPc();
+    if (&presets != nullptr){
+        DBG("Pc number=" << v);
+        DBG("presetnames" << presets[v-1]);
+        return presets[v-1];
+    }
+    else {
+        return String();   
+    }
 }
 
 StringArray& OwlNestSettings::getFactoryPresetNames(){
@@ -531,9 +541,16 @@ void OwlNestSettings::loadSysexPatchFromDisk(){
     }
 }
 
-void OwlNestSettings::run(){
+void OwlNestSettings::runSysexPatch(){
     uint8_t buf[1];
     buf[0] = SYSEX_FIRMWARE_RUN;
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
+}
+
+void OwlNestSettings::storeSysexPatch(uint8_t userSlot){
+    uint8_t buf[2];
+    buf[0] = SYSEX_FIRMWARE_STORE;
+    buf[1] = userSlot;
     theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
 }
 

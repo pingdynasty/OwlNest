@@ -743,8 +743,9 @@ void OwlNestGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
         theSettings.clearMessages();
         theSettings.sendPc(comboBoxThatHasChanged->getSelectedId()-1);
+        DBG("sending PC =" << comboBoxThatHasChanged->getSelectedId()-1);
 	Thread::sleep(100);
-	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
+	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PARAMETER_NAME_COMMAND); // request patch parameter names
         //[/UserComboBoxCode_patchSlotAComboBox]
     }
 
@@ -763,10 +764,10 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
         setStatus("Loading settings...");
         theSettings.clearMessages();
         theSettings.loadFromOwl();
-	Thread::sleep(100);
-	theSettings.setCc(REQUEST_SETTINGS, 1); // request patch names
-	Thread::sleep(100);
-	theSettings.setCc(REQUEST_SETTINGS, 2); // request patch parameter names
+        Thread::sleep(100);
+        theSettings.setCc(REQUEST_SETTINGS, SYSEX_PARAMETER_NAME_COMMAND); // request patch parameter names
+        Thread::sleep(100);
+        theSettings.setCc(REQUEST_SETTINGS, SYSEX_PRESET_NAME_COMMAND); // request patch names
         //[/UserButtonCode_loadButton]
     }
     else if (buttonThatWasClicked == saveButton)
@@ -870,16 +871,19 @@ void OwlNestGui::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_selectFromFileButton] -- add your button handler code here..
         theSettings.loadSysexPatchFromDisk();
+        theSettings.runSysexPatch();
         //[/UserButtonCode_selectFromFileButton]
     }
     else if (buttonThatWasClicked == cancelButton)
     {
         //[UserButtonCode_cancelButton] -- add your button handler code here..
+        theSettings.sendPc(patchSlotAComboBox->getSelectedId()-1+NUM_FACTORY_PRESETS);
         //[/UserButtonCode_cancelButton]
     }
     else if (buttonThatWasClicked == okButton)
     {
         //[UserButtonCode_okButton] -- add your button handler code here..
+        theSettings.storeSysexPatch((uint8_t) patchSlotAComboBox->getSelectedId());
         //[/UserButtonCode_okButton]
     }
     else if (buttonThatWasClicked == factoryButton)
@@ -986,6 +990,9 @@ void OwlNestGui::setStatus(const juce::String& msg){
 }
 
 void OwlNestGui::settingsChanged() {
+    
+    int v;
+    
     StringArray& presets=theSettings.getPresetNames();
     int offset=1;
     if (factoryButton->getToggleStateValue() == true){
@@ -994,16 +1001,21 @@ void OwlNestGui::settingsChanged() {
     }
     else {
         presets = theSettings.getUserPresetNames();
-        offset = theSettings.getUserPresetStartIndex();
+        offset = theSettings.getUserPresetStartIndex()+1;
     }
     if(presets.size() != 0){
       patchSlotAComboBox->clear(dontSendNotification);
       
       {
-      patchSlotAComboBox->addItemList(presets, offset);
+        patchSlotAComboBox->addItemList(presets, offset);
       }
       setStatus("Settings loaded");
     }
+    
+    // Current Patch Name
+    v = theSettings.getPc();
+    patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
+    currentPatchName->setText(theSettings.getCurrentPresetName(), dontSendNotification);
 
     // Parameter names
     StringArray& parameters = theSettings.getParameterNames();
@@ -1024,7 +1036,7 @@ void OwlNestGui::settingsChanged() {
     slider5->setValue(theSettings.getCc(PATCH_PARAMETER_E)/127.0);
 
     // LED button
-    int v = theSettings.getCc(LED);
+    v = theSettings.getCc(LED);
     Colour colour;
     if(v < 42){
       colour = Colour::fromRGB(0xbb, 0xbb, 0xff);
@@ -1034,10 +1046,6 @@ void OwlNestGui::settingsChanged() {
       colour = Colour::fromRGB(0, 0xff, 0); // green
     }
     ledButton->setColour(TextButton::buttonColourId, colour);
-
-    // Patches
-    v = theSettings.getPc();
-    patchSlotAComboBox->setSelectedId(v+1, dontSendNotification);
 
     // Block size
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE);
