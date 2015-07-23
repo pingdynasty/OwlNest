@@ -530,28 +530,57 @@ void OwlNestSettings::loadSysexPatchFromDisk(){
     if(chooser.browseForFileToOpen()){
         File file = chooser.getResult();
         ScopedPointer<FileInputStream> stream = file.createInputStream();
+        ScopedPointer<MidiOutput> midiOut = theDm.getDefaultMidiOutput();
         if (stream->openedOk()){
-            void* data = malloc(stream->getTotalLength());
-            stream->read(data, stream->getTotalLength());
-            if (theDm.getDefaultMidiOutput() != nullptr){
-                theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage(data, stream->getTotalLength()));
+            while(!stream->isExhausted()){
+                sendSysexFromStream(midiOut, stream);
             }
-            data = nullptr;
         }
     }
 }
 
+void OwlNestSettings::sendSysexFromStream(juce::MidiOutput *midiOut, juce::FileInputStream *stream){
+    uint8_t data[254];
+    int i=0;
+    // read until SySEX_EOX byte 0xf7
+    do
+    {
+        data[i] = stream->readByte();
+    }while (i<255 && data[i++]!=0xf7);
+    
+    if (midiOut != nullptr){
+        midiOut->sendMessageNow(MidiMessage(data, i));
+    }
+}
+
 void OwlNestSettings::runSysexPatch(){
-    uint8_t buf[1];
-    buf[0] = SYSEX_FIRMWARE_RUN;
-    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
+    const char tailer[] =  { MIDI_SYSEX_MANUFACTURER, MIDI_SYSEX_DEVICE, SYSEX_FIRMWARE_RUN };
+    MemoryBlock block; // = MemoryBlock();
+    block.append(tailer, sizeof(tailer));
+    if (theDm.getDefaultMidiOutput()!=nullptr)
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(block.getData(), block.getSize()));
 }
 
 void OwlNestSettings::storeSysexPatch(uint8_t userSlot){
-    uint8_t buf[2];
-    buf[0] = SYSEX_FIRMWARE_STORE;
-    buf[1] = userSlot;
-    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
+    if (userSlot>=0){
+    const char tailer[] =  { MIDI_SYSEX_MANUFACTURER, MIDI_SYSEX_DEVICE, SYSEX_FIRMWARE_STORE };
+    MemoryBlock block = MemoryBlock();
+    block.append(tailer, sizeof(tailer));
+    encodeInt(block, userSlot);
+        if (theDm.getDefaultMidiOutput()!=nullptr)
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(block.getData(), block.getSize()));
+    }
+}
+
+void OwlNestSettings::encodeInt(MemoryBlock& block, uint32_t data){
+    uint8_t in[4];
+    uint8_t out[5];
+    in[3] = (uint8_t)data & 0xff;
+    in[2] = (uint8_t)(data >> 8) & 0xff;
+    in[1] = (uint8_t)(data >> 16) & 0xff;
+    in[0] = (uint8_t)(data >> 24) & 0xff;
+    int len = data_to_sysex(in, out, 4);
+    block.append(out, len);
 }
 
 void OwlNestSettings::getAllCommands(Array<CommandID> &commands){

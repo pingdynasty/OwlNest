@@ -97,4 +97,7 @@ private:
   void handleSelfTestMessage(uint8_t data);
   void handleErrorMessage(uint8_t data);
   void handleSysexConfigurationCommand(const char* name, int size);
+  void sendSysexFromStream(MidiOutput* midiOut, FileInputStream* stream);
+  void encodeInt(MemoryBlock& block, uint32_t data);
+
 };
